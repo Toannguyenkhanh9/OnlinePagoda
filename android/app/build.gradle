@@ -79,7 +79,7 @@ android {
 
     namespace "com.pagodaonline"
     defaultConfig {
-        applicationId "com.pagodaonline"
+        applicationId "com.nexus.pagodaonline1"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

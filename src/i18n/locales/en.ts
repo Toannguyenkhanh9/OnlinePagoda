@@ -59,6 +59,9 @@ const en = {
     fortuneStickTitle: 'Fortune Sticks',
 
     fortuneStickSubtitle: 'Draw a reflective message for mindfulness',
+    horoscopeTitle: 'Horoscope and Auspicious Dates',
+
+    horoscopeSubtitle: 'View lunar birth date, zodiac, and suggested dates',
   },
 
   temple: {
@@ -465,6 +468,419 @@ const en = {
       neutral: 'Neutral',
       caution: 'Caution',
     },
+  },
+  horoscope: {
+    title: 'Horoscope and Auspicious Dates',
+
+    subtitle:
+      'Enter a solar birth date to view the lunar date, zodiac sign, and suggested dates for important activities.',
+
+    birthDateTitle: 'Solar Birth Date',
+
+    day: 'Day',
+
+    month: 'Month',
+
+    year: 'Year',
+
+    activityTitle: 'Activity',
+
+    searchPeriod: 'Search Period',
+
+    monthCount: '{{count}} months',
+
+    calculate: 'Convert and Find Suggested Dates',
+
+    calculating: 'Calculating...',
+
+    invalidDateTitle: 'Invalid Birth Date',
+
+    invalidDateMessage: 'Please enter a valid solar calendar date.',
+
+    profileTitle: 'Birth Information',
+
+    lunarBirthDate: 'Lunar Birth Date',
+
+    zodiac: 'Zodiac',
+
+    canChiYear: 'Sexagenary Year',
+
+    leapMonth: 'leap month',
+
+    resultsTitle: 'Suggested Dates',
+
+    resultsSubtitle: 'Dates are ranked by a cultural reference score.',
+
+    lunarDateLine: 'Lunar {{day}}/{{month}}/{{year}}',
+
+    suitableReasons: 'Favorable Points',
+
+    cautionReasons: 'Points to Consider',
+
+    disclaimer:
+      'Results are provided for cultural reference and personal reflection only. They should not be the sole basis for marriage, construction, investment, or other important decisions.',
+
+    activities: {
+      wedding: 'Wedding',
+      construction: 'Construction',
+      opening: 'Business Opening',
+      moving: 'Moving Home',
+      travel: 'Travel',
+    },
+
+    ratings: {
+      excellent: 'Excellent',
+      good: 'Good',
+      fair: 'Fair',
+      caution: 'Consider',
+    },
+
+    reasons: {
+      hoangDao: 'Auspicious almanac day',
+
+      hacDao: 'Inauspicious almanac day',
+
+      traditionalSuitable: 'Traditionally suitable for this activity',
+
+      traditionalAvoid: 'Traditionally advised against this activity',
+
+      zodiacClash: 'Day branch clashes with birth zodiac',
+
+      sixHarmony: 'Six-harmony relationship',
+
+      threeHarmony: 'Three-harmony relationship',
+
+      nguyetKy: 'Traditional Nguyet Ky day',
+
+      tamNuong: 'Traditional Tam Nuong day',
+
+      preferredLunarDay: 'Preferred lunar day in the reference rules',
+
+      weekendConvenient: 'Weekend convenience',
+      birthHourClash: 'The day branch clashes with the birth-hour branch',
+
+      birthHourHarmony: 'The day branch forms six harmony with the birth hour',
+
+      birthHourThreeHarmony:
+        'The day branch forms three harmony with the birth hour',
+
+      birthLunarDayResonance:
+        'The lunar day corresponds with the lunar birth day',
+
+      school_folk: 'Scored with the combined folk method',
+
+      school_bazi: 'Scored with the BaZi reference preset',
+
+      school_ziwei: 'Scored with the Zi Wei reference preset',
+
+      school_almanac: 'Scored with the traditional almanac preset',
+    },
+  },
+  subtitleExtended:
+    'Enter your solar birth date, birth time, gender, and interpretation method to view your lunar profile and suggested dates.',
+
+  birthTimeTitle: 'Birth Time',
+  hour: 'Hour',
+  minute: 'Minute',
+  birthTimeHint: 'Local time at place of birth',
+
+  genderTitle: 'Gender',
+
+  genders: {
+    male: 'Male',
+    female: 'Female',
+    unspecified: 'Not Specified',
+  },
+
+  schoolTitle: 'Interpretation Method',
+
+  schools: {
+    folkTitle: 'Combined Folk Method',
+
+    folkDescription:
+      'Balances zodiac relations, auspicious days, lunar dates, and traditional avoidance rules.',
+
+    baziTitle: 'BaZi Reference',
+
+    baziDescription:
+      'Places more weight on the relationship between the day branch, birth-year zodiac, and birth-hour branch.',
+
+    ziweiTitle: 'Zi Wei Reference',
+
+    ziweiDescription:
+      'Uses lunar birth details, birth time, gender, and cycle direction in a simplified model.',
+
+    almanacTitle: 'Traditional Almanac',
+
+    almanacDescription:
+      'Prioritizes suitable activities, avoided activities, auspicious days, and traditional taboo dates.',
+  },
+
+  selectedMethod: 'Selected Method',
+
+  calculateExtended: 'Build Profile and Find Suggested Dates',
+
+  invalidInputTitle: 'Invalid Information',
+
+  invalidTimeMessage: 'Birth time must be between 00:00 and 23:59.',
+
+  birthHourBranch: 'Birth Hour Branch',
+
+  profileGender: 'Gender',
+
+  profileSchool: 'Interpretation Method',
+
+  yearPolarity: 'Birth-Year Polarity',
+
+  cycleDirection: 'Reference Cycle Direction',
+
+  polarity: {
+    yang: 'Yang',
+    yin: 'Yin',
+  },
+
+  directions: {
+    forward: 'Forward',
+    backward: 'Backward',
+    neutral: 'Neutral',
+  },
+
+  schoolNotes: {
+    folk: 'A balanced reference model combining common folk and traditional calendar rules.',
+
+    bazi: 'The score emphasizes the birth-year zodiac and birth-hour branch. This is not a complete BaZi chart.',
+
+    ziwei:
+      'The score uses lunar birth details, birth time, gender, and cycle direction in a simplified form.',
+
+    almanac:
+      'The score strongly prioritizes traditional suitable activities, avoided activities, and auspicious calendar days.',
+  },
+
+  resultsSubtitleExtended:
+    'Dates are ranked using the selected method, birth zodiac, and birth hour.',
+
+  disclaimerExtended:
+    'This is a simplified cultural reference model based on lunar dates, zodiac relations, birth time, and interpretation presets. It is not a complete Zi Wei Dou Shu or BaZi chart and should not be the sole basis for important decisions.',
+  lifeOverviewTitle: 'Love and Career',
+
+  lifeOverviewSubtitle:
+    'A reflective reading based on birth details and the selected interpretation method.',
+
+  lifeStrengths: 'Strengths',
+
+  lifeCautions: 'Points to Balance',
+
+  lifeAdvice: 'Growth Suggestions',
+
+  lifeRatings: {
+    veryStrong: 'Strong Energy',
+    favorable: 'Favorable',
+    balanced: 'Balanced',
+    developing: 'Developing',
+  },
+
+  love: {
+    title: 'Love',
+
+    styles: {
+      warm: 'Warm and Affectionate',
+      steady: 'Steady and Sincere',
+      independent: 'Independent in Love',
+      sensitive: 'Sensitive and Intuitive',
+    },
+
+    summaries: {
+      warm: 'You tend to express love through visible care and naturally create emotional warmth.',
+
+      steady:
+        'You value trust, stability, and a relationship that grows over time.',
+
+      independent:
+        'You need respect, personal space, and honest communication in love.',
+
+      sensitive:
+        'You feel emotions deeply and empathize easily, while also needing emotional safety.',
+    },
+  },
+
+  career: {
+    title: 'Career',
+
+    styles: {
+      leadership: 'Leadership Oriented',
+      creative: 'Creative Direction',
+      analytical: 'Analytical Thinking',
+      supportive: 'Support and Collaboration',
+      entrepreneurial: 'Entrepreneurial Energy',
+    },
+
+    summaries: {
+      leadership:
+        'You may thrive in roles that require responsibility, coordination, and direction.',
+
+      creative:
+        'You may perform well when generating ideas, designing, or communicating a message.',
+
+      analytical:
+        'You may be strong at working with information, planning, and solving structured problems.',
+
+      supportive:
+        'You may grow in collaborative environments that create value for people and teams.',
+
+      entrepreneurial:
+        'You tend to be proactive, experimental, and adaptable when new opportunities appear.',
+    },
+  },
+
+  insights: {
+    loveHarmony:
+      'The birth-year zodiac and birth-hour branch suggest a harmonious emotional pattern.',
+
+    loveThreeHarmony:
+      'A three-harmony pattern may make it easier to build shared understanding.',
+
+    loveInnerConflict:
+      'Inner needs may conflict at times, creating a pull between closeness and personal space.',
+
+    loveSelfAwareness:
+      'You may have a relatively clear awareness of your emotional needs.',
+
+    loveWarmHeart:
+      'You show care naturally and help others feel emotionally safe.',
+
+    loveExpressive:
+      'You are capable of expressing affection through words or actions.',
+
+    loveOvergiving:
+      'You may give too much and feel disappointed when care is not returned equally.',
+
+    loveSetBoundaries:
+      'Maintain healthy boundaries instead of always putting others first.',
+
+    loveReceiveCare:
+      'Allow yourself to receive care instead of always being the caregiver.',
+
+    loveLoyal: 'You value loyalty and consistency in a relationship.',
+
+    lovePatient: 'You can patiently build trust and affection over time.',
+
+    loveReserved:
+      'Holding feelings in for too long may make your needs difficult to understand.',
+
+    loveSpeakClearly:
+      'Express needs and emotions before they build into pressure.',
+
+    loveCreateRituals:
+      'Small shared routines can strengthen emotional stability.',
+
+    loveRespectsSpace:
+      'You respect individuality and personal space within a relationship.',
+
+    loveHonest: 'You tend to prefer direct and clearly defined relationships.',
+
+    loveNeedsFreedom:
+      'You may feel restricted by excessive control or dependence.',
+
+    loveBalanceFreedom:
+      'Balance personal freedom with presence and commitment.',
+
+    loveSharePlans: 'Share plans early so your partner does not feel excluded.',
+
+    loveEmpathetic:
+      'You notice emotions easily and can understand how others feel.',
+
+    loveIntuitive: 'You may have strong intuition about relationship dynamics.',
+
+    loveOverthinking:
+      'Unclear communication or silence may lead to overthinking.',
+
+    loveTrustSlowly:
+      'Build trust gradually without forcing yourself to open too quickly.',
+
+    loveAskDirectly:
+      'Ask directly instead of guessing what another person is thinking.',
+
+    careerPersistent:
+      'You can stay with a goal and make steady progress over time.',
+
+    careerReflective:
+      'You learn from experience and adjust before moving forward.',
+
+    careerActionOriented: 'You tend to act proactively and create momentum.',
+
+    careerObservant: 'You notice context and details that others may overlook.',
+
+    careerLeadership:
+      'You may be capable of leading, coordinating, and maintaining direction.',
+
+    careerResponsibility:
+      'You are willing to take responsibility for decisions and outcomes.',
+
+    careerOvercontrol:
+      'You may take on too much or control details when trust is low.',
+
+    careerDelegate:
+      'Delegate clearly and trust suitable people with responsibility.',
+
+    careerListenBeforeDeciding:
+      'Gather team perspectives before making major decisions.',
+
+    careerCreative:
+      'You may generate original ideas and see problems from new angles.',
+
+    careerExpression:
+      'You may fit work involving communication, design, or storytelling.',
+
+    careerScattered: 'Many interests at once may make completion difficult.',
+
+    careerBuildPortfolio:
+      'Build visible work samples or a practical portfolio.',
+
+    careerFinishOneThing:
+      'Finish one important project before starting several new ones.',
+
+    careerAnalytical:
+      'You may be strong at analysis, comparison, and identifying causes.',
+
+    careerPlanning: 'You can turn goals into structured and practical steps.',
+
+    careerPerfectionism:
+      'You may delay action while waiting for perfect certainty.',
+
+    careerSetMilestones:
+      'Use clear milestones to avoid analyzing for too long.',
+
+    careerDecideWithEnoughData:
+      'Decide when enough useful information is available instead of waiting for total certainty.',
+
+    careerTeamwork:
+      'You can support collaboration and help teams function smoothly.',
+
+    careerService:
+      'You may create value by supporting, caring for, or guiding others.',
+
+    careerPeoplePleasing:
+      'You may accept too much work to avoid disappointing others.',
+
+    careerProtectEnergy: 'Protect time and energy with clear work boundaries.',
+
+    careerShowYourContribution:
+      'Document and communicate your contribution instead of working invisibly.',
+
+    careerInitiative: 'You tend to take initiative and explore new approaches.',
+
+    careerAdaptability:
+      'You adapt quickly when plans, work, or markets change.',
+
+    careerRiskTaking:
+      'You may move quickly or underestimate financial and operational risks.',
+
+    careerValidateRisk:
+      'Run small tests and validate demand before making a large investment.',
+
+    careerKeepCashReserve:
+      'Maintain a reserve before expanding a project or business.',
   },
 } as const;
 

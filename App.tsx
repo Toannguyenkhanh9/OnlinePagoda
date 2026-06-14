@@ -1,45 +1,100 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import {
+  ActivityIndicator,
+  StatusBar,
+  StyleSheet,
+  View,
+} from 'react-native';
+
 import {
   SafeAreaProvider,
-  useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+import {
+  initializeI18n,
+} from './src/i18n';
+
+import RootNavigator
+  from './src/navigation/RootNavigator';
+
+import {
+  colors,
+} from './src/theme/colors';
+import {
+  refreshLunarReminders,
+} from './src/services/lunarNotifications';
+import {
+  refreshDailyPracticeReminder,
+} from './src/services/dailyPracticeNotifications';
+
+export default function App() {
+  const [
+    isI18nReady,
+    setIsI18nReady,
+  ] = useState(false);
+
+useEffect(() => {
+  initializeI18n()
+    .then(async () => {
+      try {
+        await refreshLunarReminders();
+        await refreshDailyPracticeReminder();
+      } catch (error) {
+        console.warn(
+          'Không thể làm mới lịch thông báo âm lịch:',
+          error,
+        );
+      }
+    })
+    .catch(error => {
+      console.warn(
+        'Không thể khởi tạo ngôn ngữ:',
+        error,
+      );
+    })
+    .finally(() => {
+      setIsI18nReady(true);
+    });
+}, []);
+
+  if (!isI18nReady) {
+    return (
+      <View style={styles.loading}>
+        <ActivityIndicator
+          size="large"
+          color={colors.primary}
+        />
+      </View>
+    );
+  }
 
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={
+          colors.background
+        }
+      />
+
+      <RootNavigator />
     </SafeAreaProvider>
   );
 }
 
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
-  container: {
+  loading: {
     flex: 1,
+
+    alignItems: 'center',
+
+    justifyContent: 'center',
+
+    backgroundColor:
+      colors.background,
   },
 });
-
-export default App;

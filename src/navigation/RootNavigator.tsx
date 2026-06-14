@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import LunarCalendarScreen from '../screens/LunarCalendarScreen';
 import SpiritualAudioScreen from '../screens/SpiritualAudioScreen';
 import FortuneStickScreen from '../screens/FortuneStickScreen';
+import HoroscopeScreen from '../screens/HoroscopeScreen';
 
 export type RootTabParamList = {
   Home: undefined;
@@ -27,6 +28,7 @@ export type RootTabParamList = {
   LunarCalendar: undefined;
   SpiritualAudio: undefined;
   FortuneStick: undefined;
+  Horoscope: undefined;
 };
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
@@ -133,19 +135,28 @@ export default function RootNavigator() {
           }}
         />
         <Tab.Screen
-          name="Settings"
-          component={SettingsScreen}
+          name="FortuneStick"
+          component={FortuneStickScreen}
           options={{
-            title: 'Cài đặt',
+            title: t('fortuneStick.title'),
             tabBarButton: () => null,
             tabBarItemStyle: styles.hiddenTab,
           }}
         />
         <Tab.Screen
-          name="FortuneStick"
-          component={FortuneStickScreen}
+          name="Horoscope"
+          component={HoroscopeScreen}
           options={{
-            title: t('fortuneStick.title'),
+            title: t('horoscope.title'),
+            tabBarButton: () => null,
+                        tabBarItemStyle: styles.hiddenTab,
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{
+            title: 'Cài đặt',
             tabBarButton: () => null,
             tabBarItemStyle: styles.hiddenTab,
           }}

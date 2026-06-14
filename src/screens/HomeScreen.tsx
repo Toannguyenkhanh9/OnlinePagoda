@@ -24,7 +24,8 @@ type MenuRoute =
   | 'Prayer'
   | 'SpiritualAudio'
   | 'LunarCalendar'
-    | 'FortuneStick'
+  | 'FortuneStick'
+  | 'Horoscope'
   | 'Settings';
 
 type HomeMenuCardProps = {
@@ -217,7 +218,14 @@ export default function HomeScreen({ navigation }: Props) {
             accent="#F3DFC9"
             onPress={navigateTo}
           />
-
+          <HomeMenuCard
+            icon="🔮"
+            title={t('home.horoscopeTitle')}
+            subtitle={t('home.horoscopeSubtitle')}
+            route="Horoscope"
+            accent="#E9DDEE"
+            onPress={navigateTo}
+          />
           <HomeMenuCard
             icon="📅"
             title={t('home.lunarCalendarTitle')}

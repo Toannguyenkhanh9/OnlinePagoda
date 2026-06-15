@@ -1,7 +1,7 @@
 const ziwei = {
   title: '紫微斗数',
   subtitle:
-    '输入出生日期、时间和地点，以安命宫、身宫、十二宫、五行局及十四主星。',
+    '输入出生日期、时间和地点，以安十二宫、十四主星、二十一辅星、四化、旬空截空及长生十二神。',
   stage1: '命盘基础',
   birthInformation: '出生信息',
   displayName: '显示名称',
@@ -33,7 +33,7 @@ const ziwei = {
   bodyTag: '身',
   diagnosticsTitle: '技术提示',
   notice:
-    '第二阶段已安置全部十四主星。尚未计算庙旺得陷、辅星、四化、旬空截空、运限或命理解读。内容仅供文化参考。',
+    '第四阶段已加入四化、旬空截空、长生十二神及版本化庙旺参考表。尚未包含大限、流年、流月或十二宫解读。内容仅供文化参考。',
   genders: {male: '男', female: '女'},
   classifications: {
     yangMale: '阳男', yinMale: '阴男', yangFemale: '阳女', yinFemale: '阴女',
@@ -62,6 +62,23 @@ const ziwei = {
     LEAP_LUNAR_MONTH: '出生日期位于农历闰月，后续安星时必须保留闰月标记。',
     MAIN_STAR_BRIGHTNESS_NOT_EVALUATED:
       '第二阶段仅安置十四主星，尚未评估庙、旺、得、平、陷等亮度状态。',
+    AUXILIARY_STAR_RULESET_VIETNAMESE_V1: '辅星采用已声明的越南规则集v1。',
+    FIRE_BELL_RULESET_VARIANT: '火星与铃星在不同流派中有异法，对照命盘时应保持同一规则。',
+    FOUR_TRANSFORMATIONS_YEAR_STEM_V1: '四化采用已声明的越南规则集 v1 生年天干表。',
+    VOID_MARKERS_REFERENCE_V1: '旬空与截空采用已声明的干支参考规则。',
+    TRANG_SINH_REFERENCE_V1: '长生十二神依据五行局与大限顺逆排列。',
+    MAIN_STAR_BRIGHTNESS_REFERENCE_V1: '十四主星庙旺采用版本化的越南参考表 v1。',
+    BRIGHTNESS_TABLE_REQUIRES_EXPERT_REVIEW: '不同流派的庙旺表存在差异，专业使用前需由专家核对。',
+    MAJOR_CYCLE_REFERENCE_V1:
+      '大限采用越南参考规则：以五行局数为起运年龄，并从命宫顺逆排列。',
+    MINOR_CYCLE_REFERENCE_V1:
+      '小限按生年三合局确定起点，男顺女逆。',
+    ANNUAL_TRANSIT_REFERENCE_V1:
+      '流太岁、流禄存、流擎羊、流陀罗、流天马及流年四化采用第五阶段参考规则。',
+    ANNUAL_BOUNDARY_REFERENCE_ONLY:
+      '流年目前按公历年份处理，尚未提供农历新年或立春边界选项。',
+    CYCLE_AGE_USES_NOMINAL_AGE:
+      '大限、小限和流年均按虚岁索引。',
   },
   stage2Title: '第二阶段 · 十四主星',
   stage2Subtitle: '根据农历生日与五行局安置紫微、天府及两组十四主星。',
@@ -78,6 +95,113 @@ const ziwei = {
     qiSha: '七杀', poJun: '破军',
 
   },
+
+  stage3Title: '第三阶段 · 辅星、吉星与煞星',
+  stage3Subtitle:
+    '依据农历月份、出生时辰、年干和年支，按已声明的越南规则安置21颗辅星。',
+  stage3Labels: {
+    auxiliaryStarCount: '辅星数量', supportiveCount: '助力星', challengingCount: '挑战星',
+    mixedCount: '混合性质星', byCategory: '辅星分类', byPalace: '十二宫辅星',
+    noAuxiliaryStar: '此宫无辅星', rulesetTitle: '当前规则集',
+    rulesetNotice:
+      '火星与铃星在不同流派中存在安法差异。引擎采用越南规则集v1，为每颗星保存规则代码，并不会静默混用未经验证的庙旺表。',
+  },
+  auxiliaryCategories: {
+    assistant: '辅弼', literary: '文星', noble: '贵人', wealth: '财禄',
+    malefic: '煞星', mobility: '迁动', romance: '桃花姻缘',
+    solitary: '孤寡', ceremonial: '名贵',
+  },
+  auxiliaryTones: {supportive: '助力', challenging: '挑战', mixed: '混合'},
+  auxiliaryStars: {
+    zuoFu: '左辅', youBi: '右弼', wenChang: '文昌', wenQu: '文曲',
+    tianKui: '天魁', tianYue: '天钺', luCun: '禄存', qingYang: '擎羊',
+    tuoLuo: '陀罗', huoXing: '火星', lingXing: '铃星', diKong: '地空',
+    diJie: '地劫', tianMa: '天马', hongLuan: '红鸾', tianXi: '天喜',
+    taoHua: '桃花', guChen: '孤辰', guaXiu: '寡宿', longChi: '龙池', fengGe: '凤阁',
+  },
+
+  stage4Title: '第四阶段 · 四化、旬空截空与长生十二神',
+  stage4Subtitle:
+    '按生年天干安四化，计算旬空与截空，排列长生十二神，并依据已声明的参考表评估十四主星庙旺。',
+  stage4Labels: {
+    transformationCount: '四化数量',
+    voidMarkerCount: '空亡组数',
+    trangSinhCount: '长生阶段数',
+    brightnessCount: '已评估主星数',
+    fourTransformations: '生年天干四化',
+    voidMarkers: '旬空与截空',
+    brightnessTitle: '主星庙旺状态',
+    trangSinhTitle: '长生十二神',
+    byPalace: '十二宫第四阶段汇总',
+    rulesetTitle: '第四阶段规则集',
+    rulesetNotice:
+      '四化、旬空、截空及长生十二神采用已声明的越南规则集 v1。庙旺表另行版本化，正式专业使用前应由专业人士核对。',
+  },
+  transformations: {
+    lu: '化禄',
+    quan: '化权',
+    ke: '化科',
+    ji: '化忌',
+  },
+  voidMarkers: {
+    tuan: '旬空',
+    triet: '截空',
+  },
+  trangSinh: {
+    trangSinh: '长生',
+    mocDuc: '沐浴',
+    quanDoi: '冠带',
+    lamQuan: '临官',
+    deVuong: '帝旺',
+    suy: '衰',
+    benh: '病',
+    tu: '死',
+    mo: '墓',
+    tuyet: '绝',
+    thai: '胎',
+    duong: '养',
+  },
+  brightness: {
+    mien: '庙',
+    vuong: '旺',
+    dac: '得',
+    binh: '平',
+    ham: '陷',
+    notEvaluated: '未评估',
+  },
+
+  stage5: {
+    title: '第五阶段 · 大限、小限与流年',
+    subtitle:
+      '排定十年大限、逐岁小限，以及流太岁、流禄存、流擎羊、流陀罗、流天马和流年四化。',
+    majorCycleCount: '大限数量',
+    minorCycleCount: '小限岁数',
+    annualCycleCount: '流年记录',
+    ruleset: '运限规则',
+    rulesetName: '越南参考规则 v1',
+    majorCycles: '大限',
+    annualTransit: '流年',
+    nominalAge: '虚岁',
+    solarAge: '约周岁',
+    activeMajorCycle: '当前大限',
+    minorCycle: '小限',
+    annualTaiSui: '流太岁',
+    annualTransformationCount: '流年四化数量',
+    notStarted: '尚未开始',
+    annualStars: '流年星曜',
+    annualTransformations: '流年四化',
+    annualStarNames: {
+      taiSui: '流太岁',
+      luCun: '流禄存',
+      qingYang: '流擎羊',
+      tuoLuo: '流陀罗',
+      tianMa: '流天马',
+    },
+    noticeTitle: '第五阶段方法',
+    notice:
+      '运限采用虚岁及已声明的越南参考规则。流年边界目前按公历年份表示；专业版本应明确支持农历新年或立春边界，并使用经专家核验的命盘样本。',
+  },
+
   errors: {
     title: '信息无效',
     calculateFailed: '无法排盘，请检查输入信息。',

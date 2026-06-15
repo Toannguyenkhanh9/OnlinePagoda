@@ -1,7 +1,7 @@
 import {
   createDefaultZiweiEngine,
   type ZiweiBirthInput,
-  type ZiweiChartStage2,
+  type ZiweiChartStage5,
   type ZiweiGender,
 } from '../astrology/ziwei';
 
@@ -35,7 +35,7 @@ function parseOptionalNumber(value: string): number | undefined {
 
 export function calculateZiweiFromForm(
   values: ZiweiFormValues,
-): ZiweiChartStage2 {
+): ZiweiChartStage5 {
   const input: ZiweiBirthInput = {
     displayName: values.displayName.trim() || undefined,
     localDateTime: {

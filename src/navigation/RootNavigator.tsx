@@ -17,6 +17,14 @@ import LunarCalendarScreen from '../screens/LunarCalendarScreen';
 import SpiritualAudioScreen from '../screens/SpiritualAudioScreen';
 import FortuneStickScreen from '../screens/FortuneStickScreen';
 import HoroscopeScreen from '../screens/HoroscopeScreen';
+import BaziChartScreen
+  from '../screens/BaziChartScreen';
+  import BaziHistoryScreen
+  from '../screens/BaziHistoryScreen';
+import BaziStage4Screen
+  from '../screens/BaziStage4Screen';
+  import ZiweiChartScreen
+  from '../screens/ZiweiChartScreen';
 
 export type RootTabParamList = {
   Home: undefined;
@@ -29,6 +37,14 @@ export type RootTabParamList = {
   SpiritualAudio: undefined;
   FortuneStick: undefined;
   Horoscope: undefined;
+  BaziChart:
+    | {
+        savedRecordId?: string;
+      }
+    | undefined;
+  BaziHistory: undefined;
+  BaziStage4: undefined;
+  ZiweiChart: undefined;
 };
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
@@ -161,6 +177,50 @@ export default function RootNavigator() {
             tabBarItemStyle: styles.hiddenTab,
           }}
         />
+<Tab.Screen
+  name="BaziChart"
+  component={BaziChartScreen}
+  options={{
+    title: t('bazi.title'),
+
+    tabBarButton: () => null,
+     tabBarItemStyle: styles.hiddenTab,
+  }}
+/>
+
+<Tab.Screen
+  name="BaziHistory"
+  component={BaziHistoryScreen}
+  options={{
+    title: t(
+      'bazi.stage3.historyTitle',
+    ),
+
+    tabBarButton: () => null,
+     tabBarItemStyle: styles.hiddenTab,
+  }}
+/>
+<Tab.Screen
+  name="BaziStage4"
+  component={BaziStage4Screen}
+  options={{
+    title: t(
+      'bazi.stage4.title',
+    ),
+
+    tabBarButton: () => null,
+     tabBarItemStyle: styles.hiddenTab,
+  }}
+/>
+<Tab.Screen
+  name="ZiweiChart"
+  component={ZiweiChartScreen}
+  options={{
+    title: t('ziwei.title'),
+    tabBarButton: () => null,
+    tabBarItemStyle: styles.hiddenTab,
+  }}
+/>
       </Tab.Navigator>
     </NavigationContainer>
   );

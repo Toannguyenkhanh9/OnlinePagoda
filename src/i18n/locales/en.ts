@@ -1,3 +1,5 @@
+import bazi from './bazi.en';
+import ziwei from './ziwei.en';
 const en = {
   common: {
     cancel: 'Cancel',
@@ -14,7 +16,7 @@ const en = {
   },
 
   home: {
-    title: 'Online Temple',
+    title: 'iPagoda',
 
     subtitle: 'A quiet space to meditate, pray, and listen to yourself.',
 
@@ -62,6 +64,20 @@ const en = {
     horoscopeTitle: 'Horoscope and Auspicious Dates',
 
     horoscopeSubtitle: 'View lunar birth date, zodiac, and suggested dates',
+     baziTitle: 'BaZi Chart',
+
+  baziSubtitle:
+    'Four Pillars, elements, luck cycles, and interpretation',
+    baziHistoryTitle:
+  'Saved BaZi Charts',
+
+baziHistorySubtitle:
+  'Review and manage saved BaZi charts',
+  baziStage4Title:
+  'Timing and Compatibility',
+
+baziStage4Subtitle:
+  'Transits, chart comparison, and date selection',
   },
 
   temple: {
@@ -882,6 +898,8 @@ const en = {
     careerKeepCashReserve:
       'Maintain a reserve before expanding a project or business.',
   },
+  bazi,
+  ziwei,
 } as const;
 
 export default en;

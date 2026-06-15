@@ -7,6 +7,18 @@ export const SUPPORTED_LANGUAGES = [
     code: 'en',
     name: 'English',
   },
+   {
+    code: 'zh',
+    name: '简体中文',
+  },
+  {
+    code: 'ko',
+    name: '한국어',
+  },
+  {
+    code: 'ja',
+    name: '日本語',
+  },
 ] as const;
 
 export type AppLanguage =

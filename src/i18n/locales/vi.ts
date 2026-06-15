@@ -1,3 +1,5 @@
+import bazi from './bazi.vi';
+import ziwei from './ziwei.vi';
 const vi = {
   common: {
     cancel: 'Hủy',
@@ -14,7 +16,7 @@ const vi = {
   },
 
   home: {
-    title: 'Chùa Online',
+    title: 'iPagoda',
 
     subtitle:
       'Một không gian yên tĩnh để thiền, cầu nguyện và lắng nghe bản thân.',
@@ -62,6 +64,20 @@ const vi = {
     horoscopeTitle: 'Tử vi và ngày tốt',
 
     horoscopeSubtitle: 'Xem ngày âm, con giáp và ngày phù hợp',
+     baziTitle: 'Lá số Bát tự',
+
+  baziSubtitle:
+    'Tứ trụ, ngũ hành, đại vận và luận giải',
+    baziHistoryTitle:
+  'Lá số đã lưu',
+
+baziHistorySubtitle:
+  'Xem lại và quản lý các lá số Bát tự',
+  baziStage4Title:
+  'Dòng vận và tương hợp',
+
+baziStage4Subtitle:
+  'Lưu niên, lưu nguyệt, so lá số và chọn ngày',
   },
 
   temple: {
@@ -950,6 +966,8 @@ const vi = {
         'Giữ nguồn dự phòng trước khi mở rộng dự án hoặc kinh doanh.',
     },
   },
+  bazi,
+  ziwei,
 } as const;
 
 export default vi;

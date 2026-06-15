@@ -13,6 +13,7 @@ import {placeVoidMarkers} from './core/voidMarkers';
 import {placeMajorCycles} from './core/majorCycles';
 import {placeMinorCycles} from './core/minorCycles';
 import {buildAnnualCycles} from './core/annualCycles';
+import {buildZiweiInterpretation} from './interpretation/interpreter';
 import {validateZiweiBirthInput} from './validation/input';
 import type {
   ZiweiBirthInput,
@@ -22,13 +23,14 @@ import type {
   ZiweiChartStage3,
   ZiweiChartStage4,
   ZiweiChartStage5,
+  ZiweiChartStage6,
   ZiweiDiagnosticCode,
 } from './types';
 
 function buildDiagnostics(
   input: ZiweiBirthInput,
   isLeapMonth: boolean,
-  stage: 1 | 2 | 3 | 4 | 5,
+  stage: 1 | 2 | 3 | 4 | 5 | 6,
 ): ZiweiDiagnosticCode[] {
   const diagnostics: ZiweiDiagnosticCode[] = ['TIME_ZONE_METADATA_ONLY'];
   const minute = input.localDateTime.minute;
@@ -64,6 +66,11 @@ function buildDiagnostics(
     diagnostics.push('ANNUAL_TRANSIT_REFERENCE_V1');
     diagnostics.push('ANNUAL_BOUNDARY_REFERENCE_ONLY');
     diagnostics.push('CYCLE_AGE_USES_NOMINAL_AGE');
+  }
+
+  if (stage >= 6) {
+    diagnostics.push('INTERPRETATION_REFERENCE_V1');
+    diagnostics.push('INTERPRETATION_REQUIRES_EXPERT_REVIEW');
   }
 
   return diagnostics;
@@ -440,6 +447,39 @@ export function createStage4ZiweiEngine(): ZiweiStage4Engine {
   return new ZiweiStage4Engine();
 }
 
-export function createDefaultZiweiEngine(): ZiweiStage5Engine {
+export function createStage5ZiweiEngine(): ZiweiStage5Engine {
   return new ZiweiStage5Engine();
+}
+
+export class ZiweiStage6Engine {
+  constructor(
+    private readonly calendarProvider: ZiweiCalendarProvider =
+      new LunarJavascriptZiweiCalendarProvider(),
+  ) {}
+
+  calculate(input: ZiweiBirthInput): ZiweiChartStage6 {
+    const stage5 = new ZiweiStage5Engine(this.calendarProvider).calculate(input);
+    const interpretation = buildZiweiInterpretation(stage5);
+    const diagnostics = withZiHourDiagnostic(
+      buildDiagnostics(input, stage5.lunar.isLeapMonth, 6),
+      stage5.lunar.birthHourBranchId,
+    );
+    const {version: _version, diagnostics: _diagnostics, ...base} = stage5;
+
+    return {
+      ...base,
+      version: '6.0.0',
+      diagnostics,
+      interpretationRuleset: 'ziwei-interpretation-reference-v1',
+      interpretation,
+    };
+  }
+}
+
+export function createStage6ZiweiEngine(): ZiweiStage6Engine {
+  return new ZiweiStage6Engine();
+}
+
+export function createDefaultZiweiEngine(): ZiweiStage6Engine {
+  return new ZiweiStage6Engine();
 }

@@ -17,3 +17,4 @@ export * from './core/minorCycles';
 export * from './core/annualCycles';
 export * from './validation/input';
 export * from './calendar/lunarJavascriptProvider';
+export * from './interpretation/interpreter';

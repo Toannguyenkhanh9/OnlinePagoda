@@ -385,6 +385,108 @@ export type ZiweiAnnualCycle = {
   ruleCode: 'ANNUAL_TRANSIT_NOMINAL_AGE_REFERENCE_V1';
 };
 
+
+export type ZiweiInterpretationLevel =
+  | 'veryFavorable'
+  | 'favorable'
+  | 'balanced'
+  | 'challenging'
+  | 'veryChallenging';
+
+export type ZiweiInterpretationConfidence = 'low' | 'medium' | 'high';
+
+export type ZiweiInterpretationTone =
+  | 'supportive'
+  | 'challenging'
+  | 'mixed'
+  | 'neutral';
+
+export type ZiweiInterpretationSource =
+  | 'mainStar'
+  | 'auxiliaryStar'
+  | 'transformation'
+  | 'voidMarker'
+  | 'trangSinh'
+  | 'bodyResidence'
+  | 'majorCycle'
+  | 'minorCycle'
+  | 'annualStar'
+  | 'annualTransformation';
+
+export type ZiweiInterpretationEvidence = {
+  code: string;
+  source: ZiweiInterpretationSource;
+  sourceId: string;
+  palaceId: ZiweiPalaceId;
+  tone: ZiweiInterpretationTone;
+  scoreDelta: number;
+  brightness?: ZiweiStarBrightness;
+  details?: Record<string, string | number | boolean | null>;
+};
+
+export type ZiweiPalaceInterpretation = {
+  palaceId: ZiweiPalaceId;
+  score: number;
+  level: ZiweiInterpretationLevel;
+  confidence: ZiweiInterpretationConfidence;
+  headlineCode: string;
+  adviceCode: string;
+  mainStarIds: ZiweiMainStarId[];
+  auxiliaryStarIds: ZiweiAuxiliaryStarId[];
+  transformationTypes: ZiweiTransformationType[];
+  evidence: ZiweiInterpretationEvidence[];
+  supportiveEvidence: ZiweiInterpretationEvidence[];
+  challengingEvidence: ZiweiInterpretationEvidence[];
+};
+
+export type ZiweiDomainId =
+  | 'self'
+  | 'love'
+  | 'career'
+  | 'wealth'
+  | 'health'
+  | 'family'
+  | 'travel';
+
+export type ZiweiDomainInterpretation = {
+  domainId: ZiweiDomainId;
+  primaryPalaceId: ZiweiPalaceId;
+  relatedPalaceIds: ZiweiPalaceId[];
+  score: number;
+  level: ZiweiInterpretationLevel;
+  confidence: ZiweiInterpretationConfidence;
+  headlineCode: string;
+  adviceCode: string;
+  evidence: ZiweiInterpretationEvidence[];
+};
+
+export type ZiweiAnnualInterpretation = {
+  calendarYear: number;
+  nominalAge: number;
+  score: number;
+  level: ZiweiInterpretationLevel;
+  confidence: ZiweiInterpretationConfidence;
+  headlineCode: string;
+  adviceCode: string;
+  activeMajorPalaceId: ZiweiPalaceId | null;
+  minorCyclePalaceId: ZiweiPalaceId;
+  taiSuiPalaceId: ZiweiPalaceId;
+  evidence: ZiweiInterpretationEvidence[];
+};
+
+export type ZiweiInterpretationReport = {
+  ruleset: 'ziwei-interpretation-reference-v1';
+  overallScore: number;
+  overallLevel: ZiweiInterpretationLevel;
+  overallConfidence: ZiweiInterpretationConfidence;
+  headlineCode: string;
+  palaceReadings: ZiweiPalaceInterpretation[];
+  palaceReadingsById: Record<ZiweiPalaceId, ZiweiPalaceInterpretation>;
+  domainReadings: ZiweiDomainInterpretation[];
+  domainReadingsById: Record<ZiweiDomainId, ZiweiDomainInterpretation>;
+  annualReadings: ZiweiAnnualInterpretation[];
+};
+
 export type ZiweiDiagnosticCode =
   | 'BIRTH_NEAR_HOUR_BOUNDARY'
   | 'BIRTH_AT_ZI_HOUR'
@@ -402,7 +504,9 @@ export type ZiweiDiagnosticCode =
   | 'MINOR_CYCLE_REFERENCE_V1'
   | 'ANNUAL_TRANSIT_REFERENCE_V1'
   | 'ANNUAL_BOUNDARY_REFERENCE_ONLY'
-  | 'CYCLE_AGE_USES_NOMINAL_AGE';
+  | 'CYCLE_AGE_USES_NOMINAL_AGE'
+  | 'INTERPRETATION_REFERENCE_V1'
+  | 'INTERPRETATION_REQUIRES_EXPERT_REVIEW';
 
 export type ZiweiChartStage1 = {
   version: '1.0.0';
@@ -465,7 +569,13 @@ export type ZiweiChartStage5 = Omit<ZiweiChartStage4, 'version'> & {
   };
 };
 
-export type ZiweiChart = ZiweiChartStage5;
+export type ZiweiChartStage6 = Omit<ZiweiChartStage5, 'version'> & {
+  version: '6.0.0';
+  interpretationRuleset: 'ziwei-interpretation-reference-v1';
+  interpretation: ZiweiInterpretationReport;
+};
+
+export type ZiweiChart = ZiweiChartStage6;
 
 export interface ZiweiCalendarProvider {
   readonly name: string;

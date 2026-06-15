@@ -15,6 +15,7 @@ import {useTranslation} from 'react-i18next';
 import ZiweiStage3Details from '../components/ZiweiStage3Details';
 import ZiweiStage4Details from '../components/ZiweiStage4Details';
 import ZiweiStage5Details from '../components/ZiweiStage5Details';
+import ZiweiStage6Details from '../components/ZiweiStage6Details';
 
 import {
   calculateZiweiFromForm,
@@ -23,7 +24,7 @@ import {
 
 import type {
   EarthlyBranchId,
-  ZiweiChartStage5,
+  ZiweiChartStage6,
   ZiweiMainStarPlacement,
   ZiweiGender,
   ZiweiPalace,
@@ -53,7 +54,7 @@ function createDefaultForm(): ZiweiFormValues {
 export default function ZiweiChartScreen() {
   const {t} = useTranslation();
   const [form, setForm] = useState<ZiweiFormValues>(createDefaultForm());
-  const [chart, setChart] = useState<ZiweiChartStage5 | null>(null);
+  const [chart, setChart] = useState<ZiweiChartStage6 | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
   const palaceByBranch = useMemo(() => {
@@ -78,7 +79,7 @@ export default function ZiweiChartScreen() {
       const result = calculateZiweiFromForm(form);
       setChart(result);
     } catch (error) {
-      console.warn('Cannot calculate Zi Wei Stage 5:', error);
+      console.warn('Cannot calculate Zi Wei Stage 6:', error);
       const code = error instanceof Error ? error.message : '';
 
       Alert.alert(
@@ -370,7 +371,7 @@ export default function ZiweiChartScreen() {
 
                   <View style={styles.centerCard}>
                     <Text style={styles.centerSymbol}>☯</Text>
-                    <Text style={styles.centerTitle}>{t('ziwei.stage5.title')}</Text>
+                    <Text style={styles.centerTitle}>{t('ziwei.stage6.title')}</Text>
                     <Text style={styles.centerText}>
                       {t(`ziwei.classifications.${chart.polarity.classification}`)}
                     </Text>
@@ -512,6 +513,8 @@ export default function ZiweiChartScreen() {
             <ZiweiStage4Details chart={chart} />
 
             <ZiweiStage5Details chart={chart} />
+
+            <ZiweiStage6Details chart={chart} />
 
             {chart.diagnostics.length > 0 && (
               <View style={styles.noticeCard}>

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   Alert,
   Animated,
+  Easing,
   Image,
   ImageBackground,
   ImageSourcePropType,
@@ -196,6 +197,235 @@ function TempleRoundAction({
   );
 }
 
+
+type TempleSmokeLayerProps = {
+  visible: boolean;
+};
+
+function useRandomPulse(
+  minimum: number,
+  maximum: number,
+  minimumDuration: number,
+  maximumDuration: number,
+): Animated.Value {
+  const value = useRef(
+    new Animated.Value((minimum + maximum) / 2),
+  ).current;
+
+  useEffect(() => {
+    let cancelled = false;
+    let animation: Animated.CompositeAnimation | null = null;
+
+    const animateNext = () => {
+      if (cancelled) {
+        return;
+      }
+
+      const nextValue =
+        minimum + Math.random() * (maximum - minimum);
+
+      const duration = Math.round(
+        minimumDuration +
+          Math.random() * (maximumDuration - minimumDuration),
+      );
+
+      animation = Animated.timing(value, {
+        toValue: nextValue,
+        duration,
+        easing: Easing.inOut(Easing.quad),
+        useNativeDriver: true,
+      });
+
+      animation.start(({finished}) => {
+        if (finished && !cancelled) {
+          animateNext();
+        }
+      });
+    };
+
+    animateNext();
+
+    return () => {
+      cancelled = true;
+      animation?.stop();
+      value.stopAnimation();
+    };
+  }, [
+    maximum,
+    maximumDuration,
+    minimum,
+    minimumDuration,
+    value,
+  ]);
+
+  return value;
+}
+
+/**
+ * Ba ảnh PNG trong suốt chỉ chứa vùng sáng mềm.
+ * Vì ảnh hiệu ứng có cùng kích thước và cùng resizeMode="cover"
+ * với ảnh nền nên đèn và nến luôn nằm đúng vị trí, không tạo
+ * vòng tròn mờ trên Android.
+ */
+function TempleLightEffects() {
+  const leftLight = useRandomPulse(
+    0.22,
+    0.72,
+    260,
+    880,
+  );
+
+  const rightLight = useRandomPulse(
+    0.20,
+    0.70,
+    300,
+    960,
+  );
+
+  const centerLight = useRandomPulse(
+    0.12,
+    0.42,
+    900,
+    2100,
+  );
+
+  return (
+    <View
+      pointerEvents="none"
+      style={styles.fullScreenEffect}
+    >
+      <Animated.Image
+        source={require('../assets/images/temple_glow_left.png')}
+        resizeMode="cover"
+        style={[
+          styles.glowOverlayImage,
+          {
+            opacity: leftLight,
+          },
+        ]}
+      />
+
+      <Animated.Image
+        source={require('../assets/images/temple_glow_right.png')}
+        resizeMode="cover"
+        style={[
+          styles.glowOverlayImage,
+          {
+            opacity: rightLight,
+          },
+        ]}
+      />
+
+      <Animated.Image
+        source={require('../assets/images/temple_glow_center.png')}
+        resizeMode="cover"
+        style={[
+          styles.glowOverlayImage,
+          {
+            opacity: centerLight,
+          },
+        ]}
+      />
+    </View>
+  );
+}
+
+/**
+ * Khói vẫn dùng component Skia hiện có, nhưng toàn bộ lớp khói
+ * được đẩy trái/phải và thay đổi độ đậm nhẹ để tạo cảm giác
+ * có luồng gió rất nhỏ.
+ */
+function TempleSmokeLayer({
+  visible,
+}: TempleSmokeLayerProps) {
+  const drift = useRef(
+    new Animated.Value(0),
+  ).current;
+
+  const smokeOpacity = useRandomPulse(
+    0.72,
+    1,
+    1200,
+    2400,
+  );
+
+  useEffect(() => {
+    if (!visible) {
+      drift.stopAnimation();
+      drift.setValue(0);
+      return;
+    }
+
+    const animation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(drift, {
+          toValue: 1,
+          duration: 4200,
+          easing: Easing.inOut(Easing.sin),
+          useNativeDriver: true,
+        }),
+        Animated.timing(drift, {
+          toValue: -1,
+          duration: 5600,
+          easing: Easing.inOut(Easing.sin),
+          useNativeDriver: true,
+        }),
+        Animated.timing(drift, {
+          toValue: 0,
+          duration: 3800,
+          easing: Easing.inOut(Easing.sin),
+          useNativeDriver: true,
+        }),
+      ]),
+    );
+
+    animation.start();
+
+    return () => {
+      animation.stop();
+      drift.stopAnimation();
+    };
+  }, [drift, visible]);
+
+  if (!visible) {
+    return null;
+  }
+
+  const translateX = drift.interpolate({
+    inputRange: [-1, 0, 1],
+    outputRange: [-14, 0, 12],
+  });
+
+  const rotate = drift.interpolate({
+    inputRange: [-1, 0, 1],
+    outputRange: ['-1.5deg', '0deg', '1.3deg'],
+  });
+
+  const scaleX = drift.interpolate({
+    inputRange: [-1, 0, 1],
+    outputRange: [1.05, 0.98, 1.07],
+  });
+
+  return (
+    <Animated.View
+      pointerEvents="none"
+      style={[
+        styles.smokeMotionLayer,
+        {
+          opacity: smokeOpacity,
+          transform: [
+            {translateX},
+            {rotate},
+            {scaleX},
+          ],
+        },
+      ]}
+    >
+      <SkiaIncenseSmoke />
+    </Animated.View>
+  );
+}
+
 // Mỗi nén nhang cháy trong 60 giây.
 // Khi hoàn thiện, có thể đổi thành 5 * 60 * 1000 để cháy trong 5 phút.
 const INCENSE_BURN_DURATION_MS = 60 * 1000;
@@ -325,6 +555,8 @@ export default function TempleScreen() {
       <StatusBar barStyle="light-content" backgroundColor="#160B05" />
 
       <View style={styles.overlay}>
+        <TempleLightEffects />
+
         <SafeAreaView style={styles.safeArea}>
           <ScrollView
             contentContainerStyle={styles.content}
@@ -340,7 +572,9 @@ export default function TempleScreen() {
             </View>
 
             <View style={styles.heroSpacer}>
-              {incenseCount > 0 && <SkiaIncenseSmoke />}
+              <TempleSmokeLayer
+                visible={incenseCount > 0}
+              />
             </View>
 
             <View style={styles.bottomPanel}>
@@ -519,6 +753,36 @@ const styles = StyleSheet.create({
     minHeight: 405,
     justifyContent: 'flex-end',
     alignItems: 'center',
+    position: 'relative',
+    overflow: 'hidden',
+  },
+
+  fullScreenEffect: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  },
+
+  glowOverlayImage: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+
+  smokeMotionLayer: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
 
   bottomPanel: {

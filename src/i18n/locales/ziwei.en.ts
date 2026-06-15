@@ -33,7 +33,7 @@ const ziwei = {
   bodyTag: 'Body',
   diagnosticsTitle: 'Technical Notes',
   notice:
-    'Stage 4 adds the Four Transformations, Tuan and Triet, the Trang Sinh cycle, and a versioned brightness reference table. Major cycles, minor cycles, annual transits, and palace interpretations are not included yet. Content is for cultural reference only.',
+    'The chart includes major cycles, minor cycles, annual transits, and evidence-based interpretations for the twelve palaces. Content is for cultural reference and does not replace professional advice.',
   genders: {male: 'Male', female: 'Female'},
   classifications: {
     yangMale: 'Yang Male',
@@ -66,13 +66,13 @@ const ziwei = {
     BIRTH_NEAR_HOUR_BOUNDARY:
       'The birth time is near a double-hour boundary; verify the birth minute.',
     BIRTH_AT_ZI_HOUR:
-      'Birth occurred during Zi hour. The day-boundary rule must remain consistent in later stages.',
+      'Birth occurred during Zi hour. The day-boundary rule must remain consistent throughout the chart calculation.',
     TIME_ZONE_METADATA_ONLY:
-      'Stage 1 records the time zone but uses the entered local wall-clock date and time directly.',
+      'The Chart Foundation records the time zone but uses the entered local wall-clock date and time directly.',
     LEAP_LUNAR_MONTH:
-      'The birth date falls in a leap lunar month; preserve the leap-month flag in later star-placement stages.',
+      'The birth date falls in a leap lunar month; preserve the leap-month flag throughout star placement.',
     MAIN_STAR_BRIGHTNESS_NOT_EVALUATED:
-      'Stage 2 places the fourteen main stars, but brightness states are not evaluated yet.',
+      'The Major Star System places the fourteen main stars; brightness states are presented under Four Transformations and Star Cycles.',
     AUXILIARY_STAR_RULESET_VIETNAMESE_V1:
       'Auxiliary stars use the declared Vietnamese ruleset v1.',
     FIRE_BELL_RULESET_VARIANT:
@@ -92,13 +92,15 @@ const ziwei = {
     MINOR_CYCLE_REFERENCE_V1:
       'Minor cycles use year-triad start branches, moving forward for male charts and reverse for female charts.',
     ANNUAL_TRANSIT_REFERENCE_V1:
-      'Annual Tai Sui, Lu Cun, Qing Yang, Tuo Luo, Tian Ma, and annual Four Transformations use the Stage 5 reference rules.',
+      'Annual Tai Sui, Lu Cun, Qing Yang, Tuo Luo, Tian Ma, and annual Four Transformations use the Timing and Life Cycles reference rules.',
     ANNUAL_BOUNDARY_REFERENCE_ONLY:
       'Annual records currently use calendar-year granularity rather than a selectable Lunar New Year or Li-Chun boundary.',
     CYCLE_AGE_USES_NOMINAL_AGE:
       'Major, minor, and annual cycles are indexed by nominal age.',
+    INTERPRETATION_REFERENCE_V1: 'Interpretations use the transparent reference model v1.',
+    INTERPRETATION_REQUIRES_EXPERT_REVIEW: 'Interpretations require expert review before professional use.',
   },
-  stage2Title: 'Stage 2 · Fourteen Main Stars',
+  stage2Title: 'Major Star System',
   stage2Subtitle:
     'Places Zi Wei, Tian Fu, and both main-star groups from the lunar birth day and Five-Element Bureau.',
   stage2Labels: {
@@ -107,7 +109,7 @@ const ziwei = {
     mainStarCount: 'Main-Star Count',
     mainStarLegend: 'Fourteen Main Stars',
     noMainStar: 'No main star',
-    brightnessDeferred: 'Star brightness will be added in a later stage',
+    brightnessDeferred: 'Star brightness is shown under Four Transformations and Star Cycles',
   },
   starGroups: {
     ziWeiGroup: 'Zi Wei Group',
@@ -122,7 +124,7 @@ const ziwei = {
 
   },
 
-  stage3Title: 'Stage 3 · Auxiliary, Supportive, and Challenging Stars',
+  stage3Title: 'Auxiliary and Challenging Stars',
   stage3Subtitle:
     'Places 21 auxiliary stars from the lunar month, birth hour, year stem, and year branch using a declared Vietnamese ruleset.',
   stage3Labels: {
@@ -154,20 +156,20 @@ const ziwei = {
     guChen: 'Gu Chen', guaXiu: 'Gua Xiu', longChi: 'Long Chi', fengGe: 'Feng Ge',
   },
 
-  stage4Title: 'Stage 4 · Transformations, Voids, and Life Cycle',
+  stage4Title: 'Four Transformations and Star Cycles',
   stage4Subtitle:
     'Places the Four Transformations, calculates Tuan and Triet, builds the twelve-stage Trang Sinh cycle, and evaluates fourteen main stars with a declared reference table.',
   stage4Labels: {
     transformationCount: 'Four Transformations',
     voidMarkerCount: 'Void Marker Sets',
-    trangSinhCount: 'Life-Cycle Stages',
+    trangSinhCount: 'Life-Cycle Phases',
     brightnessCount: 'Evaluated Main Stars',
     fourTransformations: 'Four Transformations by Birth-Year Stem',
     voidMarkers: 'Tuan and Triet',
     brightnessTitle: 'Main-Star Brightness',
     trangSinhTitle: 'Trang Sinh Life Cycle',
-    byPalace: 'Stage 4 Summary by Palace',
-    rulesetTitle: 'Stage 4 Ruleset',
+    byPalace: 'Transformations and Star-Cycle Summary by Palace',
+    rulesetTitle: 'Transformations and Star-Cycle Ruleset',
     rulesetNotice:
       'The Four Transformations, Tuan, Triet, and Trang Sinh use the declared Vietnamese v1 ruleset. The brightness table is separately versioned and should be reviewed by a qualified practitioner before professional use.',
   },
@@ -205,7 +207,7 @@ const ziwei = {
   },
 
   stage5: {
-    title: 'Stage 5 · Major Cycles, Minor Cycles, and Annual Transits',
+    title: 'Timing and Life Cycles',
     subtitle:
       'Builds decade cycles, age-by-age minor cycles, and annual overlays including Tai Sui, Lu Cun, Qing Yang, Tuo Luo, Tian Ma, and annual Four Transformations.',
     majorCycleCount: 'Major Cycles',
@@ -231,9 +233,82 @@ const ziwei = {
       tuoLuo: 'Annual Tuo Luo',
       tianMa: 'Annual Tian Ma',
     },
-    noticeTitle: 'Stage 5 Method',
+    noticeTitle: 'Timing and Life-Cycle Method',
     notice:
       'Cycles use nominal age and a declared Vietnamese reference ruleset. The annual year boundary is represented at calendar-year granularity; professional use should add an explicit Lunar New Year or Li-Chun boundary policy and expert-validated fixtures.',
+  },
+
+  stage6: {
+    title: 'Comprehensive Interpretation',
+    subtitle:
+      'Interprets the twelve palaces, seven life domains, and annual periods with a transparent scoring model and visible evidence.',
+    tabs: {overview: 'Overview', palaces: '12 Palaces', annual: 'Annual'},
+    overallReading: 'Overall Reading',
+    confidenceLabel: 'Confidence',
+    confidence: {low: 'Low', medium: 'Medium', high: 'High'},
+    lifeDomains: 'Main Life Domains',
+    domains: {
+      self: 'Self', love: 'Love', career: 'Career', wealth: 'Wealth',
+      health: 'Health', family: 'Family', travel: 'Travel',
+    },
+    headlines: {
+      veryFavorable: 'Strong foundation with multiple supportive factors',
+      favorable: 'Generally favorable with room to develop',
+      balanced: 'Relatively balanced with mixed influences',
+      challenging: 'Some challenges require deliberate adjustment',
+      veryChallenging: 'Higher pressure calls for caution and gradual progress',
+    },
+    primaryPalace: 'Primary Palace',
+    palaceInterpretations: 'Twelve-Palace Interpretations',
+    supportiveEvidence: 'Supportive Evidence',
+    challengingEvidence: 'Points to Consider',
+    noEvidence: 'No prominent factor in this group.',
+    annualInterpretation: 'Annual Interpretation',
+    nominalAge: 'Nominal age {{age}}',
+    activeMajorPalace: 'Major-Cycle Palace',
+    minorPalace: 'Minor-Cycle Palace',
+    taiSuiPalace: 'Annual Tai Sui Palace',
+    notAvailable: 'Not started',
+    evidenceTitle: 'Interpretation Evidence',
+    tones: {
+      supportive: 'Supportive', challenging: 'Challenging', mixed: 'Mixed', neutral: 'Neutral',
+    },
+    evidenceTypes: {
+      mainStar: 'Main Star', auxiliaryStar: 'Auxiliary Star', transformation: 'Four Transformation',
+      voidMarker: 'Tuan/Triet', trangSinh: 'Trang Sinh Cycle', bodyResidence: 'Body resides in this palace',
+      majorCycle: 'Major Cycle', minorCycle: 'Minor Cycle', annualStar: 'Annual Star',
+    },
+    noMainStar: 'Palace without a main star',
+    advice: {
+      domains: {
+        self: 'Build self-awareness and understand your recurring strengths, limits, and reactions before major decisions.',
+        love: 'Prioritize clear communication, healthy boundaries, and emotional steadiness.',
+        career: 'Choose an environment that fits your abilities, build long-term skills, and avoid purely impulsive moves.',
+        wealth: 'Use budgeting, reserves, and risk control rather than chasing short-term returns.',
+        health: 'Maintain a sustainable routine and seek qualified medical care for real symptoms.',
+        family: 'Encourage dialogue, shared responsibility, and respect for differences.',
+        travel: 'Prepare carefully for environmental changes, broaden connections, and keep practical safety limits.',
+      },
+      palaces: {
+        life: 'Develop self-awareness and choose a path aligned with your actual temperament.',
+        parents: 'Communicate respectfully with parents and elders while maintaining appropriate boundaries.',
+        fortune: 'Support inner stability through rest, reflection, and sustainable mental habits.',
+        property: 'Use a long-term view for property, housing, renovation, and asset accumulation.',
+        career: 'Focus on core competence, professional credibility, and collaboration.',
+        friends: 'Choose trustworthy relationships and clarify interests and responsibilities.',
+        travel: 'Adapt to new environments without neglecting planning and safety.',
+        health: 'Use real health data and professional advice rather than relying on a chart.',
+        wealth: 'Manage cash flow, debt, and investments with a concrete plan.',
+        children: 'Use encouragement, listening, and realistic expectations with children or creative projects.',
+        spouse: 'Build relationships through transparency, respect, and constructive conflict resolution.',
+        siblings: 'Offer mutual support while avoiding dependence or excessive interference.',
+      },
+      annual:
+        'Treat the annual reading as a reference signal and compare it with real circumstances, plans, and available resources.',
+    },
+    noticeTitle: 'Comprehensive Interpretation Method',
+    notice:
+      'Interpretations use a testable scoring model based on main stars, brightness, auxiliary stars, Four Transformations, void markers, the Trang Sinh cycle, and timing layers. They are not certain predictions and require expert validation before professional use.',
   },
 
   errors: {

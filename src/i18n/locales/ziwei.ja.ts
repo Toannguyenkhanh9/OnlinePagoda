@@ -14,7 +14,7 @@ const ziwei = {
   twelvePalaces: '十二宮命盤', palaceList: '十二宮一覧', lifeTag: '命', bodyTag: '身',
   diagnosticsTitle: '技術上の注意',
   notice:
-    'ステージ4では四化、旬空・截空、十二運、バージョン管理された廟旺参考表を追加します。大限・小限・流年・宮別解釈はまだ含みません。文化的参考用です。',
+    '命盤には大限・小限・流年と十二宮の根拠付き解釈が含まれます。文化的参考用であり、専門的助言の代わりにはなりません。',
   genders: {male: '男性', female: '女性'},
   classifications: {yangMale: '陽男', yinMale: '陰男', yangFemale: '陽女', yinFemale: '陰女'},
   directions: {forward: '大限は順行', reverse: '大限は逆行'},
@@ -28,11 +28,11 @@ const ziwei = {
   bureaus: {water: '水二局', wood: '木三局', metal: '金四局', earth: '土五局', fire: '火六局'},
   diagnostics: {
     BIRTH_NEAR_HOUR_BOUNDARY: '出生時刻が二つの時辰の境界に近いため、出生分を確認してください。',
-    BIRTH_AT_ZI_HOUR: '子刻の出生です。後続段階では日付境界ルールを統一する必要があります。',
-    TIME_ZONE_METADATA_ONLY: 'ステージ1ではタイムゾーンを記録しますが、入力した現地日時をそのまま使用します。',
-    LEAP_LUNAR_MONTH: '旧暦の閏月生まれです。後続の星配置でも閏月フラグを保持してください。',
+    BIRTH_AT_ZI_HOUR: '子刻の出生です。命盤計算全体で日付境界ルールを統一する必要があります。',
+    TIME_ZONE_METADATA_ONLY: '命盤の基礎ではタイムゾーンを記録しますが、入力した現地日時をそのまま使用します。',
+    LEAP_LUNAR_MONTH: '旧暦の閏月生まれです。星を配置する全工程で閏月フラグを保持してください。',
     MAIN_STAR_BRIGHTNESS_NOT_EVALUATED:
-      'ステージ2では十四主星の位置のみを算出し、廟・旺・得・平・陥はまだ評価しません。',
+      '主星体系では十四主星を配置し、廟・旺・得・平・陥は「四化と星曜循環」で表示します。',
     AUXILIARY_STAR_RULESET_VIETNAMESE_V1: '補助星は明示したベトナム式ルールv1を使用します。',
     FIRE_BELL_RULESET_VARIANT: '火星と鈴星は流派差があるため、命盤比較では同一ルールを使用してください。',
     FOUR_TRANSFORMATIONS_YEAR_STEM_V1: '四化は明示したベトナム式v1の生年天干表を使用します。',
@@ -45,18 +45,20 @@ const ziwei = {
     MINOR_CYCLE_REFERENCE_V1:
       '小限は生年の三合局で開始支を定め、男性は順行、女性は逆行します。',
     ANNUAL_TRANSIT_REFERENCE_V1:
-      '流太歳・流禄存・流擎羊・流陀羅・流天馬・流年四化はステージ5参照ルールを使用します。',
+      '流太歳・流禄存・流擎羊・流陀羅・流天馬・流年四化は「運勢と時間周期」の参照ルールを使用します。',
     ANNUAL_BOUNDARY_REFERENCE_ONLY:
       '流年は現在、西暦年単位で扱い、旧正月または立春境界の選択には未対応です。',
     CYCLE_AGE_USES_NOMINAL_AGE:
       '大限・小限・流年は数え年で索引化されます。',
+    INTERPRETATION_REFERENCE_V1: '解釈は透明な参照モデルv1を使用します。',
+    INTERPRETATION_REQUIRES_EXPERT_REVIEW: '専門利用前に専門家の確認が必要です。',
   },
-  stage2Title: 'ステージ2・十四主星',
+  stage2Title: '主星体系',
   stage2Subtitle: '旧暦の出生日と五行局から、紫微・天府および二つの主星系統を配置します。',
   stage2Labels: {
     ziWeiAnchor: '紫微の位置', tianFuAnchor: '天府の位置',
     mainStarCount: '主星数', mainStarLegend: '十四主星一覧',
-    noMainStar: '主星なし', brightnessDeferred: '星の廟旺は後続段階で追加されます',
+    noMainStar: '主星なし', brightnessDeferred: '星の廟旺は「四化と星曜循環」で表示されます',
   },
   starGroups: {ziWeiGroup: '紫微星系', tianFuGroup: '天府星系'},
   mainStars: {
@@ -67,7 +69,7 @@ const ziwei = {
 
   },
 
-  stage3Title: 'ステージ3・補助星・吉星・凶星',
+  stage3Title: '補助星と吉凶星',
   stage3Subtitle:
     '旧暦月、出生時支、年干、年支から、明示したベトナム式ルールで21の補助星を配置します。',
   stage3Labels: {
@@ -90,7 +92,7 @@ const ziwei = {
     taoHua: '桃花', guChen: '孤辰', guaXiu: '寡宿', longChi: '龍池', fengGe: '鳳閣',
   },
 
-  stage4Title: 'ステージ4・四化、旬空・截空、十二運',
+  stage4Title: '四化と星曜循環',
   stage4Subtitle:
     '生年天干による四化を配置し、旬空と截空を算出し、十二運を配列し、明示した参考表で十四主星の廟旺を評価します。',
   stage4Labels: {
@@ -102,8 +104,8 @@ const ziwei = {
     voidMarkers: '旬空と截空',
     brightnessTitle: '主星の廟旺',
     trangSinhTitle: '十二運',
-    byPalace: '十二宮別ステージ4まとめ',
-    rulesetTitle: 'ステージ4ルール',
+    byPalace: '十二宮別の四化・星曜循環まとめ',
+    rulesetTitle: '四化・星曜循環ルール',
     rulesetNotice:
       '四化、旬空、截空、十二運は明示したベトナム式ルールv1を使用します。廟旺表は別バージョンで管理し、専門サービスに使用する前に専門家の確認が必要です。',
   },
@@ -141,7 +143,7 @@ const ziwei = {
   },
 
   stage5: {
-    title: 'ステージ5 · 大限・小限・流年',
+    title: '運勢と時間周期',
     subtitle:
       '10年ごとの大限、年齢ごとの小限、流太歳・流禄存・流擎羊・流陀羅・流天馬、および流年四化を算出します。',
     majorCycleCount: '大限数',
@@ -167,9 +169,79 @@ const ziwei = {
       tuoLuo: '流陀羅',
       tianMa: '流天馬',
     },
-    noticeTitle: 'ステージ5の方式',
+    noticeTitle: '運勢計算の方式',
     notice:
       '運限は数え年と明示されたベトナム参照ルールを使用します。流年境界は現在、西暦年単位で表現しています。専門利用では旧正月または立春の境界方針と、専門家が検証した命式例が必要です。',
+  },
+
+  stage6: {
+    title: '総合鑑定',
+    subtitle:
+      '透明な採点と根拠に基づき、十二宮、七つの生活領域、年ごとの流れを解釈します。',
+    tabs: {overview: '概要', palaces: '十二宮', annual: '年運'},
+    overallReading: '命盤の総合解釈',
+    confidenceLabel: '信頼度',
+    confidence: {low: '低', medium: '中', high: '高'},
+    lifeDomains: '主な生活領域',
+    domains: {
+      self: '自己', love: '恋愛', career: '仕事', wealth: '財運',
+      health: '健康', family: '家族', travel: '移動',
+    },
+    headlines: {
+      veryFavorable: '土台が強く、支援要素が多い状態です',
+      favorable: '概ね良好で、発展の余地があります',
+      balanced: '比較的均衡し、良い面と課題が混在します',
+      challenging: '課題があり、意識的な調整が必要です',
+      veryChallenging: '負荷が高く、慎重で段階的な対応が必要です',
+    },
+    primaryPalace: '主宮',
+    palaceInterpretations: '十二宮の解釈',
+    supportiveEvidence: '支援要因',
+    challengingEvidence: '注意要因',
+    noEvidence: 'このグループに目立つ要因はありません。',
+    annualInterpretation: '年運解釈',
+    nominalAge: '数え年 {{age}}歳',
+    activeMajorPalace: '大限の宮',
+    minorPalace: '小限の宮',
+    taiSuiPalace: '流年太歳の宮',
+    notAvailable: '未開始',
+    evidenceTitle: '解釈の根拠',
+    tones: {supportive: '支援', challenging: '課題', mixed: '混合', neutral: '中立'},
+    evidenceTypes: {
+      mainStar: '主星', auxiliaryStar: '補助星', transformation: '四化',
+      voidMarker: '旬空/截空', trangSinh: '十二運', bodyResidence: '身宮がこの宮に所在',
+      majorCycle: '大限', minorCycle: '小限', annualStar: '流年星',
+    },
+    noMainStar: '主星のない宮',
+    advice: {
+      domains: {
+        self: '大きな決断の前に、自分の強み、限界、繰り返す反応を理解してください。',
+        love: '明確な対話、健全な境界、感情の安定を重視してください。',
+        career: '能力に合う環境を選び、長期的な技能を育て、衝動的な転換を避けてください。',
+        wealth: '短期利益より予算、予備資金、リスク管理を優先してください。',
+        health: '持続可能な生活リズムを保ち、実際の症状は医療専門家に相談してください。',
+        family: '対話、責任の共有、違いへの尊重を維持してください。',
+        travel: '環境変化に十分備え、交流を広げながら現実的な安全基準を守ってください。',
+      },
+      palaces: {
+        life: '自己理解を深め、実際の気質に合う道を選んでください。',
+        parents: '親や年長者を尊重しつつ、適切な境界を保ってください。',
+        fortune: '休息、内省、安定した習慣で心の均衡を支えてください。',
+        property: '住居、不動産、改修、資産形成は長期視点で判断してください。',
+        career: '中核能力、職業的信用、協働に集中してください。',
+        friends: '信頼できる関係を選び、利益と責任を明確にしてください。',
+        travel: '新しい環境に適応しつつ、計画と安全を軽視しないでください。',
+        health: '命盤ではなく実際の健康データと専門的助言を優先してください。',
+        wealth: '資金繰り、負債、投資を具体的な計画で管理してください。',
+        children: '子どもや創作活動には、励まし、傾聴、現実的な期待を持ってください。',
+        spouse: '透明性、尊重、建設的な対立解決によって関係を育ててください。',
+        siblings: '互いに支えつつ、依存や過度な介入を避けてください。',
+      },
+      annual: '年運は参考シグナルとして、現実の状況、計画、資源と合わせて判断してください。',
+    },
+    noticeTitle: '総合鑑定の方法',
+    notice:
+      '解釈は主星、廟旺、補助星、四化、空曜、十二運、運限を用いた検証可能な採点モデルです。確実な予測ではなく、専門利用前には専門家の検証が必要です。',
   },
 
   errors: {

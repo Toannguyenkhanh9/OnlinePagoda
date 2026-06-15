@@ -5,6 +5,7 @@ import {useTranslation} from 'react-i18next';
 import type {
   ZiweiChartStage4,
   ZiweiChartStage5,
+  ZiweiChartStage6,
   ZiweiPalaceId,
   ZiweiStarBrightness,
   ZiweiTransformationPlacement,
@@ -31,7 +32,7 @@ const BRIGHTNESS_ORDER: Exclude<
 >[] = ['mien', 'vuong', 'dac', 'binh', 'ham'];
 
 type Props = {
-  chart: ZiweiChartStage4 | ZiweiChartStage5;
+  chart: ZiweiChartStage4 | ZiweiChartStage5 | ZiweiChartStage6;
 };
 
 export default function ZiweiStage4Details({chart}: Props) {

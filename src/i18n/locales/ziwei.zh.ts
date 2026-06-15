@@ -33,7 +33,7 @@ const ziwei = {
   bodyTag: '身',
   diagnosticsTitle: '技术提示',
   notice:
-    '第四阶段已加入四化、旬空截空、长生十二神及版本化庙旺参考表。尚未包含大限、流年、流月或十二宫解读。内容仅供文化参考。',
+    '命盘现已包含大限、小限、流年及十二宫的依据化解读。内容仅供文化参考，不能替代专业建议。',
   genders: {male: '男', female: '女'},
   classifications: {
     yangMale: '阳男', yinMale: '阴男', yangFemale: '阳女', yinFemale: '阴女',
@@ -57,11 +57,11 @@ const ziwei = {
   },
   diagnostics: {
     BIRTH_NEAR_HOUR_BOUNDARY: '出生时间接近两个时辰的交界，建议核对出生分钟。',
-    BIRTH_AT_ZI_HOUR: '出生于子时，后续阶段必须统一换日规则。',
-    TIME_ZONE_METADATA_ONLY: '第一阶段记录时区，但直接使用输入的当地日期与时间。',
-    LEAP_LUNAR_MONTH: '出生日期位于农历闰月，后续安星时必须保留闰月标记。',
+    BIRTH_AT_ZI_HOUR: '出生于子时，整个排盘过程必须统一换日规则。',
+    TIME_ZONE_METADATA_ONLY: '命盘基础部分记录时区，但直接使用输入的当地日期与时间。',
+    LEAP_LUNAR_MONTH: '出生日期位于农历闰月，整个安星过程中必须保留闰月标记。',
     MAIN_STAR_BRIGHTNESS_NOT_EVALUATED:
-      '第二阶段仅安置十四主星，尚未评估庙、旺、得、平、陷等亮度状态。',
+      '主星体系安置十四主星；庙、旺、得、平、陷等状态在“四化与星曜循环”中呈现。',
     AUXILIARY_STAR_RULESET_VIETNAMESE_V1: '辅星采用已声明的越南规则集v1。',
     FIRE_BELL_RULESET_VARIANT: '火星与铃星在不同流派中有异法，对照命盘时应保持同一规则。',
     FOUR_TRANSFORMATIONS_YEAR_STEM_V1: '四化采用已声明的越南规则集 v1 生年天干表。',
@@ -74,18 +74,20 @@ const ziwei = {
     MINOR_CYCLE_REFERENCE_V1:
       '小限按生年三合局确定起点，男顺女逆。',
     ANNUAL_TRANSIT_REFERENCE_V1:
-      '流太岁、流禄存、流擎羊、流陀罗、流天马及流年四化采用第五阶段参考规则。',
+      '流太岁、流禄存、流擎羊、流陀罗、流天马及流年四化采用“运限与时间周期”参考规则。',
     ANNUAL_BOUNDARY_REFERENCE_ONLY:
       '流年目前按公历年份处理，尚未提供农历新年或立春边界选项。',
     CYCLE_AGE_USES_NOMINAL_AGE:
       '大限、小限和流年均按虚岁索引。',
+    INTERPRETATION_REFERENCE_V1: '解读采用透明的参考模型 v1。',
+    INTERPRETATION_REQUIRES_EXPERT_REVIEW: '专业使用前需由专家复核解读。',
   },
-  stage2Title: '第二阶段 · 十四主星',
+  stage2Title: '主星体系',
   stage2Subtitle: '根据农历生日与五行局安置紫微、天府及两组十四主星。',
   stage2Labels: {
     ziWeiAnchor: '紫微星位置', tianFuAnchor: '天府星位置',
     mainStarCount: '主星数量', mainStarLegend: '十四主星列表',
-    noMainStar: '无主星', brightnessDeferred: '星曜庙旺将在后续阶段加入',
+    noMainStar: '无主星', brightnessDeferred: '星曜庙旺显示于“四化与星曜循环”',
   },
   starGroups: {ziWeiGroup: '紫微星系', tianFuGroup: '天府星系'},
   mainStars: {
@@ -96,7 +98,7 @@ const ziwei = {
 
   },
 
-  stage3Title: '第三阶段 · 辅星、吉星与煞星',
+  stage3Title: '辅星与吉煞星',
   stage3Subtitle:
     '依据农历月份、出生时辰、年干和年支，按已声明的越南规则安置21颗辅星。',
   stage3Labels: {
@@ -120,20 +122,20 @@ const ziwei = {
     taoHua: '桃花', guChen: '孤辰', guaXiu: '寡宿', longChi: '龙池', fengGe: '凤阁',
   },
 
-  stage4Title: '第四阶段 · 四化、旬空截空与长生十二神',
+  stage4Title: '四化与星曜循环',
   stage4Subtitle:
     '按生年天干安四化，计算旬空与截空，排列长生十二神，并依据已声明的参考表评估十四主星庙旺。',
   stage4Labels: {
     transformationCount: '四化数量',
     voidMarkerCount: '空亡组数',
-    trangSinhCount: '长生阶段数',
+    trangSinhCount: '长生状态数',
     brightnessCount: '已评估主星数',
     fourTransformations: '生年天干四化',
     voidMarkers: '旬空与截空',
     brightnessTitle: '主星庙旺状态',
     trangSinhTitle: '长生十二神',
-    byPalace: '十二宫第四阶段汇总',
-    rulesetTitle: '第四阶段规则集',
+    byPalace: '十二宫四化与星曜循环汇总',
+    rulesetTitle: '四化与星曜循环规则集',
     rulesetNotice:
       '四化、旬空、截空及长生十二神采用已声明的越南规则集 v1。庙旺表另行版本化，正式专业使用前应由专业人士核对。',
   },
@@ -171,7 +173,7 @@ const ziwei = {
   },
 
   stage5: {
-    title: '第五阶段 · 大限、小限与流年',
+    title: '运限与时间周期',
     subtitle:
       '排定十年大限、逐岁小限，以及流太岁、流禄存、流擎羊、流陀罗、流天马和流年四化。',
     majorCycleCount: '大限数量',
@@ -197,9 +199,79 @@ const ziwei = {
       tuoLuo: '流陀罗',
       tianMa: '流天马',
     },
-    noticeTitle: '第五阶段方法',
+    noticeTitle: '运限计算方法',
     notice:
       '运限采用虚岁及已声明的越南参考规则。流年边界目前按公历年份表示；专业版本应明确支持农历新年或立春边界，并使用经专家核验的命盘样本。',
+  },
+
+  stage6: {
+    title: '综合命理解读',
+    subtitle:
+      '以透明评分与可见依据，解读十二宫、七大人生领域及流年。',
+    tabs: {overview: '总览', palaces: '十二宫', annual: '流年'},
+    overallReading: '命盘总评',
+    confidenceLabel: '可信度',
+    confidence: {low: '低', medium: '中', high: '高'},
+    lifeDomains: '主要人生领域',
+    domains: {
+      self: '自我', love: '感情', career: '事业', wealth: '财运',
+      health: '健康', family: '家庭', travel: '迁移',
+    },
+    headlines: {
+      veryFavorable: '基础较强，助力因素较多',
+      favorable: '整体较顺，具备发展条件',
+      balanced: '相对平衡，吉凶因素并存',
+      challenging: '存在挑战，需要主动调整',
+      veryChallenging: '压力较高，宜谨慎并循序渐进',
+    },
+    primaryPalace: '主宫',
+    palaceInterpretations: '十二宫解读',
+    supportiveEvidence: '有利依据',
+    challengingEvidence: '需要注意',
+    noEvidence: '此组暂无明显因素。',
+    annualInterpretation: '流年解读',
+    nominalAge: '虚岁 {{age}}',
+    activeMajorPalace: '大限宫',
+    minorPalace: '小限宫',
+    taiSuiPalace: '流年太岁宫',
+    notAvailable: '尚未开始',
+    evidenceTitle: '解读依据',
+    tones: {supportive: '有利', challenging: '挑战', mixed: '混合', neutral: '中性'},
+    evidenceTypes: {
+      mainStar: '主星', auxiliaryStar: '辅星', transformation: '四化',
+      voidMarker: '旬空/截空', trangSinh: '长生十二神', bodyResidence: '身宫在此宫',
+      majorCycle: '大限', minorCycle: '小限', annualStar: '流年星',
+    },
+    noMainStar: '无主星宫位',
+    advice: {
+      domains: {
+        self: '在重大决定前，先理解自身优势、限制与惯常反应。',
+        love: '重视清晰沟通、健康边界与情绪稳定。',
+        career: '选择适合能力的环境，累积长期技能，避免冲动转向。',
+        wealth: '以预算、储备和风险控制为先，不宜只追求短期收益。',
+        health: '维持规律生活，出现实际症状时应寻求专业医疗帮助。',
+        family: '保持沟通、共同责任与对差异的尊重。',
+        travel: '面对环境变化应充分准备，拓展人脉同时注意现实安全。',
+      },
+      palaces: {
+        life: '提升自我认识，选择符合真实个性的道路。',
+        parents: '尊重长辈并保持适当界限。',
+        fortune: '通过休息、反思与稳定习惯维护内在平衡。',
+        property: '以长期视角处理住房、置业、装修与资产累积。',
+        career: '专注核心能力、职业信誉与合作。',
+        friends: '选择可信关系，并明确利益与责任。',
+        travel: '适应新环境，但不要忽视计划与安全。',
+        health: '应依据真实健康数据与专业意见，而非仅依赖命盘。',
+        wealth: '以明确计划管理现金流、债务和投资。',
+        children: '对孩子或创作项目保持鼓励、倾听与合理期待。',
+        spouse: '以坦诚、尊重和建设性处理分歧来经营关系。',
+        siblings: '互相支持，同时避免依赖或过度干涉。',
+      },
+      annual: '将流年解读视为参考信号，并结合现实环境、计划与资源判断。',
+    },
+    noticeTitle: '综合命理解读方法',
+    notice:
+      '本解读采用可测试评分模型，综合主星、庙旺、辅星、四化、空曜、长生十二神及运限。结果并非确定预测，专业使用前仍需专家校验。',
   },
 
   errors: {

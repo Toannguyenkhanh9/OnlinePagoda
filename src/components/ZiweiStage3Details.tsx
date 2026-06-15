@@ -9,6 +9,7 @@ import type {
   ZiweiChartStage3,
   ZiweiChartStage4,
   ZiweiChartStage5,
+  ZiweiChartStage6,
 } from '../astrology/ziwei';
 
 const CATEGORY_ORDER: ZiweiAuxiliaryStarCategory[] = [
@@ -26,7 +27,7 @@ const CATEGORY_ORDER: ZiweiAuxiliaryStarCategory[] = [
 export default function ZiweiStage3Details({
   chart,
 }: {
-  chart: ZiweiChartStage3 | ZiweiChartStage4 | ZiweiChartStage5;
+  chart: ZiweiChartStage3 | ZiweiChartStage4 | ZiweiChartStage5 | ZiweiChartStage6;
 }) {
   const {t} = useTranslation();
 

@@ -444,20 +444,32 @@ export default function SpiritualAudioScreen() {
 
           {!!currentTrack && (
             <Video
+              key={currentTrack.id}
               source={currentTrack.source}
               paused={isPaused}
               playInBackground
               playWhenInactive
               ignoreSilentSwitch="ignore"
               controls={false}
-              repeat={false}
+
+              /*
+               * Phát lặp lại chính bài đang nghe.
+               * Khi bài kết thúc, react-native-video tự quay về đầu bài
+               * và tiếp tục phát cho đến khi người dùng tạm dừng,
+               * chọn bài khác hoặc đóng trình phát.
+               */
+              repeat
+
               onLoadStart={() => setIsLoading(true)}
               onLoad={event => {
                 setDuration(event.duration ?? 0);
                 setIsLoading(false);
               }}
               onProgress={event => setCurrentTime(event.currentTime ?? 0)}
-              onEnd={playNext}
+              onEnd={() => {
+                // Đồng bộ lại thanh tiến trình khi bài bắt đầu vòng mới.
+                setCurrentTime(0);
+              }}
               onError={error => {
                 console.warn('Cannot play spiritual audio:', error);
                 setIsPaused(true);

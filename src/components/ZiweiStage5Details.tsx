@@ -11,13 +11,17 @@ import {useTranslation} from 'react-i18next';
 import type {
   ZiweiAnnualCycle,
   ZiweiChartStage5,
+  ZiweiChartStage6,
 } from '../astrology/ziwei';
 
 type Props = {
-  chart: ZiweiChartStage5;
+  chart: ZiweiChartStage5 | ZiweiChartStage6;
 };
 
-function clampYear(chart: ZiweiChartStage5, year: number): number {
+function clampYear(
+  chart: ZiweiChartStage5 | ZiweiChartStage6,
+  year: number,
+): number {
   return Math.max(
     chart.annualCycleRange.startYear,
     Math.min(chart.annualCycleRange.endYear, year),

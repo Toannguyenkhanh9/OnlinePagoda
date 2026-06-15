@@ -26,7 +26,11 @@ type MenuRoute =
   | 'LunarCalendar'
   | 'FortuneStick'
   | 'Horoscope'
-  | 'Settings';
+  | 'Settings'
+    | 'BaziChart'
+      | 'BaziHistory'
+        | 'BaziStage4'
+        | 'ZiweiChart';
 
 type HomeMenuCardProps = {
   icon: string;
@@ -234,7 +238,67 @@ export default function HomeScreen({ navigation }: Props) {
             accent="#E9DFEF"
             onPress={navigateTo}
           />
-
+<HomeMenuCard
+  icon="☯"
+  title={t('home.baziTitle')}
+  subtitle={t('home.baziSubtitle')}
+  route="BaziChart"
+  accent="#EFE2D0"
+  onPress={navigateTo}
+/>
+<HomeMenuCard
+  icon="📚"
+  title={t(
+    'home.baziHistoryTitle',
+    {
+      defaultValue:
+        'Lá số đã lưu',
+    },
+  )}
+  subtitle={t(
+    'home.baziHistorySubtitle',
+    {
+      defaultValue:
+        'Xem lại và quản lý các lá số Bát tự',
+    },
+  )}
+  route="BaziHistory"
+  accent="#F1E4CF"
+  onPress={navigateTo}
+/>
+<HomeMenuCard
+  icon="✦"
+  title={t(
+    'home.baziStage4Title',
+    {
+      defaultValue:
+        'Dòng vận và tương hợp',
+    },
+  )}
+  subtitle={t(
+    'home.baziStage4Subtitle',
+    {
+      defaultValue:
+        'Lưu niên, lưu nguyệt, so lá số và chọn ngày',
+    },
+  )}
+  route="BaziStage4"
+  accent="#F0DFC3"
+  onPress={navigateTo}
+/>
+<HomeMenuCard
+  icon="紫"
+  title={t('home.ziweiTitle', {
+    defaultValue: 'Tử vi Đẩu số',
+  })}
+  subtitle={t('home.ziweiSubtitle', {
+    defaultValue:
+      'An Mệnh, an Thân, 12 cung và Ngũ hành Cục',
+  })}
+  route="ZiweiChart"
+  accent="#F0E0CA"
+  onPress={navigateTo}
+/>
           <HomeMenuCard
             icon="⚙️"
             title={t('home.settingsTitle')}

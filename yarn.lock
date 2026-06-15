@@ -1333,6 +1333,11 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@kevin/bazi-engine@../bazi-engine-sdk":
+  version "1.0.0"
+  dependencies:
+    lunar-javascript "^1.6.0"
+
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   version "5.1.1-v1"
   resolved "https://registry.yarnpkg.com/@nicolo-ribaudo/eslint-scope-5-internals/-/eslint-scope-5-internals-5.1.1-v1.tgz#dbf733a965ca47b1973177dc0bb6c889edcfb129"
@@ -4746,7 +4751,7 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-lunar-javascript@^1.7.7:
+lunar-javascript@^1.6.0, lunar-javascript@^1.7.7:
   version "1.7.7"
   resolved "https://registry.yarnpkg.com/lunar-javascript/-/lunar-javascript-1.7.7.tgz#2c7a359f2ffc414ce2b0214f59148ff7a823851f"
   integrity sha512-u/KYiwPIBo/0bT+WWfU7qO1d+aqeB90Tuy4ErXenr2Gam0QcWeezUvtiOIyXR7HbVnW2I1DKfU0NBvzMZhbVQw==

@@ -12,6 +12,10 @@ import {
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
 
+import ZiweiStage3Details from '../components/ZiweiStage3Details';
+import ZiweiStage4Details from '../components/ZiweiStage4Details';
+import ZiweiStage5Details from '../components/ZiweiStage5Details';
+
 import {
   calculateZiweiFromForm,
   type ZiweiFormValues,
@@ -19,7 +23,7 @@ import {
 
 import type {
   EarthlyBranchId,
-  ZiweiChartStage2,
+  ZiweiChartStage5,
   ZiweiMainStarPlacement,
   ZiweiGender,
   ZiweiPalace,
@@ -49,7 +53,7 @@ function createDefaultForm(): ZiweiFormValues {
 export default function ZiweiChartScreen() {
   const {t} = useTranslation();
   const [form, setForm] = useState<ZiweiFormValues>(createDefaultForm());
-  const [chart, setChart] = useState<ZiweiChartStage2 | null>(null);
+  const [chart, setChart] = useState<ZiweiChartStage5 | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
   const palaceByBranch = useMemo(() => {
@@ -74,7 +78,7 @@ export default function ZiweiChartScreen() {
       const result = calculateZiweiFromForm(form);
       setChart(result);
     } catch (error) {
-      console.warn('Cannot calculate Zi Wei Stage 2:', error);
+      console.warn('Cannot calculate Zi Wei Stage 5:', error);
       const code = error instanceof Error ? error.message : '';
 
       Alert.alert(
@@ -317,6 +321,10 @@ export default function ZiweiChartScreen() {
                   label={t('ziwei.stage2Labels.mainStarCount')}
                   value={String(chart.mainStars.length)}
                 />
+                <SummaryItem
+                  label={t('ziwei.stage3Labels.auxiliaryStarCount')}
+                  value={String(chart.auxiliaryStars.length)}
+                />
               </View>
             </View>
 
@@ -362,7 +370,7 @@ export default function ZiweiChartScreen() {
 
                   <View style={styles.centerCard}>
                     <Text style={styles.centerSymbol}>☯</Text>
-                    <Text style={styles.centerTitle}>{t('ziwei.stage2Title')}</Text>
+                    <Text style={styles.centerTitle}>{t('ziwei.stage5.title')}</Text>
                     <Text style={styles.centerText}>
                       {t(`ziwei.classifications.${chart.polarity.classification}`)}
                     </Text>
@@ -371,6 +379,9 @@ export default function ZiweiChartScreen() {
                     </Text>
                     <Text style={styles.centerText}>
                       {t('ziwei.stage2Labels.mainStarCount')}: {chart.mainStars.length}
+                    </Text>
+                    <Text style={styles.centerText}>
+                      {t('ziwei.stage3Labels.auxiliaryStarCount')}: {chart.auxiliaryStars.length}
                     </Text>
                     <View style={styles.bureauBadge}>
                       <Text style={styles.bureauBadgeText}>
@@ -445,7 +456,7 @@ export default function ZiweiChartScreen() {
                         chart.mainStarsByPalace[item.id].map(star => (
                           <View key={star.id} style={styles.listStarChip}>
                             <Text style={styles.listStarText}>
-                              {t(`ziwei.mainStars.${star.id}`)}
+                              {t(`ziwei.mainStars.${star.id}`)} · {t(`ziwei.brightness.${star.brightness}`)}
                             </Text>
                           </View>
                         ))
@@ -495,6 +506,12 @@ export default function ZiweiChartScreen() {
                 </View>
               </View>
             </View>
+
+            <ZiweiStage3Details chart={chart} />
+
+            <ZiweiStage4Details chart={chart} />
+
+            <ZiweiStage5Details chart={chart} />
 
             {chart.diagnostics.length > 0 && (
               <View style={styles.noticeCard}>
@@ -562,7 +579,7 @@ function PalaceCell({
                 star.group === 'tianFuGroup' && styles.cellStarAlt,
               ]}
               numberOfLines={1}>
-              {t(`ziwei.mainStars.${star.id}`)}
+              {t(`ziwei.mainStars.${star.id}`)} · {t(`ziwei.brightness.${star.brightness}`)}
             </Text>
           ))
         )}

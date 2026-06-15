@@ -62,7 +62,56 @@ export type ZiweiMainStarId =
   | 'poJun';
 
 export type ZiweiMainStarGroup = 'ziWeiGroup' | 'tianFuGroup';
-export type ZiweiStarBrightness = 'notEvaluated';
+export type ZiweiStarBrightness =
+  | 'mien'
+  | 'vuong'
+  | 'dac'
+  | 'binh'
+  | 'ham'
+  | 'notEvaluated';
+
+export type ZiweiAuxiliaryStarId =
+  | 'zuoFu'
+  | 'youBi'
+  | 'wenChang'
+  | 'wenQu'
+  | 'tianKui'
+  | 'tianYue'
+  | 'luCun'
+  | 'qingYang'
+  | 'tuoLuo'
+  | 'huoXing'
+  | 'lingXing'
+  | 'diKong'
+  | 'diJie'
+  | 'tianMa'
+  | 'hongLuan'
+  | 'tianXi'
+  | 'taoHua'
+  | 'guChen'
+  | 'guaXiu'
+  | 'longChi'
+  | 'fengGe';
+
+export type ZiweiAuxiliaryStarCategory =
+  | 'assistant'
+  | 'literary'
+  | 'noble'
+  | 'wealth'
+  | 'malefic'
+  | 'mobility'
+  | 'romance'
+  | 'solitary'
+  | 'ceremonial';
+
+export type ZiweiAuxiliaryStarTone = 'supportive' | 'challenging' | 'mixed';
+
+export type ZiweiAuxiliaryStarSource =
+  | 'lunarMonth'
+  | 'birthHour'
+  | 'yearStem'
+  | 'yearBranch'
+  | 'derivedFromLuCun';
 
 export type LocalDateTimeInput = {
   year: number;
@@ -155,12 +204,205 @@ export type ZiweiMainStarsByPalace = Record<
   ZiweiMainStarPlacement[]
 >;
 
+export type ZiweiAuxiliaryStarPlacement = {
+  id: ZiweiAuxiliaryStarId;
+  category: ZiweiAuxiliaryStarCategory;
+  tone: ZiweiAuxiliaryStarTone;
+  source: ZiweiAuxiliaryStarSource;
+  branchId: EarthlyBranchId;
+  branchIndex: number;
+  palaceId: ZiweiPalaceId;
+  ruleCode: string;
+};
+
+export type ZiweiAuxiliaryStarsByPalace = Record<
+  ZiweiPalaceId,
+  ZiweiAuxiliaryStarPlacement[]
+>;
+
+export type ZiweiAuxiliaryStarSummary = {
+  total: number;
+  supportiveCount: number;
+  challengingCount: number;
+  mixedCount: number;
+  byCategory: Record<ZiweiAuxiliaryStarCategory, number>;
+  luCunBranchId: EarthlyBranchId;
+  qingYangBranchId: EarthlyBranchId;
+  tuoLuoBranchId: EarthlyBranchId;
+};
+
+export type ZiweiTransformationType = 'lu' | 'quan' | 'ke' | 'ji';
+export type ZiweiTransformableStarId =
+  | ZiweiMainStarId
+  | 'wenChang'
+  | 'wenQu'
+  | 'zuoFu'
+  | 'youBi';
+
+export type ZiweiTransformationPlacement = {
+  type: ZiweiTransformationType;
+  starId: ZiweiTransformableStarId;
+  starKind: 'main' | 'auxiliary';
+  branchId: EarthlyBranchId;
+  branchIndex: number;
+  palaceId: ZiweiPalaceId;
+  sourceYearStemId: HeavenlyStemId;
+  ruleCode: string;
+};
+
+export type ZiweiTransformationsByPalace = Record<
+  ZiweiPalaceId,
+  ZiweiTransformationPlacement[]
+>;
+
+export type ZiweiVoidMarkerId = 'tuan' | 'triet';
+
+export type ZiweiVoidMarkerPlacement = {
+  id: ZiweiVoidMarkerId;
+  branchIds: [EarthlyBranchId, EarthlyBranchId];
+  branchIndexes: [number, number];
+  palaceIds: [ZiweiPalaceId, ZiweiPalaceId];
+  ruleCode: string;
+};
+
+export type ZiweiVoidMarkersByPalace = Record<
+  ZiweiPalaceId,
+  ZiweiVoidMarkerId[]
+>;
+
+export type ZiweiTrangSinhStageId =
+  | 'trangSinh'
+  | 'mocDuc'
+  | 'quanDoi'
+  | 'lamQuan'
+  | 'deVuong'
+  | 'suy'
+  | 'benh'
+  | 'tu'
+  | 'mo'
+  | 'tuyet'
+  | 'thai'
+  | 'duong';
+
+export type ZiweiTrangSinhPlacement = {
+  stageId: ZiweiTrangSinhStageId;
+  sequenceIndex: number;
+  branchId: EarthlyBranchId;
+  branchIndex: number;
+  palaceId: ZiweiPalaceId;
+  direction: CycleDirection;
+  ruleCode: string;
+};
+
+export type ZiweiTrangSinhByPalace = Record<
+  ZiweiPalaceId,
+  ZiweiTrangSinhPlacement
+>;
+
+export type ZiweiBrightnessSummary = {
+  source: 'vietnamese-reference-v1';
+  evaluatedCount: number;
+  byBrightness: Record<Exclude<ZiweiStarBrightness, 'notEvaluated'>, number>;
+};
+
+
+
+export type ZiweiMajorCyclePlacement = {
+  index: number;
+  startAge: number;
+  endAge: number;
+  direction: CycleDirection;
+  branchId: EarthlyBranchId;
+  branchIndex: number;
+  palaceId: ZiweiPalaceId;
+  bureauNumber: BureauNumber;
+  ruleCode: 'MAJOR_CYCLE_START_AT_BUREAU_AGE_FROM_LIFE_PALACE';
+};
+
+export type ZiweiMajorCycleByPalace = Record<
+  ZiweiPalaceId,
+  ZiweiMajorCyclePlacement[]
+>;
+
+export type ZiweiMinorCyclePlacement = {
+  nominalAge: number;
+  solarAge: number;
+  calendarYear: number;
+  direction: CycleDirection;
+  startBranchId: EarthlyBranchId;
+  branchId: EarthlyBranchId;
+  branchIndex: number;
+  palaceId: ZiweiPalaceId;
+  ruleCode: 'MINOR_CYCLE_YEAR_TRIAD_START_MALE_FORWARD_FEMALE_REVERSE';
+};
+
+export type ZiweiMinorCycleByPalace = Record<
+  ZiweiPalaceId,
+  ZiweiMinorCyclePlacement[]
+>;
+
+export type ZiweiAnnualStarId =
+  | 'taiSui'
+  | 'luCun'
+  | 'qingYang'
+  | 'tuoLuo'
+  | 'tianMa';
+
+export type ZiweiAnnualStarTone =
+  | 'supportive'
+  | 'challenging'
+  | 'mixed'
+  | 'neutral';
+
+export type ZiweiAnnualStarPlacement = {
+  id: ZiweiAnnualStarId;
+  calendarYear: number;
+  sourceYearStemId: HeavenlyStemId;
+  sourceYearBranchId: EarthlyBranchId;
+  branchId: EarthlyBranchId;
+  branchIndex: number;
+  palaceId: ZiweiPalaceId;
+  tone: ZiweiAnnualStarTone;
+  ruleCode: string;
+};
+
+export type ZiweiAnnualCycle = {
+  calendarYear: number;
+  nominalAge: number;
+  solarAge: number;
+  yearStemId: HeavenlyStemId;
+  yearBranchId: EarthlyBranchId;
+  taiSuiPalaceId: ZiweiPalaceId;
+  taiSuiBranchId: EarthlyBranchId;
+  activeMajorCycleIndex: number | null;
+  activeMajorPalaceId: ZiweiPalaceId | null;
+  minorCyclePalaceId: ZiweiPalaceId;
+  minorCycleBranchId: EarthlyBranchId;
+  annualStars: ZiweiAnnualStarPlacement[];
+  annualTransformations: ZiweiTransformationPlacement[];
+  supportiveStarCount: number;
+  challengingStarCount: number;
+  ruleCode: 'ANNUAL_TRANSIT_NOMINAL_AGE_REFERENCE_V1';
+};
+
 export type ZiweiDiagnosticCode =
   | 'BIRTH_NEAR_HOUR_BOUNDARY'
   | 'BIRTH_AT_ZI_HOUR'
   | 'TIME_ZONE_METADATA_ONLY'
   | 'LEAP_LUNAR_MONTH'
-  | 'MAIN_STAR_BRIGHTNESS_NOT_EVALUATED';
+  | 'MAIN_STAR_BRIGHTNESS_NOT_EVALUATED'
+  | 'AUXILIARY_STAR_RULESET_VIETNAMESE_V1'
+  | 'FIRE_BELL_RULESET_VARIANT'
+  | 'FOUR_TRANSFORMATIONS_YEAR_STEM_V1'
+  | 'VOID_MARKERS_REFERENCE_V1'
+  | 'TRANG_SINH_REFERENCE_V1'
+  | 'MAIN_STAR_BRIGHTNESS_REFERENCE_V1'
+  | 'BRIGHTNESS_TABLE_REQUIRES_EXPERT_REVIEW'
+  | 'MAJOR_CYCLE_REFERENCE_V1'
+  | 'MINOR_CYCLE_REFERENCE_V1'
+  | 'ANNUAL_TRANSIT_REFERENCE_V1'
+  | 'ANNUAL_BOUNDARY_REFERENCE_ONLY'
+  | 'CYCLE_AGE_USES_NOMINAL_AGE';
 
 export type ZiweiChartStage1 = {
   version: '1.0.0';
@@ -185,7 +427,45 @@ export type ZiweiChartStage2 = Omit<ZiweiChartStage1, 'version'> & {
   mainStarsByPalace: ZiweiMainStarsByPalace;
 };
 
-export type ZiweiChart = ZiweiChartStage2;
+export type ZiweiChartStage3 = Omit<ZiweiChartStage2, 'version'> & {
+  version: '3.0.0';
+  auxiliaryStars: ZiweiAuxiliaryStarPlacement[];
+  auxiliaryStarsByPalace: ZiweiAuxiliaryStarsByPalace;
+  auxiliarySummary: ZiweiAuxiliaryStarSummary;
+};
+
+export type ZiweiChartStage4 = Omit<
+  ZiweiChartStage3,
+  'version' | 'mainStars' | 'mainStarsByPalace'
+> & {
+  version: '4.0.0';
+  mainStars: ZiweiMainStarPlacement[];
+  mainStarsByPalace: ZiweiMainStarsByPalace;
+  transformations: ZiweiTransformationPlacement[];
+  transformationsByPalace: ZiweiTransformationsByPalace;
+  voidMarkers: ZiweiVoidMarkerPlacement[];
+  voidMarkersByPalace: ZiweiVoidMarkersByPalace;
+  trangSinhCycle: ZiweiTrangSinhPlacement[];
+  trangSinhByPalace: ZiweiTrangSinhByPalace;
+  brightnessSummary: ZiweiBrightnessSummary;
+};
+
+export type ZiweiChartStage5 = Omit<ZiweiChartStage4, 'version'> & {
+  version: '5.0.0';
+  cycleRuleset: 'vietnamese-cycle-reference-v1';
+  majorCycles: ZiweiMajorCyclePlacement[];
+  majorCyclesByPalace: ZiweiMajorCycleByPalace;
+  minorCycles: ZiweiMinorCyclePlacement[];
+  minorCyclesByPalace: ZiweiMinorCycleByPalace;
+  annualCycles: ZiweiAnnualCycle[];
+  annualCycleRange: {
+    startYear: number;
+    endYear: number;
+    totalYears: number;
+  };
+};
+
+export type ZiweiChart = ZiweiChartStage5;
 
 export interface ZiweiCalendarProvider {
   readonly name: string;

@@ -1,5 +1,6 @@
 import React, {useMemo, useState} from 'react';
 import {
+  Image,
   ImageBackground,
   Pressable,
   SafeAreaView,
@@ -17,6 +18,8 @@ import {colors} from '../theme/colors';
 
 type AudioCategory = 'sutra' | 'meditation' | 'nature';
 
+type AudioSource = number | {uri: string};
+
 type AudioTrack = {
   id: string;
   category: AudioCategory;
@@ -24,8 +27,27 @@ type AudioTrack = {
   descriptionKey: string;
   durationLabel: string;
   icon: string;
-  source: number | {uri: string};
+  source: AudioSource;
 };
+
+/**
+ * react-native-video ở một số phiên bản chỉ nhận source dạng object.
+ * Metro trả về number khi dùng require(...) với file local, vì vậy cần
+ * chuyển asset local thành {uri: string} trước khi truyền vào Video.
+ */
+function resolveAudioSource(
+  source: AudioSource,
+): {uri: string} {
+  if (typeof source === 'number') {
+    const resolvedAsset = Image.resolveAssetSource(source);
+
+    return {
+      uri: resolvedAsset.uri,
+    };
+  }
+
+  return source;
+}
 
 const TRACKS: AudioTrack[] = [
   {
@@ -177,6 +199,14 @@ export default function SpiritualAudioScreen() {
   }, [searchText, selectedCategory, t]);
 
   const progress = duration > 0 ? Math.min(1, currentTime / duration) : 0;
+
+  const currentVideoSource = useMemo(
+    () =>
+      currentTrack
+        ? resolveAudioSource(currentTrack.source)
+        : undefined,
+    [currentTrack],
+  );
 
   const playTrack = (track: AudioTrack) => {
     if (currentTrack?.id === track.id) {
@@ -445,7 +475,7 @@ export default function SpiritualAudioScreen() {
           {!!currentTrack && (
             <Video
               key={currentTrack.id}
-              source={currentTrack.source}
+              source={currentVideoSource}
               paused={isPaused}
               playInBackground
               playWhenInactive

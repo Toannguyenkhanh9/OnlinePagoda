@@ -28,6 +28,15 @@ import {
   stopTempleSound,
   type TempleSound,
 } from '../services/audio';
+import {
+  recordPracticeActivity,
+} from '../services/practice';
+import TempleSceneOverlay
+  from '../components/TempleSceneOverlay';
+
+import TempleAmbientSound
+  from '../components/TempleAmbientSound';
+
 
 type ActionKind = 'incense' | 'woodenFish' | 'bell';
 
@@ -477,15 +486,24 @@ export default function TempleScreen() {
     };
   }, []);
 
-  const lightIncense = () => {
-    const expirationTime =
-      Date.now() + INCENSE_BURN_DURATION_MS;
+const lightIncense = () => {
+  const expirationTime =
+    Date.now() + INCENSE_BURN_DURATION_MS;
 
-    setIncenseExpirations(current => [
-      ...current,
-      expirationTime,
-    ]);
-  };
+  setIncenseExpirations(current => [
+    ...current,
+    expirationTime,
+  ]);
+
+  recordPracticeActivity('incense').catch(
+    error => {
+      console.warn(
+        'Unable to record incense practice:',
+        error,
+      );
+    },
+  );
+};
 
   const handleSoundPress = async (type: TempleSound) => {
     if (loopingSound === type) {
@@ -552,6 +570,8 @@ export default function TempleScreen() {
       resizeMode="cover"
       style={styles.background}
     >
+        <TempleSceneOverlay />
+  <TempleAmbientSound />
       <StatusBar barStyle="light-content" backgroundColor="#160B05" />
 
       <View style={styles.overlay}>

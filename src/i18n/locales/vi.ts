@@ -1,5 +1,20 @@
 import bazi from './bazi.vi';
 import ziwei from './ziwei.vi';
+import practice, {
+  practiceAudio,
+  practiceMeditation,
+} from './practice.vi';
+import {
+  peaceJournal,
+  buddhistCalendar,
+  altarCustomization,
+} from './spiritualFeatures.vi';
+import {
+  dataSync,
+  pdfExport,
+  premiumContent,
+  smartFeatures,
+} from './spiritualFeatures10_13.vi';
 const vi = {
   common: {
     cancel: 'Hủy',
@@ -122,41 +137,47 @@ baziStage4Subtitle:
     incenseStatsTitle: 'Số nén nhang',
   },
 
-  meditation: {
-    screenTitle: 'Thiền',
+meditation: {
+  // Tiêu đề màn hình
+  title: 'Thiền',
+  screenTitle: 'Thiền',
 
-    breathingTitle: 'Thiền thở',
+  // Mô tả màn hình
+  subtitle:
+    'Ngồi thoải mái, thả lỏng vai và chú ý vào từng hơi thở.',
 
-    chooseDuration: 'Chọn thời gian',
+  breathingTitle: 'Thiền thở',
 
-    minuteUnit: 'phút',
+  chooseDuration: 'Chọn thời gian',
 
-    heroMinutes: '{{count}} phút',
+  // Dùng tại các nút chọn 5, 10, 20, 30 phút
+  minutes: '{{count}} phút',
+  minuteUnit: 'phút',
+  heroMinutes: '{{count}} phút',
 
-    start: 'Bắt đầu thiền',
+  start: 'Bắt đầu thiền',
+  pause: 'Tạm dừng thiền',
+  restart: 'Thiền lại',
 
-    pause: 'Tạm dừng thiền',
+  ready: 'Sẵn sàng',
+  paused: 'Đã tạm dừng',
+  running: 'Đang thiền',
 
-    restart: 'Thiền lại',
+  resetTime: 'Đặt lại thời gian',
 
-    paused: 'Đã tạm dừng',
+  completedTitle: 'Hoàn thành buổi thiền',
 
-    running: 'Đang thiền',
+  completedMessage:
+    'Hãy hít thở chậm và cảm nhận trạng thái của bạn.',
 
-    resetTime: 'Đặt lại thời gian',
+  breathTitle: 'Hướng dẫn thở',
 
-    completedTitle: 'Hoàn thành buổi thiền',
+  inhale: 'Hít vào chậm trong 4 giây',
 
-    completedMessage: 'Hãy hít thở chậm và cảm nhận trạng thái của bạn.',
+  hold: 'Giữ hơi trong 2 giây',
 
-    breathTitle: 'Hướng dẫn thở',
-
-    inhale: 'Hít vào chậm trong 4 giây',
-
-    hold: 'Giữ hơi trong 2 giây',
-
-    exhale: 'Thở ra chậm trong 6 giây',
-  },
+  exhale: 'Thở ra chậm trong 6 giây',
+},
   prayer: {
     title: 'Nhật ký cầu nguyện',
 
@@ -968,6 +989,16 @@ baziStage4Subtitle:
   },
   bazi,
   ziwei,
+    practice,
+  practiceAudio,
+  practiceMeditation,
+    peaceJournal,
+  buddhistCalendar,
+  altarCustomization,
+    dataSync,
+  pdfExport,
+  premiumContent,
+  smartFeatures,
 } as const;
 
 export default vi;

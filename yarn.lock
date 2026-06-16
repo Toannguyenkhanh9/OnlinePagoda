@@ -2378,6 +2378,11 @@ balanced-match@^4.0.2:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-4.0.4.tgz#bfb10662feed8196a2c62e7c68e17720c274179a"
   integrity sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==
 
+base-64@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/base-64/-/base-64-0.1.0.tgz#780a99c84e7d600260361511c4877613bf24f6bb"
+  integrity sha512-Y5gU45svrR5tI2Vt/X9GPd3L0HNIKzGu202EjxrXMpuc2V2CiKgemAbUUsqYmZJvPtCXoUKjNZwBJzsNScUbXA==
+
 base64-js@^1.3.1, base64-js@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
@@ -5529,6 +5534,19 @@ react-is@^19.1.0, react-is@^19.2.3:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-19.2.7.tgz#57668ee86a78574a542b0a539455212b2c086df2"
   integrity sha512-kZFnouyVv7eP/Phmrlo9FK+zcAdriZJvzxXHF1Sl1P377WSGe2G/JxVolhTrB/jeV47lKImhNUsijjHAAbcl/A==
 
+react-native-fs@^2.20.0:
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/react-native-fs/-/react-native-fs-2.20.0.tgz#05a9362b473bfc0910772c0acbb73a78dbc810f6"
+  integrity sha512-VkTBzs7fIDUiy/XajOSNk0XazFE9l+QlMAce7lGuebZcag5CnjszB+u4BdqzwaQOdcYb5wsJIsqq4kxInIRpJQ==
+  dependencies:
+    base-64 "^0.1.0"
+    utf8 "^3.0.0"
+
+react-native-html-to-pdf@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-html-to-pdf/-/react-native-html-to-pdf-1.3.0.tgz#591d9120038e2a1717f3a9eb47b16c84928066f7"
+  integrity sha512-UCbQO1k5yeajaJrEF7Wqq8ojdgpxsTbICQvtorXmuO1LkU/a6B3/tZyLes4zXCiq/5nTMTNA/k9m5bYStg5S0Q==
+
 react-native-localize@^3.7.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/react-native-localize/-/react-native-localize-3.7.0.tgz#4ad7347bf7a1756627f491f48cf7507e7356cf13"
@@ -5546,6 +5564,11 @@ react-native-screens@^4.25.2:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
+
+react-native-share@^12.3.1:
+  version "12.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-12.3.1.tgz#beb36cf2d589335f93adc6f22bd34c8a950964b3"
+  integrity sha512-mRVRie0qKbtj+jWqJ2POPkeSd8SxnMp6aazFZVmq8ZbkUGtQLENR/L58ky8zH4VUEF/WYRmdBiBHWHVtzOewtQ==
 
 react-native-skia-android@147.1.0:
   version "147.1.0"
@@ -6464,6 +6487,11 @@ use-sync-external-store@^1.5.0, use-sync-external-store@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.6.0.tgz#b174bfa65cb2b526732d9f2ac0a408027876f32d"
   integrity sha512-Pp6GSwGP/NrPIrxVFAIkOQeyw8lFenOHijQWkUTrDvrF4ALqylP2C/KCkeS9dpUM3KvYRQhna5vt7IL95+ZQ9w==
+
+utf8@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/utf8/-/utf8-3.0.0.tgz#f052eed1364d696e769ef058b183df88c87f69d1"
+  integrity sha512-E8VjFIQ/TyQgp+TZfS6l8yp/xWppSAHzidGiRrqe4bK4XP9pTRyKFgGJpO3SN7zdX4DeomTrwaseCHovfpFcqQ==
 
 util-deprecate@^1.0.1:
   version "1.0.2"

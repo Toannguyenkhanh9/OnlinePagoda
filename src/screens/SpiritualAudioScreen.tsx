@@ -1,5 +1,10 @@
-import React, {useMemo, useState} from 'react';
+import React, {
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import {
+  AppState,
   Image,
   ImageBackground,
   Pressable,
@@ -14,10 +19,17 @@ import {
 import {useTranslation} from 'react-i18next';
 import Video from 'react-native-video';
 
+import {
+  addRecentTrack,
+  getFavoriteTrackIds,
+  getRecentTrackIds,
+  toggleFavoriteTrack,
+} from '../services/audioLibraryStorage';
+import {recordAudioStart} from '../services/practice';
 import {colors} from '../theme/colors';
 
 type AudioCategory = 'sutra' | 'meditation' | 'nature';
-
+type AudioFilter = AudioCategory | 'favorites' | 'recent';
 type AudioSource = number | {uri: string};
 
 type AudioTrack = {
@@ -29,25 +41,6 @@ type AudioTrack = {
   icon: string;
   source: AudioSource;
 };
-
-/**
- * react-native-video ở một số phiên bản chỉ nhận source dạng object.
- * Metro trả về number khi dùng require(...) với file local, vì vậy cần
- * chuyển asset local thành {uri: string} trước khi truyền vào Video.
- */
-function resolveAudioSource(
-  source: AudioSource,
-): {uri: string} {
-  if (typeof source === 'number') {
-    const resolvedAsset = Image.resolveAssetSource(source);
-
-    return {
-      uri: resolvedAsset.uri,
-    };
-  }
-
-  return source;
-}
 
 const TRACKS: AudioTrack[] = [
   {
@@ -133,8 +126,8 @@ const TRACKS: AudioTrack[] = [
   },
 ];
 
-const CATEGORIES: Array<{
-  id: AudioCategory;
+const FILTERS: Array<{
+  id: AudioFilter;
   icon: string;
   titleKey: string;
 }> = [
@@ -153,7 +146,19 @@ const CATEGORIES: Array<{
     icon: '🌿',
     titleKey: 'spiritualAudio.categories.nature',
   },
+  {
+    id: 'favorites',
+    icon: '♥',
+    titleKey: 'practiceAudio.favorites',
+  },
+  {
+    id: 'recent',
+    icon: '◷',
+    titleKey: 'practiceAudio.recent',
+  },
 ];
+
+const SLEEP_TIMER_OPTIONS = [0, 15, 30, 60];
 
 function formatTime(value: number): string {
   if (!Number.isFinite(value) || value < 0) {
@@ -164,26 +169,122 @@ function formatTime(value: number): string {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
 
-  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  return `${String(minutes).padStart(2, '0')}:${String(
+    seconds,
+  ).padStart(2, '0')}`;
+}
+
+function resolveAudioSource(
+  source: AudioSource,
+): {uri: string} {
+  if (typeof source === 'number') {
+    const resolved = Image.resolveAssetSource(source);
+
+    return {
+      uri: resolved?.uri ?? '',
+    };
+  }
+
+  return source;
 }
 
 export default function SpiritualAudioScreen() {
   const {t} = useTranslation();
 
-  const [selectedCategory, setSelectedCategory] =
-    useState<AudioCategory>('sutra');
+  const [selectedFilter, setSelectedFilter] =
+    useState<AudioFilter>('sutra');
   const [searchText, setSearchText] = useState('');
-  const [currentTrack, setCurrentTrack] = useState<AudioTrack | null>(null);
+  const [currentTrack, setCurrentTrack] =
+    useState<AudioTrack | null>(null);
   const [isPaused, setIsPaused] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [favoriteIds, setFavoriteIds] =
+    useState<string[]>([]);
+  const [recentIds, setRecentIds] = useState<string[]>([]);
+  const [sleepTimerEnd, setSleepTimerEnd] =
+    useState<number | null>(null);
+  const [selectedSleepMinutes, setSelectedSleepMinutes] =
+    useState(0);
+  const [sleepSeconds, setSleepSeconds] = useState(0);
+
+  useEffect(() => {
+    Promise.all([
+      getFavoriteTrackIds(),
+      getRecentTrackIds(),
+    ]).then(([favorites, recents]) => {
+      setFavoriteIds(favorites);
+      setRecentIds(recents);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!sleepTimerEnd) {
+      setSleepSeconds(0);
+      return;
+    }
+
+    const update = () => {
+      const remaining = Math.max(
+        0,
+        Math.ceil((sleepTimerEnd - Date.now()) / 1000),
+      );
+
+      setSleepSeconds(remaining);
+
+      if (remaining === 0) {
+        setIsPaused(true);
+        setSleepTimerEnd(null);
+        setSelectedSleepMinutes(0);
+      }
+    };
+
+    update();
+
+    const interval = setInterval(update, 1000);
+    const subscription = AppState.addEventListener(
+      'change',
+      state => {
+        if (state === 'active') {
+          update();
+        }
+      },
+    );
+
+    return () => {
+      clearInterval(interval);
+      subscription.remove();
+    };
+  }, [sleepTimerEnd]);
 
   const filteredTracks = useMemo(() => {
     const keyword = searchText.trim().toLocaleLowerCase();
 
+    const recentOrder = new Map(
+      recentIds.map((id, index) => [id, index]),
+    );
+
     return TRACKS.filter(track => {
-      if (track.category !== selectedCategory) {
+      if (
+        selectedFilter === 'favorites' &&
+        !favoriteIds.includes(track.id)
+      ) {
+        return false;
+      }
+
+      if (
+        selectedFilter === 'recent' &&
+        !recentIds.includes(track.id)
+      ) {
+        return false;
+      }
+
+      if (
+        selectedFilter !== 'favorites' &&
+        selectedFilter !== 'recent' &&
+        track.category !== selectedFilter
+      ) {
         return false;
       }
 
@@ -192,13 +293,35 @@ export default function SpiritualAudioScreen() {
       }
 
       return (
-        t(track.titleKey).toLocaleLowerCase().includes(keyword) ||
-        t(track.descriptionKey).toLocaleLowerCase().includes(keyword)
+        t(track.titleKey)
+          .toLocaleLowerCase()
+          .includes(keyword) ||
+        t(track.descriptionKey)
+          .toLocaleLowerCase()
+          .includes(keyword)
+      );
+    }).sort((a, b) => {
+      if (selectedFilter !== 'recent') {
+        return 0;
+      }
+
+      return (
+        (recentOrder.get(a.id) ?? 999) -
+        (recentOrder.get(b.id) ?? 999)
       );
     });
-  }, [searchText, selectedCategory, t]);
+  }, [
+    favoriteIds,
+    recentIds,
+    searchText,
+    selectedFilter,
+    t,
+  ]);
 
-  const progress = duration > 0 ? Math.min(1, currentTime / duration) : 0;
+  const progress =
+    duration > 0
+      ? Math.min(1, currentTime / duration)
+      : 0;
 
   const currentVideoSource = useMemo(
     () =>
@@ -208,7 +331,7 @@ export default function SpiritualAudioScreen() {
     [currentTrack],
   );
 
-  const playTrack = (track: AudioTrack) => {
+  const playTrack = async (track: AudioTrack) => {
     if (currentTrack?.id === track.id) {
       setIsPaused(value => !value);
       return;
@@ -219,6 +342,18 @@ export default function SpiritualAudioScreen() {
     setDuration(0);
     setIsLoading(true);
     setIsPaused(false);
+
+    const updatedRecents = await addRecentTrack(track.id);
+    setRecentIds(updatedRecents);
+
+    recordAudioStart().catch(error => {
+      console.warn('Unable to record audio practice:', error);
+    });
+  };
+
+  const toggleFavorite = async (trackId: string) => {
+    const updated = await toggleFavoriteTrack(trackId);
+    setFavoriteIds(updated);
   };
 
   const stopPlayback = () => {
@@ -227,6 +362,8 @@ export default function SpiritualAudioScreen() {
     setCurrentTime(0);
     setDuration(0);
     setIsLoading(false);
+    setSleepTimerEnd(null);
+    setSelectedSleepMinutes(0);
   };
 
   const findCurrentTrackIndex = () => {
@@ -234,7 +371,9 @@ export default function SpiritualAudioScreen() {
       return -1;
     }
 
-    return TRACKS.findIndex(track => track.id === currentTrack.id);
+    return TRACKS.findIndex(
+      track => track.id === currentTrack.id,
+    );
   };
 
   const playPrevious = () => {
@@ -244,7 +383,9 @@ export default function SpiritualAudioScreen() {
       return;
     }
 
-    const previousIndex = index === 0 ? TRACKS.length - 1 : index - 1;
+    const previousIndex =
+      index === 0 ? TRACKS.length - 1 : index - 1;
+
     playTrack(TRACKS[previousIndex]);
   };
 
@@ -255,8 +396,21 @@ export default function SpiritualAudioScreen() {
       return;
     }
 
-    const nextIndex = index === TRACKS.length - 1 ? 0 : index + 1;
+    const nextIndex =
+      index === TRACKS.length - 1 ? 0 : index + 1;
+
     playTrack(TRACKS[nextIndex]);
+  };
+
+  const setSleepTimer = (minutes: number) => {
+    if (minutes === 0) {
+      setSleepTimerEnd(null);
+      setSelectedSleepMinutes(0);
+      return;
+    }
+
+    setSelectedSleepMinutes(minutes);
+    setSleepTimerEnd(Date.now() + minutes * 60_000);
   };
 
   return (
@@ -272,8 +426,12 @@ export default function SpiritualAudioScreen() {
             showsVerticalScrollIndicator={false}>
             <View style={styles.headerCard}>
               <Text style={styles.headerIcon}>🎧</Text>
-              <Text style={styles.title}>{t('spiritualAudio.title')}</Text>
-              <Text style={styles.subtitle}>{t('spiritualAudio.subtitle')}</Text>
+              <Text style={styles.title}>
+                {t('spiritualAudio.title')}
+              </Text>
+              <Text style={styles.subtitle}>
+                {t('spiritualAudio.subtitle')}
+              </Text>
             </View>
 
             <View style={styles.searchWrap}>
@@ -281,14 +439,18 @@ export default function SpiritualAudioScreen() {
               <TextInput
                 value={searchText}
                 onChangeText={setSearchText}
-                placeholder={t('spiritualAudio.searchPlaceholder')}
+                placeholder={t(
+                  'spiritualAudio.searchPlaceholder',
+                )}
                 placeholderTextColor="#A48D76"
                 style={styles.searchInput}
                 returnKeyType="search"
               />
 
               {!!searchText && (
-                <Pressable hitSlop={10} onPress={() => setSearchText('')}>
+                <Pressable
+                  hitSlop={10}
+                  onPress={() => setSearchText('')}>
                   <Text style={styles.clearSearch}>×</Text>
                 </Pressable>
               )}
@@ -298,25 +460,32 @@ export default function SpiritualAudioScreen() {
               horizontal
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.categoryRow}>
-              {CATEGORIES.map(category => {
-                const selected = selectedCategory === category.id;
+              {FILTERS.map(filter => {
+                const selected =
+                  selectedFilter === filter.id;
 
                 return (
                   <Pressable
-                    key={category.id}
+                    key={filter.id}
                     style={({pressed}) => [
                       styles.categoryButton,
-                      selected && styles.categoryButtonSelected,
+                      selected &&
+                        styles.categoryButtonSelected,
                       pressed && styles.buttonPressed,
                     ]}
-                    onPress={() => setSelectedCategory(category.id)}>
-                    <Text style={styles.categoryIcon}>{category.icon}</Text>
+                    onPress={() =>
+                      setSelectedFilter(filter.id)
+                    }>
+                    <Text style={styles.categoryIcon}>
+                      {filter.icon}
+                    </Text>
                     <Text
                       style={[
                         styles.categoryText,
-                        selected && styles.categoryTextSelected,
+                        selected &&
+                          styles.categoryTextSelected,
                       ]}>
-                      {t(category.titleKey)}
+                      {t(filter.titleKey)}
                     </Text>
                   </Pressable>
                 );
@@ -325,7 +494,9 @@ export default function SpiritualAudioScreen() {
 
             <Text style={styles.sectionTitle}>
               {t(
-                CATEGORIES.find(item => item.id === selectedCategory)?.titleKey ??
+                FILTERS.find(
+                  item => item.id === selectedFilter,
+                )?.titleKey ??
                   'spiritualAudio.categories.sutra',
               )}
             </Text>
@@ -333,12 +504,23 @@ export default function SpiritualAudioScreen() {
             {filteredTracks.length === 0 ? (
               <View style={styles.emptyCard}>
                 <Text style={styles.emptyIcon}>🔎</Text>
-                <Text style={styles.emptyText}>{t('spiritualAudio.empty')}</Text>
+                <Text style={styles.emptyText}>
+                  {t(
+                    selectedFilter === 'favorites'
+                      ? 'practiceAudio.emptyFavorites'
+                      : selectedFilter === 'recent'
+                        ? 'practiceAudio.emptyRecent'
+                        : 'spiritualAudio.empty',
+                  )}
+                </Text>
               </View>
             ) : (
               filteredTracks.map(track => {
-                const active = currentTrack?.id === track.id;
+                const active =
+                  currentTrack?.id === track.id;
                 const playing = active && !isPaused;
+                const favorite =
+                  favoriteIds.includes(track.id);
 
                 return (
                   <Pressable
@@ -352,21 +534,27 @@ export default function SpiritualAudioScreen() {
                     <View
                       style={[
                         styles.trackArtwork,
-                        active && styles.trackArtworkActive,
+                        active &&
+                          styles.trackArtworkActive,
                       ]}>
-                      <Text style={styles.trackIcon}>{track.icon}</Text>
+                      <Text style={styles.trackIcon}>
+                        {track.icon}
+                      </Text>
                     </View>
 
                     <View style={styles.trackInfo}>
                       <Text
                         style={[
                           styles.trackTitle,
-                          active && styles.trackTitleActive,
+                          active &&
+                            styles.trackTitleActive,
                         ]}>
                         {t(track.titleKey)}
                       </Text>
 
-                      <Text style={styles.trackDescription} numberOfLines={2}>
+                      <Text
+                        style={styles.trackDescription}
+                        numberOfLines={2}>
                         {t(track.descriptionKey)}
                       </Text>
 
@@ -385,18 +573,39 @@ export default function SpiritualAudioScreen() {
                       </View>
                     </View>
 
-                    <View
-                      style={[
-                        styles.cardPlayButton,
-                        active && styles.cardPlayButtonActive,
-                      ]}>
-                      <Text
+                    <View style={styles.cardActions}>
+                      <Pressable
+                        hitSlop={8}
+                        style={styles.favoriteButton}
+                        onPress={event => {
+                          event.stopPropagation();
+                          toggleFavorite(track.id);
+                        }}>
+                        <Text
+                          style={[
+                            styles.favoriteIcon,
+                            favorite &&
+                              styles.favoriteIconActive,
+                          ]}>
+                          {favorite ? '♥' : '♡'}
+                        </Text>
+                      </Pressable>
+
+                      <View
                         style={[
-                          styles.cardPlayIcon,
-                          active && styles.cardPlayIconActive,
+                          styles.cardPlayButton,
+                          active &&
+                            styles.cardPlayButtonActive,
                         ]}>
-                        {playing ? 'Ⅱ' : '▶'}
-                      </Text>
+                        <Text
+                          style={[
+                            styles.cardPlayIcon,
+                            active &&
+                              styles.cardPlayIconActive,
+                          ]}>
+                          {playing ? 'Ⅱ' : '▶'}
+                        </Text>
+                      </View>
                     </View>
                   </Pressable>
                 );
@@ -408,19 +617,27 @@ export default function SpiritualAudioScreen() {
             <View style={styles.playerCard}>
               <View style={styles.playerTopRow}>
                 <View style={styles.playerArtwork}>
-                  <Text style={styles.playerArtworkIcon}>{currentTrack.icon}</Text>
+                  <Text style={styles.playerArtworkIcon}>
+                    {currentTrack.icon}
+                  </Text>
                 </View>
 
                 <View style={styles.playerInfo}>
-                  <Text style={styles.playerTitle} numberOfLines={1}>
+                  <Text
+                    style={styles.playerTitle}
+                    numberOfLines={1}>
                     {t(currentTrack.titleKey)}
                   </Text>
-                  <Text style={styles.playerSubtitle} numberOfLines={1}>
+                  <Text
+                    style={styles.playerSubtitle}
+                    numberOfLines={1}>
                     {t(currentTrack.descriptionKey)}
                   </Text>
                 </View>
 
-                <Pressable hitSlop={10} onPress={stopPlayback}>
+                <Pressable
+                  hitSlop={10}
+                  onPress={stopPlayback}>
                   <Text style={styles.closePlayer}>×</Text>
                 </Pressable>
               </View>
@@ -435,9 +652,56 @@ export default function SpiritualAudioScreen() {
               </View>
 
               <View style={styles.timeRow}>
-                <Text style={styles.timeText}>{formatTime(currentTime)}</Text>
-                <Text style={styles.timeText}>{formatTime(duration)}</Text>
+                <Text style={styles.timeText}>
+                  {formatTime(currentTime)}
+                </Text>
+                <Text style={styles.timeText}>
+                  {formatTime(duration)}
+                </Text>
               </View>
+
+              <View style={styles.sleepTimerRow}>
+                <Text style={styles.sleepTimerLabel}>
+                  {t('practiceAudio.sleepTimer')}
+                </Text>
+
+                {SLEEP_TIMER_OPTIONS.map(minutes => {
+                  const active =
+                    selectedSleepMinutes === minutes;
+
+                  return (
+                    <Pressable
+                      key={minutes}
+                      style={[
+                        styles.sleepTimerButton,
+                        active &&
+                          styles.sleepTimerButtonActive,
+                      ]}
+                      onPress={() =>
+                        setSleepTimer(minutes)
+                      }>
+                      <Text
+                        style={[
+                          styles.sleepTimerText,
+                          active &&
+                            styles.sleepTimerTextActive,
+                        ]}>
+                        {minutes === 0
+                          ? t('practiceAudio.off')
+                          : `${minutes}m`}
+                      </Text>
+                    </Pressable>
+                  );
+                })}
+              </View>
+
+              {sleepTimerEnd !== null && (
+                <Text style={styles.sleepCountdown}>
+                  {t('practiceAudio.stopsIn', {
+                    time: formatTime(sleepSeconds),
+                  })}
+                </Text>
+              )}
 
               <View style={styles.controlsRow}>
                 <Pressable
@@ -454,9 +718,15 @@ export default function SpiritualAudioScreen() {
                     styles.mainControlButton,
                     pressed && styles.buttonPressed,
                   ]}
-                  onPress={() => setIsPaused(value => !value)}>
+                  onPress={() =>
+                    setIsPaused(value => !value)
+                  }>
                   <Text style={styles.mainControlIcon}>
-                    {isLoading ? '…' : isPaused ? '▶' : 'Ⅱ'}
+                    {isLoading
+                      ? '…'
+                      : isPaused
+                        ? '▶'
+                        : 'Ⅱ'}
                   </Text>
                 </Pressable>
 
@@ -472,7 +742,7 @@ export default function SpiritualAudioScreen() {
             </View>
           )}
 
-          {!!currentTrack && (
+          {!!currentTrack && currentVideoSource && (
             <Video
               key={currentTrack.id}
               source={currentVideoSource}
@@ -481,27 +751,21 @@ export default function SpiritualAudioScreen() {
               playWhenInactive
               ignoreSilentSwitch="ignore"
               controls={false}
-
-              /*
-               * Phát lặp lại chính bài đang nghe.
-               * Khi bài kết thúc, react-native-video tự quay về đầu bài
-               * và tiếp tục phát cho đến khi người dùng tạm dừng,
-               * chọn bài khác hoặc đóng trình phát.
-               */
               repeat
-
               onLoadStart={() => setIsLoading(true)}
               onLoad={event => {
                 setDuration(event.duration ?? 0);
                 setIsLoading(false);
               }}
-              onProgress={event => setCurrentTime(event.currentTime ?? 0)}
-              onEnd={() => {
-                // Đồng bộ lại thanh tiến trình khi bài bắt đầu vòng mới.
-                setCurrentTime(0);
-              }}
+              onProgress={event =>
+                setCurrentTime(event.currentTime ?? 0)
+              }
+              onEnd={() => setCurrentTime(0)}
               onError={error => {
-                console.warn('Cannot play spiritual audio:', error);
+                console.warn(
+                  'Cannot play spiritual audio:',
+                  error,
+                );
                 setIsPaused(true);
                 setIsLoading(false);
               }}
@@ -533,7 +797,7 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 16,
-    paddingBottom: 220,
+    paddingBottom: 285,
   },
   headerCard: {
     alignItems: 'center',
@@ -591,7 +855,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   categoryButton: {
-    minWidth: 122,
+    minWidth: 112,
     minHeight: 46,
     flexDirection: 'row',
     alignItems: 'center',
@@ -600,20 +864,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#E3D0AD',
     borderRadius: 16,
-    paddingHorizontal: 14,
-    marginRight: 10,
+    paddingHorizontal: 13,
+    marginRight: 9,
   },
   categoryButtonSelected: {
     backgroundColor: BROWN,
     borderColor: GOLD,
   },
   categoryIcon: {
-    fontSize: 19,
-    marginRight: 7,
+    fontSize: 18,
+    marginRight: 6,
   },
   categoryText: {
     color: '#6E543D',
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: '700',
   },
   categoryTextSelected: {
@@ -661,7 +925,7 @@ const styles = StyleSheet.create({
   trackInfo: {
     flex: 1,
     marginLeft: 13,
-    marginRight: 9,
+    marginRight: 7,
   },
   trackTitle: {
     color: BROWN,
@@ -692,20 +956,34 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     marginLeft: 10,
   },
+  cardActions: {
+    alignItems: 'center',
+  },
+  favoriteButton: {
+    padding: 5,
+    marginBottom: 3,
+  },
+  favoriteIcon: {
+    color: '#A88D72',
+    fontSize: 24,
+  },
+  favoriteIconActive: {
+    color: '#B8513E',
+  },
   cardPlayButton: {
-    width: 40,
-    height: 40,
+    width: 38,
+    height: 38,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#EFE0C7',
-    borderRadius: 20,
+    borderRadius: 19,
   },
   cardPlayButtonActive: {
     backgroundColor: BROWN,
   },
   cardPlayIcon: {
     color: BROWN,
-    fontSize: 17,
+    fontSize: 16,
     fontWeight: '800',
   },
   cardPlayIconActive: {
@@ -793,11 +1071,49 @@ const styles = StyleSheet.create({
     color: '#CBB18E',
     fontSize: 10,
   },
+  sleepTimerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  sleepTimerLabel: {
+    flex: 1,
+    color: '#D7BE9A',
+    fontSize: 11,
+  },
+  sleepTimerButton: {
+    minWidth: 36,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(216,170,69,0.35)',
+    borderRadius: 10,
+    paddingHorizontal: 7,
+    paddingVertical: 5,
+    marginLeft: 5,
+  },
+  sleepTimerButtonActive: {
+    backgroundColor: GOLD,
+    borderColor: '#FFE4A0',
+  },
+  sleepTimerText: {
+    color: '#D7BE9A',
+    fontSize: 10,
+    fontWeight: '700',
+  },
+  sleepTimerTextActive: {
+    color: BROWN,
+  },
+  sleepCountdown: {
+    color: '#E8C97D',
+    fontSize: 10,
+    textAlign: 'right',
+    marginTop: 4,
+  },
   controlsRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 6,
+    marginTop: 4,
   },
   controlButton: {
     width: 42,
@@ -806,12 +1122,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   mainControlButton: {
-    width: 52,
-    height: 52,
+    width: 50,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: GOLD,
-    borderRadius: 26,
+    borderRadius: 25,
     marginHorizontal: 18,
   },
   controlIcon: {

@@ -15,6 +15,8 @@ import { useTranslation } from 'react-i18next';
 
 import type { RootTabParamList } from '../navigation/RootNavigator';
 import { colors } from '../theme/colors';
+import PracticeStreakCard
+  from '../components/PracticeStreakCard';
 
 type Props = BottomTabScreenProps<RootTabParamList, 'Home'>;
 
@@ -30,7 +32,12 @@ type MenuRoute =
     | 'BaziChart'
       | 'BaziHistory'
         | 'BaziStage4'
-        | 'ZiweiChart';
+        | 'ZiweiChart'
+        | 'DailyRitual'
+        | 'PeaceJournal'
+        | 'BuddhistCalendar'
+        | 'AltarCustomization'  
+        ;
 
 type HomeMenuCardProps = {
   icon: string;
@@ -159,7 +166,14 @@ export default function HomeScreen({ navigation }: Props) {
             </View>
           </View>
         </ImageBackground>
-
+                <View style={{ marginTop: 10 }}>
+          <View>
+        <PracticeStreakCard
+  onPress={() =>
+    navigation.navigate('DailyRitual')
+  }
+/>
+</View></View>
         <View style={styles.sectionHeader}>
           <View>
             <Text style={styles.sectionEyebrow}>
@@ -222,6 +236,7 @@ export default function HomeScreen({ navigation }: Props) {
             accent="#F3DFC9"
             onPress={navigateTo}
           />
+          
           <HomeMenuCard
             icon="🔮"
             title={t('home.horoscopeTitle')}
@@ -238,6 +253,17 @@ export default function HomeScreen({ navigation }: Props) {
             accent="#E9DFEF"
             onPress={navigateTo}
           />
+
+
+<HomeMenuCard
+  icon="☸"
+  title={t('buddhistCalendar.title')}
+  subtitle={t('buddhistCalendar.subtitle')}
+  route="BuddhistCalendar"
+  accent="#E8D6B8"
+  onPress={navigateTo}
+/>
+
 <HomeMenuCard
   icon="☯"
   title={t('home.baziTitle')}
@@ -297,6 +323,22 @@ export default function HomeScreen({ navigation }: Props) {
   })}
   route="ZiweiChart"
   accent="#F0E0CA"
+  onPress={navigateTo}
+/>
+          <HomeMenuCard
+  icon="📖"
+  title={t('peaceJournal.title')}
+  subtitle={t('peaceJournal.subtitle')}
+  route="PeaceJournal"
+  accent="#F1DFC8"
+  onPress={navigateTo}
+/>
+<HomeMenuCard
+  icon="🪔"
+  title={t('altarCustomization.title')}
+  subtitle={t('altarCustomization.subtitle')}
+  route="AltarCustomization"
+  accent="#F0D8BA"
   onPress={navigateTo}
 />
           <HomeMenuCard

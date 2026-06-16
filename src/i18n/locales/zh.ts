@@ -1,5 +1,20 @@
 import bazi from './bazi.zh';
 import ziwei from './ziwei.zh';
+import practice, {
+  practiceAudio,
+  practiceMeditation,
+} from './practice.zh';
+import {
+  peaceJournal,
+  buddhistCalendar,
+  altarCustomization,
+} from './spiritualFeatures.zh';
+import {
+  dataSync,
+  pdfExport,
+  premiumContent,
+  smartFeatures,
+} from './spiritualFeatures10_13.zh';
 const zh = {
   common: {
     cancel: '取消',
@@ -120,41 +135,44 @@ baziStage4Subtitle:
     incenseStatsTitle: '香支数',
   },
 
-  meditation: {
-    screenTitle: '冥想',
+meditation: {
+  title: '冥想',
+  screenTitle: '冥想',
 
-    breathingTitle: '呼吸冥想',
+  subtitle:
+    '舒适地坐下，放松肩膀，轻轻专注于每一次呼吸。',
 
-    chooseDuration: '选择时长',
+  breathingTitle: '呼吸冥想',
 
-    minuteUnit: '分钟',
+  chooseDuration: '选择时长',
 
-    heroMinutes: '{{count}} 分钟',
+  minutes: '{{count}} 分钟',
+  minuteUnit: '分钟',
+  heroMinutes: '{{count}} 分钟',
 
-    start: '开始冥想',
+  start: '开始冥想',
+  pause: '暂停冥想',
+  restart: '重新冥想',
 
-    pause: '暂停冥想',
+  ready: '准备就绪',
+  paused: '已暂停',
+  running: '正在冥想',
 
-    restart: '再次冥想',
+  resetTime: '重置时间',
 
-    paused: '已暂停',
+  completedTitle: '冥想完成',
 
-    running: '冥想中',
+  completedMessage:
+    '请缓慢呼吸，并感受此刻自己的身心状态。',
 
-    resetTime: '重置时间',
+  breathTitle: '呼吸指导',
 
-    completedTitle: '冥想完成',
+  inhale: '缓慢吸气 4 秒',
 
-    completedMessage: '缓慢呼吸，觉察此刻的感受。',
+  hold: '屏息 2 秒',
 
-    breathTitle: '呼吸指导',
-
-    inhale: '缓慢吸气 4 秒',
-
-    hold: '屏息 2 秒',
-
-    exhale: '缓慢呼气 6 秒',
-  },
+  exhale: '缓慢呼气 6 秒',
+},
 
   prayer: {
     title: '祈愿日记',
@@ -900,6 +918,16 @@ baziStage4Subtitle:
   },
   bazi,
   ziwei,
+    practice,
+  practiceAudio,
+  practiceMeditation,
+    peaceJournal,
+  buddhistCalendar,
+  altarCustomization,
+    dataSync,
+  pdfExport,
+  premiumContent,
+  smartFeatures,
 } as const;
 
 export default zh;

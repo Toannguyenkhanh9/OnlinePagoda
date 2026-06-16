@@ -285,7 +285,7 @@ const bazi = {
   },
 
   stage4: {
-    title: '第四阶段：运势与合盘',
+    title: '运势与合盘',
     subtitle:
       '查看流年、流月，比较两张命盘，并依据八字结构选择日期。',
     calculating: '正在计算...',

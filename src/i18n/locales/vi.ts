@@ -123,6 +123,8 @@ practiceReminderSubtitle:
 chooseDateTitle: 'Xem ngày',
 chooseDateSubtitle:
   'Tham khảo ngày phù hợp cho cưới hỏi, khai trương và việc lớn',
+  ziweiTitle: 'Tử vi Đẩu số',
+  ziweiSubtitle: 'Nhập ngày giờ và nơi sinh để lập 12 cung, an 14 chính tinh, 21 phụ tinh, Tứ Hóa, Tuần-Triệt và vòng Tràng Sinh.',
   },
 
   temple: {
@@ -533,489 +535,446 @@ meditation: {
     },
   },
   horoscope: {
-    title: 'Tử vi và ngày phù hợp',
+    title: 'Tử vi và ngày tốt',
 
-    subtitle:
-      'Nhập ngày sinh dương lịch để xem ngày âm, tuổi con giáp và gợi ý ngày phù hợp cho các việc quan trọng.',
+  subtitle:
+    'Nhập ngày sinh dương lịch để xem ngày âm, con giáp và các ngày được gợi ý cho những việc quan trọng.',
 
-    birthDateTitle: 'Ngày sinh dương lịch',
+  subtitleExtended:
+    'Nhập ngày giờ sinh dương lịch, giới tính và trường phái luận giải để xem hồ sơ âm lịch, các luận giải chiêm nghiệm và ngày phù hợp được gợi ý.',
 
-    day: 'Ngày',
+  birthDateTitle: 'Ngày sinh dương lịch',
 
-    month: 'Tháng',
+  day: 'Ngày',
 
-    year: 'Năm',
+  month: 'Tháng',
 
-    activityTitle: 'Việc cần xem ngày',
+  year: 'Năm',
 
-    searchPeriod: 'Khoảng thời gian tìm',
+  birthTimeTitle: 'Giờ sinh',
 
-    monthCount: '{{count}} tháng',
+  hour: 'Giờ',
 
-    calculate: 'Xem ngày âm và ngày phù hợp',
+  minute: 'Phút',
 
-    calculating: 'Đang tính...',
+  birthTimeHint: 'Giờ địa phương tại nơi sinh',
 
-    invalidDateTitle: 'Ngày sinh không hợp lệ',
+  genderTitle: 'Giới tính',
 
-    invalidDateMessage: 'Hãy nhập đúng ngày, tháng và năm sinh dương lịch.',
+  schoolTitle: 'Trường phái luận giải',
 
-    profileTitle: 'Thông tin ngày sinh',
+  selectedMethod: 'Phương pháp đang dùng',
 
-    lunarBirthDate: 'Ngày sinh âm lịch',
+  activityTitle: 'Việc cần xem ngày',
 
-    zodiac: 'Con giáp',
+  searchPeriod: 'Khoảng thời gian tìm',
 
-    canChiYear: 'Năm Can Chi',
+  monthCount: '{{count}} tháng',
 
-    leapMonth: 'nhuận',
+  calculate: 'Chuyển đổi và tìm ngày phù hợp',
 
-    resultsTitle: 'Ngày phù hợp được gợi ý',
+  calculateExtended: 'Lập hồ sơ và tìm ngày phù hợp',
 
-    resultsSubtitle: 'Các ngày được xếp theo điểm tham khảo từ cao xuống thấp.',
+  calculating: 'Đang tính...',
 
-    lunarDateLine: 'Âm lịch {{day}}/{{month}}/{{year}}',
+  invalidDateTitle: 'Ngày sinh không hợp lệ',
 
-    suitableReasons: 'Điểm thuận',
+  invalidInputTitle: 'Thông tin không hợp lệ',
 
-    cautionReasons: 'Điểm cần lưu ý',
+  invalidDateMessage:
+    'Vui lòng nhập ngày sinh dương lịch hợp lệ.',
 
-    disclaimer:
-      'Kết quả chỉ mang tính tham khảo văn hóa và chiêm nghiệm. Không nên dùng làm cơ sở duy nhất cho quyết định cưới hỏi, xây dựng, đầu tư hoặc các quyết định quan trọng khác.',
+  invalidTimeMessage:
+    'Giờ sinh phải nằm trong khoảng từ 00:00 đến 23:59.',
 
-    activities: {
-      wedding: 'Cưới hỏi',
-      construction: 'Xây nhà',
-      opening: 'Khai trương',
-      moving: 'Chuyển nhà',
-      travel: 'Xuất hành',
+  profileTitle: 'Thông tin ngày giờ sinh',
+
+  lunarBirthDate: 'Ngày sinh âm lịch',
+
+  birthHourBranch: 'Địa chi giờ sinh',
+
+  zodiac: 'Con giáp',
+
+  canChiYear: 'Năm Can Chi',
+
+  profileGender: 'Giới tính',
+
+  profileSchool: 'Trường phái luận giải',
+
+  yearPolarity: 'Âm dương năm sinh',
+
+  cycleDirection: 'Chiều an vòng tham khảo',
+
+  leapMonth: 'tháng nhuận',
+
+  resultsTitle: 'Ngày phù hợp được gợi ý',
+
+  resultsSubtitle:
+    'Các ngày được xếp hạng theo điểm tham khảo văn hóa.',
+
+  resultsSubtitleExtended:
+    'Các ngày được xếp hạng theo trường phái đã chọn, con giáp và địa chi giờ sinh.',
+
+  lunarDateLine: 'Âm lịch {{day}}/{{month}}/{{year}}',
+
+  suitableReasons: 'Điểm thuận',
+
+  cautionReasons: 'Điểm cần lưu ý',
+
+  lifeOverviewTitle: 'Tình duyên và sự nghiệp',
+
+  lifeOverviewSubtitle:
+    'Luận giải chiêm nghiệm dựa trên ngày sinh, giờ sinh và trường phái đã chọn.',
+
+  lifeStrengths: 'Điểm mạnh',
+
+  lifeCautions: 'Điểm cần cân bằng',
+
+  lifeAdvice: 'Gợi ý phát triển',
+
+  disclaimer:
+    'Kết quả chỉ nhằm tham khảo văn hóa và tự chiêm nghiệm. Không nên dùng làm cơ sở duy nhất cho cưới hỏi, xây dựng, đầu tư hoặc các quyết định quan trọng khác.',
+
+  disclaimerExtended:
+    'Đây là mô hình chiêm nghiệm rút gọn dựa trên lịch âm, con giáp, giờ sinh và bộ trọng số của trường phái đã chọn. Đây không phải lá số Tử vi Đẩu số hay Bát tự hoàn chỉnh và không nên là cơ sở duy nhất cho các quyết định quan trọng.',
+
+  activities: {
+    wedding: 'Cưới hỏi',
+    construction: 'Xây dựng',
+    opening: 'Khai trương',
+    moving: 'Chuyển nhà',
+    travel: 'Xuất hành',
+  },
+
+  genders: {
+    male: 'Nam',
+    female: 'Nữ',
+    unspecified: 'Không xác định',
+  },
+
+  schools: {
+    folkTitle: 'Dân gian tổng hợp',
+    folkDescription:
+      'Cân bằng các quy tắc chọn ngày truyền thống, quan hệ con giáp, giờ sinh và phong tục văn hóa phổ biến.',
+
+    baziTitle: 'Tham khảo Bát tự',
+    baziDescription:
+      'Nhấn mạnh hơn vào con giáp, địa chi giờ sinh và các quan hệ hợp, xung.',
+
+    ziweiTitle: 'Tham khảo Tử vi',
+    ziweiDescription:
+      'Sử dụng bộ trọng số chiêm nghiệm lấy cảm hứng từ quan niệm thời vận Tử vi và quan hệ giữa thông tin sinh với ngày được chọn.',
+
+    almanacTitle: 'Lịch vạn niên truyền thống',
+    almanacDescription:
+      'Ưu tiên các quy tắc nên làm, kiêng kỵ, ngày hoàng đạo và những lưu ý âm lịch truyền thống.',
+  },
+
+  polarity: {
+    yang: 'Dương',
+    yin: 'Âm',
+  },
+
+  directions: {
+    forward: 'Thuận',
+    backward: 'Nghịch',
+    neutral: 'Chưa xác định',
+  },
+
+  schoolNotes: {
+    folk:
+      'Kết quả sử dụng sự kết hợp cân bằng giữa phong tục dân gian, yếu tố lịch pháp, quan hệ con giáp và tham chiếu giờ sinh.',
+
+    bazi:
+      'Kết quả tăng trọng số cho các quan hệ hợp hoặc xung của con giáp và giờ sinh như một mô hình Bát tự rút gọn.',
+
+    ziwei:
+      'Kết quả sử dụng bộ trọng số thời vận lấy cảm hứng từ Tử vi ở mức rút gọn, chỉ nhằm tham khảo văn hóa.',
+
+    almanac:
+      'Kết quả ưu tiên nhiều nhất cho các quy tắc nên làm, kiêng kỵ và ngày âm trong lịch vạn niên truyền thống.',
+  },
+
+  ratings: {
+    excellent: 'Rất tốt',
+    good: 'Tốt',
+    fair: 'Khá',
+    caution: 'Cân nhắc',
+  },
+
+  lifeRatings: {
+    veryStrong: 'Rất mạnh',
+    favorable: 'Thuận lợi',
+    balanced: 'Cân bằng',
+    developing: 'Đang phát triển',
+  },
+
+  love: {
+    title: 'Tình duyên',
+
+    styles: {
+      warm: 'Ấm áp và giàu biểu đạt',
+      steady: 'Ổn định và chung thủy',
+      independent: 'Độc lập và thẳng thắn',
+      sensitive: 'Nhạy cảm và trực giác',
     },
 
-    ratings: {
-      excellent: 'Rất tốt',
-      good: 'Tốt',
-      fair: 'Khá',
-      caution: 'Cân nhắc',
+    summaries: {
+      warm:
+        'Bạn có thể bày tỏ tình cảm cởi mở và coi trọng sự ấm áp, gần gũi cùng sự trân trọng chân thành.',
+
+      steady:
+        'Bạn có thể thích niềm tin được xây dựng từ từ, cam kết ổn định và một mối quan hệ được nuôi dưỡng bằng sự quan tâm bền bỉ.',
+
+      independent:
+        'Bạn có thể coi trọng sự chân thật, không gian riêng và một mối quan hệ cho phép cả hai giữ được cá tính riêng.',
+
+      sensitive:
+        'Bạn có thể nhanh chóng nhận ra những thay đổi cảm xúc và tìm kiếm sự đồng cảm, trấn an cùng thấu hiểu lẫn nhau.',
+    },
+  },
+
+  career: {
+    title: 'Sự nghiệp',
+
+    styles: {
+      leadership: 'Thiên về lãnh đạo',
+      creative: 'Sáng tạo và biểu đạt',
+      analytical: 'Phân tích và có hệ thống',
+      supportive: 'Hỗ trợ và hướng đến phục vụ',
+      entrepreneurial: 'Khởi nghiệp và linh hoạt',
     },
 
-    reasons: {
-      hoangDao: 'Ngày Hoàng đạo',
+    summaries: {
+      leadership:
+        'Bạn có thể làm việc tốt khi nhận trách nhiệm, điều phối mọi người và chuyển định hướng thành hành động rõ ràng.',
 
-      hacDao: 'Ngày Hắc đạo',
+      creative:
+        'Bạn có thể phát huy trong công việc coi trọng trí tưởng tượng, giao tiếp, thiết kế, kể chuyện hoặc giải quyết vấn đề theo cách mới.',
 
-      traditionalSuitable: 'Lịch truyền thống ghi là ngày nên làm',
+      analytical:
+        'Bạn có thể làm tốt nhất khi công việc cần lập kế hoạch, nghiên cứu, tư duy hệ thống, độ chính xác và quyết định thận trọng.',
 
-      traditionalAvoid: 'Lịch truyền thống ghi là ngày nên tránh',
+      supportive:
+        'Bạn có thể đóng góp mạnh trong các vai trò hợp tác, tư vấn, giảng dạy, chăm sóc hoặc phục vụ cộng đồng.',
 
-      zodiacClash: 'Địa chi ngày xung với tuổi',
-
-      sixHarmony: 'Ngày lục hợp với tuổi',
-
-      threeHarmony: 'Ngày tam hợp với tuổi',
-
-      nguyetKy: 'Phạm ngày Nguyệt Kỵ',
-
-      tamNuong: 'Phạm ngày Tam Nương',
-
-      preferredLunarDay: 'Ngày âm phù hợp theo bộ quy tắc tham khảo',
-
-      weekendConvenient: 'Cuối tuần thuận tiện tổ chức',
-      subtitleExtended:
-        'Nhập ngày giờ sinh dương lịch, giới tính và trường phái để xem ngày âm, giờ sinh và gợi ý ngày phù hợp.',
-
-      birthTimeTitle: 'Giờ sinh',
-      hour: 'Giờ',
-      minute: 'Phút',
-      birthTimeHint: 'Giờ địa phương nơi sinh',
-
-      genderTitle: 'Giới tính',
-
-      genders: {
-        male: 'Nam',
-        female: 'Nữ',
-        unspecified: 'Không chọn',
-      },
-
-      schoolTitle: 'Trường phái luận giải',
-
-      schools: {
-        folkTitle: 'Dân gian tổng hợp',
-
-        folkDescription:
-          'Cân bằng tuổi, ngày Hoàng đạo, ngày âm và các ngày kiêng truyền thống.',
-
-        baziTitle: 'Bát tự tham khảo',
-
-        baziDescription:
-          'Ưu tiên quan hệ giữa địa chi ngày, tuổi năm sinh và giờ sinh.',
-
-        ziweiTitle: 'Tử vi tham khảo',
-
-        ziweiDescription:
-          'Xét ngày âm, giờ sinh, giới tính và chiều an vòng ở mức rút gọn.',
-
-        almanacTitle: 'Lịch pháp',
-
-        almanacDescription:
-          'Ưu tiên mục nên làm, kiêng làm, Hoàng đạo và các ngày kỵ.',
-      },
-
-      selectedMethod: 'Đang dùng',
-
-      calculateExtended: 'Lập hồ sơ và tìm ngày phù hợp',
-
-      invalidInputTitle: 'Thông tin chưa hợp lệ',
-
-      invalidTimeMessage: 'Giờ sinh phải từ 00:00 đến 23:59.',
-
-      birthHourBranch: 'Giờ sinh Can Chi',
-
-      profileGender: 'Giới tính',
-
-      profileSchool: 'Trường phái',
-
-      yearPolarity: 'Âm dương năm sinh',
-
-      cycleDirection: 'Chiều an vòng tham khảo',
-
-      polarity: {
-        yang: 'Dương',
-        yin: 'Âm',
-      },
-
-      directions: {
-        forward: 'Thuận',
-        backward: 'Nghịch',
-        neutral: 'Trung tính',
-      },
-
-      schoolNotes: {
-        folk: 'Phương pháp tổng hợp, cân bằng các quy tắc dân gian và lịch truyền thống.',
-
-        bazi: 'Bộ điểm nhấn mạnh tuổi năm sinh và địa chi giờ sinh. Đây chưa phải Bát tự đầy đủ.',
-
-        ziwei:
-          'Bộ điểm sử dụng ngày âm, giờ sinh, giới tính và chiều an vòng ở mức tham khảo.',
-
-        almanac:
-          'Bộ điểm ưu tiên mạnh nội dung nên làm, kiêng làm và Hoàng đạo trong lịch pháp.',
-      },
-
-      resultsSubtitleExtended:
-        'Các ngày được xếp theo trường phái, tuổi và giờ sinh đã chọn.',
-
-      disclaimerExtended:
-        'Đây là mô hình luận giải rút gọn dựa trên lịch âm, tuổi, giờ sinh và bộ trọng số theo trường phái. Không phải lá số Tử vi Đẩu số hay Bát tự hoàn chỉnh và không nên là cơ sở duy nhất cho quyết định quan trọng.',
+      entrepreneurial:
+        'Bạn có thể bị thu hút bởi sự chủ động, thử nghiệm, dự án độc lập và cơ hội tưởng thưởng khả năng thích nghi.',
     },
-    subtitleExtended:
-      'Nhập ngày giờ sinh dương lịch, giới tính và trường phái để xem ngày âm, giờ sinh và gợi ý ngày phù hợp.',
+  },
 
-    birthTimeTitle: 'Giờ sinh',
-    hour: 'Giờ',
-    minute: 'Phút',
-    birthTimeHint: 'Giờ địa phương nơi sinh',
+  reasons: {
+    hoangDao: 'Ngày hoàng đạo theo lịch pháp',
 
-    genderTitle: 'Giới tính',
+    hacDao: 'Ngày hắc đạo theo lịch pháp',
 
-    genders: {
-      male: 'Nam',
-      female: 'Nữ',
-      unspecified: 'Không chọn',
-    },
+    traditionalSuitable:
+      'Theo truyền thống phù hợp với việc này',
 
-    schoolTitle: 'Trường phái luận giải',
+    traditionalAvoid:
+      'Theo truyền thống nên tránh việc này',
 
-    schools: {
-      folkTitle: 'Dân gian tổng hợp',
+    zodiacClash:
+      'Địa chi ngày xung với con giáp năm sinh',
 
-      folkDescription:
-        'Cân bằng tuổi, ngày Hoàng đạo, ngày âm và các ngày kiêng truyền thống.',
+    sixHarmony: 'Quan hệ lục hợp',
 
-      baziTitle: 'Bát tự tham khảo',
+    threeHarmony: 'Quan hệ tam hợp',
 
-      baziDescription:
-        'Ưu tiên quan hệ giữa địa chi ngày, tuổi năm sinh và giờ sinh.',
+    nguyetKy: 'Ngày Nguyệt Kỵ theo dân gian',
 
-      ziweiTitle: 'Tử vi tham khảo',
+    tamNuong: 'Ngày Tam Nương theo dân gian',
 
-      ziweiDescription:
-        'Xét ngày âm, giờ sinh, giới tính và chiều an vòng ở mức rút gọn.',
+    preferredLunarDay:
+      'Ngày âm được ưu tiên trong bộ quy tắc tham khảo',
 
-      almanacTitle: 'Lịch pháp',
+    weekendConvenient: 'Thuận tiện vì rơi vào cuối tuần',
 
-      almanacDescription:
-        'Ưu tiên mục nên làm, kiêng làm, Hoàng đạo và các ngày kỵ.',
-    },
+    birthHourClash:
+      'Địa chi ngày xung với địa chi giờ sinh',
 
-    selectedMethod: 'Đang dùng',
+    birthHourHarmony:
+      'Địa chi ngày tạo quan hệ lục hợp với giờ sinh',
 
-    calculateExtended: 'Lập hồ sơ và tìm ngày phù hợp',
+    birthHourThreeHarmony:
+      'Địa chi ngày tạo quan hệ tam hợp với giờ sinh',
 
-    invalidInputTitle: 'Thông tin chưa hợp lệ',
+    birthLunarDayResonance:
+      'Ngày âm tương ứng với ngày sinh âm lịch',
 
-    invalidTimeMessage: 'Giờ sinh phải từ 00:00 đến 23:59.',
+    school_folk:
+      'Được chấm theo phương pháp dân gian tổng hợp',
 
-    birthHourBranch: 'Giờ sinh Can Chi',
+    school_bazi:
+      'Được chấm theo bộ tham khảo Bát tự',
 
-    profileGender: 'Giới tính',
+    school_ziwei:
+      'Được chấm theo bộ tham khảo Tử vi',
 
-    profileSchool: 'Trường phái',
+    school_almanac:
+      'Được chấm theo bộ lịch vạn niên truyền thống',
+  },
 
-    yearPolarity: 'Âm dương năm sinh',
+  insights: {
+    loveHarmony:
+      'Con giáp năm sinh và địa chi giờ sinh tạo quan hệ lục hợp.',
 
-    cycleDirection: 'Chiều an vòng tham khảo',
+    loveThreeHarmony:
+      'Con giáp năm sinh và địa chi giờ sinh thuộc cùng một nhóm tam hợp.',
 
-    polarity: {
-      yang: 'Dương',
-      yin: 'Âm',
-    },
+    loveInnerConflict:
+      'Con giáp năm sinh và địa chi giờ sinh tạo quan hệ xung, có thể phản ánh sự giằng co nội tâm giữa nhu cầu gần gũi và nhu cầu cá nhân.',
 
-    directions: {
-      forward: 'Thuận',
-      backward: 'Nghịch',
-      neutral: 'Trung tính',
-    },
+    loveSelfAwareness:
+      'Ngày sinh âm lịch cho thấy xu hướng tự quan sát và nhận biết cảm xúc.',
 
-    schoolNotes: {
-      folk: 'Phương pháp tổng hợp, cân bằng các quy tắc dân gian và lịch truyền thống.',
+    loveWarmHeart:
+      'Bạn có thể thể hiện tình cảm rộng rãi và tạo ra bầu không khí cảm xúc ấm áp.',
 
-      bazi: 'Bộ điểm nhấn mạnh tuổi năm sinh và địa chi giờ sinh. Đây chưa phải Bát tự đầy đủ.',
+    loveExpressive:
+      'Bạn thường có khả năng thể hiện sự quan tâm bằng lời nói, hành động và sự chú ý rõ ràng.',
 
-      ziwei:
-        'Bộ điểm sử dụng ngày âm, giờ sinh, giới tính và chiều an vòng ở mức tham khảo.',
+    loveOvergiving:
+      'Đôi khi bạn có thể cho đi quá nhiều trước khi kiểm tra xem nhu cầu của mình đã được đáp ứng hay chưa.',
 
-      almanac:
-        'Bộ điểm ưu tiên mạnh nội dung nên làm, kiêng làm và Hoàng đạo trong lịch pháp.',
-    },
+    loveSetBoundaries:
+      'Hãy thiết lập ranh giới rõ ràng và tử tế để sự quan tâm luôn cân bằng.',
 
-    resultsSubtitleExtended:
-      'Các ngày được xếp theo trường phái, tuổi và giờ sinh đã chọn.',
+    loveReceiveCare:
+      'Cho phép người khác chăm sóc và hỗ trợ bạn thay vì luôn là người cho đi.',
 
-    disclaimerExtended:
-      'Đây là mô hình luận giải rút gọn dựa trên lịch âm, tuổi, giờ sinh và bộ trọng số theo trường phái. Không phải lá số Tử vi Đẩu số hay Bát tự hoàn chỉnh và không nên là cơ sở duy nhất cho quyết định quan trọng.',
-    lifeOverviewTitle: 'Tình duyên và sự nghiệp',
+    loveLoyal:
+      'Bạn có thể coi trọng sự chung thủy, đáng tin cậy và cam kết lâu dài.',
 
-    lifeOverviewSubtitle:
-      'Luận giải tham khảo từ ngày giờ sinh và trường phái đã chọn.',
+    lovePatient:
+      'Bạn thường sẵn lòng dành thời gian để một mối quan hệ phát triển.',
 
-    lifeStrengths: 'Điểm mạnh',
+    loveReserved:
+      'Bạn có thể giữ cảm xúc bên trong cho đến khi chúng trở nên khó giải thích.',
 
-    lifeCautions: 'Điểm cần cân bằng',
+    loveSpeakClearly:
+      'Hãy bày tỏ nhu cầu sớm và rõ ràng thay vì mong người khác tự đoán.',
 
-    lifeAdvice: 'Gợi ý phát triển',
+    loveCreateRituals:
+      'Tạo những thói quen chung nhỏ để củng cố niềm tin và sự kết nối.',
 
-    lifeRatings: {
-      veryStrong: 'Năng lượng nổi bật',
-      favorable: 'Khá thuận lợi',
-      balanced: 'Tương đối cân bằng',
-      developing: 'Đang hoàn thiện',
-    },
+    loveRespectsSpace:
+      'Bạn có thể tôn trọng cá tính riêng và hiểu nhu cầu về không gian cá nhân.',
 
-    love: {
-      title: 'Tình duyên',
+    loveHonest:
+      'Bạn có thể thích giao tiếp trực tiếp và chân thành trong tình cảm.',
 
-      styles: {
-        warm: 'Ấm áp và giàu tình cảm',
-        steady: 'Bền vững và chân thành',
-        independent: 'Độc lập trong tình cảm',
-        sensitive: 'Tinh tế và nhạy cảm',
-      },
+    loveNeedsFreedom:
+      'Sự hạn chế quá mức có thể khiến bạn thu mình hoặc trở nên xa cách về cảm xúc.',
 
-      summaries: {
-        warm: 'Bạn có xu hướng yêu bằng sự quan tâm rõ ràng, dễ tạo cảm giác gần gũi và ấm áp.',
+    loveBalanceFreedom:
+      'Cân bằng tính độc lập với sự hiện diện cảm xúc đều đặn.',
 
-        steady:
-          'Bạn coi trọng sự ổn định, lòng tin và một mối quan hệ phát triển lâu dài.',
+    loveSharePlans:
+      'Chia sẻ kế hoạch và kỳ vọng để tự do không bị hiểu thành xa cách.',
 
-        independent:
-          'Bạn cần tình yêu có sự tôn trọng, khoảng riêng và giao tiếp thẳng thắn.',
+    loveEmpathetic:
+      'Bạn có thể hiểu những thay đổi cảm xúc tinh tế và phản hồi bằng sự đồng cảm.',
 
-        sensitive:
-          'Bạn cảm nhận cảm xúc sâu sắc, dễ đồng cảm nhưng cũng cần sự an toàn tinh thần.',
-      },
-    },
+    loveIntuitive:
+      'Bạn có thể dựa nhiều vào trực giác khi cảm nhận một mối quan hệ.',
 
-    career: {
-      title: 'Sự nghiệp',
+    loveOverthinking:
+      'Sự nhạy cảm có thể chuyển thành suy nghĩ quá nhiều khi giao tiếp chưa rõ ràng.',
 
-      styles: {
-        leadership: 'Định hướng lãnh đạo',
-        creative: 'Thiên hướng sáng tạo',
-        analytical: 'Tư duy phân tích',
-        supportive: 'Phối hợp và hỗ trợ',
-        entrepreneurial: 'Tinh thần kinh doanh',
-      },
+    loveTrustSlowly:
+      'Hãy để niềm tin phát triển qua những hành động lặp lại thay vì suy đoán.',
 
-      summaries: {
-        leadership:
-          'Bạn phù hợp với vai trò chịu trách nhiệm, điều phối và đưa ra định hướng.',
+    loveAskDirectly:
+      'Khi chưa chắc chắn, hãy hỏi trực tiếp thay vì tự diễn giải sự im lặng.',
 
-        creative:
-          'Bạn phát huy tốt khi được tạo ra ý tưởng mới, thiết kế hoặc truyền đạt thông điệp.',
+    careerPersistent:
+      'Bạn có thể tiến bộ nhờ sự bền bỉ và sẵn lòng tiếp tục tiến về phía trước.',
 
-        analytical:
-          'Bạn mạnh về quan sát dữ liệu, lập kế hoạch và giải quyết vấn đề có hệ thống.',
+    careerReflective:
+      'Bạn có thể học tốt qua việc nhìn lại, suy ngẫm và điều chỉnh cách làm.',
 
-        supportive:
-          'Bạn phát triển tốt trong môi trường hợp tác, phục vụ và tạo giá trị cho tập thể.',
+    careerActionOriented:
+      'Tính Dương có thể hỗ trợ sự chủ động, hành động rõ ràng và quyết định dứt khoát.',
 
-        entrepreneurial:
-          'Bạn có xu hướng chủ động, thích thử nghiệm và thích nghi nhanh với cơ hội mới.',
-      },
-    },
+    careerObservant:
+      'Tính Âm có thể hỗ trợ khả năng quan sát, kiên nhẫn, chọn thời điểm và chuẩn bị kỹ.',
 
-    insights: {
-      loveHarmony:
-        'Tuổi năm sinh và giờ sinh tạo xu hướng hòa hợp trong cách biểu đạt tình cảm.',
+    careerLeadership:
+      'Bạn có thể cảm thấy thoải mái khi dẫn dắt người khác và đặt ra định hướng rõ ràng.',
 
-      loveThreeHarmony:
-        'Năng lượng tam hợp giúp bạn dễ tìm được điểm chung với người đồng hành.',
+    careerResponsibility:
+      'Bạn thường nhận trách nhiệm về kết quả và theo đuổi cam kết đến cùng.',
 
-      loveInnerConflict:
-        'Nhu cầu bên trong đôi khi mâu thuẫn, khiến bạn vừa muốn gần gũi vừa muốn giữ khoảng cách.',
+    careerOvercontrol:
+      'Kiểm soát quá nhiều có thể hạn chế sự hợp tác hoặc tạo áp lực không cần thiết.',
 
-      loveSelfAwareness:
-        'Bạn có khả năng nhận biết cảm xúc và nhu cầu tình cảm khá rõ.',
+    careerDelegate:
+      'Phân công rõ ràng và cho người khác không gian đóng góp theo cách của họ.',
 
-      loveWarmHeart:
-        'Biết quan tâm và dễ tạo cảm giác ấm áp cho người bên cạnh.',
+    careerListenBeforeDeciding:
+      'Thu thập nhiều góc nhìn trước khi đưa ra quyết định quan trọng.',
 
-      loveExpressive:
-        'Có khả năng thể hiện tình cảm bằng lời nói hoặc hành động.',
+    careerCreative:
+      'Bạn có thể tạo ra ý tưởng mới và nhìn thấy những khả năng người khác bỏ qua.',
 
-      loveOvergiving:
-        'Dễ cho đi quá nhiều rồi cảm thấy hụt hẫng khi không được đáp lại tương xứng.',
+    careerExpression:
+      'Giao tiếp, thiết kế, kể chuyện hoặc trình bày có thể là thế mạnh tự nhiên.',
 
-      loveSetBoundaries:
-        'Hãy duy trì ranh giới lành mạnh thay vì luôn ưu tiên người khác.',
+    careerScattered:
+      'Quá nhiều ý tưởng cùng lúc có thể khiến bạn khó hoàn thành việc quan trọng nhất.',
 
-      loveReceiveCare:
-        'Cho phép bản thân nhận sự quan tâm thay vì chỉ đóng vai người chăm sóc.',
+    careerBuildPortfolio:
+      'Xây dựng danh mục công việc đã hoàn thành để biến sự sáng tạo thành cơ hội.',
 
-      loveLoyal: 'Đề cao sự chung thủy và tính ổn định trong mối quan hệ.',
+    careerFinishOneThing:
+      'Chọn một ưu tiên và hoàn thành trước khi mở rộng sang ý tưởng tiếp theo.',
 
-      lovePatient: 'Có khả năng kiên nhẫn xây dựng tình cảm theo thời gian.',
+    careerAnalytical:
+      'Bạn có thể có kỹ năng xem xét chi tiết, quy luật và quan hệ nhân quả.',
 
-      loveReserved:
-        'Đôi lúc giữ cảm xúc quá lâu khiến đối phương khó hiểu điều bạn cần.',
+    careerPlanning:
+      'Chuẩn bị có hệ thống có thể giúp bạn giảm rủi ro và tăng tính ổn định.',
 
-      loveSpeakClearly:
-        'Nói rõ mong muốn và cảm xúc trước khi chúng tích tụ thành áp lực.',
+    careerPerfectionism:
+      'Chờ đợi thông tin hoàn hảo có thể làm chậm những hành động hữu ích.',
 
-      loveCreateRituals:
-        'Những thói quen nhỏ như trò chuyện hoặc dành thời gian cố định sẽ giúp tình cảm bền hơn.',
+    careerSetMilestones:
+      'Chia mục tiêu lớn thành các mốc có thể đo lường với thời hạn rõ ràng.',
 
-      loveRespectsSpace:
-        'Tôn trọng khoảng riêng và sự khác biệt của người đồng hành.',
+    careerDecideWithEnoughData:
+      'Hành động khi thông tin đã đủ, dù chưa hoàn toàn đầy đủ.',
 
-      loveHonest:
-        'Có xu hướng thẳng thắn và không thích mối quan hệ thiếu rõ ràng.',
+    careerTeamwork:
+      'Bạn có thể củng cố tập thể bằng sự hợp tác, đáng tin cậy và nhận biết cảm xúc.',
 
-      loveNeedsFreedom:
-        'Có thể thấy ngột ngạt khi mối quan hệ kiểm soát hoặc phụ thuộc quá mức.',
+    careerService:
+      'Bạn có thể tìm thấy ý nghĩa trong công việc giúp đỡ, giảng dạy, hỗ trợ hoặc cải thiện cuộc sống của người khác.',
 
-      loveBalanceFreedom:
-        'Cân bằng tự do cá nhân với sự hiện diện và cam kết trong mối quan hệ.',
+    careerPeoplePleasing:
+      'Cố gắng làm hài lòng tất cả mọi người có thể làm giảm năng lượng và khiến ưu tiên trở nên mờ nhạt.',
 
-      loveSharePlans:
-        'Chia sẻ kế hoạch sớm để người đồng hành không cảm thấy bị đứng ngoài.',
+    careerProtectEnergy:
+      'Đặt giới hạn cho thời gian và sức lao động cảm xúc để đóng góp của bạn được bền vững.',
 
-      loveEmpathetic: 'Nhạy bén với cảm xúc và dễ thấu hiểu người khác.',
+    careerShowYourContribution:
+      'Trình bày kết quả của bạn rõ ràng thay vì cho rằng người khác sẽ tự nhận ra.',
 
-      loveIntuitive:
-        'Có trực giác tốt về bầu không khí và những thay đổi trong mối quan hệ.',
+    careerInitiative:
+      'Bạn có thể sẵn lòng bắt đầu trước khi mọi điều kiện hoàn toàn chắc chắn.',
 
-      loveOverthinking:
-        'Dễ suy diễn khi thông tin chưa rõ hoặc khi đối phương im lặng.',
+    careerAdaptability:
+      'Bạn có thể điều chỉnh nhanh khi hoàn cảnh, thị trường hoặc kế hoạch thay đổi.',
 
-      loveTrustSlowly:
-        'Xây dựng lòng tin theo từng bước, không cần ép bản thân mở lòng quá nhanh.',
+    careerRiskTaking:
+      'Sự hào hứng với cơ hội có thể dẫn đến chấp nhận rủi ro khi chưa có đủ biện pháp bảo vệ.',
 
-      loveAskDirectly: 'Hỏi trực tiếp thay vì tự đoán suy nghĩ của người khác.',
+    careerValidateRisk:
+      'Kiểm chứng giả định bằng các thử nghiệm nhỏ trước khi đưa ra cam kết lớn.',
 
-      careerPersistent:
-        'Có khả năng duy trì mục tiêu và tiến đều trong thời gian dài.',
-
-      careerReflective:
-        'Biết nhìn lại, điều chỉnh và học từ trải nghiệm trước khi tiến tiếp.',
-
-      careerActionOriented:
-        'Có xu hướng chủ động bắt tay vào việc và tạo động lực cho tiến độ.',
-
-      careerObservant:
-        'Quan sát kỹ, cảm nhận bối cảnh tốt và thường nhận ra điều người khác bỏ sót.',
-
-      careerLeadership: 'Có khả năng dẫn dắt, phân công và giữ mục tiêu chung.',
-
-      careerResponsibility:
-        'Sẵn sàng chịu trách nhiệm với quyết định và kết quả công việc.',
-
-      careerOvercontrol:
-        'Dễ ôm việc hoặc kiểm soát quá sâu khi lo người khác làm chưa đúng.',
-
-      careerDelegate: 'Học cách giao việc rõ ràng và tin tưởng người phù hợp.',
-
-      careerListenBeforeDeciding:
-        'Thu thập góc nhìn của đội nhóm trước khi đưa ra quyết định lớn.',
-
-      careerCreative:
-        'Có khả năng tạo ý tưởng, nhìn vấn đề theo hướng mới và khác biệt.',
-
-      careerExpression:
-        'Phù hợp với công việc cần truyền đạt, thiết kế hoặc kể chuyện.',
-
-      careerScattered:
-        'Dễ hứng thú nhiều hướng cùng lúc và thiếu thời gian hoàn thành.',
-
-      careerBuildPortfolio:
-        'Tập trung xây sản phẩm hoặc hồ sơ năng lực có thể nhìn thấy được.',
-
-      careerFinishOneThing:
-        'Ưu tiên hoàn thành một dự án quan trọng trước khi mở thêm dự án mới.',
-
-      careerAnalytical:
-        'Mạnh về phân tích, so sánh và tìm nguyên nhân của vấn đề.',
-
-      careerPlanning:
-        'Có khả năng lập kế hoạch và chia mục tiêu thành bước cụ thể.',
-
-      careerPerfectionism:
-        'Có thể trì hoãn vì muốn mọi thứ hoàn hảo trước khi bắt đầu.',
-
-      careerSetMilestones:
-        'Đặt mốc hoàn thành rõ ràng để tránh phân tích quá lâu.',
-
-      careerDecideWithEnoughData:
-        'Quyết định khi đã có đủ dữ liệu cần thiết, không cần chờ mọi thứ tuyệt đối chắc chắn.',
-
-      careerTeamwork: 'Biết phối hợp và giúp tập thể vận hành ổn định.',
-
-      careerService:
-        'Có khả năng tạo giá trị thông qua hỗ trợ, chăm sóc hoặc hướng dẫn người khác.',
-
-      careerPeoplePleasing:
-        'Dễ nhận quá nhiều việc vì ngại từ chối hoặc sợ làm người khác thất vọng.',
-
-      careerProtectEnergy:
-        'Bảo vệ thời gian và năng lượng bằng giới hạn công việc rõ ràng.',
-
-      careerShowYourContribution:
-        'Ghi nhận và trình bày rõ đóng góp của bạn thay vì chỉ âm thầm làm việc.',
-
-      careerInitiative: 'Có tinh thần chủ động và sẵn sàng thử cách làm mới.',
-
-      careerAdaptability:
-        'Thích nghi nhanh khi thị trường, công việc hoặc kế hoạch thay đổi.',
-
-      careerRiskTaking:
-        'Đôi lúc quyết định nhanh hoặc đánh giá thấp rủi ro tài chính và vận hành.',
-
-      careerValidateRisk:
-        'Thử nghiệm quy mô nhỏ và kiểm chứng nhu cầu trước khi đầu tư lớn.',
-
-      careerKeepCashReserve:
-        'Giữ nguồn dự phòng trước khi mở rộng dự án hoặc kinh doanh.',
-    },
+    careerKeepCashReserve:
+      'Duy trì quỹ dự phòng tài chính khi theo đuổi cơ hội độc lập hoặc có tính bất định.',
+  },
   },
   bazi,
   ziwei,

@@ -1,23 +1,37 @@
+import {Platform} from 'react-native';
 import Sound from 'react-native-sound';
 
-Sound.setCategory('Playback');
+if (Platform.OS === 'ios') {
+  Sound.setCategory('Playback');
+}
 
-export type TempleSound = 'woodenFish' | 'bell';
+export type TempleSound =
+  | 'woodenFish'
+  | 'bell';
 
-const soundFiles: Record<TempleSound, string> = {
+const soundFiles: Record<
+  TempleSound,
+  string
+> = {
   woodenFish: 'wooden_fish.mp3',
   bell: 'temple_bell.mp3',
 };
 
-const soundCache: Partial<Record<TempleSound, Sound>> = {};
+const soundCache: Partial<
+  Record<TempleSound, Sound>
+> = {};
 
 const loadingCache: Partial<
   Record<TempleSound, Promise<Sound>>
 > = {};
 
-let currentLoopingSound: TempleSound | null = null;
+let currentLoopingSound:
+  | TempleSound
+  | null = null;
 
-function loadSound(type: TempleSound): Promise<Sound> {
+function loadSound(
+  type: TempleSound,
+): Promise<Sound> {
   const cachedSound = soundCache[type];
 
   if (cachedSound) {
@@ -30,31 +44,35 @@ function loadSound(type: TempleSound): Promise<Sound> {
     return loadingSound;
   }
 
-  const loadingPromise = new Promise<Sound>((resolve, reject) => {
-    let soundInstance: Sound;
+  const loadingPromise =
+    new Promise<Sound>(
+      (resolve, reject) => {
+        const soundInstance =
+          new Sound(
+            soundFiles[type],
+            Sound.MAIN_BUNDLE,
+            error => {
+              delete loadingCache[type];
 
-    soundInstance = new Sound(
-      soundFiles[type],
-      Sound.MAIN_BUNDLE,
-      error => {
-        delete loadingCache[type];
+              if (error) {
+                console.warn(
+                  `Không thể tải âm thanh ${soundFiles[type]}:`,
+                  error,
+                );
 
-        if (error) {
-          console.warn(
-            `Không thể tải âm thanh ${soundFiles[type]}:`,
-            error,
+                soundInstance.release();
+                reject(error);
+                return;
+              }
+
+              soundCache[type] =
+                soundInstance;
+
+              resolve(soundInstance);
+            },
           );
-
-          soundInstance.release();
-          reject(error);
-          return;
-        }
-
-        soundCache[type] = soundInstance;
-        resolve(soundInstance);
       },
     );
-  });
 
   loadingCache[type] = loadingPromise;
 
@@ -68,14 +86,10 @@ export async function preloadTempleSounds(): Promise<void> {
   ]);
 }
 
-/**
- * Phát âm thanh một lần.
- */
 export async function playTempleSound(
   type: TempleSound,
 ): Promise<void> {
   try {
-    // Không để âm thanh phát một lần chồng lên âm thanh đang lặp.
     stopAllTempleSounds();
 
     const sound = await loadSound(type);
@@ -85,23 +99,25 @@ export async function playTempleSound(
 
       sound.play(success => {
         if (!success) {
-          console.warn('Không thể phát âm thanh:', type);
+          console.warn(
+            'Không thể phát âm thanh:',
+            type,
+          );
         }
       });
     });
   } catch (error) {
-    console.warn('Lỗi phát âm thanh:', error);
+    console.warn(
+      'Lỗi phát âm thanh:',
+      error,
+    );
   }
 }
 
-/**
- * Phát lặp liên tục cho đến khi gọi stop.
- */
 export async function startLoopingTempleSound(
   type: TempleSound,
 ): Promise<void> {
   try {
-    // Chỉ cho phép một âm thanh chạy lặp tại một thời điểm.
     stopAllTempleSounds();
 
     const sound = await loadSound(type);
@@ -109,14 +125,18 @@ export async function startLoopingTempleSound(
     currentLoopingSound = type;
 
     sound.stop(() => {
-      // -1 nghĩa là lặp vô hạn trong react-native-sound.
       sound.setNumberOfLoops(-1);
 
       sound.play(success => {
         if (!success) {
-          console.warn('Không thể phát lặp âm thanh:', type);
+          console.warn(
+            'Không thể phát lặp âm thanh:',
+            type,
+          );
 
-          if (currentLoopingSound === type) {
+          if (
+            currentLoopingSound === type
+          ) {
             currentLoopingSound = null;
           }
         }
@@ -124,11 +144,17 @@ export async function startLoopingTempleSound(
     });
   } catch (error) {
     currentLoopingSound = null;
-    console.warn('Lỗi phát lặp âm thanh:', error);
+
+    console.warn(
+      'Lỗi phát lặp âm thanh:',
+      error,
+    );
   }
 }
 
-export function stopTempleSound(type: TempleSound): void {
+export function stopTempleSound(
+  type: TempleSound,
+): void {
   const sound = soundCache[type];
 
   if (currentLoopingSound === type) {
@@ -140,7 +166,6 @@ export function stopTempleSound(type: TempleSound): void {
   }
 
   sound.stop(() => {
-    // Trả về chế độ phát một lần cho lần phát tiếp theo.
     sound.setNumberOfLoops(0);
   });
 }
@@ -148,27 +173,33 @@ export function stopTempleSound(type: TempleSound): void {
 export function stopAllTempleSounds(): void {
   currentLoopingSound = null;
 
-  Object.values(soundCache).forEach(sound => {
-    if (!sound) {
-      return;
-    }
+  Object.values(soundCache).forEach(
+    sound => {
+      if (!sound) {
+        return;
+      }
 
-    sound.stop(() => {
-      sound.setNumberOfLoops(0);
-    });
-  });
+      sound.stop(() => {
+        sound.setNumberOfLoops(0);
+      });
+    },
+  );
 }
 
-export function getLoopingTempleSound(): TempleSound | null {
+export function getLoopingTempleSound():
+  | TempleSound
+  | null {
   return currentLoopingSound;
 }
 
 export function releaseTempleSounds(): void {
   stopAllTempleSounds();
 
-  Object.values(soundCache).forEach(sound => {
-    sound?.release();
-  });
+  Object.values(soundCache).forEach(
+    sound => {
+      sound?.release();
+    },
+  );
 
   delete soundCache.woodenFish;
   delete soundCache.bell;

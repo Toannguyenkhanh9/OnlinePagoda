@@ -24,14 +24,17 @@ type MenuRoute =
   | "Prayer"
   | "SpiritualAudio"
   | "ChantCounter"
+  | "DailyRitual"
   | "PeaceJournal"
+  | "AltarCustomization"
   | "LunarCalendar"
   | "BuddhistCalendar"
-  | "DailyRitual"
   | "FortuneStick"
+  | "Horoscope"
   | "BaziChart"
-  | "ZiweiChart"
+  | "BaziHistory"
   | "BaziStage4"
+  | "ZiweiChart"
   | "Settings";
 
 type HomeMenuItem = {
@@ -190,6 +193,30 @@ export default function HomeScreen({ navigation }: Props) {
       accent: "#EEE0C5",
     },
     {
+      icon: "🔥",
+      title: t("practice.title", {
+        defaultValue: "Nghi thức hằng ngày",
+      }),
+      subtitle: t("practice.subtitle", {
+        defaultValue:
+          "Thắp hương, nghe kinh, thiền và ghi lại lòng biết ơn mỗi ngày",
+      }),
+      route: "DailyRitual",
+      accent: "#F2E0C4",
+    },
+    {
+      icon: "🪷",
+      title: t("altarCustomization.title", {
+        defaultValue: "Bàn thờ cá nhân hóa",
+      }),
+      subtitle: t("altarCustomization.subtitle", {
+        defaultValue:
+          "Tùy chỉnh biểu tượng, hoa, đèn, màu ánh sáng và không gian chính điện",
+      }),
+      route: "AltarCustomization",
+      accent: "#F0D8BA",
+    },
+    {
       icon: "📖",
       title: t("home.peaceJournalShortTitle", {
         defaultValue: "Nhật ký",
@@ -254,6 +281,18 @@ export default function HomeScreen({ navigation }: Props) {
       accent: "#F3DFC9",
     },
     {
+      icon: "🔮",
+      title: t("home.horoscopeTitle", {
+        defaultValue: "Tử vi và ngày tốt",
+      }),
+      subtitle: t("home.horoscopeSubtitle", {
+        defaultValue:
+          "Nhập ngày sinh để tham khảo tử vi và ngày phù hợp cho các việc quan trọng",
+      }),
+      route: "Horoscope",
+      accent: "#E9DDEE",
+    },
+    {
       icon: "☯",
       title: t("home.baziTitle"),
       subtitle: t("home.baziSubtitle"),
@@ -261,27 +300,40 @@ export default function HomeScreen({ navigation }: Props) {
       accent: "#EFE2D0",
     },
     {
+      icon: "📚",
+      title: t("home.baziHistoryTitle", {
+        defaultValue: "Lá số đã lưu",
+      }),
+      subtitle: t("home.baziHistorySubtitle", {
+        defaultValue:
+          "Xem lại, chia sẻ, nhân bản và tính lại các lá số Bát tự đã lưu",
+      }),
+      route: "BaziHistory",
+      accent: "#F1E4CF",
+    },
+    {
+      icon: "✦",
+      title: t("home.baziStage4Title", {
+        defaultValue: "Dòng vận và tương hợp",
+      }),
+      subtitle: t("home.baziStage4Subtitle", {
+        defaultValue:
+          "Xem lưu niên, lưu nguyệt, so hai lá số và chọn ngày theo Bát tự",
+      }),
+      route: "BaziStage4",
+      accent: "#F0DFC3",
+    },
+    {
       icon: "紫",
       title: t("home.ziweiTitle", {
         defaultValue: "Tử vi Đẩu số",
       }),
       subtitle: t("home.ziweiSubtitle", {
-        defaultValue: "An Mệnh, an Thân, 12 cung và Ngũ hành Cục",
+        defaultValue:
+          "An Mệnh, an Thân, 12 cung, sao và các lớp luận giải chuyên sâu",
       }),
       route: "ZiweiChart",
       accent: "#F0E0CA",
-    },
-    {
-      icon: "🗓️",
-      title: t("home.chooseDateTitle", {
-        defaultValue: "Xem ngày",
-      }),
-      subtitle: t("home.chooseDateSubtitle", {
-        defaultValue:
-          "Tham khảo ngày phù hợp cho cưới hỏi, khai trương và việc lớn",
-      }),
-      route: "BaziStage4",
-      accent: "#EEE0C8",
     },
   ];
 

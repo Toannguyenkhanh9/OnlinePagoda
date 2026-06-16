@@ -123,6 +123,8 @@ practiceReminderSubtitle:
 chooseDateTitle: '日取りを見る',
 chooseDateSubtitle:
   '結婚、開店、重要な予定に適した日を参考にします',
+        ziweiTitle: '紫微斗数',
+  ziweiSubtitle: '生年月日、出生時刻、出生地を入力して、十二宮、十四主星、21の補助星、四化、旬空・截空、十二運を配置します。',
   },
 
   temple: {
@@ -534,121 +536,116 @@ meditation: {
     },
   },
   horoscope: {
-    title: '運勢と吉日',
+  title: '運勢と吉日',
 
-    subtitle:
-      '新暦の生年月日を入力すると、旧暦の日付、干支、重要な予定におすすめの日を確認できます。',
+  subtitle:
+    '西暦の生年月日を入力し、旧暦の日付、干支、重要な行事の候補日を確認します。',
 
-    birthDateTitle: '新暦の生年月日',
-
-    day: '日',
-
-    month: '月',
-
-    year: '年',
-
-    activityTitle: '予定',
-
-    searchPeriod: '検索期間',
-
-    monthCount: '{{count}}か月',
-
-    calculate: '変換しておすすめの日を検索',
-
-    calculating: '計算中...',
-
-    invalidDateTitle: '生年月日が無効です',
-
-    invalidDateMessage: '有効な新暦の日付を入力してください。',
-
-    profileTitle: '出生情報',
-
-    lunarBirthDate: '旧暦の生年月日',
-
-    zodiac: '干支',
-
-    canChiYear: '干支年',
-
-    leapMonth: '閏月',
-
-    resultsTitle: 'おすすめの日',
-
-    resultsSubtitle: '日付は文化的な参考スコア順に並べられます。',
-
-    lunarDateLine: '旧暦 {{year}}年{{month}}月{{day}}日',
-
-    suitableReasons: '良い点',
-
-    cautionReasons: '注意点',
-
-    disclaimer:
-      '結果は文化的な参考と個人の振り返りのためのものです。結婚、建築、投資、その他の重要な判断の唯一の根拠にはしないでください。',
-
-    activities: {
-      wedding: '結婚',
-      construction: '建築',
-      opening: '開業',
-      moving: '引っ越し',
-      travel: '旅行',
-    },
-
-    ratings: {
-      excellent: '大吉',
-      good: '吉',
-      fair: 'まずまず',
-      caution: '要検討',
-    },
-
-    reasons: {
-      hoangDao: '吉日',
-
-      hacDao: '凶日',
-
-      traditionalSuitable: '伝統的にこの予定に適するとされる日',
-
-      traditionalAvoid: '伝統的にこの予定を避けるとされる日',
-
-      zodiacClash: '日の地支が生年の干支と冲する',
-
-      sixHarmony: '六合の関係',
-
-      threeHarmony: '三合の関係',
-
-      nguyetKy: '伝統的な月忌日',
-
-      tamNuong: '伝統的な三娘煞日',
-
-      preferredLunarDay: '参考ルールで優先される旧暦の日',
-
-      weekendConvenient: '週末で都合がよい',
-      birthHourClash: '日の地支が出生時の地支と冲する',
-
-      birthHourHarmony: '日の地支が出生時の地支と六合になる',
-
-      birthHourThreeHarmony:
-        '日の地支が出生時の地支と三合になる',
-
-      birthLunarDayResonance:
-        '旧暦の日が旧暦の誕生日と対応する',
-
-      school_folk: '総合民俗法で採点',
-
-      school_bazi: '四柱推命参考プリセットで採点',
-
-      school_ziwei: '紫微斗数参考プリセットで採点',
-
-      school_almanac: '伝統暦プリセットで採点',
-    },
-  },
   subtitleExtended:
-    '新暦の生年月日、出生時刻、性別、解釈方法を入力して、旧暦プロフィールとおすすめの日を確認します。',
+    '西暦の生年月日と出生時刻、性別、解釈方式を入力し、旧暦プロフィール、内省的な解釈、候補日を確認します。',
+
+  birthDateTitle: '西暦の生年月日',
+
+  day: '日',
+
+  month: '月',
+
+  year: '年',
 
   birthTimeTitle: '出生時刻',
+
   hour: '時',
+
   minute: '分',
+
   birthTimeHint: '出生地の現地時刻',
 
   genderTitle: '性別',
+
+  schoolTitle: '解釈方式',
+
+  selectedMethod: '現在の方式',
+
+  activityTitle: '目的',
+
+  searchPeriod: '検索期間',
+
+  monthCount: '{{count}}か月',
+
+  calculate: '変換して候補日を探す',
+
+  calculateExtended: 'プロフィールを作成して候補日を探す',
+
+  calculating: '計算中...',
+
+  invalidDateTitle: '生年月日が無効です',
+
+  invalidInputTitle: '情報が無効です',
+
+  invalidDateMessage:
+    '有効な西暦の生年月日を入力してください。',
+
+  invalidTimeMessage:
+    '出生時刻は00:00から23:59の範囲で入力してください。',
+
+  profileTitle: '出生情報',
+
+  lunarBirthDate: '旧暦の生年月日',
+
+  birthHourBranch: '出生時の地支',
+
+  zodiac: '干支',
+
+  canChiYear: '干支年',
+
+  profileGender: '性別',
+
+  profileSchool: '解釈方式',
+
+  yearPolarity: '出生年の陰陽',
+
+  cycleDirection: '参考運行方向',
+
+  leapMonth: '閏月',
+
+  resultsTitle: '候補日',
+
+  resultsSubtitle:
+    '日付は文化的な参考スコアによって順位付けされます。',
+
+  resultsSubtitleExtended:
+    '選択した方式、出生年の干支、出生時の地支に基づいて日付を順位付けします。',
+
+  lunarDateLine: '旧暦 {{year}}年{{month}}月{{day}}日',
+
+  suitableReasons: '良い要素',
+
+  cautionReasons: '考慮すべき点',
+
+  lifeOverviewTitle: '恋愛と仕事',
+
+  lifeOverviewSubtitle:
+    '入力した生年月日、出生時刻、選択した解釈方式に基づく内省的な読み解きです。',
+
+  lifeStrengths: '長所',
+
+  lifeCautions: '整えるべき点',
+
+  lifeAdvice: '成長の提案',
+
+  disclaimer:
+    '結果は文化的な参考と自己内省のためのものです。結婚、建築、投資、その他の重要な決定の唯一の根拠にはしないでください。',
+
+  disclaimerExtended:
+    'これは旧暦、出生年の干支、出生時刻、選択した方式の重み付けに基づく簡易的な内省モデルです。完全な紫微斗数や八字の命式ではなく、重要な決定の唯一の根拠にはしないでください。',
+
+  activities: {
+    wedding: '結婚',
+    construction: '建築',
+    opening: '開業',
+    moving: '引っ越し',
+    travel: '旅行',
+  },
 
   genders: {
     male: '男性',
@@ -656,47 +653,23 @@ meditation: {
     unspecified: '未指定',
   },
 
-  schoolTitle: '解釈方法',
-
   schools: {
-    folkTitle: '総合民俗法',
-
+    folkTitle: '民間総合法',
     folkDescription:
-      '干支の関係、吉日、旧暦の日付、伝統的な忌避ルールをバランスよく考慮します。',
+      '伝統的な吉日規則、干支の関係、出生時刻、一般的な文化習慣をバランスよく考慮します。',
 
-    baziTitle: '四柱推命参考',
-
+    baziTitle: '八字参考',
     baziDescription:
-      '日支、生年の干支、出生時の地支の関係を重視します。',
+      '出生年の干支、出生時の地支、合と冲の関係をより重視します。',
 
     ziweiTitle: '紫微斗数参考',
-
     ziweiDescription:
-      '旧暦の出生情報、出生時刻、性別、運行方向を簡略化したモデルで使用します。',
+      '紫微斗数の時運思想に着想を得た内省的な重み付けと、出生情報と候補日の関係を用います。',
 
     almanacTitle: '伝統暦',
-
     almanacDescription:
-      '適した予定、避ける予定、吉日、伝統的な忌日を優先します。',
+      '暦の宜忌、吉日、伝統的な旧暦上の注意日を優先します。',
   },
-
-  selectedMethod: '選択中の方法',
-
-  calculateExtended: 'プロフィールを作成しておすすめの日を検索',
-
-  invalidInputTitle: '情報が無効です',
-
-  invalidTimeMessage: '出生時刻は00:00〜23:59の間で入力してください。',
-
-  birthHourBranch: '出生時の地支',
-
-  profileGender: '性別',
-
-  profileSchool: '解釈方法',
-
-  yearPolarity: '生年の陰陽',
-
-  cycleDirection: '参考運行方向',
 
   polarity: {
     yang: '陽',
@@ -706,41 +679,34 @@ meditation: {
   directions: {
     forward: '順行',
     backward: '逆行',
-    neutral: '中立',
+    neutral: '未確定',
   },
 
   schoolNotes: {
-    folk: '一般的な民俗と伝統暦のルールを組み合わせたバランス型の参考モデルです。',
+    folk:
+      '民間習慣、暦の要素、干支の関係、出生時刻の参考をバランスよく組み合わせています。',
 
-    bazi: 'スコアは生年の干支と出生時の地支を重視します。完全な四柱推命ではありません。',
+    bazi:
+      '簡易的な八字参考として、干支と出生時刻の合・冲関係により大きな重みを置きます。',
 
     ziwei:
-      'スコアは旧暦の出生情報、出生時刻、性別、運行方向を簡略化して使用します。',
+      '文化的な内省のため、紫微斗数の時運概念に着想を得た簡易的な重み付けを使用します。',
 
     almanac:
-      'スコアは伝統的な吉凶、適否、吉日を強く優先します。',
+      '伝統暦の宜忌と旧暦上の日付規則を最も重視します。',
   },
 
-  resultsSubtitleExtended:
-    '日付は選択した方法、生年の干支、出生時刻に基づいて順位付けされます。',
-
-  disclaimerExtended:
-    'これは旧暦の日付、干支関係、出生時刻、解釈プリセットに基づく簡略化された文化的参考モデルです。完全な紫微斗数や四柱推命ではなく、重要な判断の唯一の根拠にはしないでください。',
-  lifeOverviewTitle: '恋愛と仕事',
-
-  lifeOverviewSubtitle:
-    '出生情報と選択した解釈方法に基づく振り返りのための分析です。',
-
-  lifeStrengths: '強み',
-
-  lifeCautions: '整える点',
-
-  lifeAdvice: '成長の提案',
+  ratings: {
+    excellent: '非常に良い',
+    good: '良い',
+    fair: 'まずまず',
+    caution: '要検討',
+  },
 
   lifeRatings: {
-    veryStrong: '強いエネルギー',
+    veryStrong: '非常に強い',
     favorable: '良好',
-    balanced: 'バランス型',
+    balanced: '均衡',
     developing: '発展中',
   },
 
@@ -748,23 +714,24 @@ meditation: {
     title: '恋愛',
 
     styles: {
-      warm: '温かく愛情深い',
-      steady: '安定して誠実',
-      independent: '恋愛でも自立的',
+      warm: '温かく表現豊か',
+      steady: '安定し誠実',
+      independent: '自立的で率直',
       sensitive: '繊細で直感的',
     },
 
     summaries: {
-      warm: 'あなたは目に見える気遣いで愛情を示し、自然に温かな雰囲気を作る傾向があります。',
+      warm:
+        '愛情を率直に表し、心の温かさ、親密さ、誠実な感謝を大切にする傾向があります。',
 
       steady:
-        '信頼、安定、時間をかけて育つ関係を大切にします。',
+        '少しずつ築く信頼、安定した約束、継続的な気遣いによって育つ関係を好む傾向があります。',
 
       independent:
-        '恋愛では尊重、個人の時間、率直なコミュニケーションが必要です。',
+        '誠実さ、個人の空間、双方が自分らしさを保てる関係を大切にする傾向があります。',
 
       sensitive:
-        '感情を深く受け止め共感しやすい一方、心の安心も必要です。',
+        '感情の細かな変化に気づきやすく、共感、安心感、相互理解のある関係を求める傾向があります。',
     },
   },
 
@@ -773,179 +740,243 @@ meditation: {
 
     styles: {
       leadership: 'リーダーシップ志向',
-      creative: '創造性重視',
-      analytical: '分析思考',
-      supportive: '支援と協働',
-      entrepreneurial: '起業家精神',
+      creative: '創造的で表現豊か',
+      analytical: '分析的で体系的',
+      supportive: '支援・奉仕志向',
+      entrepreneurial: '起業家的で適応力が高い',
     },
 
     summaries: {
       leadership:
-        '責任、調整、方向づけが必要な役割で力を発揮しやすいでしょう。',
+        '責任を担い、人を調整し、方向性を明確な行動へ変える場面で力を発揮しやすいでしょう。',
 
       creative:
-        'アイデア創出、デザイン、メッセージ発信で能力を発揮しやすいでしょう。',
+        '想像力、コミュニケーション、デザイン、物語表現、独創的な問題解決を重視する仕事で力を発揮しやすいでしょう。',
 
       analytical:
-        '情報処理、計画、構造化された問題解決が得意な可能性があります。',
+        '計画、調査、システム思考、正確さ、慎重な判断が必要な仕事で最も実力を発揮しやすいでしょう。',
 
       supportive:
-        '人やチームに価値を生む協働環境で成長しやすいでしょう。',
+        '協働、助言、教育、ケア、サービス中心の役割で大きく貢献しやすいでしょう。',
 
       entrepreneurial:
-        '新しい機会が現れると、主体的に試し、柔軟に適応する傾向があります。',
+        '主体性、試行、独立したプロジェクト、適応力が評価される機会に惹かれやすいでしょう。',
     },
+  },
+
+  reasons: {
+    hoangDao: '暦上の吉日',
+
+    hacDao: '暦上の凶日',
+
+    traditionalSuitable:
+      '伝統的にこの目的に適している',
+
+    traditionalAvoid:
+      '伝統的にこの目的を避けるよう勧められる',
+
+    zodiacClash:
+      '日の地支が出生年の干支と冲になる',
+
+    sixHarmony: '六合の関係',
+
+    threeHarmony: '三合の関係',
+
+    nguyetKy: '伝統的な月忌日',
+
+    tamNuong: '伝統的な三娘日',
+
+    preferredLunarDay:
+      '参考規則で優先される旧暦日',
+
+    weekendConvenient: '週末で都合がよい',
+
+    birthHourClash:
+      '日の地支が出生時の地支と冲になる',
+
+    birthHourHarmony:
+      '日の地支が出生時と六合を形成する',
+
+    birthHourThreeHarmony:
+      '日の地支が出生時と三合を形成する',
+
+    birthLunarDayResonance:
+      '旧暦の日が旧暦の出生日と対応する',
+
+    school_folk:
+      '民間総合法で評価',
+
+    school_bazi:
+      '八字参考プリセットで評価',
+
+    school_ziwei:
+      '紫微斗数参考プリセットで評価',
+
+    school_almanac:
+      '伝統暦プリセットで評価',
   },
 
   insights: {
     loveHarmony:
-      '生年の干支と出生時の地支は、調和的な感情パターンを示しています。',
+      '出生年の干支と出生時の地支が六合の関係を形成します。',
 
     loveThreeHarmony:
-      '三合のパターンは相互理解を築きやすくする可能性があります。',
+      '出生年の干支と出生時の地支が同じ三合グループに属します。',
 
     loveInnerConflict:
-      '内面の欲求がぶつかり、親密さと個人の空間の間で揺れることがあります。',
+      '出生年の干支と出生時の地支が冲となり、親密さと個人的な必要の間の内的な緊張を表す場合があります。',
 
     loveSelfAwareness:
-      '自分の感情的なニーズを比較的よく理解している可能性があります。',
+      '旧暦の出生日は、内省と感情への自己認識の傾向を示します。',
 
     loveWarmHeart:
-      '自然に思いやりを示し、相手に安心感を与えます。',
+      '愛情を豊かに表し、温かい感情の雰囲気を作りやすいでしょう。',
 
     loveExpressive:
-      '言葉や行動で愛情を表現できます。',
+      '言葉、行動、明確な気遣いを通して思いやりを示す力があるでしょう。',
 
     loveOvergiving:
-      '与えすぎて、同じだけ返ってこないと落胆することがあります。',
+      '自分の必要が満たされているか確認する前に、与えすぎることがあります。',
 
     loveSetBoundaries:
-      'いつも相手を優先するのではなく、健全な境界線を保ちましょう。',
+      '思いやりが偏らないよう、明確で優しい境界線を持ちましょう。',
 
     loveReceiveCare:
-      'いつも支える側になるだけでなく、思いやりを受け取ることも許しましょう。',
+      'いつも与える側になるのではなく、他者からの支えも受け取りましょう。',
 
-    loveLoyal: '関係の中で誠実さと一貫性を大切にします。',
+    loveLoyal:
+      '誠実さ、信頼性、長期的な約束を重視する傾向があります。',
 
-    lovePatient: '時間をかけて信頼と愛情を育てられます。',
+    lovePatient:
+      '関係が育つまで時間をかけることができるでしょう。',
 
     loveReserved:
-      '感情を長くため込むと、あなたのニーズが相手に伝わりにくくなります。',
+      '感情を内側にため、説明が難しくなることがあります。',
 
     loveSpeakClearly:
-      'ニーズや感情が負担になる前に言葉にしましょう。',
+      '相手に察してもらうのを待たず、必要を早めに明確に伝えましょう。',
 
     loveCreateRituals:
-      '小さな共通の習慣が心の安定を強めます。',
+      '信頼とつながりを強める小さな共通習慣を作りましょう。',
 
     loveRespectsSpace:
-      '関係の中でも個性と個人の空間を尊重します。',
+      '個性を尊重し、個人の空間が必要であることを理解しやすいでしょう。',
 
-    loveHonest: '率直で輪郭のはっきりした関係を好む傾向があります。',
+    loveHonest:
+      '関係では率直で誠実なコミュニケーションを好む傾向があります。',
 
     loveNeedsFreedom:
-      '過度な支配や依存に窮屈さを感じることがあります。',
+      '制限が多すぎると、引きこもったり感情的に距離を置いたりする場合があります。',
 
     loveBalanceFreedom:
-      '個人の自由と、寄り添う姿勢や約束のバランスを取りましょう。',
+      '自立と継続的な心のつながりのバランスを取りましょう。',
 
-    loveSharePlans: '相手が取り残されたと感じないよう、早めに予定を共有しましょう。',
+    loveSharePlans:
+      '自由が距離感に見えないよう、計画と期待を共有しましょう。',
 
     loveEmpathetic:
-      '感情の変化に気づきやすく、相手の気持ちを理解できます。',
+      '微妙な感情の変化を理解し、共感をもって応じやすいでしょう。',
 
-    loveIntuitive: '関係性の流れに対して強い直感を持つ可能性があります。',
+    loveIntuitive:
+      '関係を理解するとき、直感に強く頼る傾向があります。',
 
     loveOverthinking:
-      '曖昧な会話や沈黙は考えすぎにつながることがあります。',
+      'コミュニケーションが不明確なとき、繊細さが考えすぎにつながる場合があります。',
 
     loveTrustSlowly:
-      '無理に早く心を開こうとせず、少しずつ信頼を築きましょう。',
+      '推測ではなく、繰り返される行動によって信頼を育てましょう。',
 
     loveAskDirectly:
-      '相手の考えを推測するのではなく、直接尋ねましょう。',
+      '不確かなときは沈黙を解釈せず、直接たずねましょう。',
 
     careerPersistent:
-      '目標を保ち、時間をかけて着実に前進できます。',
+      '粘り強さと前進し続ける意志によって成長しやすいでしょう。',
 
     careerReflective:
-      '経験から学び、前に進む前に調整できます。',
+      '振り返り、内省、方法の調整を通して学ぶ力があります。',
 
-    careerActionOriented: '主体的に動き、流れを生み出す傾向があります。',
+    careerActionOriented:
+      '陽の傾向は、主体性、目に見える行動、決断力のある推進を支える場合があります。',
 
-    careerObservant: '他の人が見落としやすい背景や細部に気づきます。',
+    careerObservant:
+      '陰の傾向は、観察、忍耐、タイミング、丁寧な準備を支える場合があります。',
 
     careerLeadership:
-      '率いること、調整すること、方向性を保つことができる可能性があります。',
+      '人を導き、明確な方向性を示すことに抵抗が少ないでしょう。',
 
     careerResponsibility:
-      '決定と結果に責任を持つ姿勢があります。',
+      '結果に責任を持ち、約束を最後まで果たす傾向があります。',
 
     careerOvercontrol:
-      '信頼が低いと、抱え込みすぎたり細部を管理しすぎたりすることがあります。',
+      '支配しすぎると協力が制限され、不要な圧力を生む場合があります。',
 
     careerDelegate:
-      '役割を明確に任せ、適切な人を信頼しましょう。',
+      '明確に委任し、他者が自分の方法で貢献する余地を与えましょう。',
 
     careerListenBeforeDeciding:
-      '大きな決定の前に、チームの視点を集めましょう。',
+      '重要な決定の前に、さまざまな意見を集めましょう。',
 
     careerCreative:
-      '独創的なアイデアを生み、問題を新しい角度から見られる可能性があります。',
+      '独創的なアイデアを生み、他者が見落とす可能性に気づきやすいでしょう。',
 
     careerExpression:
-      'コミュニケーション、デザイン、物語づくりに関わる仕事が向いている可能性があります。',
+      'コミュニケーション、デザイン、物語表現、プレゼンテーションが自然な強みになるでしょう。',
 
-    careerScattered: '興味が多すぎると、やり切ることが難しくなる場合があります。',
+    careerScattered:
+      '同時に多くのアイデアを持つと、最も重要な仕事を終えにくくなる場合があります。',
 
     careerBuildPortfolio:
-      '見える成果物や実用的なポートフォリオを作りましょう。',
+      '完成した仕事を見える形で積み上げ、創造性を機会につなげましょう。',
 
     careerFinishOneThing:
-      '複数の新しいことを始める前に、重要な一つを完了させましょう。',
+      '次のアイデアへ広げる前に、一つの優先事項を終えましょう。',
 
     careerAnalytical:
-      '分析、比較、原因の特定が得意な可能性があります。',
+      '細部、パターン、因果関係を分析する力があるでしょう。',
 
-    careerPlanning: '目標を構造化された実践的な手順に変えられます。',
+    careerPlanning:
+      '体系的な準備はリスクを減らし、安定性を高める助けになります。',
 
     careerPerfectionism:
-      '完全な確実性を求めて行動が遅れることがあります。',
+      '完璧な情報を待つと、有益な行動が遅れる場合があります。',
 
     careerSetMilestones:
-      '分析しすぎないよう、明確な節目を設定しましょう。',
+      '大きな目標を測定可能な段階と明確な期限に分けましょう。',
 
     careerDecideWithEnoughData:
-      '完全な確実性を待たず、十分な有用情報がそろった段階で決めましょう。',
+      '情報が完全でなくても十分にそろった段階で行動しましょう。',
 
     careerTeamwork:
-      '協働を支え、チームが円滑に動くよう助けられます。',
+      '協力、信頼性、感情への気づきによってチームを強くできるでしょう。',
 
     careerService:
-      '支援、ケア、指導を通じて価値を生み出す可能性があります。',
+      '助ける、教える、支える、他者の生活を改善する仕事に意味を感じやすいでしょう。',
 
     careerPeoplePleasing:
-      '相手を失望させたくなくて、仕事を引き受けすぎることがあります。',
+      '全員を満足させようとすると、エネルギーが減り優先事項が曖昧になる場合があります。',
 
-    careerProtectEnergy: '明確な仕事の境界線で時間とエネルギーを守りましょう。',
+    careerProtectEnergy:
+      '貢献を持続可能にするため、時間と感情労働の境界を設けましょう。',
 
     careerShowYourContribution:
-      '見えないところで働くだけでなく、自分の貢献を記録し伝えましょう。',
+      '他者が気づくと決めつけず、成果を明確に伝えましょう。',
 
-    careerInitiative: '自ら動き、新しい方法を探る傾向があります。',
+    careerInitiative:
+      '条件が完全に確定していなくても、始める意欲があるでしょう。',
 
     careerAdaptability:
-      '計画、仕事、市場が変わっても素早く適応できます。',
+      '状況、市場、計画が変化したとき、素早く適応できるでしょう。',
 
     careerRiskTaking:
-      '動きが速すぎたり、財務・運営リスクを過小評価したりすることがあります。',
+      '機会への熱意から、十分な備えなしにリスクを取る場合があります。',
 
     careerValidateRisk:
-      '大きく投資する前に、小さく試して需要を確認しましょう。',
+      '大きな約束をする前に、小さな実験で仮説を確認しましょう。',
 
     careerKeepCashReserve:
-      'プロジェクトや事業を拡大する前に、予備資金を確保しましょう。',
+      '独立した機会や不確実な挑戦を追うときは、資金の予備を保ちましょう。',
   },
+},
   bazi,
   ziwei,
     practice,

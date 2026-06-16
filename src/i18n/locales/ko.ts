@@ -123,6 +123,8 @@ practiceReminderSubtitle:
 chooseDateTitle: '길일 보기',
 chooseDateSubtitle:
   '결혼, 개업과 중요한 일을 위한 날짜를 참고합니다',
+        ziweiTitle: '자미두수',
+  ziweiSubtitle: '출생 날짜, 시간, 장소를 입력하여 십이궁, 14주성, 21개 보조성, 사화, 순공·절공 및 장생십이신을 배치합니다.',
   },
 
   temple: {
@@ -534,161 +536,67 @@ meditation: {
     },
   },
   horoscope: {
-    title: '사주와 길일',
+  title: '운세와 길일',
 
-    subtitle:
-      '양력 생년월일을 입력하면 음력 날짜, 띠, 중요한 일에 추천되는 날짜를 확인할 수 있습니다.',
+  subtitle:
+    '양력 생년월일을 입력하여 음력 날짜, 띠와 중요한 일을 위한 추천 날짜를 확인하세요.',
 
-    birthDateTitle: '양력 생년월일',
-
-    day: '일',
-
-    month: '월',
-
-    year: '년',
-
-    activityTitle: '활동',
-
-    searchPeriod: '검색 기간',
-
-    monthCount: '{{count}}개월',
-
-    calculate: '변환하고 추천 날짜 찾기',
-
-    calculating: '계산 중...',
-
-    invalidDateTitle: '생년월일이 올바르지 않습니다',
-
-    invalidDateMessage: '올바른 양력 날짜를 입력하세요.',
-
-    profileTitle: '출생 정보',
-
-    lunarBirthDate: '음력 생년월일',
-
-    zodiac: '띠',
-
-    canChiYear: '간지 연도',
-
-    leapMonth: '윤달',
-
-    resultsTitle: '추천 날짜',
-
-    resultsSubtitle: '날짜는 문화적 참고 점수 순으로 정렬됩니다.',
-
-    lunarDateLine: '음력 {{year}}년 {{month}}월 {{day}}일',
-
-    suitableReasons: '유리한 점',
-
-    cautionReasons: '고려할 점',
-
-    disclaimer:
-      '결과는 문화적 참고와 개인적인 성찰을 위한 것입니다. 결혼, 건축, 투자 또는 기타 중요한 결정의 유일한 근거로 사용해서는 안 됩니다.',
-
-    activities: {
-      wedding: '결혼',
-      construction: '건축',
-      opening: '개업',
-      moving: '이사',
-      travel: '여행',
-    },
-
-    ratings: {
-      excellent: '대길',
-      good: '길',
-      fair: '무난함',
-      caution: '검토 필요',
-    },
-
-    reasons: {
-      hoangDao: '길일',
-
-      hacDao: '흉일',
-
-      traditionalSuitable: '전통적으로 이 활동에 적합한 날',
-
-      traditionalAvoid: '전통적으로 이 활동을 피하는 날',
-
-      zodiacClash: '일지와 출생 띠가 충합니다',
-
-      sixHarmony: '육합 관계',
-
-      threeHarmony: '삼합 관계',
-
-      nguyetKy: '전통 월기일',
-
-      tamNuong: '전통 삼낭일',
-
-      preferredLunarDay: '참고 규칙에서 선호하는 음력 날짜',
-
-      weekendConvenient: '주말이라 편리함',
-      birthHourClash: '일지와 출생 시지가 충합니다',
-
-      birthHourHarmony: '일지와 출생 시지가 육합을 이룹니다',
-
-      birthHourThreeHarmony:
-        '일지와 출생 시지가 삼합을 이룹니다',
-
-      birthLunarDayResonance:
-        '음력 날짜가 음력 생일과 대응합니다',
-
-      school_folk: '종합 민속 방식으로 점수 계산',
-
-      school_bazi: '사주 참고 프리셋으로 점수 계산',
-
-      school_ziwei: '자미두수 참고 프리셋으로 점수 계산',
-
-      school_almanac: '전통 역법 프리셋으로 점수 계산',
-    },
-  },
   subtitleExtended:
-    '양력 생년월일, 출생 시간, 성별, 해석 방식을 입력해 음력 정보와 추천 날짜를 확인하세요.',
+    '양력 생년월일과 출생 시간, 성별, 해석 방식을 입력하여 음력 정보, 성찰적 해석과 추천 날짜를 확인하세요.',
+
+  birthDateTitle: '양력 생년월일',
+
+  day: '일',
+
+  month: '월',
+
+  year: '년',
 
   birthTimeTitle: '출생 시간',
+
   hour: '시',
+
   minute: '분',
-  birthTimeHint: '출생지 현지 시간',
+
+  birthTimeHint: '출생지의 현지 시간',
 
   genderTitle: '성별',
 
-  genders: {
-    male: '남성',
-    female: '여성',
-    unspecified: '선택 안 함',
-  },
-
   schoolTitle: '해석 방식',
 
-  schools: {
-    folkTitle: '종합 민속 방식',
+  selectedMethod: '현재 방식',
 
-    folkDescription:
-      '띠의 관계, 길일, 음력 날짜, 전통 금기 규칙을 균형 있게 반영합니다.',
+  activityTitle: '활동',
 
-    baziTitle: '사주 참고',
+  searchPeriod: '검색 기간',
 
-    baziDescription:
-      '일지, 출생 연도의 띠, 출생 시지의 관계를 더 중요하게 봅니다.',
+  monthCount: '{{count}}개월',
 
-    ziweiTitle: '자미두수 참고',
+  calculate: '변환하고 추천 날짜 찾기',
 
-    ziweiDescription:
-      '음력 출생 정보, 출생 시간, 성별, 운행 방향을 단순화한 모델로 사용합니다.',
+  calculateExtended: '프로필 만들고 추천 날짜 찾기',
 
-    almanacTitle: '전통 역법',
+  calculating: '계산 중...',
 
-    almanacDescription:
-      '적합한 활동, 피해야 할 활동, 길일, 전통 금기일을 우선합니다.',
-  },
+  invalidDateTitle: '유효하지 않은 생년월일',
 
-  selectedMethod: '선택한 방식',
+  invalidInputTitle: '유효하지 않은 정보',
 
-  calculateExtended: '프로필 작성 및 추천 날짜 찾기',
+  invalidDateMessage:
+    '올바른 양력 생년월일을 입력하세요.',
 
-  invalidInputTitle: '올바르지 않은 정보',
+  invalidTimeMessage:
+    '출생 시간은 00:00부터 23:59 사이여야 합니다.',
 
-  invalidTimeMessage: '출생 시간은 00:00부터 23:59 사이여야 합니다.',
+  profileTitle: '출생 정보',
+
+  lunarBirthDate: '음력 생년월일',
 
   birthHourBranch: '출생 시지',
+
+  zodiac: '띠',
+
+  canChiYear: '간지 연도',
 
   profileGender: '성별',
 
@@ -696,7 +604,72 @@ meditation: {
 
   yearPolarity: '출생 연도의 음양',
 
-  cycleDirection: '참고 운행 방향',
+  cycleDirection: '참고 순행 방향',
+
+  leapMonth: '윤달',
+
+  resultsTitle: '추천 날짜',
+
+  resultsSubtitle:
+    '날짜는 문화적 참고 점수에 따라 정렬됩니다.',
+
+  resultsSubtitleExtended:
+    '선택한 해석 방식, 출생 띠와 출생 시지를 기준으로 날짜를 정렬합니다.',
+
+  lunarDateLine: '음력 {{year}}년 {{month}}월 {{day}}일',
+
+  suitableReasons: '유리한 점',
+
+  cautionReasons: '고려할 점',
+
+  lifeOverviewTitle: '연애와 직업',
+
+  lifeOverviewSubtitle:
+    '입력한 생년월일, 출생 시간과 선택한 해석 방식을 바탕으로 한 성찰적 해석입니다.',
+
+  lifeStrengths: '강점',
+
+  lifeCautions: '균형이 필요한 점',
+
+  lifeAdvice: '성장 제안',
+
+  disclaimer:
+    '결과는 문화적 참고와 자기 성찰을 위한 것입니다. 결혼, 건축, 투자 또는 기타 중요한 결정을 위한 유일한 근거로 사용해서는 안 됩니다.',
+
+  disclaimerExtended:
+    '이것은 음력, 출생 띠, 출생 시간과 선택한 해석 방식의 가중치를 바탕으로 한 간략한 성찰 모델입니다. 완전한 자미두수 또는 사주 명식이 아니며, 중요한 결정의 유일한 근거가 되어서는 안 됩니다.',
+
+  activities: {
+    wedding: '결혼',
+    construction: '건축',
+    opening: '개업',
+    moving: '이사',
+    travel: '여행',
+  },
+
+  genders: {
+    male: '남성',
+    female: '여성',
+    unspecified: '미지정',
+  },
+
+  schools: {
+    folkTitle: '민간 종합 방식',
+    folkDescription:
+      '전통 길일 규칙, 띠 관계, 출생 시간과 일반적인 문화 관습을 균형 있게 반영합니다.',
+
+    baziTitle: '사주 참고',
+    baziDescription:
+      '출생 띠, 출생 시지, 합과 충 관계에 더 큰 비중을 둡니다.',
+
+    ziweiTitle: '자미두수 참고',
+    ziweiDescription:
+      '자미두수의 시기 해석에서 영감을 받은 성찰적 가중치와 출생 정보와 선택 날짜의 관계를 활용합니다.',
+
+    almanacTitle: '전통 역서',
+    almanacDescription:
+      '역서의 길흉, 적합·회피 규칙, 길일과 전통 음력 주의일을 우선합니다.',
+  },
 
   polarity: {
     yang: '양',
@@ -706,41 +679,34 @@ meditation: {
   directions: {
     forward: '순행',
     backward: '역행',
-    neutral: '보통',
+    neutral: '미정',
   },
 
   schoolNotes: {
-    folk: '일반 민속과 전통 역법 규칙을 결합한 균형형 참고 모델입니다.',
+    folk:
+      '민간 관습, 역서 요소, 띠 관계와 출생 시간 참고를 균형 있게 조합합니다.',
 
-    bazi: '점수는 출생 연도의 띠와 출생 시지를 강조합니다. 완전한 사주 분석은 아닙니다.',
+    bazi:
+      '간략한 사주 참고로서 띠와 출생 시간의 합·충 관계에 더 높은 비중을 둡니다.',
 
     ziwei:
-      '점수는 음력 출생 정보, 출생 시간, 성별, 운행 방향을 단순화해 사용합니다.',
+      '문화적 성찰을 위해 자미두수의 시기 개념에서 영감을 받은 간략한 가중치를 사용합니다.',
 
     almanac:
-      '점수는 전통적인 길흉 활동과 길일을 강하게 우선합니다.',
+      '전통 역서의 적합·회피 규칙과 음력 날짜 규칙에 가장 높은 비중을 둡니다.',
   },
 
-  resultsSubtitleExtended:
-    '날짜는 선택한 방식, 출생 띠, 출생 시간에 따라 순위가 매겨집니다.',
-
-  disclaimerExtended:
-    '이것은 음력 날짜, 띠의 관계, 출생 시간, 해석 프리셋을 바탕으로 한 단순화된 문화 참고 모델입니다. 완전한 자미두수나 사주 분석이 아니며 중요한 결정의 유일한 근거로 사용해서는 안 됩니다.',
-  lifeOverviewTitle: '연애와 직업',
-
-  lifeOverviewSubtitle:
-    '출생 정보와 선택한 해석 방식에 기반한 성찰용 분석입니다.',
-
-  lifeStrengths: '강점',
-
-  lifeCautions: '균형이 필요한 점',
-
-  lifeAdvice: '성장 제안',
+  ratings: {
+    excellent: '매우 좋음',
+    good: '좋음',
+    fair: '보통',
+    caution: '신중히 고려',
+  },
 
   lifeRatings: {
-    veryStrong: '강한 에너지',
+    veryStrong: '매우 강함',
     favorable: '유리함',
-    balanced: '균형형',
+    balanced: '균형',
     developing: '발전 중',
   },
 
@@ -748,23 +714,24 @@ meditation: {
     title: '연애',
 
     styles: {
-      warm: '따뜻하고 애정이 깊음',
-      steady: '안정적이고 진실함',
-      independent: '연애에서도 독립적임',
+      warm: '따뜻하고 표현이 풍부함',
+      steady: '안정적이고 충실함',
+      independent: '독립적이고 직접적임',
       sensitive: '섬세하고 직관적임',
     },
 
     summaries: {
-      warm: '눈에 보이는 배려로 사랑을 표현하고 자연스럽게 따뜻한 분위기를 만드는 경향이 있습니다.',
+      warm:
+        '애정을 솔직하게 표현하고 정서적 따뜻함, 친밀감과 진심 어린 감사를 중요하게 여길 수 있습니다.',
 
       steady:
-        '신뢰와 안정, 시간에 따라 성장하는 관계를 중요하게 생각합니다.',
+        '천천히 쌓이는 신뢰, 안정적인 약속과 꾸준한 돌봄으로 형성되는 관계를 선호할 수 있습니다.',
 
       independent:
-        '연애에서는 존중, 개인 공간, 솔직한 소통이 필요합니다.',
+        '정직함, 개인 공간과 두 사람이 각자의 개성을 지킬 수 있는 관계를 중요하게 여길 수 있습니다.',
 
       sensitive:
-        '감정을 깊이 느끼고 공감도 잘하지만 정서적 안전감도 필요합니다.',
+        '감정의 미세한 변화를 빠르게 알아차리고 공감, 안심과 상호 이해가 있는 관계를 찾을 수 있습니다.',
     },
   },
 
@@ -773,179 +740,243 @@ meditation: {
 
     styles: {
       leadership: '리더십 지향',
-      creative: '창의적 방향',
-      analytical: '분석적 사고',
-      supportive: '지원과 협업',
-      entrepreneurial: '기업가적 에너지',
+      creative: '창의적이고 표현적임',
+      analytical: '분석적이고 체계적임',
+      supportive: '지원과 봉사 지향',
+      entrepreneurial: '기업가적이고 적응력이 높음',
     },
 
     summaries: {
       leadership:
-        '책임, 조율, 방향 제시가 필요한 역할에서 강점을 보일 수 있습니다.',
+        '책임을 맡고 사람을 조율하며 방향을 명확한 행동으로 옮길 때 좋은 성과를 낼 수 있습니다.',
 
       creative:
-        '아이디어를 만들고 디자인하거나 메시지를 전달할 때 좋은 성과를 낼 수 있습니다.',
+        '상상력, 소통, 디자인, 스토리텔링 또는 독창적 문제 해결을 중시하는 일에서 역량을 발휘할 수 있습니다.',
 
       analytical:
-        '정보 처리, 계획, 구조화된 문제 해결에 강할 수 있습니다.',
+        '계획, 연구, 시스템 사고, 정확성과 신중한 판단이 필요한 일에서 가장 잘할 수 있습니다.',
 
       supportive:
-        '사람과 팀에 가치를 만드는 협업 환경에서 성장할 수 있습니다.',
+        '협업, 자문, 교육, 돌봄 또는 서비스 중심 역할에서 크게 기여할 수 있습니다.',
 
       entrepreneurial:
-        '새로운 기회가 나타나면 주도적으로 실험하고 빠르게 적응하는 경향이 있습니다.',
+        '주도성, 실험, 독립 프로젝트와 적응력을 보상하는 기회에 끌릴 수 있습니다.',
     },
+  },
+
+  reasons: {
+    hoangDao: '역서상 길일',
+
+    hacDao: '역서상 흉일',
+
+    traditionalSuitable:
+      '전통적으로 이 활동에 적합함',
+
+    traditionalAvoid:
+      '전통적으로 이 활동을 피하도록 권함',
+
+    zodiacClash:
+      '일지가 출생 띠와 충함',
+
+    sixHarmony: '육합 관계',
+
+    threeHarmony: '삼합 관계',
+
+    nguyetKy: '전통 월기일',
+
+    tamNuong: '전통 삼낭일',
+
+    preferredLunarDay:
+      '참고 규칙에서 선호하는 음력 날짜',
+
+    weekendConvenient: '주말이라 편리함',
+
+    birthHourClash:
+      '일지가 출생 시지와 충함',
+
+    birthHourHarmony:
+      '일지가 출생 시지와 육합을 이룸',
+
+    birthHourThreeHarmony:
+      '일지가 출생 시지와 삼합을 이룸',
+
+    birthLunarDayResonance:
+      '음력 날짜가 음력 출생일과 대응함',
+
+    school_folk:
+      '민간 종합 방식으로 평가함',
+
+    school_bazi:
+      '사주 참고 프리셋으로 평가함',
+
+    school_ziwei:
+      '자미두수 참고 프리셋으로 평가함',
+
+    school_almanac:
+      '전통 역서 프리셋으로 평가함',
   },
 
   insights: {
     loveHarmony:
-      '출생 연도의 띠와 출생 시지는 조화로운 감정 패턴을 시사합니다.',
+      '출생 띠와 출생 시지가 육합 관계를 이룹니다.',
 
     loveThreeHarmony:
-      '삼합의 패턴은 서로의 이해를 쌓는 데 도움이 될 수 있습니다.',
+      '출생 띠와 출생 시지가 같은 삼합 그룹에 속합니다.',
 
     loveInnerConflict:
-      '내면의 욕구가 충돌해 친밀함과 개인 공간 사이에서 흔들릴 수 있습니다.',
+      '출생 띠와 출생 시지가 충을 이루어 친밀감과 개인적 욕구 사이의 내적 긴장을 반영할 수 있습니다.',
 
     loveSelfAwareness:
-      '자신의 감정적 욕구를 비교적 분명하게 인식할 수 있습니다.',
+      '음력 출생일은 성찰과 감정적 자기 인식의 경향을 보여 줍니다.',
 
     loveWarmHeart:
-      '자연스럽게 배려를 표현하고 상대가 정서적으로 안전하다고 느끼게 합니다.',
+      '애정을 풍부하게 표현하고 따뜻한 정서적 분위기를 만들 수 있습니다.',
 
     loveExpressive:
-      '말이나 행동으로 애정을 표현할 수 있습니다.',
+      '말, 행동과 분명한 관심을 통해 돌봄을 표현하는 능력이 있을 수 있습니다.',
 
     loveOvergiving:
-      '너무 많이 베풀고 같은 만큼 돌려받지 못하면 실망할 수 있습니다.',
+      '자신의 필요가 충족되는지 확인하기 전에 지나치게 많이 베풀 수 있습니다.',
 
     loveSetBoundaries:
-      '항상 다른 사람을 우선하기보다 건강한 경계를 유지하세요.',
+      '돌봄이 균형을 유지하도록 명확하고 친절한 경계를 세우세요.',
 
     loveReceiveCare:
-      '늘 돌보는 역할만 하지 말고, 자신도 배려를 받아들이세요.',
+      '항상 주는 역할만 하기보다 다른 사람의 지원을 받아들이세요.',
 
-    loveLoyal: '관계에서 충실함과 일관성을 중요하게 생각합니다.',
+    loveLoyal:
+      '충성심, 신뢰성과 장기적인 헌신을 중요하게 여길 수 있습니다.',
 
-    lovePatient: '시간을 두고 인내심 있게 신뢰와 애정을 쌓을 수 있습니다.',
+    lovePatient:
+      '관계가 발전할 시간을 기꺼이 줄 수 있습니다.',
 
     loveReserved:
-      '감정을 오래 숨기면 자신의 욕구가 상대에게 잘 전달되지 않을 수 있습니다.',
+      '감정을 안에 담아 두다가 설명하기 어려워질 수 있습니다.',
 
     loveSpeakClearly:
-      '욕구와 감정이 부담으로 쌓이기 전에 표현하세요.',
+      '상대가 추측하기를 기대하지 말고 필요를 일찍 분명하게 표현하세요.',
 
     loveCreateRituals:
-      '작은 공동 습관이 정서적 안정감을 높여 줍니다.',
+      '신뢰와 유대감을 강화하는 작은 공동 습관을 만드세요.',
 
     loveRespectsSpace:
-      '관계 안에서도 개성과 개인 공간을 존중합니다.',
+      '개별성을 존중하고 개인 공간의 필요를 이해할 수 있습니다.',
 
-    loveHonest: '직접적이고 경계가 분명한 관계를 선호하는 경향이 있습니다.',
+    loveHonest:
+      '관계에서 직접적이고 정직한 소통을 선호할 수 있습니다.',
 
     loveNeedsFreedom:
-      '과도한 통제나 의존에 답답함을 느낄 수 있습니다.',
+      '지나친 제한은 위축되거나 감정적으로 멀어지게 만들 수 있습니다.',
 
     loveBalanceFreedom:
-      '개인의 자유와 함께함, 책임감 사이의 균형을 맞추세요.',
+      '독립성과 꾸준한 정서적 존재감 사이에서 균형을 잡으세요.',
 
-    loveSharePlans: '상대가 소외감을 느끼지 않도록 계획을 일찍 공유하세요.',
+    loveSharePlans:
+      '자유가 거리감으로 느껴지지 않도록 계획과 기대를 공유하세요.',
 
     loveEmpathetic:
-      '감정 변화를 잘 알아차리고 다른 사람의 마음을 이해할 수 있습니다.',
+      '미묘한 감정 변화를 이해하고 공감으로 반응할 수 있습니다.',
 
-    loveIntuitive: '관계의 흐름에 대한 직관이 강할 수 있습니다.',
+    loveIntuitive:
+      '관계를 해석할 때 직관에 크게 의존할 수 있습니다.',
 
     loveOverthinking:
-      '불분명한 소통이나 침묵은 과도한 생각으로 이어질 수 있습니다.',
+      '소통이 불분명할 때 민감함이 과도한 생각으로 이어질 수 있습니다.',
 
     loveTrustSlowly:
-      '너무 빨리 마음을 열려고 하지 말고 천천히 신뢰를 쌓으세요.',
+      '추측보다 반복되는 행동을 통해 신뢰가 자라도록 하세요.',
 
     loveAskDirectly:
-      '상대의 생각을 추측하기보다 직접 물어보세요.',
+      '확실하지 않을 때 침묵을 해석하지 말고 직접 물어보세요.',
 
     careerPersistent:
-      '목표를 유지하며 꾸준히 나아갈 수 있습니다.',
+      '끈기와 계속 앞으로 나아가려는 의지로 발전할 수 있습니다.',
 
     careerReflective:
-      '경험에서 배우고 앞으로 나아가기 전에 조정할 수 있습니다.',
+      '되돌아보기, 성찰과 방식 조정을 통해 잘 배울 수 있습니다.',
 
-    careerActionOriented: '주도적으로 행동하며 추진력을 만드는 경향이 있습니다.',
+    careerActionOriented:
+      '양의 성향은 주도성, 눈에 보이는 행동과 결단력 있는 추진을 도울 수 있습니다.',
 
-    careerObservant: '다른 사람이 놓칠 수 있는 맥락과 세부 사항을 잘 알아차립니다.',
+    careerObservant:
+      '음의 성향은 관찰, 인내, 타이밍과 신중한 준비를 도울 수 있습니다.',
 
     careerLeadership:
-      '이끌고 조율하며 방향을 유지하는 능력이 있을 수 있습니다.',
+      '다른 사람을 이끌고 명확한 방향을 정하는 데 편안함을 느낄 수 있습니다.',
 
     careerResponsibility:
-      '결정과 결과에 책임을 지려는 태도가 있습니다.',
+      '결과에 책임을 지고 약속을 끝까지 이행하는 편일 수 있습니다.',
 
     careerOvercontrol:
-      '신뢰가 낮을 때 일을 너무 많이 떠맡거나 세부 사항을 과도하게 통제할 수 있습니다.',
+      '지나친 통제는 협업을 제한하거나 불필요한 압박을 만들 수 있습니다.',
 
     careerDelegate:
-      '역할을 명확히 맡기고 적절한 사람을 신뢰하세요.',
+      '명확하게 위임하고 다른 사람이 자신의 방식으로 기여할 공간을 주세요.',
 
     careerListenBeforeDeciding:
-      '중요한 결정을 내리기 전에 팀의 의견을 모으세요.',
+      '중요한 결정을 내리기 전에 다양한 관점을 모으세요.',
 
     careerCreative:
-      '독창적인 아이디어를 내고 문제를 새로운 시각으로 볼 수 있습니다.',
+      '독창적인 아이디어를 만들고 다른 사람이 놓친 가능성을 볼 수 있습니다.',
 
     careerExpression:
-      '소통, 디자인, 스토리텔링과 관련된 일이 잘 맞을 수 있습니다.',
+      '소통, 디자인, 스토리텔링 또는 발표가 자연스러운 강점일 수 있습니다.',
 
-    careerScattered: '한꺼번에 관심사가 너무 많으면 마무리가 어려울 수 있습니다.',
+    careerScattered:
+      '한 번에 너무 많은 아이디어를 다루면 가장 중요한 일을 끝내기 어려울 수 있습니다.',
 
     careerBuildPortfolio:
-      '눈에 보이는 작업물이나 실용적인 포트폴리오를 만드세요.',
+      '완성된 작업을 눈에 보이게 쌓아 창의성을 기회로 바꾸세요.',
 
     careerFinishOneThing:
-      '여러 새 일을 시작하기 전에 중요한 프로젝트 하나를 먼저 끝내세요.',
+      '다음 아이디어로 확장하기 전에 하나의 우선순위를 끝내세요.',
 
     careerAnalytical:
-      '분석, 비교, 원인 파악에 강할 수 있습니다.',
+      '세부 사항, 패턴과 인과 관계를 살펴보는 능력이 있을 수 있습니다.',
 
-    careerPlanning: '목표를 구조적이고 실용적인 단계로 바꿀 수 있습니다.',
+    careerPlanning:
+      '체계적인 준비는 위험을 줄이고 일관성을 높이는 데 도움이 될 수 있습니다.',
 
     careerPerfectionism:
-      '완벽한 확신을 기다리다 행동이 늦어질 수 있습니다.',
+      '완벽한 정보를 기다리면 유용한 행동이 늦어질 수 있습니다.',
 
     careerSetMilestones:
-      '분석이 길어지지 않도록 명확한 중간 목표를 설정하세요.',
+      '큰 목표를 측정 가능한 단계와 명확한 기한으로 나누세요.',
 
     careerDecideWithEnoughData:
-      '완전한 확신을 기다리기보다 충분한 유용한 정보가 모였을 때 결정하세요.',
+      '정보가 완전하지 않아도 충분할 때 행동하세요.',
 
     careerTeamwork:
-      '협업을 지원하고 팀이 원활하게 움직이도록 도울 수 있습니다.',
+      '협력, 신뢰성과 감정 인식을 통해 팀을 강화할 수 있습니다.',
 
     careerService:
-      '다른 사람을 지원하고 돌보거나 안내함으로써 가치를 만들 수 있습니다.',
+      '돕고, 가르치고, 지원하거나 다른 사람의 삶을 개선하는 일에서 의미를 찾을 수 있습니다.',
 
     careerPeoplePleasing:
-      '다른 사람을 실망시키지 않으려다 일을 너무 많이 맡을 수 있습니다.',
+      '모두를 만족시키려 하면 에너지가 줄고 우선순위가 흐려질 수 있습니다.',
 
-    careerProtectEnergy: '명확한 업무 경계로 시간과 에너지를 보호하세요.',
+    careerProtectEnergy:
+      '기여를 지속 가능하게 유지하도록 시간과 감정 노동의 한계를 정하세요.',
 
     careerShowYourContribution:
-      '보이지 않게 일하기보다 자신의 기여를 기록하고 알리세요.',
+      '다른 사람이 알아서 알아보리라 기대하지 말고 성과를 명확히 전달하세요.',
 
-    careerInitiative: '주도적으로 움직이며 새로운 방법을 탐색하는 경향이 있습니다.',
+    careerInitiative:
+      '조건이 완전히 확실하지 않아도 시작하려는 의지가 있을 수 있습니다.',
 
     careerAdaptability:
-      '계획, 업무, 시장이 변해도 빠르게 적응합니다.',
+      '환경, 시장 또는 계획이 바뀔 때 빠르게 적응할 수 있습니다.',
 
     careerRiskTaking:
-      '너무 빠르게 움직이거나 재무·운영 위험을 과소평가할 수 있습니다.',
+      '기회에 대한 열정이 충분한 보호 없이 위험을 감수하게 만들 수 있습니다.',
 
     careerValidateRisk:
-      '큰 투자를 하기 전에 작은 테스트로 수요를 검증하세요.',
+      '큰 결정을 내리기 전에 작은 실험으로 가정을 검증하세요.',
 
     careerKeepCashReserve:
-      '프로젝트나 사업을 확장하기 전에 예비 자금을 확보하세요.',
+      '독립적이거나 불확실한 기회를 추구할 때 재정 예비 자금을 유지하세요.',
   },
+},
   bazi,
   ziwei,
     practice,

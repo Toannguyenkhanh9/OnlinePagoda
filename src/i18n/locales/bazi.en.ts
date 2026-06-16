@@ -284,7 +284,7 @@ const bazi = {
   },
 
   stage4: {
-    title: 'Stage 4: Timing and Compatibility',
+    title: 'Timing and Compatibility',
     subtitle:
       'Explore annual and monthly transits, compare two charts, and select dates using BaZi structure.',
     calculating: 'Calculating...',

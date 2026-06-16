@@ -284,7 +284,7 @@ const bazi = {
   },
 
   stage4: {
-    title: 'Giai đoạn 4: Dòng vận và tương hợp',
+    title: 'Dòng vận và tương hợp',
     subtitle:
       'Xem lưu niên, lưu nguyệt, so sánh hai lá số và chọn ngày theo cấu trúc Bát tự.',
     calculating: 'Đang tính...',

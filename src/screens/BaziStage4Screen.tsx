@@ -698,6 +698,9 @@ export default function BaziStage4Screen() {
               onSelect={
                 setPrimaryId
               }
+              language={
+                language
+              }
             />
 
             {(tab ===
@@ -731,6 +734,9 @@ export default function BaziStage4Screen() {
                 noneLabel={t(
                   'bazi.stage4.noPartner',
                 )}
+                language={
+                  language
+                }
               />
             )}
 
@@ -898,6 +904,7 @@ function RecordSelector({
   onSelect,
   allowNone = false,
   noneLabel = '',
+  language,
 }: {
   label: string;
   records: SavedBaziRecord[];
@@ -907,6 +914,7 @@ function RecordSelector({
   ) => void;
   allowNone?: boolean;
   noneLabel?: string;
+  language: string;
 }) {
   return (
     <View
@@ -996,12 +1004,12 @@ function RecordSelector({
                     selected &&
                       styles.recordChipMetaActive,
                   ]}>
-                  {
+                  {formatStage4Pillar(
                     item.chart
                       .pillars
-                      .day
-                      .text
-                  }
+                      .day,
+                    language,
+                  )}
                 </Text>
               </Pressable>
             );

@@ -285,7 +285,7 @@ const bazi = {
   },
 
   stage4: {
-    title: '4단계: 운세 흐름과 궁합',
+    title: '운세 흐름과 궁합',
     subtitle:
       '세운과 월운을 살펴보고 두 명식을 비교하며 사주 구조로 날짜를 선택합니다.',
     calculating: '계산 중...',

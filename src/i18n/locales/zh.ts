@@ -123,6 +123,8 @@ practiceReminderSubtitle:
 chooseDateTitle: '择日',
 chooseDateSubtitle:
   '参考婚礼、开业和重要事项的适合日期',
+      ziweiTitle: '紫微斗数',
+  ziweiSubtitle: 'E输入出生日期、时间和地点，以安十二宫、十四主星、二十一辅星、四化、旬空截空及长生十二神。',
   },
 
   temple: {
@@ -534,121 +536,116 @@ meditation: {
     },
   },
   horoscope: {
-    title: '命理与择吉',
+  title: '命理参考与吉日',
 
-    subtitle:
-      '输入公历生日，查看农历日期、生肖以及重要事项的推荐日期。',
+  subtitle:
+    '输入阳历出生日期，查看农历日期、生肖及重要事项的建议日期。',
 
-    birthDateTitle: '公历生日',
-
-    day: '日',
-
-    month: '月',
-
-    year: '年',
-
-    activityTitle: '事项',
-
-    searchPeriod: '查找范围',
-
-    monthCount: '{{count}} 个月',
-
-    calculate: '转换并查找推荐日期',
-
-    calculating: '计算中...',
-
-    invalidDateTitle: '出生日期无效',
-
-    invalidDateMessage: '请输入有效的公历日期。',
-
-    profileTitle: '出生信息',
-
-    lunarBirthDate: '农历生日',
-
-    zodiac: '生肖',
-
-    canChiYear: '干支年',
-
-    leapMonth: '闰月',
-
-    resultsTitle: '推荐日期',
-
-    resultsSubtitle: '日期按文化参考评分排序。',
-
-    lunarDateLine: '农历 {{year}} 年 {{month}} 月 {{day}} 日',
-
-    suitableReasons: '有利因素',
-
-    cautionReasons: '注意事项',
-
-    disclaimer:
-      '结果仅供文化参考与个人观照，不应作为婚姻、建造、投资或其他重要决定的唯一依据。',
-
-    activities: {
-      wedding: '婚嫁',
-      construction: '建造',
-      opening: '开业',
-      moving: '搬家',
-      travel: '出行',
-    },
-
-    ratings: {
-      excellent: '上吉',
-      good: '吉',
-      fair: '尚可',
-      caution: '需斟酌',
-    },
-
-    reasons: {
-      hoangDao: '黄道吉日',
-
-      hacDao: '黑道日',
-
-      traditionalSuitable: '传统历法认为适合此事',
-
-      traditionalAvoid: '传统历法认为不宜此事',
-
-      zodiacClash: '日支与出生生肖相冲',
-
-      sixHarmony: '六合关系',
-
-      threeHarmony: '三合关系',
-
-      nguyetKy: '传统月忌日',
-
-      tamNuong: '传统三娘煞日',
-
-      preferredLunarDay: '参考规则中的优选农历日',
-
-      weekendConvenient: '周末较方便',
-      birthHourClash: '日支与出生时支相冲',
-
-      birthHourHarmony: '日支与出生时支构成六合',
-
-      birthHourThreeHarmony:
-        '日支与出生时支构成三合',
-
-      birthLunarDayResonance:
-        '该农历日与农历生日相应',
-
-      school_folk: '按综合民俗方法评分',
-
-      school_bazi: '按八字参考预设评分',
-
-      school_ziwei: '按紫微斗数参考预设评分',
-
-      school_almanac: '按传统历法预设评分',
-    },
-  },
   subtitleExtended:
-    '输入公历生日、出生时间、性别与解读方法，查看农历信息与推荐日期。',
+    '输入阳历出生日期和时间、性别及解读流派，以查看农历信息、人生反思解读和建议日期。',
+
+  birthDateTitle: '阳历出生日期',
+
+  day: '日',
+
+  month: '月',
+
+  year: '年',
 
   birthTimeTitle: '出生时间',
+
   hour: '时',
+
   minute: '分',
+
   birthTimeHint: '出生地当地时间',
 
   genderTitle: '性别',
+
+  schoolTitle: '解读流派',
+
+  selectedMethod: '当前方法',
+
+  activityTitle: '事项',
+
+  searchPeriod: '查询范围',
+
+  monthCount: '{{count}}个月',
+
+  calculate: '转换并查找建议日期',
+
+  calculateExtended: '建立资料并查找建议日期',
+
+  calculating: '正在计算……',
+
+  invalidDateTitle: '出生日期无效',
+
+  invalidInputTitle: '信息无效',
+
+  invalidDateMessage:
+    '请输入有效的阳历出生日期。',
+
+  invalidTimeMessage:
+    '出生时间必须在00:00至23:59之间。',
+
+  profileTitle: '出生信息',
+
+  lunarBirthDate: '农历出生日期',
+
+  birthHourBranch: '出生时支',
+
+  zodiac: '生肖',
+
+  canChiYear: '干支年',
+
+  profileGender: '性别',
+
+  profileSchool: '解读流派',
+
+  yearPolarity: '出生年阴阳',
+
+  cycleDirection: '参考运转方向',
+
+  leapMonth: '闰月',
+
+  resultsTitle: '建议日期',
+
+  resultsSubtitle:
+    '日期按文化参考评分排序。',
+
+  resultsSubtitleExtended:
+    '日期依据所选流派、出生生肖和出生时支进行排序。',
+
+  lunarDateLine: '农历{{year}}年{{month}}月{{day}}日',
+
+  suitableReasons: '有利因素',
+
+  cautionReasons: '需注意因素',
+
+  lifeOverviewTitle: '感情与事业',
+
+  lifeOverviewSubtitle:
+    '根据输入的出生日期、出生时间和所选解读流派提供反思性解读。',
+
+  lifeStrengths: '优势',
+
+  lifeCautions: '需要平衡之处',
+
+  lifeAdvice: '成长建议',
+
+  disclaimer:
+    '结果仅供文化参考与自我反思，不应作为婚姻、建造、投资或其他重要决定的唯一依据。',
+
+  disclaimerExtended:
+    '这是一个依据农历、出生生肖、出生时辰及所选流派权重建立的简化反思模型，并非完整的紫微斗数或八字命盘，也不应作为重要决定的唯一依据。',
+
+  activities: {
+    wedding: '婚嫁',
+    construction: '动土建造',
+    opening: '开业',
+    moving: '搬家',
+    travel: '出行',
+  },
 
   genders: {
     male: '男',
@@ -656,47 +653,23 @@ meditation: {
     unspecified: '未指定',
   },
 
-  schoolTitle: '解读方法',
-
   schools: {
-    folkTitle: '综合民俗法',
-
+    folkTitle: '民俗综合法',
     folkDescription:
-      '综合考虑生肖关系、吉日、农历日期与传统避忌规则。',
+      '综合传统择日规则、生肖关系、出生时辰和常见民俗。',
 
     baziTitle: '八字参考',
-
     baziDescription:
-      '更重视日支、出生年生肖与出生时支之间的关系。',
+      '更重视出生生肖、出生时支以及合、冲关系。',
 
-    ziweiTitle: '紫微斗数参考',
-
+    ziweiTitle: '紫微参考',
     ziweiDescription:
-      '以简化模型使用农历出生信息、出生时间、性别与行运方向。',
+      '采用受紫微时运观念启发的反思权重，并参考出生信息与所选日期之间的关系。',
 
-    almanacTitle: '传统历法',
-
+    almanacTitle: '传统黄历',
     almanacDescription:
-      '优先考虑宜忌事项、吉日与传统禁忌日。',
+      '优先考虑黄历宜忌、吉日及传统农历禁忌。',
   },
-
-  selectedMethod: '已选方法',
-
-  calculateExtended: '建立资料并查找推荐日期',
-
-  invalidInputTitle: '信息无效',
-
-  invalidTimeMessage: '出生时间必须在 00:00 到 23:59 之间。',
-
-  birthHourBranch: '出生时支',
-
-  profileGender: '性别',
-
-  profileSchool: '解读方法',
-
-  yearPolarity: '出生年阴阳',
-
-  cycleDirection: '参考行运方向',
 
   polarity: {
     yang: '阳',
@@ -706,41 +679,34 @@ meditation: {
   directions: {
     forward: '顺行',
     backward: '逆行',
-    neutral: '平',
+    neutral: '未确定',
   },
 
   schoolNotes: {
-    folk: '结合常见民俗与传统历法规则的平衡参考模型。',
+    folk:
+      '结果平衡结合民俗、黄历因素、生肖关系和出生时辰参考。',
 
-    bazi: '评分侧重出生年生肖与出生时支；这并非完整八字命盘。',
+    bazi:
+      '结果提高生肖与出生时辰合冲关系的权重，作为简化的八字参考。',
 
     ziwei:
-      '评分以简化方式使用农历出生信息、出生时间、性别与行运方向。',
+      '结果采用受紫微时运观念启发的简化权重，仅供文化反思。',
 
     almanac:
-      '评分高度优先传统宜忌事项与历法吉日。',
+      '结果最重视传统黄历中的宜忌及农历日期规则。',
   },
 
-  resultsSubtitleExtended:
-    '日期根据所选方法、出生生肖与出生时辰排序。',
-
-  disclaimerExtended:
-    '这是基于农历日期、生肖关系、出生时间与解读预设的简化文化参考模型，并非完整的紫微斗数或八字命盘，不应作为重要决定的唯一依据。',
-  lifeOverviewTitle: '感情与事业',
-
-  lifeOverviewSubtitle:
-    '根据出生信息与所选解读方法提供的观照性分析。',
-
-  lifeStrengths: '优势',
-
-  lifeCautions: '需要平衡的方面',
-
-  lifeAdvice: '成长建议',
+  ratings: {
+    excellent: '极佳',
+    good: '良好',
+    fair: '尚可',
+    caution: '慎重考虑',
+  },
 
   lifeRatings: {
-    veryStrong: '能量强',
-    favorable: '较有利',
-    balanced: '较平衡',
+    veryStrong: '很强',
+    favorable: '有利',
+    balanced: '平衡',
     developing: '发展中',
   },
 
@@ -748,23 +714,24 @@ meditation: {
     title: '感情',
 
     styles: {
-      warm: '温暖且重感情',
-      steady: '稳定而真诚',
-      independent: '感情中较独立',
-      sensitive: '敏感而直觉强',
+      warm: '温暖而善于表达',
+      steady: '稳定而忠诚',
+      independent: '独立而直接',
+      sensitive: '敏感而富有直觉',
     },
 
     summaries: {
-      warm: '你倾向通过明显的关心表达爱意，并自然营造温暖的情感氛围。',
+      warm:
+        '你可能会坦率表达感情，并重视情感温度、亲近感和真诚的欣赏。',
 
       steady:
-        '你重视信任、稳定以及随时间成长的关系。',
+        '你可能偏好逐步建立信任、稳定承诺，以及通过持续关怀培养的关系。',
 
       independent:
-        '你在感情中需要尊重、个人空间与坦诚沟通。',
+        '你可能重视诚实、个人空间，以及让双方保有独立个性的关系。',
 
       sensitive:
-        '你感受深刻、容易共情，同时也需要情绪上的安全感。',
+        '你可能很快察觉情绪细节，并寻求具有同理心、安心感和相互理解的关系。',
     },
   },
 
@@ -773,179 +740,243 @@ meditation: {
 
     styles: {
       leadership: '领导导向',
-      creative: '创意导向',
-      analytical: '分析思维',
-      supportive: '支持与协作',
-      entrepreneurial: '创业能量',
+      creative: '创意与表达',
+      analytical: '分析与结构',
+      supportive: '支持与服务导向',
+      entrepreneurial: '创业与适应',
     },
 
     summaries: {
       leadership:
-        '你可能适合需要责任、协调与方向感的岗位。',
+        '当你承担责任、协调人员并把方向转化为明确行动时，可能表现良好。',
 
       creative:
-        '在提出创意、设计或传达信息时，你可能表现出色。',
+        '你可能适合重视想象力、沟通、设计、叙事或原创解题的工作。',
 
       analytical:
-        '你可能擅长处理信息、规划并解决结构化问题。',
+        '在需要规划、研究、系统思考、精确性和谨慎决策的工作中，你可能表现最佳。',
 
       supportive:
-        '你可能在为个人与团队创造价值的协作环境中成长。',
+        '你可能在协作、咨询、教学、照护或服务型角色中发挥重要作用。',
 
       entrepreneurial:
-        '当新机会出现时，你往往主动、愿意尝试且适应迅速。',
+        '你可能会被主动尝试、实验、独立项目和奖励适应力的机会吸引。',
     },
+  },
+
+  reasons: {
+    hoangDao: '黄道吉日',
+
+    hacDao: '黑道日',
+
+    traditionalSuitable:
+      '传统上适合此事项',
+
+    traditionalAvoid:
+      '传统上建议避免此事项',
+
+    zodiacClash:
+      '日支与出生生肖相冲',
+
+    sixHarmony: '六合关系',
+
+    threeHarmony: '三合关系',
+
+    nguyetKy: '传统月忌日',
+
+    tamNuong: '传统三娘煞日',
+
+    preferredLunarDay:
+      '参考规则中优先的农历日期',
+
+    weekendConvenient: '周末较为便利',
+
+    birthHourClash:
+      '日支与出生时支相冲',
+
+    birthHourHarmony:
+      '日支与出生时支形成六合',
+
+    birthHourThreeHarmony:
+      '日支与出生时支形成三合',
+
+    birthLunarDayResonance:
+      '农历日期与农历出生日相应',
+
+    school_folk:
+      '按民俗综合法评分',
+
+    school_bazi:
+      '按八字参考预设评分',
+
+    school_ziwei:
+      '按紫微参考预设评分',
+
+    school_almanac:
+      '按传统黄历预设评分',
   },
 
   insights: {
     loveHarmony:
-      '出生年生肖与出生时支显示出较和谐的情感模式。',
+      '出生生肖与出生时支形成六合关系。',
 
     loveThreeHarmony:
-      '三合格局可能有助于建立共同理解。',
+      '出生生肖与出生时支属于同一三合组。',
 
     loveInnerConflict:
-      '内在需求有时会冲突，使你在亲密与个人空间之间拉扯。',
+      '出生生肖与出生时支形成相冲，可能反映亲密需求与个人需求之间的内在张力。',
 
     loveSelfAwareness:
-      '你可能较清楚自己的情感需求。',
+      '农历出生日显示出反思和情绪自我觉察的倾向。',
 
     loveWarmHeart:
-      '你自然地表达关怀，也能让他人感到情绪安全。',
+      '你可能慷慨表达感情，并营造温暖的情感氛围。',
 
     loveExpressive:
-      '你能够通过言语或行动表达感情。',
+      '你往往能通过言语、行动和明确的关注表达关怀。',
 
     loveOvergiving:
-      '你可能付出过多，并在得不到同等回应时感到失望。',
+      '有时你可能付出过多，却未先确认自己的需要是否得到照顾。',
 
     loveSetBoundaries:
-      '保持健康边界，不要总把他人放在自己之前。',
+      '建立清晰而友善的界限，让关怀保持平衡。',
 
     loveReceiveCare:
-      '允许自己接受关爱，而不总是扮演照顾者。',
+      '允许他人支持和照顾你，而不是总由你付出。',
 
-    loveLoyal: '你重视关系中的忠诚与一致性。',
+    loveLoyal:
+      '你可能重视忠诚、可靠和长期承诺。',
 
-    lovePatient: '你能耐心地随时间建立信任与感情。',
+    lovePatient:
+      '你通常愿意给一段关系时间去发展。',
 
     loveReserved:
-      '长期压抑感受，可能让他人难以理解你的需求。',
+      '你可能把感受藏在心里，直到难以解释。',
 
     loveSpeakClearly:
-      '在需求与情绪累积成压力前及时表达。',
+      '尽早清楚表达需要，不要期待对方自行猜测。',
 
     loveCreateRituals:
-      '共同的小习惯有助于增强情感稳定。',
+      '建立一些共同的小习惯，以增强信任与连结。',
 
     loveRespectsSpace:
-      '你尊重关系中的个体性与个人空间。',
+      '你可能尊重个体差异，并理解个人空间的需要。',
 
-    loveHonest: '你倾向于直接且界限清晰的关系。',
+    loveHonest:
+      '你可能偏好直接而诚实的感情沟通。',
 
     loveNeedsFreedom:
-      '过度控制或依赖可能让你感到受限。',
+      '过多限制可能使你退缩或产生情感距离。',
 
     loveBalanceFreedom:
-      '在个人自由、陪伴与承诺之间取得平衡。',
+      '在独立与持续的情感陪伴之间取得平衡。',
 
-    loveSharePlans: '尽早分享计划，避免伴侣感到被排除在外。',
+    loveSharePlans:
+      '分享计划与期待，避免自由被误解为疏远。',
 
     loveEmpathetic:
-      '你容易察觉情绪，也能理解他人的感受。',
+      '你可能理解细微的情绪变化，并以同理心回应。',
 
-    loveIntuitive: '你可能对关系动态有较强直觉。',
+    loveIntuitive:
+      '你在理解关系时可能非常依赖直觉。',
 
     loveOverthinking:
-      '沟通不清或沉默可能导致过度思考。',
+      '当沟通不清时，敏感可能转化为过度思考。',
 
     loveTrustSlowly:
-      '逐步建立信任，不必逼自己过快敞开心扉。',
+      '让信任通过持续行动逐步形成，而不是依赖猜测。',
 
     loveAskDirectly:
-      '直接询问，而不是猜测他人的想法。',
+      '不确定时直接询问，而不是解读沉默。',
 
     careerPersistent:
-      '你能坚持目标，并随时间稳定推进。',
+      '你可能凭借坚持和持续前进的意愿获得进展。',
 
     careerReflective:
-      '你会从经验中学习，并在继续前进前作出调整。',
+      '你可能擅长通过复盘、反思和调整方法来学习。',
 
-    careerActionOriented: '你倾向主动行动并形成推进力。',
+    careerActionOriented:
+      '阳性倾向可能支持主动性、可见行动和果断推进。',
 
-    careerObservant: '你能注意到他人可能忽略的背景与细节。',
+    careerObservant:
+      '阴性倾向可能支持观察、耐心、时机判断和周密准备。',
 
     careerLeadership:
-      '你可能具备领导、协调并保持方向的能力。',
+      '你可能乐于引导他人并设定清晰方向。',
 
     careerResponsibility:
-      '你愿意为决定与结果承担责任。',
+      '你通常愿意为结果负责，并履行承诺。',
 
     careerOvercontrol:
-      '在信任不足时，你可能承担过多或过度控制细节。',
+      '控制过多可能限制合作或造成不必要的压力。',
 
     careerDelegate:
-      '清楚地授权，并信任合适的人承担责任。',
+      '清楚分工，并给他人以自己的方式贡献的空间。',
 
     careerListenBeforeDeciding:
-      '在作出重大决定前，先收集团队意见。',
+      '在重要决定前收集不同观点。',
 
     careerCreative:
-      '你可能能提出原创想法，并从新角度看问题。',
+      '你可能产生原创想法，并看到他人忽略的可能性。',
 
     careerExpression:
-      '你可能适合沟通、设计或叙事相关工作。',
+      '沟通、设计、叙事或展示可能是你的自然优势。',
 
-    careerScattered: '同时关注太多兴趣，可能让完成任务变得困难。',
+    careerScattered:
+      '同时拥有太多想法，可能使你难以完成最重要的工作。',
 
     careerBuildPortfolio:
-      '建立可展示的作品或实用作品集。',
+      '建立可展示的完成作品，把创造力转化为机会。',
 
     careerFinishOneThing:
-      '在开启多个新项目之前，先完成一个重要项目。',
+      '先完成一个重点，再扩展到下一个想法。',
 
     careerAnalytical:
-      '你可能擅长分析、比较并识别原因。',
+      '你可能善于分析细节、模式和因果关系。',
 
-    careerPlanning: '你能把目标转化为结构化且实际的步骤。',
+    careerPlanning:
+      '结构化准备可能帮助你降低风险并提高稳定性。',
 
     careerPerfectionism:
-      '你可能因等待完全确定而延迟行动。',
+      '等待完美信息可能延误有价值的行动。',
 
     careerSetMilestones:
-      '设定清晰里程碑，避免分析过久。',
+      '把大目标拆分为可衡量、期限明确的里程碑。',
 
     careerDecideWithEnoughData:
-      '在已有足够有用信息时作出决定，不必等待绝对确定。',
+      '当信息已经足够时采取行动，即使尚未完全齐备。',
 
     careerTeamwork:
-      '你能支持协作并帮助团队顺畅运作。',
+      '你可能通过合作、可靠和情绪觉察增强团队。',
 
     careerService:
-      '你可能通过支持、照顾或指导他人来创造价值。',
+      '你可能在帮助、教学、支持或改善他人生活的工作中找到意义。',
 
     careerPeoplePleasing:
-      '为了不让他人失望，你可能接下过多工作。',
+      '试图取悦所有人可能消耗精力，并模糊优先事项。',
 
-    careerProtectEnergy: '通过清晰的工作边界保护时间与精力。',
+    careerProtectEnergy:
+      '为时间和情绪劳动设定界限，使贡献保持可持续。',
 
     careerShowYourContribution:
-      '记录并表达你的贡献，而不是默默无闻地工作。',
+      '清楚表达成果，不要假设别人会自行注意到。',
 
-    careerInitiative: '你倾向主动并探索新的做法。',
+    careerInitiative:
+      '即使条件尚未完全确定，你也可能愿意先开始。',
 
     careerAdaptability:
-      '当计划、工作或市场变化时，你适应很快。',
+      '当环境、市场或计划变化时，你可能调整得很快。',
 
     careerRiskTaking:
-      '你可能行动过快，或低估财务与运营风险。',
+      '对机会的热情可能使你在保护不足时承担风险。',
 
     careerValidateRisk:
-      '在进行大额投入前，先做小规模测试并验证需求。',
+      '在做出重大承诺前，用小型实验验证假设。',
 
     careerKeepCashReserve:
-      '在扩展项目或业务前保留备用资金。',
+      '追求独立或不确定的机会时，保留财务储备。',
   },
+},
   bazi,
   ziwei,
     practice,

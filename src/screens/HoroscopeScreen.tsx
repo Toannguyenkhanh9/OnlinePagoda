@@ -27,6 +27,12 @@ import {
   type LifeInsightRating,
 } from '../services/auspiciousDates';
 
+import {
+  localizeBirthHourBranch,
+  localizeCanChi,
+  localizeZodiac,
+} from '../utils/horoscopeValueLocalization';
+
 type ActivityOption = {
   id: AuspiciousActivity;
   icon: string;
@@ -1031,11 +1037,11 @@ export default function HoroscopeScreen() {
                 </Text>
 
                 <Text style={styles.profileValue}>
-                  {language
-                    .toLowerCase()
-                    .startsWith('vi')
-                    ? profile.birthHourBranchVi
-                    : profile.birthHourBranchEn}
+                  {localizeBirthHourBranch(
+                    profile.birthHourBranchEn ||
+                      profile.birthHourBranchVi,
+                    language,
+                  )}
                 </Text>
               </View>
 
@@ -1051,11 +1057,11 @@ export default function HoroscopeScreen() {
                 </Text>
 
                 <Text style={styles.profileValue}>
-                  {language
-                    .toLowerCase()
-                    .startsWith('vi')
-                    ? profile.zodiacVi
-                    : profile.zodiacEn}
+                  {localizeZodiac(
+                    profile.zodiacEn ||
+                      profile.zodiacVi,
+                    language,
+                  )}
                 </Text>
               </View>
 
@@ -1071,7 +1077,10 @@ export default function HoroscopeScreen() {
                 </Text>
 
                 <Text style={styles.profileValue}>
-                  {profile.canChiYear}
+                  {localizeCanChi(
+                    profile.canChiYear,
+                    language,
+                  )}
                 </Text>
               </View>
 
@@ -1537,7 +1546,10 @@ export default function HoroscopeScreen() {
 
                         {!!item.dayCanChi && (
                           <Text style={styles.resultCanChi}>
-                            {item.dayCanChi}
+                            {localizeCanChi(
+                              item.dayCanChi,
+                              language,
+                            )}
                           </Text>
                         )}
                       </View>

@@ -22,12 +22,24 @@ import {
 } from '../services/baziHistory';
 import {shareBaziChart} from '../services/baziShare';
 
+import {
+  localizeCanChi,
+} from '../utils/horoscopeValueLocalization';
+import {
+  localizeBaziPlaceName,
+} from '../utils/baziHistoryLocalization';
+
 export default function BaziHistoryScreen() {
   const {t, i18n} = useTranslation();
   const navigation = useNavigation<any>();
   const [records, setRecords] = useState<SavedBaziRecord[]>([]);
   const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+
+  const language =
+    i18n.resolvedLanguage ??
+    i18n.language ??
+    'en';
 
   const load = useCallback(async () => {
     try {
@@ -154,8 +166,20 @@ export default function BaziHistoryScreen() {
         ) : (
           filtered.map(item => {
             const input = item.input.localDateTime;
-            const pillars = ['year', 'month', 'day', 'hour']
-              .map(kind => item.chart.pillars[kind as keyof typeof item.chart.pillars].text)
+            const pillars = [
+              'year',
+              'month',
+              'day',
+              'hour',
+            ]
+              .map(kind =>
+                localizeCanChi(
+                  item.chart.pillars[
+                    kind as keyof typeof item.chart.pillars
+                  ].text,
+                  language,
+                ),
+              )
               .join('  ');
 
             return (
@@ -181,7 +205,11 @@ export default function BaziHistoryScreen() {
 
                 <Text style={styles.pillars}>{pillars}</Text>
                 <Text style={styles.location}>
-                  {item.input.location.placeName || item.input.location.timeZone}
+                  {localizeBaziPlaceName(
+                    item.input.location.placeName ||
+                      item.input.location.timeZone,
+                    language,
+                  )}
                 </Text>
                 <Text style={styles.version}>
                   {t('bazi.stage3.engineVersion', {defaultValue: 'Engine'})}: {item.engineVersion}
@@ -195,7 +223,12 @@ export default function BaziHistoryScreen() {
                   />
                   <ActionButton
                     label={t('bazi.stage3.share', {defaultValue: 'Chia sẻ'})}
-                    onPress={() => shareBaziChart(item.chart, i18n.resolvedLanguage)}
+                    onPress={() =>
+                      shareBaziChart(
+                        item.chart,
+                        language,
+                      )
+                    }
                   />
                   <ActionButton
                     label={t('bazi.stage3.recalculate', {defaultValue: 'Tính lại'})}

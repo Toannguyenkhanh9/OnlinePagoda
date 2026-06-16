@@ -25,6 +25,16 @@ import BaziStage4Screen
   from '../screens/BaziStage4Screen';
   import ZiweiChartScreen
   from '../screens/ZiweiChartScreen';
+  import DailyRitualScreen
+  from '../screens/DailyRitualScreen';
+  import PeaceJournalScreen
+  from '../screens/PeaceJournalScreen';
+
+import BuddhistCalendarScreen
+  from '../screens/BuddhistCalendarScreen';
+
+import AltarCustomizationScreen
+  from '../screens/AltarCustomizationScreen';
 
 export type RootTabParamList = {
   Home: undefined;
@@ -45,6 +55,20 @@ export type RootTabParamList = {
   BaziHistory: undefined;
   BaziStage4: undefined;
   ZiweiChart: undefined;
+  DailyRitual: undefined;
+  PeaceJournal: undefined;
+  BuddhistCalendar: undefined;
+  AltarCustomization: undefined;
+  DataSync: undefined;
+ExportCenter: undefined;
+PremiumLibrary: undefined;
+
+PremiumContentDetail: {
+  contentId: string;
+};
+
+SmartReminder: undefined;
+  
 };
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
@@ -219,6 +243,44 @@ export default function RootNavigator() {
     title: t('ziwei.title'),
     tabBarButton: () => null,
     tabBarItemStyle: styles.hiddenTab,
+  }}
+/>
+<Tab.Screen
+  name="DailyRitual"
+  component={DailyRitualScreen}
+  options={{
+    title: t('practice.title'),
+    tabBarButton: () => null,
+    tabBarItemStyle: styles.hiddenTab,
+  }}
+/>
+<Tab.Screen
+  name="PeaceJournal"
+  component={PeaceJournalScreen}
+  options={{
+    title: t('peaceJournal.title'),
+    tabBarButton: () => null,
+        tabBarItemStyle: styles.hiddenTab,
+  }}
+/>
+
+<Tab.Screen
+  name="BuddhistCalendar"
+  component={BuddhistCalendarScreen}
+  options={{
+    title: t('buddhistCalendar.title'),
+    tabBarButton: () => null,
+        tabBarItemStyle: styles.hiddenTab,
+  }}
+/>
+
+<Tab.Screen
+  name="AltarCustomization"
+  component={AltarCustomizationScreen}
+  options={{
+    title: t('altarCustomization.title'),
+    tabBarButton: () => null,
+        tabBarItemStyle: styles.hiddenTab,
   }}
 />
       </Tab.Navigator>

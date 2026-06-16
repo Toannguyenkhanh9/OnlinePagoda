@@ -1,5 +1,20 @@
 import bazi from './bazi.ko';
 import ziwei from './ziwei.ko';
+import practice, {
+  practiceAudio,
+  practiceMeditation,
+} from './practice.ko';
+import {
+  peaceJournal,
+  buddhistCalendar,
+  altarCustomization,
+} from './spiritualFeatures.ko';
+import {
+  dataSync,
+  pdfExport,
+  premiumContent,
+  smartFeatures,
+} from './spiritualFeatures10_13.ko';
 const ko = {
   common: {
     cancel: '취소',
@@ -120,41 +135,44 @@ baziStage4Subtitle:
     incenseStatsTitle: '향 개수',
   },
 
-  meditation: {
-    screenTitle: '명상',
+meditation: {
+  title: '명상',
+  screenTitle: '명상',
 
-    breathingTitle: '호흡 명상',
+  subtitle:
+    '편안하게 앉아 어깨의 힘을 빼고, 매 순간의 호흡에 부드럽게 집중하세요.',
 
-    chooseDuration: '시간 선택',
+  breathingTitle: '호흡 명상',
 
-    minuteUnit: '분',
+  chooseDuration: '시간 선택',
 
-    heroMinutes: '{{count}}분',
+  minutes: '{{count}}분',
+  minuteUnit: '분',
+  heroMinutes: '{{count}}분',
 
-    start: '명상 시작',
+  start: '명상 시작',
+  pause: '명상 일시정지',
+  restart: '다시 명상하기',
 
-    pause: '명상 일시정지',
+  ready: '준비됨',
+  paused: '일시정지됨',
+  running: '명상 중',
 
-    restart: '다시 명상하기',
+  resetTime: '시간 초기화',
 
-    paused: '일시정지됨',
+  completedTitle: '명상 완료',
 
-    running: '명상 중',
+  completedMessage:
+    '천천히 호흡하며 지금의 몸과 마음 상태를 느껴보세요.',
 
-    resetTime: '시간 재설정',
+  breathTitle: '호흡 안내',
 
-    completedTitle: '명상 완료',
+  inhale: '4초 동안 천천히 들이쉬기',
 
-    completedMessage: '천천히 호흡하며 지금의 느낌을 알아차려 보세요.',
+  hold: '2초 동안 숨 멈추기',
 
-    breathTitle: '호흡 안내',
-
-    inhale: '4초 동안 천천히 들이쉬기',
-
-    hold: '2초 동안 숨 멈추기',
-
-    exhale: '6초 동안 천천히 내쉬기',
-  },
+  exhale: '6초 동안 천천히 내쉬기',
+},
 
   prayer: {
     title: '기도 일기',
@@ -900,6 +918,16 @@ baziStage4Subtitle:
   },
   bazi,
   ziwei,
+    practice,
+  practiceAudio,
+  practiceMeditation,
+    peaceJournal,
+  buddhistCalendar,
+  altarCustomization,
+    dataSync,
+  pdfExport,
+  premiumContent,
+  smartFeatures,
 } as const;
 
 export default ko;

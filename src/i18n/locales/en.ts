@@ -1,5 +1,20 @@
 import bazi from './bazi.en';
 import ziwei from './ziwei.en';
+import practice, {
+  practiceAudio,
+  practiceMeditation,
+} from './practice.en';
+import {
+  peaceJournal,
+  buddhistCalendar,
+  altarCustomization,
+} from './spiritualFeatures.en';
+import {
+  dataSync,
+  pdfExport,
+  premiumContent,
+  smartFeatures,
+} from './spiritualFeatures10_13.en';
 const en = {
   common: {
     cancel: 'Cancel',
@@ -120,41 +135,44 @@ baziStage4Subtitle:
     incenseStatsTitle: 'Incense sticks',
   },
 
-  meditation: {
-    screenTitle: 'Meditation',
+meditation: {
+  title: 'Meditation',
+  screenTitle: 'Meditation',
 
-    breathingTitle: 'Breathing Meditation',
+  subtitle:
+    'Sit comfortably, relax your shoulders, and gently focus on each breath.',
 
-    chooseDuration: 'Choose duration',
+  breathingTitle: 'Breathing Meditation',
 
-    minuteUnit: 'min',
+  chooseDuration: 'Choose Duration',
 
-    heroMinutes: '{{count}} minutes',
+  minutes: '{{count}} minutes',
+  minuteUnit: 'minutes',
+  heroMinutes: '{{count}} minutes',
 
-    start: 'Start Meditation',
+  start: 'Start Meditation',
+  pause: 'Pause Meditation',
+  restart: 'Meditate Again',
 
-    pause: 'Pause Meditation',
+  ready: 'Ready',
+  paused: 'Paused',
+  running: 'Meditating',
 
-    restart: 'Meditate Again',
+  resetTime: 'Reset Time',
 
-    paused: 'Paused',
+  completedTitle: 'Meditation Complete',
 
-    running: 'Meditating',
+  completedMessage:
+    'Breathe slowly and take a moment to notice how you feel.',
 
-    resetTime: 'Reset Time',
+  breathTitle: 'Breathing Guide',
 
-    completedTitle: 'Meditation Completed',
+  inhale: 'Inhale slowly for 4 seconds',
 
-    completedMessage: 'Take a slow breath and notice how you feel.',
+  hold: 'Hold your breath for 2 seconds',
 
-    breathTitle: 'Breathing Guide',
-
-    inhale: 'Inhale slowly for 4 seconds',
-
-    hold: 'Hold your breath for 2 seconds',
-
-    exhale: 'Exhale slowly for 6 seconds',
-  },
+  exhale: 'Exhale slowly for 6 seconds',
+},
 
   prayer: {
     title: 'Prayer journal',
@@ -900,6 +918,16 @@ baziStage4Subtitle:
   },
   bazi,
   ziwei,
+  practice,
+  practiceAudio,
+  practiceMeditation, 
+    peaceJournal,
+  buddhistCalendar,
+  altarCustomization,
+    dataSync,
+  pdfExport,
+  premiumContent,
+  smartFeatures,
 } as const;
 
 export default en;

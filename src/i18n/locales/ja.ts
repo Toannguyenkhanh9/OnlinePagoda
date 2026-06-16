@@ -1,5 +1,20 @@
 import bazi from './bazi.ja';
 import ziwei from './ziwei.ja';
+import practice, {
+  practiceAudio,
+  practiceMeditation,
+} from './practice.ja';
+import {
+  peaceJournal,
+  buddhistCalendar,
+  altarCustomization,
+} from './spiritualFeatures.ja';
+import {
+  dataSync,
+  pdfExport,
+  premiumContent,
+  smartFeatures,
+} from './spiritualFeatures10_13.ja';
 const ja = {
   common: {
     cancel: 'キャンセル',
@@ -120,41 +135,44 @@ baziStage4Subtitle:
     incenseStatsTitle: 'お香の本数',
   },
 
-  meditation: {
-    screenTitle: '瞑想',
+meditation: {
+  title: '瞑想',
+  screenTitle: '瞑想',
 
-    breathingTitle: '呼吸瞑想',
+  subtitle:
+    '楽な姿勢で座り、肩の力を抜いて、一呼吸ずつ静かに意識を向けましょう。',
 
-    chooseDuration: '時間を選択',
+  breathingTitle: '呼吸瞑想',
 
-    minuteUnit: '分',
+  chooseDuration: '時間を選択',
 
-    heroMinutes: '{{count}}分',
+  minutes: '{{count}}分',
+  minuteUnit: '分',
+  heroMinutes: '{{count}}分',
 
-    start: '瞑想を開始',
+  start: '瞑想を始める',
+  pause: '瞑想を一時停止',
+  restart: 'もう一度瞑想する',
 
-    pause: '瞑想を一時停止',
+  ready: '準備完了',
+  paused: '一時停止中',
+  running: '瞑想中',
 
-    restart: 'もう一度瞑想する',
+  resetTime: '時間をリセット',
 
-    paused: '一時停止中',
+  completedTitle: '瞑想が完了しました',
 
-    running: '瞑想中',
+  completedMessage:
+    'ゆっくり呼吸し、今の心と体の状態を感じてみましょう。',
 
-    resetTime: '時間をリセット',
+  breathTitle: '呼吸ガイド',
 
-    completedTitle: '瞑想完了',
+  inhale: '4秒かけてゆっくり吸う',
 
-    completedMessage: 'ゆっくり呼吸し、今の気持ちに気づいてみましょう。',
+  hold: '2秒間息を止める',
 
-    breathTitle: '呼吸ガイド',
-
-    inhale: '4秒かけてゆっくり吸う',
-
-    hold: '2秒息を止める',
-
-    exhale: '6秒かけてゆっくり吐く',
-  },
+  exhale: '6秒かけてゆっくり吐く',
+},
 
   prayer: {
     title: '祈りの日記',
@@ -900,6 +918,16 @@ baziStage4Subtitle:
   },
   bazi,
   ziwei,
+    practice,
+  practiceAudio,
+  practiceMeditation,
+    peaceJournal,
+  buddhistCalendar,
+  altarCustomization,
+    dataSync,
+  pdfExport,
+  premiumContent,
+  smartFeatures,
 } as const;
 
 export default ja;

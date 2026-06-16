@@ -15,6 +15,8 @@ import {
   premiumContent,
   smartFeatures,
 } from './spiritualFeatures10_13.ko';
+import chantCounter
+  from './chantCounter.ko';
 const ko = {
   common: {
     cancel: '취소',
@@ -93,6 +95,34 @@ baziHistorySubtitle:
 
 baziStage4Subtitle:
   '세운, 월운, 명식 비교 및 날짜 선택',
+  organizedActivitiesTitle: '나를 위한 수행 공간',
+practiceSectionEyebrow: '수행',
+practiceSectionTitle: '수행',
+practiceSectionSubtitle:
+  '마음을 가라앉히고 매일의 습관을 이어 가는 활동',
+calendarSectionEyebrow: '시간과 의식',
+calendarSectionTitle: '달력과 의식',
+calendarSectionSubtitle:
+  '음력 날짜, 불교 기념일과 중요한 수행일을 확인합니다',
+reflectionSectionEyebrow: '성찰',
+reflectionSectionTitle: '성찰',
+reflectionSectionSubtitle:
+  '문화적 참고와 자기 성찰을 위한 전통 콘텐츠',
+peaceJournalShortTitle: '일기',
+peaceJournalShortSubtitle:
+  '감정, 감사와 내려놓고 싶은 마음을 기록합니다',
+newMoonFullMoonTitle: '초하루와 보름',
+newMoonFullMoonSubtitle:
+  '음력 의식일을 확인하고 수행을 준비합니다',
+buddhistFestivalTitle: '불교 기념일',
+buddhistFestivalSubtitle:
+  '부처님오신날, 우란분절 등 주요 기념일을 확인합니다',
+practiceReminderTitle: '수행 알림',
+practiceReminderSubtitle:
+  '명상, 독경과 매일 의식 알림 시간을 선택합니다',
+chooseDateTitle: '길일 보기',
+chooseDateSubtitle:
+  '결혼, 개업과 중요한 일을 위한 날짜를 참고합니다',
   },
 
   temple: {
@@ -928,6 +958,7 @@ meditation: {
   pdfExport,
   premiumContent,
   smartFeatures,
+  chantCounter
 } as const;
 
 export default ko;

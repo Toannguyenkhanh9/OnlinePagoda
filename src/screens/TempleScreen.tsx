@@ -28,15 +28,15 @@ import {
   stopTempleSound,
   type TempleSound,
 } from '../services/audio';
+import TempleAmbientSound from '../components/TempleAmbientSound';
+import TempleSceneOverlay from '../components/TempleSceneOverlay';
+
+import {
+  incrementChantDraft,
+} from '../services/chantCounter';
 import {
   recordPracticeActivity,
 } from '../services/practice';
-import TempleSceneOverlay
-  from '../components/TempleSceneOverlay';
-
-import TempleAmbientSound
-  from '../components/TempleAmbientSound';
-
 
 type ActionKind = 'incense' | 'woodenFish' | 'bell';
 
@@ -486,24 +486,48 @@ export default function TempleScreen() {
     };
   }, []);
 
-const lightIncense = () => {
-  const expirationTime =
-    Date.now() + INCENSE_BURN_DURATION_MS;
+  const lightIncense = () => {
+    const expirationTime =
+      Date.now() + INCENSE_BURN_DURATION_MS;
 
-  setIncenseExpirations(current => [
-    ...current,
-    expirationTime,
-  ]);
+    setIncenseExpirations(current => [
+      ...current,
+      expirationTime,
+    ]);
 
-  recordPracticeActivity('incense').catch(
-    error => {
+    recordPracticeActivity('incense').catch(
+      error => {
+        console.warn(
+          'Unable to record incense practice:',
+          error,
+        );
+      },
+    );
+  };
+
+  /**
+   * Cộng một lần gõ mõ vào:
+   * 1. Bộ đếm tạm đang hiển thị trong Chính điện.
+   * 2. Bản đếm đang dở của Bộ đếm tụng niệm.
+   *
+   * Lịch sử theo ngày chỉ được tạo khi người dùng mở màn hình
+   * Bộ đếm tụng niệm và bấm "Hoàn thành và lưu".
+   */
+  const recordWoodenFishStrike = async () => {
+    setWoodenFishCount(current => current + 1);
+
+    try {
+      await incrementChantDraft(
+        'woodenFish',
+        1,
+      );
+    } catch (error) {
       console.warn(
-        'Unable to record incense practice:',
+        'Unable to update wooden-fish chant counter:',
         error,
       );
-    },
-  );
-};
+    }
+  };
 
   const handleSoundPress = async (type: TempleSound) => {
     if (loopingSound === type) {
@@ -520,7 +544,7 @@ const lightIncense = () => {
     await playTempleSound(type);
 
     if (type === 'woodenFish') {
-      setWoodenFishCount(current => current + 1);
+      await recordWoodenFishStrike();
     } else {
       setBellCount(current => current + 1);
     }
@@ -538,7 +562,9 @@ const lightIncense = () => {
     setLoopingSound(type);
 
     if (type === 'woodenFish') {
-      setWoodenFishCount(current => current + 1);
+      // Khi bắt đầu phát lặp chỉ tính một lần.
+      // Âm thanh lặp không tự động cộng số liên tục.
+      await recordWoodenFishStrike();
     } else {
       setBellCount(current => current + 1);
     }
@@ -570,9 +596,13 @@ const lightIncense = () => {
       resizeMode="cover"
       style={styles.background}
     >
-        <TempleSceneOverlay />
-  <TempleAmbientSound />
-      <StatusBar barStyle="light-content" backgroundColor="#160B05" />
+      <TempleSceneOverlay />
+      <TempleAmbientSound />
+
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="#160B05"
+      />
 
       <View style={styles.overlay}>
         <TempleLightEffects />

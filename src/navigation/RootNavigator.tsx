@@ -35,6 +35,8 @@ import BuddhistCalendarScreen
 
 import AltarCustomizationScreen
   from '../screens/AltarCustomizationScreen';
+  import ChantCounterScreen
+  from '../screens/ChantCounterScreen';
 
 export type RootTabParamList = {
   Home: undefined;
@@ -60,6 +62,7 @@ export type RootTabParamList = {
   BuddhistCalendar: undefined;
   AltarCustomization: undefined;
   DataSync: undefined;
+  ChantCounter: undefined;
 ExportCenter: undefined;
 PremiumLibrary: undefined;
 
@@ -279,6 +282,15 @@ export default function RootNavigator() {
   component={AltarCustomizationScreen}
   options={{
     title: t('altarCustomization.title'),
+    tabBarButton: () => null,
+        tabBarItemStyle: styles.hiddenTab,
+  }}
+/>
+<Tab.Screen
+  name="ChantCounter"
+  component={ChantCounterScreen}
+  options={{
+    title: t('chantCounter.title'),
     tabBarButton: () => null,
         tabBarItemStyle: styles.hiddenTab,
   }}

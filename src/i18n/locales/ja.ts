@@ -15,6 +15,8 @@ import {
   premiumContent,
   smartFeatures,
 } from './spiritualFeatures10_13.ja';
+import chantCounter
+  from './chantCounter.ja';
 const ja = {
   common: {
     cancel: 'キャンセル',
@@ -93,6 +95,34 @@ baziHistorySubtitle:
 
 baziStage4Subtitle:
   '流年・流月、命式比較、日取り選択',
+  organizedActivitiesTitle: 'あなたのための修習空間',
+practiceSectionEyebrow: '修習',
+practiceSectionTitle: '修習',
+practiceSectionSubtitle:
+  '心を落ち着け、毎日の習慣を続けるための活動',
+calendarSectionEyebrow: '時間と儀式',
+calendarSectionTitle: '暦と儀式',
+calendarSectionSubtitle:
+  '旧暦の日付、仏教行事、重要な修習日を確認します',
+reflectionSectionEyebrow: '省察',
+reflectionSectionTitle: '省察',
+reflectionSectionSubtitle:
+  '文化的な参考と自己省察のための伝統コンテンツ',
+peaceJournalShortTitle: '日記',
+peaceJournalShortSubtitle:
+  '感情、感謝、手放したいことを記録します',
+newMoonFullMoonTitle: '朔日と満月日',
+newMoonFullMoonSubtitle:
+  '旧暦の節目を確認し、儀式の準備をします',
+buddhistFestivalTitle: '仏教行事',
+buddhistFestivalSubtitle:
+  'ウェーサーカ祭、盂蘭盆会などの行事を確認します',
+practiceReminderTitle: '修習リマインダー',
+practiceReminderSubtitle:
+  '瞑想、読経、毎日の儀式の通知時間を選びます',
+chooseDateTitle: '日取りを見る',
+chooseDateSubtitle:
+  '結婚、開店、重要な予定に適した日を参考にします',
   },
 
   temple: {
@@ -928,6 +958,7 @@ meditation: {
   pdfExport,
   premiumContent,
   smartFeatures,
+  chantCounter
 } as const;
 
 export default ja;

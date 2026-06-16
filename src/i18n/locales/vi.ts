@@ -15,6 +15,8 @@ import {
   premiumContent,
   smartFeatures,
 } from './spiritualFeatures10_13.vi';
+import chantCounter
+  from './chantCounter.vi';
 const vi = {
   common: {
     cancel: 'Hủy',
@@ -93,6 +95,34 @@ baziHistorySubtitle:
 
 baziStage4Subtitle:
   'Lưu niên, lưu nguyệt, so lá số và chọn ngày',
+  organizedActivitiesTitle: 'Không gian dành cho bạn',
+practiceSectionEyebrow: 'THỰC HÀNH',
+practiceSectionTitle: 'Tu tập',
+practiceSectionSubtitle:
+  'Các hoạt động giúp tâm lắng dịu và duy trì thói quen mỗi ngày',
+calendarSectionEyebrow: 'THỜI GIAN',
+calendarSectionTitle: 'Lịch và nghi lễ',
+calendarSectionSubtitle:
+  'Theo dõi ngày âm, ngày lễ và những dịp thực hành quan trọng',
+reflectionSectionEyebrow: 'CHIÊM NGHIỆM',
+reflectionSectionTitle: 'Chiêm nghiệm',
+reflectionSectionSubtitle:
+  'Nội dung truyền thống để tham khảo văn hóa và tự nhìn lại bản thân',
+peaceJournalShortTitle: 'Nhật ký',
+peaceJournalShortSubtitle:
+  'Ghi lại cảm xúc, lòng biết ơn và điều muốn buông bỏ',
+newMoonFullMoonTitle: 'Mùng một – ngày rằm',
+newMoonFullMoonSubtitle:
+  'Theo dõi ngày sóc, ngày vọng và chuẩn bị nghi lễ',
+buddhistFestivalTitle: 'Ngày lễ Phật giáo',
+buddhistFestivalSubtitle:
+  'Xem Phật Đản, Vu Lan và các ngày vía phổ biến',
+practiceReminderTitle: 'Nhắc thực hành',
+practiceReminderSubtitle:
+  'Chọn giờ nhắc thiền, tụng kinh và nghi thức hằng ngày',
+chooseDateTitle: 'Xem ngày',
+chooseDateSubtitle:
+  'Tham khảo ngày phù hợp cho cưới hỏi, khai trương và việc lớn',
   },
 
   temple: {
@@ -999,6 +1029,7 @@ meditation: {
   pdfExport,
   premiumContent,
   smartFeatures,
+  chantCounter
 } as const;
 
 export default vi;

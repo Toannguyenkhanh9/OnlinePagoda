@@ -15,6 +15,8 @@ import {
   premiumContent,
   smartFeatures,
 } from './spiritualFeatures10_13.en';
+import chantCounter
+  from './chantCounter.en';
 const en = {
   common: {
     cancel: 'Cancel',
@@ -93,6 +95,34 @@ baziHistorySubtitle:
 
 baziStage4Subtitle:
   'Transits, chart comparison, and date selection',
+  organizedActivitiesTitle: 'Spaces for your practice',
+practiceSectionEyebrow: 'PRACTICE',
+practiceSectionTitle: 'Practice',
+practiceSectionSubtitle:
+  'Activities that calm the mind and support a steady daily routine',
+calendarSectionEyebrow: 'TIME & RITUAL',
+calendarSectionTitle: 'Calendar and Rituals',
+calendarSectionSubtitle:
+  'Follow lunar dates, observances, and important practice days',
+reflectionSectionEyebrow: 'REFLECTION',
+reflectionSectionTitle: 'Reflection',
+reflectionSectionSubtitle:
+  'Traditional content for cultural reference and personal reflection',
+peaceJournalShortTitle: 'Journal',
+peaceJournalShortSubtitle:
+  'Record emotions, gratitude, and what you are ready to release',
+newMoonFullMoonTitle: 'New Moon and Full Moon',
+newMoonFullMoonSubtitle:
+  'Follow lunar observance days and prepare your rituals',
+buddhistFestivalTitle: 'Buddhist Observances',
+buddhistFestivalSubtitle:
+  'View Vesak, Ullambana, and other common observance days',
+practiceReminderTitle: 'Practice Reminders',
+practiceReminderSubtitle:
+  'Choose reminders for meditation, chanting, and daily rituals',
+chooseDateTitle: 'Auspicious Dates',
+chooseDateSubtitle:
+  'Reference dates for weddings, openings, and important events',
   },
 
   temple: {
@@ -928,6 +958,7 @@ meditation: {
   pdfExport,
   premiumContent,
   smartFeatures,
+  chantCounter
 } as const;
 
 export default en;

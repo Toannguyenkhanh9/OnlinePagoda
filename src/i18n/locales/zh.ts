@@ -15,6 +15,8 @@ import {
   premiumContent,
   smartFeatures,
 } from './spiritualFeatures10_13.zh';
+import chantCounter
+  from './chantCounter.zh';
 const zh = {
   common: {
     cancel: '取消',
@@ -93,6 +95,34 @@ baziHistorySubtitle:
 
 baziStage4Subtitle:
   '流年、流月、命盘比较与择日',
+  organizedActivitiesTitle: '你的修习空间',
+practiceSectionEyebrow: '日常修习',
+practiceSectionTitle: '修习',
+practiceSectionSubtitle:
+  '帮助内心安定并维持每日习惯的活动',
+calendarSectionEyebrow: '时间与仪式',
+calendarSectionTitle: '日历与仪式',
+calendarSectionSubtitle:
+  '查看农历日期、佛教纪念日和重要修习日',
+reflectionSectionEyebrow: '文化省思',
+reflectionSectionTitle: '省思',
+reflectionSectionSubtitle:
+  '用于文化参考与自我观照的传统内容',
+peaceJournalShortTitle: '日记',
+peaceJournalShortSubtitle:
+  '记录情绪、感恩和准备放下的事情',
+newMoonFullMoonTitle: '初一与十五',
+newMoonFullMoonSubtitle:
+  '查看朔望日并准备相关仪式',
+buddhistFestivalTitle: '佛教节日',
+buddhistFestivalSubtitle:
+  '查看卫塞节、盂兰盆节和常见纪念日',
+practiceReminderTitle: '修习提醒',
+practiceReminderSubtitle:
+  '设置冥想、诵经和每日仪式提醒',
+chooseDateTitle: '择日',
+chooseDateSubtitle:
+  '参考婚礼、开业和重要事项的适合日期',
   },
 
   temple: {
@@ -928,6 +958,7 @@ meditation: {
   pdfExport,
   premiumContent,
   smartFeatures,
+  chantCounter
 } as const;
 
 export default zh;

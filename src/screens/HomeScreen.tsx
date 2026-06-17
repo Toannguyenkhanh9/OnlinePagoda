@@ -37,6 +37,7 @@ type MenuRoute =
   | "Prayer"
   | "SpiritualAudio"
   | "ChantCounter"
+  | "PracticeJourney"
   | "DailyRitual"
   | "PeaceJournal"
   | "AltarCustomization"
@@ -214,6 +215,13 @@ export default function HomeScreen({ navigation }: Props) {
   };
 
   const practiceItems: HomeMenuItem[] = [
+    {
+      icon: "🌱",
+      title: t("practiceJourney.homeTitle"),
+      subtitle: t("practiceJourney.homeSubtitle"),
+      route: "PracticeJourney",
+      accent: "#E7E5C9",
+    },
     {
       icon: "🪔",
       title: t("home.templeTitle"),

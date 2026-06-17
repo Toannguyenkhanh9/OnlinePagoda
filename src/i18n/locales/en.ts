@@ -17,6 +17,8 @@ import {
 } from './spiritualFeatures10_13.en';
 import chantCounter
   from './chantCounter.en';
+  import practiceJourney
+  from './practiceJourney.en';
 const en = {
   common: {
     cancel: 'Cancel',
@@ -989,7 +991,8 @@ meditation: {
   pdfExport,
   premiumContent,
   smartFeatures,
-  chantCounter
+  chantCounter,
+  practiceJourney
 } as const;
 
 export default en;

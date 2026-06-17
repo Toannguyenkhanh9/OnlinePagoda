@@ -17,6 +17,8 @@ import {
 } from './spiritualFeatures10_13.ko';
 import chantCounter
   from './chantCounter.ko';
+  import practiceJourney
+  from './practiceJourney.ko';
 const ko = {
   common: {
     cancel: '취소',
@@ -989,7 +991,8 @@ meditation: {
   pdfExport,
   premiumContent,
   smartFeatures,
-  chantCounter
+  chantCounter,
+  practiceJourney
 } as const;
 
 export default ko;

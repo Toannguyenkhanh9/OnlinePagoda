@@ -7,6 +7,14 @@ export type TempleSceneMode =
   | 'dusk'
   | 'night';
 
+export type AltarCultureTheme =
+  | 'auto'
+  | 'vietnam'
+  | 'china'
+  | 'japan'
+  | 'korea'
+  | 'western';
+
 export type AltarCenterpiece =
   | 'buddha'
   | 'lotus'
@@ -39,6 +47,7 @@ export type TempleSoundscape =
   | 'bell';
 
 export type AltarPreferences = {
+  cultureTheme: AltarCultureTheme;
   sceneMode: TempleSceneMode;
   centerpiece: AltarCenterpiece;
   flower: AltarFlower;
@@ -51,7 +60,17 @@ export type AltarPreferences = {
 const STORAGE_KEY =
   '@online_pagoda/altar_preferences_v1';
 
+const CULTURE_THEMES: AltarCultureTheme[] = [
+  'auto',
+  'vietnam',
+  'china',
+  'japan',
+  'korea',
+  'western',
+];
+
 export const DEFAULT_ALTAR_PREFERENCES: AltarPreferences = {
+  cultureTheme: 'auto',
   sceneMode: 'auto',
   centerpiece: 'none',
   flower: 'none',
@@ -60,6 +79,16 @@ export const DEFAULT_ALTAR_PREFERENCES: AltarPreferences = {
   soundscape: 'none',
   showFloatingPetals: true,
 };
+
+function normalizeCultureTheme(
+  value: unknown,
+): AltarCultureTheme {
+  return CULTURE_THEMES.includes(
+    value as AltarCultureTheme,
+  )
+    ? (value as AltarCultureTheme)
+    : 'auto';
+}
 
 export async function getAltarPreferences(): Promise<
   AltarPreferences
@@ -73,11 +102,16 @@ export async function getAltarPreferences(): Promise<
       return DEFAULT_ALTAR_PREFERENCES;
     }
 
-    const parsed = JSON.parse(raw);
+    const parsed = JSON.parse(
+      raw,
+    ) as Partial<AltarPreferences>;
 
     return {
       ...DEFAULT_ALTAR_PREFERENCES,
-      ...(parsed as Partial<AltarPreferences>),
+      ...parsed,
+      cultureTheme: normalizeCultureTheme(
+        parsed.cultureTheme,
+      ),
     };
   } catch (error) {
     console.warn(
@@ -92,9 +126,16 @@ export async function getAltarPreferences(): Promise<
 export async function saveAltarPreferences(
   preferences: AltarPreferences,
 ): Promise<void> {
+  const normalized: AltarPreferences = {
+    ...preferences,
+    cultureTheme: normalizeCultureTheme(
+      preferences.cultureTheme,
+    ),
+  };
+
   await AsyncStorage.setItem(
     STORAGE_KEY,
-    JSON.stringify(preferences),
+    JSON.stringify(normalized),
   );
 }
 

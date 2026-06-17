@@ -82,6 +82,17 @@ export const altarCustomization = {
   subtitle:
     'Choose lighting, flowers, lamps, and ambience for your practice space.',
   preview: 'Preview',
+  cultureThemeTitle: 'Altar style',
+  activeCultureTheme:
+    'Current style: {{theme}}',
+  cultureThemes: {
+    auto: 'Automatic by language',
+    vietnam: 'Vietnamese',
+    china: 'Chinese',
+    japan: 'Japanese',
+    korea: 'Korean',
+    western: 'Western',
+  },
   sceneTitle: 'Time of day',
   centerpieceTitle: 'Centerpiece',
   flowerTitle: 'Flowers',

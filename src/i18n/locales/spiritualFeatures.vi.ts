@@ -82,6 +82,17 @@ export const altarCustomization = {
   subtitle:
     'Chọn ánh sáng, hoa, đèn và không khí phù hợp với không gian thực hành của bạn.',
   preview: 'Xem trước',
+  cultureThemeTitle: 'Phong cách bàn thờ',
+  activeCultureTheme:
+    'Đang dùng: {{theme}}',
+  cultureThemes: {
+    auto: 'Tự động theo ngôn ngữ',
+    vietnam: 'Việt Nam',
+    china: 'Trung Quốc',
+    japan: 'Nhật Bản',
+    korea: 'Hàn Quốc',
+    western: 'Phương Tây',
+  },
   sceneTitle: 'Thời điểm trong ngày',
   centerpieceTitle: 'Biểu tượng trung tâm',
   flowerTitle: 'Hoa trang trí',

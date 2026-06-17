@@ -1,3 +1,4 @@
+
 import React, {
   useEffect,
   useState,
@@ -9,6 +10,8 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+
+import mobileAds from 'react-native-google-mobile-ads';
 
 import {
   SafeAreaProvider,
@@ -22,14 +25,16 @@ import RootNavigator
   from './src/navigation/RootNavigator';
 
 import {
-  colors,
-} from './src/theme/colors';
+  refreshDailyPracticeReminder,
+} from './src/services/dailyPracticeNotifications';
+
 import {
   refreshLunarReminders,
 } from './src/services/lunarNotifications';
+
 import {
-  refreshDailyPracticeReminder,
-} from './src/services/dailyPracticeNotifications';
+  colors,
+} from './src/theme/colors';
 
 export default function App() {
   const [
@@ -37,29 +42,78 @@ export default function App() {
     setIsI18nReady,
   ] = useState(false);
 
-useEffect(() => {
-  initializeI18n()
-    .then(async () => {
-      try {
-        await refreshLunarReminders();
-        await refreshDailyPracticeReminder();
-      } catch (error) {
+  useEffect(() => {
+    let isMounted = true;
+
+    /**
+     * Khởi tạo Google Mobile Ads.
+     *
+     * Việc khởi tạo quảng cáo chạy độc lập,
+     * không làm chặn quá trình mở ứng dụng.
+     */
+    mobileAds()
+      .initialize()
+      .then(adapterStatuses => {
+        console.log(
+          'AdMob đã khởi tạo:',
+          adapterStatuses,
+        );
+      })
+      .catch(error => {
         console.warn(
-          'Không thể làm mới lịch thông báo âm lịch:',
+          'Không thể khởi tạo AdMob:',
           error,
         );
-      }
-    })
-    .catch(error => {
-      console.warn(
-        'Không thể khởi tạo ngôn ngữ:',
-        error,
-      );
-    })
-    .finally(() => {
-      setIsI18nReady(true);
-    });
-}, []);
+      });
+
+    /**
+     * Khởi tạo ngôn ngữ và làm mới
+     * các thông báo đã lên lịch.
+     */
+    initializeI18n()
+      .then(async () => {
+        const reminderResults =
+          await Promise.allSettled([
+            refreshLunarReminders(),
+            refreshDailyPracticeReminder(),
+          ]);
+
+        reminderResults.forEach(
+          (result, index) => {
+            if (
+              result.status !== 'rejected'
+            ) {
+              return;
+            }
+
+            const reminderName =
+              index === 0
+                ? 'lịch âm'
+                : 'thực hành hằng ngày';
+
+            console.warn(
+              `Không thể làm mới thông báo ${reminderName}:`,
+              result.reason,
+            );
+          },
+        );
+      })
+      .catch(error => {
+        console.warn(
+          'Không thể khởi tạo ngôn ngữ:',
+          error,
+        );
+      })
+      .finally(() => {
+        if (isMounted) {
+          setIsI18nReady(true);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   if (!isI18nReady) {
     return (
@@ -89,12 +143,10 @@ useEffect(() => {
 const styles = StyleSheet.create({
   loading: {
     flex: 1,
-
     alignItems: 'center',
-
     justifyContent: 'center',
-
     backgroundColor:
       colors.background,
   },
 });
+

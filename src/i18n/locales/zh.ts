@@ -17,6 +17,8 @@ import {
 } from './spiritualFeatures10_13.zh';
 import chantCounter
   from './chantCounter.zh';
+  import practiceJourney
+  from './practiceJourney.zh';
 const zh = {
   common: {
     cancel: '取消',
@@ -989,7 +991,8 @@ meditation: {
   pdfExport,
   premiumContent,
   smartFeatures,
-  chantCounter
+  chantCounter,
+  practiceJourney
 } as const;
 
 export default zh;

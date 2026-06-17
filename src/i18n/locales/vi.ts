@@ -17,6 +17,8 @@ import {
 } from './spiritualFeatures10_13.vi';
 import chantCounter
   from './chantCounter.vi';
+  import practiceJourney
+  from './practiceJourney.vi';
 const vi = {
   common: {
     cancel: 'Hủy',
@@ -989,7 +991,8 @@ meditation: {
   pdfExport,
   premiumContent,
   smartFeatures,
-  chantCounter
+  chantCounter,
+  practiceJourney
 } as const;
 
 export default vi;

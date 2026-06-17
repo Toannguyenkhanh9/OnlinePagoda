@@ -25,6 +25,7 @@ import {
   saveAltarPreferences,
   type AltarAccent,
   type AltarCenterpiece,
+  type AltarCultureTheme,
   type AltarFlower,
   type AltarLamp,
   type AltarPreferences,
@@ -32,12 +33,57 @@ import {
   type TempleSoundscape,
 } from '../services/altarPreferences';
 import {colors} from '../theme/colors';
+import {
+  getAltarBackgroundSource,
+  resolveAltarCultureTheme,
+} from '../utils/altarTheme';
 
 type Option<T extends string> = {
   value: T;
   icon: string;
   labelKey: string;
 };
+
+const CULTURE_THEME_OPTIONS: Array<
+  Option<AltarCultureTheme>
+> = [
+  {
+    value: 'auto',
+    icon: '🌐',
+    labelKey:
+      'altarCustomization.cultureThemes.auto',
+  },
+  {
+    value: 'vietnam',
+    icon: '🇻🇳',
+    labelKey:
+      'altarCustomization.cultureThemes.vietnam',
+  },
+  {
+    value: 'china',
+    icon: '🇨🇳',
+    labelKey:
+      'altarCustomization.cultureThemes.china',
+  },
+  {
+    value: 'japan',
+    icon: '🇯🇵',
+    labelKey:
+      'altarCustomization.cultureThemes.japan',
+  },
+  {
+    value: 'korea',
+    icon: '🇰🇷',
+    labelKey:
+      'altarCustomization.cultureThemes.korea',
+  },
+  {
+    value: 'western',
+    icon: '🌍',
+    labelKey:
+      'altarCustomization.cultureThemes.western',
+  },
+];
 
 const SCENE_OPTIONS: Array<
   Option<TempleSceneMode>
@@ -282,7 +328,7 @@ function OptionGroup<T extends string>({
 }
 
 export default function AltarCustomizationScreen() {
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
 
   const [preferences, setPreferences] =
     useState<AltarPreferences>(
@@ -290,6 +336,22 @@ export default function AltarCustomizationScreen() {
     );
   const [isSaving, setIsSaving] =
     useState(false);
+
+  const language =
+    i18n.resolvedLanguage ??
+    i18n.language ??
+    'en';
+
+  const effectiveCultureTheme =
+    resolveAltarCultureTheme(
+      preferences.cultureTheme,
+      language,
+    );
+
+  const previewBackground =
+    getAltarBackgroundSource(
+      effectiveCultureTheme,
+    );
 
   useFocusEffect(
     useCallback(() => {
@@ -396,7 +458,7 @@ export default function AltarCustomizationScreen() {
 
         <View style={styles.previewCard}>
           <ImageBackground
-            source={require('../assets/images/main_hall_background.png')}
+            source={previewBackground}
             resizeMode="cover"
             style={styles.previewImage}
             imageStyle={
@@ -415,9 +477,32 @@ export default function AltarCustomizationScreen() {
                   'altarCustomization.preview',
                 )}
               </Text>
+
+              <Text
+                style={styles.previewCultureLabel}>
+                {t(
+                  'altarCustomization.activeCultureTheme',
+                  {
+                    theme: t(
+                      `altarCustomization.cultureThemes.${effectiveCultureTheme}`,
+                    ),
+                  },
+                )}
+              </Text>
             </View>
           </ImageBackground>
         </View>
+
+        <OptionGroup
+          title={t(
+            'altarCustomization.cultureThemeTitle',
+          )}
+          options={CULTURE_THEME_OPTIONS}
+          value={preferences.cultureTheme}
+          onChange={value =>
+            update('cultureTheme', value)
+          }
+        />
 
         <OptionGroup
           title={t(
@@ -633,6 +718,13 @@ const styles = StyleSheet.create({
     color: '#FFE4A5',
     fontSize: 12,
     fontWeight: '800',
+  },
+  previewCultureLabel: {
+    color: '#F6E4C3',
+    fontSize: 10,
+    fontWeight: '600',
+    textAlign: 'center',
+    marginTop: 2,
   },
   optionSection: {
     marginTop: 22,

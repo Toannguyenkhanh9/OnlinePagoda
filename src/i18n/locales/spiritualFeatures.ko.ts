@@ -77,6 +77,17 @@ export const altarCustomization = {
   subtitle:
     '수행 공간에 어울리는 빛, 꽃, 등불과 분위기를 선택하세요.',
   preview: '미리보기',
+  cultureThemeTitle: '법당 스타일',
+  activeCultureTheme:
+    '현재 스타일: {{theme}}',
+  cultureThemes: {
+    auto: '언어에 따라 자동 선택',
+    vietnam: '베트남 스타일',
+    china: '중국 스타일',
+    japan: '일본 스타일',
+    korea: '한국 스타일',
+    western: '서양 스타일',
+  },
   sceneTitle: '시간대',
   centerpieceTitle: '중앙 상징',
   flowerTitle: '꽃 장식',

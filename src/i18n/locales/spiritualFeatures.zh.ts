@@ -73,6 +73,17 @@ export const altarCustomization = {
   subtitle:
     '选择适合你的光线、花卉、灯具与环境氛围。',
   preview: '预览',
+  cultureThemeTitle: '佛堂风格',
+  activeCultureTheme:
+    '当前风格：{{theme}}',
+  cultureThemes: {
+    auto: '跟随语言自动选择',
+    vietnam: '越南风格',
+    china: '中国风格',
+    japan: '日本风格',
+    korea: '韩国风格',
+    western: '西方风格',
+  },
   sceneTitle: '时间场景',
   centerpieceTitle: '中心象征',
   flowerTitle: '花卉',

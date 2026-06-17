@@ -1,4 +1,7 @@
-import React from "react";
+import React, {
+  useCallback,
+  useState,
+} from "react";
 import {
   ImageBackground,
   Pressable,
@@ -11,10 +14,20 @@ import {
 } from "react-native";
 
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { useFocusEffect } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
 import PracticeStreakCard from "../components/PracticeStreakCard";
 import type { RootTabParamList } from "../navigation/RootNavigator";
+import {
+  DEFAULT_ALTAR_PREFERENCES,
+  getAltarPreferences,
+  type AltarPreferences,
+} from "../services/altarPreferences";
+import {
+  getAltarBackgroundSource,
+  resolveAltarCultureTheme,
+} from "../utils/altarTheme";
 
 type Props = BottomTabScreenProps<RootTabParamList, "Home">;
 
@@ -150,7 +163,51 @@ function HomeSection({
 }
 
 export default function HomeScreen({ navigation }: Props) {
-  const { t } = useTranslation();
+  const {t, i18n} = useTranslation();
+
+  const [altarPreferences, setAltarPreferences] =
+    useState<AltarPreferences>(
+      DEFAULT_ALTAR_PREFERENCES,
+    );
+
+  useFocusEffect(
+    useCallback(() => {
+      let active = true;
+
+      getAltarPreferences()
+        .then(value => {
+          if (active) {
+            setAltarPreferences(value);
+          }
+        })
+        .catch(error => {
+          console.warn(
+            "Unable to load altar preferences:",
+            error,
+          );
+        });
+
+      return () => {
+        active = false;
+      };
+    }, []),
+  );
+
+  const language =
+    i18n.resolvedLanguage ??
+    i18n.language ??
+    "en";
+
+  const effectiveCultureTheme =
+    resolveAltarCultureTheme(
+      altarPreferences.cultureTheme,
+      language,
+    );
+
+  const heroBackground =
+    getAltarBackgroundSource(
+      effectiveCultureTheme,
+    );
 
   const navigateTo = (route: MenuRoute) => {
     navigation.navigate(route);
@@ -376,7 +433,7 @@ export default function HomeScreen({ navigation }: Props) {
         </View>
 
         <ImageBackground
-          source={require("../assets/images/main_hall_background.png")}
+          source={heroBackground}
           resizeMode="cover"
           imageStyle={styles.heroImage}
           style={styles.hero}

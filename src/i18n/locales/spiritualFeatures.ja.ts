@@ -77,6 +77,17 @@ export const altarCustomization = {
   subtitle:
     '修習空間に合う光、花、灯り、環境音を選びます。',
   preview: 'プレビュー',
+  cultureThemeTitle: '仏壇のスタイル',
+  activeCultureTheme:
+    '現在のスタイル：{{theme}}',
+  cultureThemes: {
+    auto: '言語に合わせて自動選択',
+    vietnam: 'ベトナム風',
+    china: '中国風',
+    japan: '日本風',
+    korea: '韓国風',
+    western: '西洋風',
+  },
   sceneTitle: '時間帯',
   centerpieceTitle: '中央の象徴',
   flowerTitle: '花',

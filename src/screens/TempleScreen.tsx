@@ -1,4 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   Alert,
   Animated,
@@ -15,6 +20,7 @@ import {
   View,
 } from 'react-native';
 
+import {useFocusEffect} from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 
 import SkiaIncenseSmoke from '../components/SkiaIncenseSmoke';
@@ -37,6 +43,15 @@ import {
 import {
   recordPracticeActivity,
 } from '../services/practice';
+import {
+  DEFAULT_ALTAR_PREFERENCES,
+  getAltarPreferences,
+  type AltarPreferences,
+} from '../services/altarPreferences';
+import {
+  getAltarBackgroundSource,
+  resolveAltarCultureTheme,
+} from '../utils/altarTheme';
 
 type ActionKind = 'incense' | 'woodenFish' | 'bell';
 
@@ -440,7 +455,7 @@ function TempleSmokeLayer({
 const INCENSE_BURN_DURATION_MS = 60 * 1000;
 
 export default function TempleScreen() {
-  const { t } = useTranslation();
+  const {t, i18n} = useTranslation();
 
   const [incenseExpirations, setIncenseExpirations] =
     useState<number[]>([]);
@@ -448,7 +463,52 @@ export default function TempleScreen() {
   const incenseCount = incenseExpirations.length;
   const [woodenFishCount, setWoodenFishCount] = useState(0);
   const [bellCount, setBellCount] = useState(0);
-  const [loopingSound, setLoopingSound] = useState<TempleSound | null>(null);
+  const [loopingSound, setLoopingSound] =
+    useState<TempleSound | null>(null);
+
+  const [altarPreferences, setAltarPreferences] =
+    useState<AltarPreferences>(
+      DEFAULT_ALTAR_PREFERENCES,
+    );
+
+  const language =
+    i18n.resolvedLanguage ??
+    i18n.language ??
+    'en';
+
+  const effectiveCultureTheme =
+    resolveAltarCultureTheme(
+      altarPreferences.cultureTheme,
+      language,
+    );
+
+  const altarBackground =
+    getAltarBackgroundSource(
+      effectiveCultureTheme,
+    );
+
+  useFocusEffect(
+    useCallback(() => {
+      let active = true;
+
+      getAltarPreferences()
+        .then(value => {
+          if (active) {
+            setAltarPreferences(value);
+          }
+        })
+        .catch(error => {
+          console.warn(
+            'Unable to load altar preferences:',
+            error,
+          );
+        });
+
+      return () => {
+        active = false;
+      };
+    }, []),
+  );
 
   useEffect(() => {
     preloadTempleSounds();
@@ -592,11 +652,13 @@ export default function TempleScreen() {
 
   return (
     <ImageBackground
-      source={require('../assets/images/main_hall_background.png')}
+      source={altarBackground}
       resizeMode="cover"
       style={styles.background}
     >
-      <TempleSceneOverlay />
+      <TempleSceneOverlay
+        preferences={altarPreferences}
+      />
       <TempleAmbientSound />
 
       <StatusBar
@@ -605,7 +667,10 @@ export default function TempleScreen() {
       />
 
       <View style={styles.overlay}>
-        <TempleLightEffects />
+        {effectiveCultureTheme ===
+          'vietnam' && (
+          <TempleLightEffects />
+        )}
 
         <SafeAreaView style={styles.safeArea}>
           <ScrollView

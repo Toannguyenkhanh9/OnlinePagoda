@@ -41,12 +41,14 @@ type MenuRoute =
   | "DailyRitual"
   | "PeaceJournal"
   | "AltarCustomization"
+  | "Today"
   | "LunarCalendar"
   | "BuddhistCalendar"
   | "FortuneStick"
   | "Horoscope"
   | "BaziChart"
   | "BaziHistory"
+  | "UserProfiles"
   | "BaziStage4"
   | "ZiweiChart"
   | "Settings";
@@ -296,6 +298,18 @@ export default function HomeScreen({ navigation }: Props) {
 
   const calendarItems: HomeMenuItem[] = [
     {
+      icon: "☀️",
+      title: t("today.title", {
+        defaultValue: "Hôm nay",
+      }),
+      subtitle: t("today.homeSubtitle", {
+        defaultValue:
+          "Xem ngày âm, Can Chi, giờ tham khảo và một phút chiêm nghiệm",
+      }),
+      route: "Today",
+      accent: "#F3E3BE",
+    },
+    {
       icon: "📅",
       title: t("home.lunarCalendarTitle"),
       subtitle: t("home.lunarCalendarSubtitle"),
@@ -363,6 +377,18 @@ export default function HomeScreen({ navigation }: Props) {
       subtitle: t("home.baziSubtitle"),
       route: "BaziChart",
       accent: "#EFE2D0",
+    },
+    {
+      icon: "◎",
+      title: t("userProfiles.title", {
+        defaultValue: "Hồ sơ chiêm nghiệm",
+      }),
+      subtitle: t("userProfiles.subtitle", {
+        defaultValue:
+          "Lưu thông tin ngày giờ sinh để dùng chung cho Bát Tự, Tử Vi và ngày tốt",
+      }),
+      route: "UserProfiles",
+      accent: "#DDE5E9",
     },
     {
       icon: "📚",

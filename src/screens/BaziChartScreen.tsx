@@ -32,6 +32,15 @@ import {
 } from '../services/baziHistory';
 import {shareBaziChart} from '../services/baziShare';
 
+import {
+  getUserProfile,
+} from '../services/userProfiles';
+
+import {
+  getUserProfileTimeWarningCode,
+  userProfileToBaziForm,
+} from '../services/userProfileAdapters';
+
 import type {
   BaziChart,
   Element,
@@ -42,10 +51,6 @@ import type {
   StrengthLevel,
   TenGod,
 } from '../astrology/bazi';
-import {
-  formatLocalizedPillar,
-  localizeStem,
-} from '../utils/baziLocalization';
 
 const ELEMENTS: Element[] = [
   'wood',
@@ -184,6 +189,81 @@ export default function BaziChartScreen() {
     i18n.resolvedLanguage ??
     i18n.language ??
     'en';
+
+  const isVietnamese =
+    language
+      .toLowerCase()
+      .startsWith('vi');
+
+  useEffect(() => {
+    const profileId =
+      route.params?.profileId as
+        | string
+        | undefined;
+
+    const savedRecordId =
+      route.params?.savedRecordId as
+        | string
+        | undefined;
+
+    if (
+      !profileId ||
+      savedRecordId
+    ) {
+      return;
+    }
+
+    let active = true;
+
+    getUserProfile(profileId)
+      .then(profile => {
+        if (!active || !profile) {
+          return;
+        }
+
+        setForm(
+          userProfileToBaziForm(
+            profile,
+          ),
+        );
+
+        setChart(null);
+        setLoadedRecordId(null);
+        setOpenSection('character');
+
+        const warningCode =
+          getUserProfileTimeWarningCode(
+            profile,
+          );
+
+        if (warningCode) {
+          Alert.alert(
+            t(
+              'userProfiles.profileTimeWarningTitle',
+            ),
+            t(
+              warningCode === 'unknown'
+                ? 'userProfiles.profileTimeUnknownMessage'
+                : 'userProfiles.profileTimeApproximateMessage',
+            ),
+          );
+        }
+      })
+      .catch(error => {
+        console.warn(
+          'Cannot load shared profile for BaZi:',
+          error,
+        );
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [
+    route.params?.profileId,
+    route.params?.savedRecordId,
+    t,
+  ]);
 
   useEffect(() => {
     const savedRecordId =
@@ -898,10 +978,11 @@ export default function BaziChartScreen() {
                         'Nhật chủ',
                     },
                   )}
-value={`${localizeStem(
-  chart.dayMaster,
-  language,
-)} ${chart.dayMaster.han}`}
+                  value={`${
+                    isVietnamese
+                      ? chart.dayMaster.vi
+                      : chart.dayMaster.en
+                  } ${chart.dayMaster.han}`}
                 />
 
                 <SummaryItem
@@ -1016,13 +1097,17 @@ value={`${localizeStem(
 
               <View style={styles.pillarsRow}>
                 {PILLAR_ORDER.map(kind => (
-<PillarCard
-  key={kind}
-  kind={kind}
-  pillar={chart.pillars[kind]}
-  language={language}
-  t={t}
-/>
+                  <PillarCard
+                    key={kind}
+                    kind={kind}
+                    pillar={
+                      chart.pillars[
+                        kind
+                      ]
+                    }
+                    isVietnamese={isVietnamese}
+                    t={t}
+                  />
                 ))}
               </View>
             </View>
@@ -1204,12 +1289,15 @@ value={`${localizeStem(
                         )}
                       </Text>
 
-<Text style={styles.luckPillar}>
-  {formatLocalizedPillar(
-    item.pillar,
-    language,
-  )}
-</Text>
+                      <Text style={styles.luckPillar}>
+                        {isVietnamese
+                          ? item.pillar.stem.vi
+                          : item.pillar.stem.en}
+                        {' '}
+                        {isVietnamese
+                          ? item.pillar.branch.vi
+                          : item.pillar.branch.en}
+                      </Text>
 
                       <Text style={styles.luckYears}>
                         {item.approximateStartYear}
@@ -1275,20 +1363,23 @@ function SummaryItem({
 type PillarCardProps = {
   kind: PillarKind;
   pillar: Pillar;
-  language: string;
+  isVietnamese: boolean;
   t: TFunction;
 };
 
 function PillarCard({
   kind,
   pillar,
-  language,
+  isVietnamese,
   t,
 }: PillarCardProps) {
   return (
     <View style={styles.pillarCard}>
       <Text style={styles.pillarKind}>
-        {pillarKindLabel(kind, t)}
+        {pillarKindLabel(
+          kind,
+          t,
+        )}
       </Text>
 
       <Text style={styles.pillarHan}>
@@ -1297,10 +1388,13 @@ function PillarCard({
       </Text>
 
       <Text style={styles.pillarVi}>
-        {formatLocalizedPillar(
-          pillar,
-          language,
-        )}
+        {isVietnamese
+          ? pillar.stem.vi
+          : pillar.stem.en}
+        {' '}
+        {isVietnamese
+          ? pillar.branch.vi
+          : pillar.branch.en}
       </Text>
 
       <Text style={styles.pillarTenGod}>

@@ -19,6 +19,10 @@ import chantCounter
   from './chantCounter.en';
   import practiceJourney
   from './practiceJourney.en';
+  import userProfiles
+  from './userProfiles.en';
+  import today
+  from './today.en';
 const en = {
   common: {
     cancel: 'Cancel',
@@ -992,7 +996,9 @@ meditation: {
   premiumContent,
   smartFeatures,
   chantCounter,
-  practiceJourney
+  practiceJourney,
+  userProfiles,
+  today
 } as const;
 
 export default en;

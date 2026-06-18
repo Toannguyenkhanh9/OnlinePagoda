@@ -19,6 +19,10 @@ import chantCounter
   from './chantCounter.ko';
   import practiceJourney
   from './practiceJourney.ko';
+  import userProfiles
+  from './userProfiles.ko';
+  import today
+  from './today.ko';
 const ko = {
   common: {
     cancel: '취소',
@@ -992,7 +996,9 @@ meditation: {
   premiumContent,
   smartFeatures,
   chantCounter,
-  practiceJourney
+  practiceJourney,
+  userProfiles,
+  today
 } as const;
 
 export default ko;

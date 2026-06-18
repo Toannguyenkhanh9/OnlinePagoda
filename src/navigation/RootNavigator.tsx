@@ -45,6 +45,9 @@ import SettingsScreen
 import LunarCalendarScreen
   from '../screens/LunarCalendarScreen';
 
+import TodayScreen
+  from '../screens/TodayScreen';
+
 import SpiritualAudioScreen
   from '../screens/SpiritualAudioScreen';
 
@@ -84,6 +87,12 @@ import ChantCounterScreen
 import PracticeJourneyScreen
   from '../screens/PracticeJourneyScreen';
 
+import UserProfilesScreen
+  from '../screens/UserProfilesScreen';
+
+import UserProfileEditorScreen
+  from '../screens/UserProfileEditorScreen';
+
 import {
   colors,
 } from '../theme/colors';
@@ -103,15 +112,22 @@ export type RootTabParamList = {
 
   LunarCalendar: undefined;
 
+  Today: undefined;
+
   SpiritualAudio: undefined;
 
   FortuneStick: undefined;
 
-  Horoscope: undefined;
+  Horoscope:
+    | {
+        profileId?: string;
+      }
+    | undefined;
 
   BaziChart:
     | {
         savedRecordId?: string;
+        profileId?: string;
       }
     | undefined;
 
@@ -119,7 +135,19 @@ export type RootTabParamList = {
 
   BaziStage4: undefined;
 
-  ZiweiChart: undefined;
+  ZiweiChart:
+    | {
+        profileId?: string;
+      }
+    | undefined;
+
+  UserProfiles: undefined;
+
+  UserProfileEditor:
+    | {
+        profileId?: string;
+      }
+    | undefined;
 
   DailyRitual: undefined;
 
@@ -336,6 +364,28 @@ export default function RootNavigator() {
               options={{
                 title: t(
                   'lunarCalendar.title',
+                ),
+
+                tabBarButton:
+                  () => null,
+
+                tabBarItemStyle:
+                  styles.hiddenTab,
+              }}
+            />
+
+            <Tab.Screen
+              name="Today"
+              component={
+                TodayScreen
+              }
+              options={{
+                title: t(
+                  'today.title',
+                  {
+                    defaultValue:
+                      'Today',
+                  },
                 ),
 
                 tabBarButton:
@@ -592,6 +642,50 @@ export default function RootNavigator() {
               options={{
                 title: t(
                   'practiceJourney.title',
+                ),
+
+                tabBarButton:
+                  () => null,
+
+                tabBarItemStyle:
+                  styles.hiddenTab,
+              }}
+            />
+
+            <Tab.Screen
+              name="UserProfiles"
+              component={
+                UserProfilesScreen
+              }
+              options={{
+                title: t(
+                  'userProfiles.title',
+                  {
+                    defaultValue:
+                      'Reflection Profiles',
+                  },
+                ),
+
+                tabBarButton:
+                  () => null,
+
+                tabBarItemStyle:
+                  styles.hiddenTab,
+              }}
+            />
+
+            <Tab.Screen
+              name="UserProfileEditor"
+              component={
+                UserProfileEditorScreen
+              }
+              options={{
+                title: t(
+                  'userProfiles.createTitle',
+                  {
+                    defaultValue:
+                      'Create Profile',
+                  },
                 ),
 
                 tabBarButton:

@@ -19,6 +19,10 @@ import chantCounter
   from './chantCounter.vi';
   import practiceJourney
   from './practiceJourney.vi';
+  import userProfiles
+  from './userProfiles.vi';
+  import today
+  from './today.vi';
 const vi = {
   common: {
     cancel: 'Hủy',
@@ -992,7 +996,9 @@ meditation: {
   premiumContent,
   smartFeatures,
   chantCounter,
-  practiceJourney
+  practiceJourney,
+  userProfiles,
+  today
 } as const;
 
 export default vi;

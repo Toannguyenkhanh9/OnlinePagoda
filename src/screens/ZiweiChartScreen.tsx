@@ -1,4 +1,8 @@
-import React, {useMemo, useState} from 'react';
+import React, {
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import {
   Alert,
   Pressable,
@@ -11,6 +15,7 @@ import {
   View,
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
+import {useRoute} from '@react-navigation/native';
 
 import ZiweiStage3Details from '../components/ZiweiStage3Details';
 import ZiweiStage4Details from '../components/ZiweiStage4Details';
@@ -21,6 +26,15 @@ import {
   calculateZiweiFromForm,
   type ZiweiFormValues,
 } from '../services/ziweiEngine';
+
+import {
+  getUserProfile,
+} from '../services/userProfiles';
+
+import {
+  getUserProfileTimeWarningCode,
+  userProfileToZiweiForm,
+} from '../services/userProfileAdapters';
 
 import type {
   EarthlyBranchId,
@@ -53,9 +67,103 @@ function createDefaultForm(): ZiweiFormValues {
 
 export default function ZiweiChartScreen() {
   const {t} = useTranslation();
-  const [form, setForm] = useState<ZiweiFormValues>(createDefaultForm());
-  const [chart, setChart] = useState<ZiweiChartStage6 | null>(null);
-  const [isCalculating, setIsCalculating] = useState(false);
+  const route = useRoute<any>();
+
+  const [form, setForm] =
+    useState<ZiweiFormValues>(
+      createDefaultForm(),
+    );
+
+  const [chart, setChart] =
+    useState<ZiweiChartStage6 | null>(
+      null,
+    );
+
+  const [isCalculating, setIsCalculating] =
+    useState(false);
+
+  useEffect(() => {
+    const profileId =
+      route.params?.profileId as
+        | string
+        | undefined;
+
+    if (!profileId) {
+      return;
+    }
+
+    let active = true;
+
+    getUserProfile(profileId)
+      .then(profile => {
+        if (!active || !profile) {
+          return;
+        }
+
+        try {
+          setForm(
+            userProfileToZiweiForm(
+              profile,
+            ),
+          );
+
+          setChart(null);
+
+          const warningCode =
+            getUserProfileTimeWarningCode(
+              profile,
+            );
+
+          if (warningCode) {
+            Alert.alert(
+              t(
+                'userProfiles.profileTimeWarningTitle',
+              ),
+              t(
+                warningCode === 'unknown'
+                  ? 'userProfiles.profileTimeUnknownMessage'
+                  : 'userProfiles.profileTimeApproximateMessage',
+              ),
+            );
+          }
+        } catch (error) {
+          const code =
+            error instanceof Error
+              ? error.message
+              : '';
+
+          if (
+            code ===
+            'ZIWEI_GENDER_REQUIRED'
+          ) {
+            Alert.alert(
+              t(
+                'userProfiles.ziweiGenderTitle',
+              ),
+              t(
+                'userProfiles.ziweiGenderMessage',
+              ),
+            );
+            return;
+          }
+
+          throw error;
+        }
+      })
+      .catch(error => {
+        console.warn(
+          'Cannot load shared profile for Zi Wei:',
+          error,
+        );
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [
+    route.params?.profileId,
+    t,
+  ]);
 
   const palaceByBranch = useMemo(() => {
     const map = new Map<EarthlyBranchId, ZiweiPalace>();

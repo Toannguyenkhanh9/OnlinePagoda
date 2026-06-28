@@ -23,6 +23,10 @@ import chantCounter
   from './userProfiles.vi';
   import today
   from './today.vi';
+    import palmReading
+  from './palmReading.vi';
+  import palmReadingV2Lite
+  from './palmReadingV2Lite.vi';
 const vi = {
   common: {
     cancel: 'Hủy',
@@ -998,7 +1002,9 @@ meditation: {
   chantCounter,
   practiceJourney,
   userProfiles,
-  today
+  today,      
+                    ...palmReading,
+                          ...palmReadingV2Lite,
 } as const;
 
 export default vi;

@@ -23,6 +23,10 @@ import chantCounter
   from './userProfiles.zh';
   import today
   from './today.zh';
+    import palmReading
+  from './palmReading.zh';
+  import palmReadingV2Lite
+  from './palmReadingV2Lite.zh';
 const zh = {
   common: {
     cancel: '取消',
@@ -998,7 +1002,9 @@ meditation: {
   chantCounter,
   practiceJourney,
   userProfiles,
-  today
+  today,
+                          ...palmReading,
+                          ...palmReadingV2Lite,
 } as const;
 
 export default zh;

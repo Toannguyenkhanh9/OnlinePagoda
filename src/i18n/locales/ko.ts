@@ -23,6 +23,10 @@ import chantCounter
   from './userProfiles.ko';
   import today
   from './today.ko';
+    import palmReading
+  from './palmReading.ko';
+  import palmReadingV2Lite
+  from './palmReadingV2Lite.ko';
 const ko = {
   common: {
     cancel: '취소',
@@ -998,7 +1002,9 @@ meditation: {
   chantCounter,
   practiceJourney,
   userProfiles,
-  today
+  today,
+                          ...palmReading,
+                          ...palmReadingV2Lite,
 } as const;
 
 export default ko;

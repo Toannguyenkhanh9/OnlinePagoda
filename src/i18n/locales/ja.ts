@@ -23,6 +23,10 @@ import chantCounter
   from './userProfiles.ja';
   import today
   from './today.ja';
+    import palmReading
+  from './palmReading.ja';
+  import palmReadingV2Lite
+  from './palmReadingV2Lite.ja';
 const ja = {
   common: {
     cancel: 'キャンセル',
@@ -998,7 +1002,9 @@ meditation: {
   chantCounter,
   practiceJourney,
   userProfiles,
-  today
+  today,
+                          ...palmReading,
+                          ...palmReadingV2Lite,
 } as const;
 
 export default ja;

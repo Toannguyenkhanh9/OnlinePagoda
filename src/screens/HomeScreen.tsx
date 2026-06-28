@@ -51,7 +51,12 @@ type MenuRoute =
   | "UserProfiles"
   | "BaziStage4"
   | "ZiweiChart"
-  | "Settings";
+  | "Settings"
+    | "RelationshipTimeline"
+  | "PalmReadingIntro"
+  | "PalmReadingCamera"
+  | "PalmReadingResult"
+  | "PalmReadingHistory";
 
 type HomeMenuItem = {
   icon: string;
@@ -378,6 +383,14 @@ export default function HomeScreen({ navigation }: Props) {
       route: "BaziChart",
       accent: "#EFE2D0",
     },
+        {
+      icon: "✋",
+      title: t("palmReading.homeTitle"),
+      subtitle: t("palmReading.homeSubtitle"),
+      route: "PalmReadingIntro",
+      accent: "#EFE2D0",
+    },
+    
     {
       icon: "◎",
       title: t("userProfiles.title", {

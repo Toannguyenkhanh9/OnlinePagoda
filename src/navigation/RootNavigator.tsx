@@ -96,6 +96,7 @@ import UserProfileEditorScreen
 import {
   colors,
 } from '../theme/colors';
+import ReleaseLifeScreen from '../screens/ReleaseLifeScreen';
 
 export type RootTabParamList = {
   Home: undefined;
@@ -176,6 +177,7 @@ export type RootTabParamList = {
   };
 
   SmartReminder: undefined;
+  ReleaseLife: undefined;
 };
 
 const Tab =
@@ -695,6 +697,16 @@ export default function RootNavigator() {
                   styles.hiddenTab,
               }}
             />
+            <Tab.Screen
+  name="ReleaseLife"
+  component={ReleaseLifeScreen}
+  options={{
+    title: 'Phóng sinh',
+    headerShown: false,
+                    tabBarItemStyle:
+                  styles.hiddenTab,
+  }}
+/>
           </Tab.Navigator>
         </View>
       </View>

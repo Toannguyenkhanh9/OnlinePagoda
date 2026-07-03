@@ -52,11 +52,7 @@ type MenuRoute =
   | "BaziStage4"
   | "ZiweiChart"
   | "Settings"
-    | "RelationshipTimeline"
-  | "PalmReadingIntro"
-  | "PalmReadingCamera"
-  | "PalmReadingResult"
-  | "PalmReadingHistory";
+  | "ReleaseLife";
 
 type HomeMenuItem = {
   icon: string;
@@ -299,6 +295,17 @@ export default function HomeScreen({ navigation }: Props) {
       route: "PeaceJournal",
       accent: "#F1DFC8",
     },
+    {
+      icon: "🕊️",
+      title: t("home.releaseLifeTitle", {
+        defaultValue: "Phóng sinh",
+      }),
+      subtitle: t("home.releaseLifeSubtitle", {
+        defaultValue: "Trải nghiệm hành trình buông bỏ và tìm lại sự bình yên",
+      }),
+      route: "ReleaseLife",
+      accent: "#F7F0DF",
+    }
   ];
 
   const calendarItems: HomeMenuItem[] = [
@@ -383,14 +390,6 @@ export default function HomeScreen({ navigation }: Props) {
       route: "BaziChart",
       accent: "#EFE2D0",
     },
-        {
-      icon: "✋",
-      title: t("palmReading.homeTitle"),
-      subtitle: t("palmReading.homeSubtitle"),
-      route: "PalmReadingIntro",
-      accent: "#EFE2D0",
-    },
-    
     {
       icon: "◎",
       title: t("userProfiles.title", {
@@ -1079,4 +1078,40 @@ const styles = StyleSheet.create({
     fontSize: 30,
     lineHeight: 25,
   },
+  releaseLifeButton: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  backgroundColor: '#F7F0DF',
+  borderRadius: 18,
+  padding: 14,
+  marginHorizontal: 16,
+  marginTop: 12,
+  borderWidth: 1,
+  borderColor: '#E3D4B7',
+},
+
+releaseLifeIcon: {
+  fontSize: 30,
+  marginRight: 12,
+},
+
+releaseLifeTitle: {
+  color: '#3F3324',
+  fontSize: 16,
+  fontWeight: '900',
+},
+
+releaseLifeSubtitle: {
+  color: '#7A6B56',
+  fontSize: 12,
+  lineHeight: 17,
+  marginTop: 3,
+  fontWeight: '600',
+},
+
+releaseLifeArrow: {
+  color: '#8A6A34',
+  fontSize: 28,
+  fontWeight: '600',
+},
 });

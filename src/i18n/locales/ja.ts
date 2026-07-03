@@ -135,6 +135,11 @@ chooseDateSubtitle:
   '結婚、開店、重要な予定に適した日を参考にします',
         ziweiTitle: '紫微斗数',
   ziweiSubtitle: '生年月日、出生時刻、出生地を入力して、十二宮、十四主星、21の補助星、四化、旬空・截空、十二運を配置します。',
+  lanternReleaseTitle: '灯籠流し',
+lanternReleaseSubtitle:
+  '水面に浮かぶ灯りに平安の祈りを込める',
+  releaseLifeTitle: '生命を解放',
+  releaseLifeSubtitle: '手放すと感じる旅と平和を見つける体験',
   },
 
   temple: {
@@ -986,6 +991,35 @@ meditation: {
     careerKeepCashReserve:
       '独立した機会や不確実な挑戦を追うときは、資金の予備を保ちましょう。',
   },
+},
+lanternRelease: {
+  released: '灯しました',
+  releaseButton: '灯籠を流す',
+  releaseWithPrayer: '祈りを込めて流す',
+  modalTitle: '祈りを書く',
+  modalPlaceholder: '例：家族の平安を祈ります',
+  cancel: 'キャンセル',
+  release: '流す',
+  today: '今日',
+  total: '合計',
+  defaultPrayer: '平安',
+  specialNightMessage:
+    '今日は平安を祈って灯籠を流す吉日です。',
+  types: {
+    pink: '桃色の蓮',
+    gold: '金色の蓮',
+    paper: '紙灯籠',
+    moon: '月の灯籠',
+    peace: '平安の灯籠',
+  },
+  prayerPresets: [
+    '平安',
+    '願い',
+    '祈り',
+    '慈悲',
+    '良縁',
+    '安らぎ',
+  ],
 },
   bazi,
   ziwei,

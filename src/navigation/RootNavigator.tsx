@@ -96,23 +96,8 @@ import UserProfileEditorScreen
 import {
   colors,
 } from '../theme/colors';
-import PalmReadingIntroScreen from '../screens/PalmReadingIntroScreen';
-
-import PalmReadingCameraScreen from '../screens/PalmReadingCameraScreen';
-
-import PalmReadingResultScreen from '../screens/PalmReadingResultScreen';
-
-import PalmReadingHistoryScreen from '../screens/PalmReadingHistoryScreen';
-import type {
-  PalmDominantHand,
-  PalmHandSide,
-  PalmReadingFocus,
-  PalmReadingResult,
-} from '../services/palmReading';
-import PalmReadingLiteAnalysisScreen from '../screens/PalmReadingLiteAnalysisScreen';
-
-// Add to existing palmReading type imports:
-import type { PalmReadingObservation } from '../services/palmReading';
+import ReleaseLifeScreen from '../screens/ReleaseLifeScreen';
+import LanternReleaseScreen from '../screens/LanternReleaseScreen';
 
 export type RootTabParamList = {
   Home: undefined;
@@ -193,33 +178,8 @@ export type RootTabParamList = {
   };
 
   SmartReminder: undefined;
-    PalmReadingIntro: undefined;
-
-  PalmReadingCamera: {
-    handSide: PalmHandSide;
-    dominantHand: PalmDominantHand;
-    focus: PalmReadingFocus;
-  };
-    PalmReadingLiteAnalysis: {
-    imageUri: string;
-    handSide: PalmHandSide;
-    dominantHand: PalmDominantHand;
-    focus: PalmReadingFocus;
-  };
-
-  PalmReadingResult:
-    | {
-        imageUri?: string;
-        handSide?: PalmHandSide;
-        dominantHand?: PalmDominantHand;
-        focus?: PalmReadingFocus;
-        observations?: PalmReadingObservation;
-        savedReading?: PalmReadingResult;
-      }
-    | undefined;
-
-  PalmReadingHistory: undefined;
-
+  ReleaseLife: undefined;
+  LanternRelease: undefined;
 };
 
 const Tab =
@@ -797,6 +757,16 @@ export default function RootNavigator() {
               }),
               tabBarButton: () => null,
               tabBarItemStyle: styles.hiddenTab,
+  }}
+/>
+            <Tab.Screen
+  name="LanternRelease"
+  component={LanternReleaseScreen}
+  options={{
+    title: 'Thao đèn hoa đăng',
+    headerShown: false,
+                    tabBarItemStyle:
+                  styles.hiddenTab,
   }}
 />
           </Tab.Navigator>

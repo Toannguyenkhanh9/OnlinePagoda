@@ -52,11 +52,8 @@ type MenuRoute =
   | "BaziStage4"
   | "ZiweiChart"
   | "Settings"
-    | "RelationshipTimeline"
-  | "PalmReadingIntro"
-  | "PalmReadingCamera"
-  | "PalmReadingResult"
-  | "PalmReadingHistory";
+  | "ReleaseLife"
+    | "LanternRelease";
 
 type HomeMenuItem = {
   icon: string;
@@ -299,6 +296,29 @@ export default function HomeScreen({ navigation }: Props) {
       route: "PeaceJournal",
       accent: "#F1DFC8",
     },
+    {
+      icon: "🕊️",
+      title: t("home.releaseLifeTitle", {
+        defaultValue: "Phóng sinh",
+      }),
+      subtitle: t("home.releaseLifeSubtitle", {
+        defaultValue: "Trải nghiệm hành trình buông bỏ và tìm lại sự bình yên",
+      }),
+      route: "ReleaseLife",
+      accent: "#F7F0DF",
+    },
+{
+  icon: '🌸',
+  title: t('home.lanternReleaseTitle', {
+    defaultValue: 'Thả hoa đăng',
+  }),
+  subtitle: t('home.lanternReleaseSubtitle', {
+    defaultValue: 'Gửi lời nguyện bình an theo ánh đèn trên mặt nước',
+  }),
+  route: 'LanternRelease',
+  accent: '#DFA436',
+}
+
   ];
 
   const calendarItems: HomeMenuItem[] = [

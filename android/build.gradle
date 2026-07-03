@@ -19,3 +19,11 @@ buildscript {
 }
 
 apply plugin: "com.facebook.react.rootproject"
+allprojects {
+    configurations.all {
+        resolutionStrategy {
+            force "com.google.android.gms:play-services-ads:24.7.0"
+            force "com.google.android.gms:play-services-ads-lite:24.7.0"
+        }
+    }
+}

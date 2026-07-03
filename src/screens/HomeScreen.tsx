@@ -52,7 +52,8 @@ type MenuRoute =
   | "BaziStage4"
   | "ZiweiChart"
   | "Settings"
-  | "ReleaseLife";
+  | "ReleaseLife"
+    | "LanternRelease";
 
 type HomeMenuItem = {
   icon: string;
@@ -305,7 +306,19 @@ export default function HomeScreen({ navigation }: Props) {
       }),
       route: "ReleaseLife",
       accent: "#F7F0DF",
-    }
+    },
+{
+  icon: '🌸',
+  title: t('home.lanternReleaseTitle', {
+    defaultValue: 'Thả hoa đăng',
+  }),
+  subtitle: t('home.lanternReleaseSubtitle', {
+    defaultValue: 'Gửi lời nguyện bình an theo ánh đèn trên mặt nước',
+  }),
+  route: 'LanternRelease',
+  accent: '#DFA436',
+}
+
   ];
 
   const calendarItems: HomeMenuItem[] = [

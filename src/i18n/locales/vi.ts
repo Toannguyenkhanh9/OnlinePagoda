@@ -131,6 +131,11 @@ chooseDateSubtitle:
   'Tham khảo ngày phù hợp cho cưới hỏi, khai trương và việc lớn',
   ziweiTitle: 'Tử vi Đẩu số',
   ziweiSubtitle: 'Nhập ngày giờ và nơi sinh để lập 12 cung, an 14 chính tinh, 21 phụ tinh, Tứ Hóa, Tuần-Triệt và vòng Tràng Sinh.',
+  lanternReleaseTitle: 'Thả hoa đăng',
+lanternReleaseSubtitle:
+  'Gửi lời nguyện bình an theo ánh đèn trên mặt nước',
+  releaseLifeTitle: 'Phóng sinh',
+  releaseLifeSubtitle: 'Trải nghiệm hành trình buông bỏ và tìm lại sự bình yên',
   },
 
   temple: {
@@ -1006,6 +1011,35 @@ meditation: {
   noBirdMessage: 'Bạn có thể bấm Đặt lại hôm nay để tiếp tục.',
   soundOn: 'Âm thanh: Bật',
   soundOff: 'Âm thanh: Tắt',
+},
+lanternRelease: {
+  released: 'đã thả',
+  releaseButton: 'Thả hoa đăng',
+  releaseWithPrayer: 'Thả với lời nguyện',
+  modalTitle: 'Viết lời nguyện',
+  modalPlaceholder: 'Ví dụ: Cầu bình an cho gia đình',
+  cancel: 'Hủy',
+  release: 'Thả',
+  today: 'Hôm nay',
+  total: 'Tổng',
+  defaultPrayer: 'Bình An',
+  specialNightMessage:
+    'Hôm nay là ngày lành để thả hoa đăng cầu an.',
+  types: {
+    pink: 'Sen hồng',
+    gold: 'Sen vàng',
+    paper: 'Đèn giấy',
+    moon: 'Đèn trăng',
+    peace: 'Cầu an',
+  },
+  prayerPresets: [
+    'Bình An',
+    'Như Ý',
+    'Cầu An',
+    'Từ Bi',
+    'Thiện Duyên',
+    'An Lạc',
+  ],
 },
   bazi,
   ziwei,

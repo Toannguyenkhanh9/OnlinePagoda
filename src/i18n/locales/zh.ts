@@ -131,6 +131,11 @@ chooseDateSubtitle:
   '参考婚礼、开业和重要事项的适合日期',
       ziweiTitle: '紫微斗数',
   ziweiSubtitle: 'E输入出生日期、时间和地点，以安十二宫、十四主星、二十一辅星、四化、旬空截空及长生十二神。',
+  lanternReleaseTitle: '放花灯',
+lanternReleaseSubtitle:
+  '让心愿随着水面上的灯光缓缓流去',
+  releaseLifeTitle: '放生',
+  releaseLifeSubtitle: '体验放下与找回平静的旅程',
   },
 
   temple: {
@@ -982,6 +987,35 @@ meditation: {
     careerKeepCashReserve:
       '追求独立或不确定的机会时，保留财务储备。',
   },
+},
+lanternRelease: {
+  released: 'đã thả',
+  releaseButton: 'Thả hoa đăng',
+  releaseWithPrayer: 'Thả với lời nguyện',
+  modalTitle: 'Viết lời nguyện',
+  modalPlaceholder: 'Ví dụ: Cầu bình an cho gia đình',
+  cancel: 'Hủy',
+  release: 'Thả',
+  today: 'Hôm nay',
+  total: 'Tổng',
+  defaultPrayer: 'Bình An',
+  specialNightMessage:
+    'Hôm nay là ngày lành để thả hoa đăng cầu an.',
+  types: {
+    pink: 'Sen hồng',
+    gold: 'Sen vàng',
+    paper: 'Đèn giấy',
+    moon: 'Đèn trăng',
+    peace: 'Cầu an',
+  },
+  prayerPresets: [
+    'Bình An',
+    'Như Ý',
+    'Cầu An',
+    'Từ Bi',
+    'Thiện Duyên',
+    'An Lạc',
+  ],
 },
   bazi,
   ziwei,

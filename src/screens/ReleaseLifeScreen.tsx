@@ -144,7 +144,6 @@ function FishSprite({item}: {item: FishItem}) {
 
   return (
     <Animated.Image
-      pointerEvents="none"
       source={RELEASE_ASSETS.fish}
       resizeMode="contain"
       style={[
@@ -188,7 +187,6 @@ function BirdSprite({item}: {item: BirdItem}) {
 
   return (
     <Animated.Image
-      pointerEvents="none"
       source={RELEASE_ASSETS.bird}
       resizeMode="contain"
       style={[

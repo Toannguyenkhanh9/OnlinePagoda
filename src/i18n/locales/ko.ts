@@ -131,6 +131,11 @@ chooseDateSubtitle:
   '결혼, 개업과 중요한 일을 위한 날짜를 참고합니다',
         ziweiTitle: '자미두수',
   ziweiSubtitle: '출생 날짜, 시간, 장소를 입력하여 십이궁, 14주성, 21개 보조성, 사화, 순공·절공 및 장생십이신을 배치합니다.',
+  lanternReleaseTitle: '연등 띄우기',
+lanternReleaseSubtitle:
+  '물 위에 떠가는 등불에 평안의 소원을 담아보세요',
+  releaseLifeTitle: '생명 방생',
+  releaseLifeSubtitle: '버리고 싶은 것을 내려놓고 평온함을 찾는 경험을 하세요',
   },
 
   temple: {
@@ -982,6 +987,35 @@ meditation: {
     careerKeepCashReserve:
       '독립적이거나 불확실한 기회를 추구할 때 재정 예비 자금을 유지하세요.',
   },
+},
+lanternRelease: {
+  released: '띄움',
+  releaseButton: '연등 띄우기',
+  releaseWithPrayer: '소원을 담아 띄우기',
+  modalTitle: '소원을 적어주세요',
+  modalPlaceholder: '예: 가족의 평안을 기원합니다',
+  cancel: '취소',
+  release: '띄우기',
+  today: '오늘',
+  total: '전체',
+  defaultPrayer: '평안',
+  specialNightMessage:
+    '오늘은 평안을 기원하며 연등을 띄우기 좋은 날입니다.',
+  types: {
+    pink: '분홍 연꽃등',
+    gold: '황금 연꽃등',
+    paper: '종이등',
+    moon: '달빛등',
+    peace: '평안등',
+  },
+  prayerPresets: [
+    '평안',
+    '소원성취',
+    '기도',
+    '자비',
+    '좋은 인연',
+    '안락',
+  ],
 },
   bazi,
   ziwei,

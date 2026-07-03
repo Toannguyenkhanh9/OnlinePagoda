@@ -131,6 +131,11 @@ chooseDateSubtitle:
   'Reference dates for weddings, openings, and important events',
     ziweiTitle: 'Zi Wei Dou Shu',
   ziweiSubtitle: 'Enter birth date, time, and place to build the twelve palaces, place main and auxiliary stars, Four Transformations, void markers, and the Trang Sinh cycle.y',
+  lanternReleaseTitle: 'Lotus Lantern Release',
+lanternReleaseSubtitle:
+  'Send a peaceful prayer with a lantern floating on the water',
+    releaseLifeTitle: 'Release Life',
+  releaseLifeSubtitle: 'Experience the journey of letting go and finding peace',
   },
 
   temple: {
@@ -1007,6 +1012,35 @@ meditation: {
   noBirdMessage: 'You can tap Reset Today to continue.',
   soundOn: 'Sound: On',
   soundOff: 'Sound: Off',
+},
+lanternRelease: {
+  released: 'released',
+  releaseButton: 'Release lantern',
+  releaseWithPrayer: 'Release with prayer',
+  modalTitle: 'Write a prayer',
+  modalPlaceholder: 'Example: Peace for my family',
+  cancel: 'Cancel',
+  release: 'Release',
+  today: 'Today',
+  total: 'Total',
+  defaultPrayer: 'Peace',
+  specialNightMessage:
+    'Today is an auspicious day to release lanterns for peace.',
+  types: {
+    pink: 'Pink lotus',
+    gold: 'Golden lotus',
+    paper: 'Paper lantern',
+    moon: 'Moon lantern',
+    peace: 'Peace lantern',
+  },
+  prayerPresets: [
+    'Peace',
+    'Blessing',
+    'Compassion',
+    'Good Karma',
+    'Healing',
+    'Harmony',
+  ],
 },
   bazi,
   ziwei,

@@ -97,6 +97,7 @@ import {
   colors,
 } from '../theme/colors';
 import ReleaseLifeScreen from '../screens/ReleaseLifeScreen';
+import LanternReleaseScreen from '../screens/LanternReleaseScreen';
 
 export type RootTabParamList = {
   Home: undefined;
@@ -178,6 +179,7 @@ export type RootTabParamList = {
 
   SmartReminder: undefined;
   ReleaseLife: undefined;
+  LanternRelease: undefined;
 };
 
 const Tab =
@@ -702,6 +704,16 @@ export default function RootNavigator() {
   component={ReleaseLifeScreen}
   options={{
     title: 'Phóng sinh',
+    headerShown: false,
+                    tabBarItemStyle:
+                  styles.hiddenTab,
+  }}
+/>
+            <Tab.Screen
+  name="LanternRelease"
+  component={LanternReleaseScreen}
+  options={{
+    title: 'Thao đèn hoa đăng',
     headerShown: false,
                     tabBarItemStyle:
                   styles.hiddenTab,

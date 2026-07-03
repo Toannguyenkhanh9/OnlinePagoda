@@ -96,7 +96,23 @@ import UserProfileEditorScreen
 import {
   colors,
 } from '../theme/colors';
-import ReleaseLifeScreen from '../screens/ReleaseLifeScreen';
+import PalmReadingIntroScreen from '../screens/PalmReadingIntroScreen';
+
+import PalmReadingCameraScreen from '../screens/PalmReadingCameraScreen';
+
+import PalmReadingResultScreen from '../screens/PalmReadingResultScreen';
+
+import PalmReadingHistoryScreen from '../screens/PalmReadingHistoryScreen';
+import type {
+  PalmDominantHand,
+  PalmHandSide,
+  PalmReadingFocus,
+  PalmReadingResult,
+} from '../services/palmReading';
+import PalmReadingLiteAnalysisScreen from '../screens/PalmReadingLiteAnalysisScreen';
+
+// Add to existing palmReading type imports:
+import type { PalmReadingObservation } from '../services/palmReading';
 
 export type RootTabParamList = {
   Home: undefined;
@@ -177,7 +193,33 @@ export type RootTabParamList = {
   };
 
   SmartReminder: undefined;
-  ReleaseLife: undefined;
+    PalmReadingIntro: undefined;
+
+  PalmReadingCamera: {
+    handSide: PalmHandSide;
+    dominantHand: PalmDominantHand;
+    focus: PalmReadingFocus;
+  };
+    PalmReadingLiteAnalysis: {
+    imageUri: string;
+    handSide: PalmHandSide;
+    dominantHand: PalmDominantHand;
+    focus: PalmReadingFocus;
+  };
+
+  PalmReadingResult:
+    | {
+        imageUri?: string;
+        handSide?: PalmHandSide;
+        dominantHand?: PalmDominantHand;
+        focus?: PalmReadingFocus;
+        observations?: PalmReadingObservation;
+        savedReading?: PalmReadingResult;
+      }
+    | undefined;
+
+  PalmReadingHistory: undefined;
+
 };
 
 const Tab =
@@ -698,13 +740,63 @@ export default function RootNavigator() {
               }}
             />
             <Tab.Screen
-  name="ReleaseLife"
-  component={ReleaseLifeScreen}
+            name="PalmReadingIntro"
+            component={PalmReadingIntroScreen as React.ComponentType<any>}
   options={{
-    title: 'Phóng sinh',
-    headerShown: false,
-                    tabBarItemStyle:
-                  styles.hiddenTab,
+              title: t('palmReading.title', {
+                defaultValue: 'Palm Reading',
+              }),
+              tabBarButton: () => null,
+              tabBarItemStyle: styles.hiddenTab,
+            }}
+          />
+
+          <Tab.Screen
+            name="PalmReadingCamera"
+            component={PalmReadingCameraScreen as React.ComponentType<any>}
+            options={{
+              title: t('palmReading.cameraTitle', {
+                defaultValue: 'Capture your palm',
+              }),
+              tabBarButton: () => null,
+              tabBarItemStyle: styles.hiddenTab,
+            }}
+          />
+
+          <Tab.Screen
+            name="PalmReadingResult"
+            component={PalmReadingResultScreen as React.ComponentType<any>}
+            options={{
+              title: t('palmReading.resultTitle', {
+                defaultValue: 'Your Palm Reading',
+              }),
+              tabBarButton: () => null,
+              tabBarItemStyle: styles.hiddenTab,
+            }}
+          />
+
+          <Tab.Screen
+            name="PalmReadingHistory"
+            component={PalmReadingHistoryScreen as React.ComponentType<any>}
+            options={{
+              title: t('palmReading.historyTitle', {
+                defaultValue: 'Palm Reading History',
+              }),
+              tabBarButton: () => null,
+              tabBarItemStyle: styles.hiddenTab,
+            }}
+          />
+          <Tab.Screen
+            name="PalmReadingLiteAnalysis"
+            component={
+              PalmReadingLiteAnalysisScreen as React.ComponentType<any>
+            }
+            options={{
+              title: t('palmReading.v2.title', {
+                defaultValue: 'Palm Details',
+              }),
+              tabBarButton: () => null,
+              tabBarItemStyle: styles.hiddenTab,
   }}
 />
           </Tab.Navigator>

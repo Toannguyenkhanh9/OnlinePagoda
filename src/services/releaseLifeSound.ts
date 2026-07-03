@@ -1,6 +1,52 @@
-import {Platform} from 'react-native';
+import Sound from 'react-native-sound';
+
+Sound.setCategory('Playback');
 
 let soundEnabled = true;
+
+let fishSplashSound: Sound | null = null;
+let birdChirpSound: Sound | null = null;
+
+function loadSound(
+  filename: string,
+  onLoaded: (sound: Sound) => void,
+) {
+  const sound = new Sound(filename, Sound.MAIN_BUNDLE, error => {
+    if (error) {
+      console.log('Release life sound load error:', filename, error);
+      return;
+    }
+
+    sound.setVolume(1);
+    onLoaded(sound);
+  });
+}
+
+export function preloadReleaseLifeSounds() {
+  if (!fishSplashSound) {
+    loadSound('fish_splash.mp3', sound => {
+      fishSplashSound = sound;
+    });
+  }
+
+  if (!birdChirpSound) {
+    loadSound('bird_chirp.mp3', sound => {
+      birdChirpSound = sound;
+    });
+  }
+}
+
+export function releaseReleaseLifeSounds() {
+  if (fishSplashSound) {
+    fishSplashSound.release();
+    fishSplashSound = null;
+  }
+
+  if (birdChirpSound) {
+    birdChirpSound.release();
+    birdChirpSound = null;
+  }
+}
 
 export function setReleaseLifeSoundEnabled(enabled: boolean) {
   soundEnabled = enabled;
@@ -10,30 +56,25 @@ export function getReleaseLifeSoundEnabled() {
   return soundEnabled;
 }
 
-export function playFishReleaseSound() {
-  if (!soundEnabled) {
+function playSound(sound: Sound | null) {
+  if (!soundEnabled || !sound) {
     return;
   }
 
-  // Tạm thời để trống để không cần cài thêm thư viện.
-  // Sau này có thể nối với audio service hiện tại của iPagoda.
-  console.log('play fish release sound');
+  sound.stop(() => {
+    sound.setCurrentTime(0);
+    sound.play(success => {
+      if (!success) {
+        console.log('Release life sound playback failed');
+      }
+    });
+  });
+}
 
-  if (Platform.OS === 'ios') {
-    // Có thể nối tiếng nước bắn ở đây.
-  }
+export function playFishReleaseSound() {
+  playSound(fishSplashSound);
 }
 
 export function playBirdReleaseSound() {
-  if (!soundEnabled) {
-    return;
-  }
-
-  // Tạm thời để trống để không cần cài thêm thư viện.
-  // Sau này có thể nối với audio service hiện tại của iPagoda.
-  console.log('play bird release sound');
-
-  if (Platform.OS === 'ios') {
-    // Có thể nối tiếng chim bay ở đây.
-  }
+  playSound(birdChirpSound);
 }

@@ -1,9 +1,4 @@
-import React, {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import {
   Alert,
@@ -25,10 +20,12 @@ import {
   getReleaseLifeSoundEnabled,
   playBirdReleaseSound,
   playFishReleaseSound,
+  preloadReleaseLifeSounds,
+  releaseReleaseLifeSounds,
   setReleaseLifeSoundEnabled,
 } from '../services/releaseLifeSound';
 
-const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const STORAGE_KEY = 'IPAGODA_RELEASE_LIFE_STATS';
 
@@ -42,10 +39,7 @@ const RELEASE_ASSETS = {
 
 const isSmallScreen = SCREEN_HEIGHT < 760;
 
-const objectSize = Math.min(
-  SCREEN_WIDTH * 0.38,
-  isSmallScreen ? 132 : 162,
-);
+const objectSize = Math.min(SCREEN_WIDTH * 0.38, isSmallScreen ? 132 : 162);
 
 const previewIconSize = isSmallScreen ? 21 : 24;
 
@@ -116,7 +110,7 @@ async function saveStats(stats: ReleaseStats) {
   await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(stats));
 }
 
-function FishSprite({item}: {item: FishItem}) {
+function FishSprite({ item }: { item: FishItem }) {
   const translateX = item.progress.interpolate({
     inputRange: [0, 0.3, 0.7, 1],
     outputRange: [0, 42, 105, 170],
@@ -144,7 +138,6 @@ function FishSprite({item}: {item: FishItem}) {
 
   return (
     <Animated.Image
-      pointerEvents="none"
       source={RELEASE_ASSETS.fish}
       resizeMode="contain"
       style={[
@@ -153,7 +146,7 @@ function FishSprite({item}: {item: FishItem}) {
           left: item.x,
           top: item.y,
           opacity,
-          transform: [{translateX}, {translateY}, {rotate}, {scale}],
+          transform: [{ translateX }, { translateY }, { rotate }, { scale }],
         },
       ]}
     />
@@ -162,33 +155,59 @@ function FishSprite({item}: {item: FishItem}) {
 
 function BirdSprite({item}: {item: BirdItem}) {
   const translateX = item.progress.interpolate({
-    inputRange: [0, 0.35, 0.7, 1],
-    outputRange: [0, -22, 38, 90],
+    inputRange: [0, 0.12, 0.25, 0.38, 0.52, 0.68, 0.84, 1],
+    outputRange: [
+      0,
+      -85,
+      -25,
+      70,
+      15,
+      -95,
+      45,
+      130,
+    ],
   });
 
   const translateY = item.progress.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, -250],
+    inputRange: [0, 0.12, 0.25, 0.38, 0.52, 0.68, 0.84, 1],
+    outputRange: [
+      0,
+      -45,
+      -105,
+      -150,
+      -210,
+      -255,
+      -315,
+      -390,
+    ],
   });
 
   const rotate = item.progress.interpolate({
-    inputRange: [0, 0.5, 1],
-    outputRange: ['0deg', '-10deg', '8deg'],
+    inputRange: [0, 0.12, 0.25, 0.38, 0.52, 0.68, 0.84, 1],
+    outputRange: [
+      '0deg',
+      '-22deg',
+      '14deg',
+      '18deg',
+      '-12deg',
+      '-24deg',
+      '16deg',
+      '6deg',
+    ],
   });
 
   const scale = item.progress.interpolate({
-    inputRange: [0, 0.5, 1],
-    outputRange: [1, 1.06, 0.92],
+    inputRange: [0, 0.25, 0.5, 0.75, 1],
+    outputRange: [1, 1.14, 1.04, 0.9, 0.72],
   });
 
   const opacity = item.progress.interpolate({
-    inputRange: [0, 0.88, 1],
+    inputRange: [0, 0.9, 1],
     outputRange: [1, 1, 0],
   });
 
   return (
     <Animated.Image
-      pointerEvents="none"
       source={RELEASE_ASSETS.bird}
       resizeMode="contain"
       style={[
@@ -203,7 +222,6 @@ function BirdSprite({item}: {item: BirdItem}) {
     />
   );
 }
-
 function StatBox({
   title,
   children,
@@ -237,6 +255,8 @@ export default function ReleaseLifeScreen() {
   useEffect(() => {
     let mounted = true;
 
+    preloadReleaseLifeSounds();
+
     loadStats().then(value => {
       if (mounted) {
         setStats(value);
@@ -245,16 +265,17 @@ export default function ReleaseLifeScreen() {
 
     return () => {
       mounted = false;
+      releaseReleaseLifeSounds();
     };
   }, []);
 
   const fishPreview = useMemo(
-    () => Array.from({length: Math.min(fishCount, 8)}),
+    () => Array.from({ length: Math.min(fishCount, 8) }),
     [fishCount],
   );
 
   const birdPreview = useMemo(
-    () => Array.from({length: Math.min(birdCount, 8)}),
+    () => Array.from({ length: Math.min(birdCount, 8) }),
     [birdCount],
   );
 
@@ -284,10 +305,7 @@ export default function ReleaseLifeScreen() {
 
   const releaseFish = () => {
     if (fishCount <= 0) {
-      Alert.alert(
-        'Đã hết cá',
-        'Bạn có thể bấm Đặt lại hôm nay để tiếp tục.',
-      );
+      Alert.alert('Đã hết cá', 'Bạn có thể bấm Đặt lại hôm nay để tiếp tục.');
       return;
     }
 
@@ -305,36 +323,42 @@ export default function ReleaseLifeScreen() {
     setFishCount(prev => Math.max(0, prev - 1));
 
     void updateStats('fish');
-    playFishReleaseSound();
 
-    Animated.timing(progress, {
-      toValue: 1,
-      duration: 1350,
-      easing: Easing.out(Easing.quad),
-      useNativeDriver: true,
-    }).start(() => {
+    setTimeout(() => {
+      playFishReleaseSound();
+    }, 850);
+
+Animated.timing(progress, {
+  toValue: 1,
+  duration: 1350,
+  easing: Easing.out(Easing.quad),
+  useNativeDriver: true,
+}).start(() => {
       setFishItems(prev => prev.filter(fish => fish.id !== id));
     });
   };
 
   const releaseBird = () => {
     if (birdCount <= 0) {
-      Alert.alert(
-        'Đã hết chim',
-        'Bạn có thể bấm Đặt lại hôm nay để tiếp tục.',
-      );
+      Alert.alert('Đã hết chim', 'Bạn có thể bấm Đặt lại hôm nay để tiếp tục.');
       return;
     }
 
     const id = idRef.current++;
     const progress = new Animated.Value(0);
 
-    const item: BirdItem = {
-      id,
-      x: SCREEN_WIDTH * 0.72,
-      y: SCREEN_HEIGHT * 0.5,
-      progress,
-    };
+const startX =
+  SCREEN_WIDTH * (0.18 + Math.random() * 0.6);
+
+const startY =
+  SCREEN_HEIGHT * (0.54 + Math.random() * 0.12);
+
+const item: BirdItem = {
+  id,
+  x: startX,
+  y: startY,
+  progress,
+};
 
     setBirdItems(prev => [...prev, item]);
     setBirdCount(prev => Math.max(0, prev - 1));
@@ -342,12 +366,12 @@ export default function ReleaseLifeScreen() {
     void updateStats('bird');
     playBirdReleaseSound();
 
-    Animated.timing(progress, {
-      toValue: 1,
-      duration: 1850,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: true,
-    }).start(() => {
+Animated.timing(progress, {
+  toValue: 1,
+  duration: 5200,
+  easing: Easing.inOut(Easing.sin),
+  useNativeDriver: true,
+}).start(() => {
       setBirdItems(prev => prev.filter(bird => bird.id !== id));
     });
   };
@@ -380,7 +404,8 @@ export default function ReleaseLifeScreen() {
         source={RELEASE_ASSETS.sceneBg}
         resizeMode="cover"
         style={styles.background}
-        imageStyle={styles.backgroundImage}>
+        imageStyle={styles.backgroundImage}
+      >
         <View style={styles.overlay}>
           <View style={styles.header}>
             <Text style={styles.title}>
@@ -442,10 +467,11 @@ export default function ReleaseLifeScreen() {
             <View style={styles.itemColumn}>
               <Pressable
                 onPress={releaseFish}
-                style={({pressed}) => [
+                style={({ pressed }) => [
                   styles.touchArea,
                   pressed && styles.objectPressed,
-                ]}>
+                ]}
+              >
                 <Image
                   source={RELEASE_ASSETS.fishBowl}
                   resizeMode="contain"
@@ -472,10 +498,11 @@ export default function ReleaseLifeScreen() {
             <View style={styles.itemColumn}>
               <Pressable
                 onPress={releaseBird}
-                style={({pressed}) => [
+                style={({ pressed }) => [
                   styles.touchArea,
                   pressed && styles.objectPressed,
-                ]}>
+                ]}
+              >
                 <Image
                   source={RELEASE_ASSETS.birdCage}
                   resizeMode="contain"
@@ -506,7 +533,8 @@ export default function ReleaseLifeScreen() {
                 styles.soundButton,
                 !soundEnabled && styles.soundButtonOff,
               ]}
-              onPress={toggleSound}>
+              onPress={toggleSound}
+            >
               <Text style={styles.bottomButtonIcon}>🔊</Text>
               <Text style={styles.bottomButtonText}>
                 {soundEnabled ? 'Âm thanh: Bật' : 'Âm thanh: Tắt'}
@@ -565,7 +593,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     color: '#0D6B49',
     textShadowColor: 'rgba(255,255,255,0.98)',
-    textShadowOffset: {width: 0, height: 2},
+    textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 10,
   },
 
@@ -581,7 +609,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     marginTop: 0,
     textShadowColor: 'rgba(255,255,255,0.9)',
-    textShadowOffset: {width: 0, height: 1},
+    textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 4,
   },
 
@@ -735,7 +763,7 @@ const styles = StyleSheet.create({
   },
 
   objectPressed: {
-    transform: [{scale: 0.97}],
+    transform: [{ scale: 0.97 }],
     opacity: 0.9,
   },
 
@@ -840,10 +868,10 @@ const styles = StyleSheet.create({
     zIndex: 50,
   },
 
-  birdReleased: {
-    position: 'absolute',
-    width: 46,
-    height: 40,
-    zIndex: 50,
-  },
+birdReleased: {
+  position: 'absolute',
+  width: 54,
+  height: 48,
+  zIndex: 50,
+},
 });

@@ -52,7 +52,11 @@ type MenuRoute =
   | "BaziStage4"
   | "ZiweiChart"
   | "Settings"
-  | "ReleaseLife";
+    | "RelationshipTimeline"
+  | "PalmReadingIntro"
+  | "PalmReadingCamera"
+  | "PalmReadingResult"
+  | "PalmReadingHistory";
 
 type HomeMenuItem = {
   icon: string;
@@ -295,17 +299,6 @@ export default function HomeScreen({ navigation }: Props) {
       route: "PeaceJournal",
       accent: "#F1DFC8",
     },
-    {
-      icon: "🕊️",
-      title: t("home.releaseLifeTitle", {
-        defaultValue: "Phóng sinh",
-      }),
-      subtitle: t("home.releaseLifeSubtitle", {
-        defaultValue: "Trải nghiệm hành trình buông bỏ và tìm lại sự bình yên",
-      }),
-      route: "ReleaseLife",
-      accent: "#F7F0DF",
-    }
   ];
 
   const calendarItems: HomeMenuItem[] = [
@@ -390,6 +383,14 @@ export default function HomeScreen({ navigation }: Props) {
       route: "BaziChart",
       accent: "#EFE2D0",
     },
+        {
+      icon: "✋",
+      title: t("palmReading.homeTitle"),
+      subtitle: t("palmReading.homeSubtitle"),
+      route: "PalmReadingIntro",
+      accent: "#EFE2D0",
+    },
+    
     {
       icon: "◎",
       title: t("userProfiles.title", {

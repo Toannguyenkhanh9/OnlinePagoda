@@ -1,103 +1,68 @@
-
 import React from 'react';
 
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
-import {
-  NavigationContainer,
-} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 
 import {
   BottomTabBar,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 
-import {
-  useTranslation,
-} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
-import SmallBannerAd
-  from '../components/SmallBannerAd';
+import SmallBannerAd from '../components/SmallBannerAd';
 
-import HomeScreen
-  from '../screens/HomeScreen';
+import HomeScreen from '../screens/HomeScreen';
 
-import TempleScreen
-  from '../screens/TempleScreen';
+import TempleScreen from '../screens/TempleScreen';
 
-import MeditationScreen
-  from '../screens/MeditationScreen';
+import MeditationScreen from '../screens/MeditationScreen';
 
-import PrayerScreen
-  from '../screens/PrayerScreen';
+import PrayerScreen from '../screens/PrayerScreen';
 
-import AudioLibraryScreen
-  from '../screens/AudioLibraryScreen';
+import AudioLibraryScreen from '../screens/AudioLibraryScreen';
 
-import SettingsScreen
-  from '../screens/SettingsScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
-import LunarCalendarScreen
-  from '../screens/LunarCalendarScreen';
+import LunarCalendarScreen from '../screens/LunarCalendarScreen';
 
-import TodayScreen
-  from '../screens/TodayScreen';
+import TodayScreen from '../screens/TodayScreen';
 
-import SpiritualAudioScreen
-  from '../screens/SpiritualAudioScreen';
+import SpiritualAudioScreen from '../screens/SpiritualAudioScreen';
 
-import FortuneStickScreen
-  from '../screens/FortuneStickScreen';
+import FortuneStickScreen from '../screens/FortuneStickScreen';
 
-import HoroscopeScreen
-  from '../screens/HoroscopeScreen';
+import HoroscopeScreen from '../screens/HoroscopeScreen';
 
-import BaziChartScreen
-  from '../screens/BaziChartScreen';
+import BaziChartScreen from '../screens/BaziChartScreen';
 
-import BaziHistoryScreen
-  from '../screens/BaziHistoryScreen';
+import BaziHistoryScreen from '../screens/BaziHistoryScreen';
 
-import BaziStage4Screen
-  from '../screens/BaziStage4Screen';
+import BaziStage4Screen from '../screens/BaziStage4Screen';
 
-import ZiweiChartScreen
-  from '../screens/ZiweiChartScreen';
+import ZiweiChartScreen from '../screens/ZiweiChartScreen';
 
-import DailyRitualScreen
-  from '../screens/DailyRitualScreen';
+import DailyRitualScreen from '../screens/DailyRitualScreen';
 
-import PeaceJournalScreen
-  from '../screens/PeaceJournalScreen';
+import PeaceJournalScreen from '../screens/PeaceJournalScreen';
 
-import BuddhistCalendarScreen
-  from '../screens/BuddhistCalendarScreen';
+import BuddhistCalendarScreen from '../screens/BuddhistCalendarScreen';
 
-import AltarCustomizationScreen
-  from '../screens/AltarCustomizationScreen';
+import AltarCustomizationScreen from '../screens/AltarCustomizationScreen';
 
-import ChantCounterScreen
-  from '../screens/ChantCounterScreen';
+import ChantCounterScreen from '../screens/ChantCounterScreen';
 
-import PracticeJourneyScreen
-  from '../screens/PracticeJourneyScreen';
+import PracticeJourneyScreen from '../screens/PracticeJourneyScreen';
 
-import UserProfilesScreen
-  from '../screens/UserProfilesScreen';
+import UserProfilesScreen from '../screens/UserProfilesScreen';
 
-import UserProfileEditorScreen
-  from '../screens/UserProfileEditorScreen';
+import UserProfileEditorScreen from '../screens/UserProfileEditorScreen';
 
-import {
-  colors,
-} from '../theme/colors';
+import { colors } from '../theme/colors';
 import ReleaseLifeScreen from '../screens/ReleaseLifeScreen';
 import LanternReleaseScreen from '../screens/LanternReleaseScreen';
+import AncestorAltarScreen from '../screens/AncestorAltarScreen';
 
 export type RootTabParamList = {
   Home: undefined;
@@ -180,36 +145,26 @@ export type RootTabParamList = {
   SmartReminder: undefined;
   ReleaseLife: undefined;
   LanternRelease: undefined;
+  AncestorAltar: undefined;
 };
 
-const Tab =
-  createBottomTabNavigator<
-    RootTabParamList
-  >();
+const Tab = createBottomTabNavigator<RootTabParamList>();
 
 type TabIconProps = {
   icon: string;
   focused: boolean;
 };
 
-function TabIcon({
-  icon,
-  focused,
-}: TabIconProps) {
+function TabIcon({ icon, focused }: TabIconProps) {
   return (
-    <Text
-      style={[
-        styles.tabIcon,
-        focused &&
-          styles.activeTabIcon,
-      ]}>
+    <Text style={[styles.tabIcon, focused && styles.activeTabIcon]}>
       {icon}
     </Text>
   );
 }
 
 export default function RootNavigator() {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   /**
    * Tạm thời chưa có PremiumContext.
@@ -224,7 +179,7 @@ export default function RootNavigator() {
    *
    * const {isPremium} = usePremium();
    */
-  const isPremium = true;
+  const isPremium = false;
 
   return (
     <NavigationContainer>
@@ -234,13 +189,8 @@ export default function RootNavigator() {
             tabBar={props => (
               <View style={styles.bottomArea}>
                 {!isPremium && (
-                  <View
-                    style={
-                      styles.bannerContainer
-                    }>
-                    <SmallBannerAd
-                      visible={!isPremium}
-                    />
+                  <View style={styles.bannerContainer}>
+                    <SmallBannerAd visible={!isPremium} />
                   </View>
                 )}
 
@@ -250,31 +200,23 @@ export default function RootNavigator() {
             screenOptions={{
               headerShown: false,
 
-              tabBarActiveTintColor:
-                colors.primary,
+              tabBarActiveTintColor: colors.primary,
 
-              tabBarInactiveTintColor:
-                '#867A6E',
+              tabBarInactiveTintColor: '#867A6E',
 
-              tabBarStyle:
-                styles.tabBar,
+              tabBarStyle: styles.tabBar,
 
-              tabBarLabelStyle:
-                styles.tabBarLabel,
-            }}>
+              tabBarLabelStyle: styles.tabBarLabel,
+            }}
+          >
             <Tab.Screen
               name="Home"
               component={HomeScreen}
               options={{
                 title: t('tabs.home'),
 
-                tabBarIcon: ({
-                  focused,
-                }) => (
-                  <TabIcon
-                    icon="🏠"
-                    focused={focused}
-                  />
+                tabBarIcon: ({ focused }) => (
+                  <TabIcon icon="🏠" focused={focused} />
                 ),
               }}
             />
@@ -283,38 +225,22 @@ export default function RootNavigator() {
               name="Temple"
               component={TempleScreen}
               options={{
-                title: t(
-                  'tabs.temple',
-                ),
+                title: t('tabs.temple'),
 
-                tabBarIcon: ({
-                  focused,
-                }) => (
-                  <TabIcon
-                    icon="🛕"
-                    focused={focused}
-                  />
+                tabBarIcon: ({ focused }) => (
+                  <TabIcon icon="🛕" focused={focused} />
                 ),
               }}
             />
 
             <Tab.Screen
               name="Meditation"
-              component={
-                MeditationScreen
-              }
+              component={MeditationScreen}
               options={{
-                title: t(
-                  'tabs.meditation',
-                ),
+                title: t('tabs.meditation'),
 
-                tabBarIcon: ({
-                  focused,
-                }) => (
-                  <TabIcon
-                    icon="🧘"
-                    focused={focused}
-                  />
+                tabBarIcon: ({ focused }) => (
+                  <TabIcon icon="🧘" focused={focused} />
                 ),
               }}
             />
@@ -323,452 +249,279 @@ export default function RootNavigator() {
               name="Prayer"
               component={PrayerScreen}
               options={{
-                title: t(
-                  'tabs.prayer',
-                ),
+                title: t('tabs.prayer'),
 
-                tabBarIcon: ({
-                  focused,
-                }) => (
-                  <TabIcon
-                    icon="🙏"
-                    focused={focused}
-                  />
+                tabBarIcon: ({ focused }) => (
+                  <TabIcon icon="🙏" focused={focused} />
                 ),
               }}
             />
 
             <Tab.Screen
               name="AudioLibrary"
-              component={
-                AudioLibraryScreen
-              }
+              component={AudioLibraryScreen}
               options={{
-                title: t(
-                  'audioLibrary.title',
-                  {
-                    defaultValue:
-                      'Âm thanh',
-                  },
-                ),
+                title: t('audioLibrary.title', {
+                  defaultValue: 'Âm thanh',
+                }),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="LunarCalendar"
-              component={
-                LunarCalendarScreen
-              }
+              component={LunarCalendarScreen}
               options={{
-                title: t(
-                  'lunarCalendar.title',
-                ),
+                title: t('lunarCalendar.title'),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="Today"
-              component={
-                TodayScreen
-              }
+              component={TodayScreen}
               options={{
-                title: t(
-                  'today.title',
-                  {
-                    defaultValue:
-                      'Today',
-                  },
-                ),
+                title: t('today.title', {
+                  defaultValue: 'Today',
+                }),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="SpiritualAudio"
-              component={
-                SpiritualAudioScreen
-              }
+              component={SpiritualAudioScreen}
               options={{
-                title: t(
-                  'spiritualAudio.title',
-                ),
+                title: t('spiritualAudio.title'),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="FortuneStick"
-              component={
-                FortuneStickScreen
-              }
+              component={FortuneStickScreen}
               options={{
-                title: t(
-                  'fortuneStick.title',
-                ),
+                title: t('fortuneStick.title'),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="Horoscope"
-              component={
-                HoroscopeScreen
-              }
+              component={HoroscopeScreen}
               options={{
-                title: t(
-                  'horoscope.title',
-                ),
+                title: t('horoscope.title'),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="Settings"
-              component={
-                SettingsScreen
-              }
+              component={SettingsScreen}
               options={{
-                title: t(
-                  'settings.title',
-                  {
-                    defaultValue:
-                      'Cài đặt',
-                  },
-                ),
+                title: t('settings.title', {
+                  defaultValue: 'Cài đặt',
+                }),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="BaziChart"
-              component={
-                BaziChartScreen
-              }
+              component={BaziChartScreen}
               options={{
-                title: t(
-                  'bazi.title',
-                ),
+                title: t('bazi.title'),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="BaziHistory"
-              component={
-                BaziHistoryScreen
-              }
+              component={BaziHistoryScreen}
               options={{
-                title: t(
-                  'bazi.stage3.historyTitle',
-                ),
+                title: t('bazi.stage3.historyTitle'),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="BaziStage4"
-              component={
-                BaziStage4Screen
-              }
+              component={BaziStage4Screen}
               options={{
-                title: t(
-                  'bazi.stage4.title',
-                ),
+                title: t('bazi.stage4.title'),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="ZiweiChart"
-              component={
-                ZiweiChartScreen
-              }
+              component={ZiweiChartScreen}
               options={{
-                title: t(
-                  'ziwei.title',
-                ),
+                title: t('ziwei.title'),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="DailyRitual"
-              component={
-                DailyRitualScreen
-              }
+              component={DailyRitualScreen}
               options={{
-                title: t(
-                  'practice.title',
-                ),
+                title: t('practice.title'),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="PeaceJournal"
-              component={
-                PeaceJournalScreen
-              }
+              component={PeaceJournalScreen}
               options={{
-                title: t(
-                  'peaceJournal.title',
-                ),
+                title: t('peaceJournal.title'),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="BuddhistCalendar"
-              component={
-                BuddhistCalendarScreen
-              }
+              component={BuddhistCalendarScreen}
               options={{
-                title: t(
-                  'buddhistCalendar.title',
-                ),
+                title: t('buddhistCalendar.title'),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="AltarCustomization"
-              component={
-                AltarCustomizationScreen
-              }
+              component={AltarCustomizationScreen}
               options={{
-                title: t(
-                  'altarCustomization.title',
-                ),
+                title: t('altarCustomization.title'),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="ChantCounter"
-              component={
-                ChantCounterScreen
-              }
+              component={ChantCounterScreen}
               options={{
-                title: t(
-                  'chantCounter.title',
-                ),
+                title: t('chantCounter.title'),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="PracticeJourney"
-              component={
-                PracticeJourneyScreen
-              }
+              component={PracticeJourneyScreen}
               options={{
-                title: t(
-                  'practiceJourney.title',
-                ),
+                title: t('practiceJourney.title'),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="UserProfiles"
-              component={
-                UserProfilesScreen
-              }
+              component={UserProfilesScreen}
               options={{
-                title: t(
-                  'userProfiles.title',
-                  {
-                    defaultValue:
-                      'Reflection Profiles',
-                  },
-                ),
+                title: t('userProfiles.title', {
+                  defaultValue: 'Reflection Profiles',
+                }),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
 
             <Tab.Screen
               name="UserProfileEditor"
-              component={
-                UserProfileEditorScreen
-              }
+              component={UserProfileEditorScreen}
               options={{
-                title: t(
-                  'userProfiles.createTitle',
-                  {
-                    defaultValue:
-                      'Create Profile',
-                  },
-                ),
+                title: t('userProfiles.createTitle', {
+                  defaultValue: 'Create Profile',
+                }),
 
-                tabBarButton:
-                  () => null,
+                tabBarButton: () => null,
 
-                tabBarItemStyle:
-                  styles.hiddenTab,
+                tabBarItemStyle: styles.hiddenTab,
+              }}
+            />
+
+            <Tab.Screen
+              name="LanternRelease"
+              component={LanternReleaseScreen}
+              options={{
+                title: 'Thả đèn hoa đăng',
+                headerShown: false,
+                tabBarItemStyle: styles.hiddenTab,
               }}
             />
             <Tab.Screen
-            name="PalmReadingIntro"
-            component={PalmReadingIntroScreen as React.ComponentType<any>}
-  options={{
-              title: t('palmReading.title', {
-                defaultValue: 'Palm Reading',
-              }),
-              tabBarButton: () => null,
-              tabBarItemStyle: styles.hiddenTab,
-            }}
-          />
-
-          <Tab.Screen
-            name="PalmReadingCamera"
-            component={PalmReadingCameraScreen as React.ComponentType<any>}
-            options={{
-              title: t('palmReading.cameraTitle', {
-                defaultValue: 'Capture your palm',
-              }),
-              tabBarButton: () => null,
-              tabBarItemStyle: styles.hiddenTab,
-            }}
-          />
-
-          <Tab.Screen
-            name="PalmReadingResult"
-            component={PalmReadingResultScreen as React.ComponentType<any>}
-            options={{
-              title: t('palmReading.resultTitle', {
-                defaultValue: 'Your Palm Reading',
-              }),
-              tabBarButton: () => null,
-              tabBarItemStyle: styles.hiddenTab,
-            }}
-          />
-
-          <Tab.Screen
-            name="PalmReadingHistory"
-            component={PalmReadingHistoryScreen as React.ComponentType<any>}
-            options={{
-              title: t('palmReading.historyTitle', {
-                defaultValue: 'Palm Reading History',
-              }),
-              tabBarButton: () => null,
-              tabBarItemStyle: styles.hiddenTab,
-            }}
-          />
-          <Tab.Screen
-            name="PalmReadingLiteAnalysis"
-            component={
-              PalmReadingLiteAnalysisScreen as React.ComponentType<any>
-            }
-            options={{
-              title: t('palmReading.v2.title', {
-                defaultValue: 'Palm Details',
-              }),
-              tabBarButton: () => null,
-              tabBarItemStyle: styles.hiddenTab,
-  }}
-/>
+              name="ReleaseLife"
+              component={ReleaseLifeScreen}
+              options={{
+                title: 'Phóng Sinh',
+                headerShown: false,
+                tabBarItemStyle: styles.hiddenTab,
+              }}
+            />
             <Tab.Screen
-  name="LanternRelease"
-  component={LanternReleaseScreen}
-  options={{
-    title: 'Thao đèn hoa đăng',
-    headerShown: false,
-                    tabBarItemStyle:
-                  styles.hiddenTab,
-  }}
-/>
+              name="AncestorAltar"
+              component={AncestorAltarScreen}
+              options={{
+                title: 'Linh mục tổ tiên',
+                headerShown: false,
+                tabBarItemStyle: styles.hiddenTab,
+              }}
+            />
           </Tab.Navigator>
         </View>
       </View>
@@ -779,8 +532,7 @@ export default function RootNavigator() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor:
-      colors.background,
+    backgroundColor: colors.background,
   },
 
   bottomArea: {
@@ -793,8 +545,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFFAF2',
-    borderTopWidth:
-      StyleSheet.hairlineWidth,
+    borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: '#EADBC8',
   },
 
@@ -803,17 +554,11 @@ const styles = StyleSheet.create({
   },
 
   tabBar: {
-    height:
-      Platform.OS === 'ios'
-        ? 88
-        : 70,
+    height: Platform.OS === 'ios' ? 88 : 70,
 
     paddingTop: 7,
 
-    paddingBottom:
-      Platform.OS === 'ios'
-        ? 22
-        : 8,
+    paddingBottom: Platform.OS === 'ios' ? 22 : 8,
 
     backgroundColor: '#FFFAF2',
 
@@ -839,4 +584,3 @@ const styles = StyleSheet.create({
     display: 'none',
   },
 });
-

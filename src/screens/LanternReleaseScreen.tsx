@@ -1,9 +1,4 @@
-import React, {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import {
   Animated,
@@ -22,16 +17,18 @@ import {
 } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 import {
+  getLanternSoundEnabled,
   playLanternWaterSound,
   preloadLanternSounds,
   releaseLanternSounds,
+  setLanternSoundEnabled,
 } from '../services/lanternSound';
+import { scheduleLanternReleaseReminders } from '../services/lanternReleaseNotifications';
 
-const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} =
-  Dimensions.get('window');
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const ASSETS = {
   background: require('../assets/images/lantern/lantern_river_bg.png'),
@@ -44,19 +41,14 @@ const ASSETS = {
 };
 
 const STORAGE_KEY = 'IPAGODA_LANTERN_RELEASE_STATS';
-
+const SOUND_STORAGE_KEY = 'IPAGODA_LANTERN_RELEASE_SOUND_ENABLED';
 type LanternStats = {
   total: number;
   today: number;
   lastDate: string;
 };
 
-type LanternKind =
-  | 'pink'
-  | 'gold'
-  | 'paper'
-  | 'moon'
-  | 'peace';
+type LanternKind = 'pink' | 'gold' | 'paper' | 'moon' | 'peace';
 
 type LanternItem = {
   id: number;
@@ -177,15 +169,9 @@ function jdFromDate(dd: number, mm: number, yy: number) {
     Math.floor(y / 400) -
     32045;
 
-  if (
-    jd < 2299161
-  ) {
+  if (jd < 2299161) {
     jd =
-      dd +
-      Math.floor((153 * m + 2) / 5) +
-      365 * y +
-      Math.floor(y / 4) -
-      32083;
+      dd + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - 32083;
   }
 
   return jd;
@@ -197,33 +183,15 @@ function getNewMoonDay(k: number, timeZone: number) {
   const t3 = t2 * t;
   const dr = Math.PI / 180;
 
-  let jd1 =
-    2415020.75933 +
-    29.53058868 * k +
-    0.0001178 * t2 -
-    0.000000155 * t3;
+  let jd1 = 2415020.75933 + 29.53058868 * k + 0.0001178 * t2 - 0.000000155 * t3;
 
-  jd1 +=
-    0.00033 *
-    Math.sin((166.56 + 132.87 * t - 0.009173 * t2) * dr);
+  jd1 += 0.00033 * Math.sin((166.56 + 132.87 * t - 0.009173 * t2) * dr);
 
-  const m =
-    359.2242 +
-    29.10535608 * k -
-    0.0000333 * t2 -
-    0.00000347 * t3;
+  const m = 359.2242 + 29.10535608 * k - 0.0000333 * t2 - 0.00000347 * t3;
 
-  const mpr =
-    306.0253 +
-    385.81691806 * k +
-    0.0107306 * t2 +
-    0.00001236 * t3;
+  const mpr = 306.0253 + 385.81691806 * k + 0.0107306 * t2 + 0.00001236 * t3;
 
-  const f =
-    21.2964 +
-    390.67050646 * k -
-    0.0016528 * t2 -
-    0.00000239 * t3;
+  const f = 21.2964 + 390.67050646 * k - 0.0016528 * t2 - 0.00000239 * t3;
 
   let c1 =
     (0.1734 - 0.000393 * t) * Math.sin(m * dr) +
@@ -250,10 +218,7 @@ function getNewMoonDay(k: number, timeZone: number) {
       0.00000845 * t3 -
       0.000000081 * t * t3;
   } else {
-    deltaT =
-      -0.000278 +
-      0.000265 * t +
-      0.000262 * t2;
+    deltaT = -0.000278 + 0.000265 * t + 0.000262 * t2;
   }
 
   const jdNew = jd1 + c1 - deltaT;
@@ -262,27 +227,17 @@ function getNewMoonDay(k: number, timeZone: number) {
 }
 
 function getSunLongitude(jdn: number, timeZone: number) {
-  const t =
-    (jdn - 2451545.5 - timeZone / 24) / 36525;
+  const t = (jdn - 2451545.5 - timeZone / 24) / 36525;
   const t2 = t * t;
   const dr = Math.PI / 180;
 
-  const m =
-    357.5291 +
-    35999.0503 * t -
-    0.0001559 * t2 -
-    0.00000048 * t * t2;
+  const m = 357.5291 + 35999.0503 * t - 0.0001559 * t2 - 0.00000048 * t * t2;
 
-  const l0 =
-    280.46645 +
-    36000.76983 * t +
-    0.0003032 * t2;
+  const l0 = 280.46645 + 36000.76983 * t + 0.0003032 * t2;
 
   let dl =
-    (1.9146 - 0.004817 * t - 0.000014 * t2) *
-      Math.sin(dr * m) +
-    (0.019993 - 0.000101 * t) *
-      Math.sin(2 * dr * m) +
+    (1.9146 - 0.004817 * t - 0.000014 * t2) * Math.sin(dr * m) +
+    (0.019993 - 0.000101 * t) * Math.sin(2 * dr * m) +
     0.00029 * Math.sin(3 * dr * m);
 
   let l = l0 + dl;
@@ -309,18 +264,12 @@ function getLeapMonthOffset(a11: number, timeZone: number) {
   const k = Math.floor((a11 - 2415021.076998695) / 29.530588853 + 0.5);
   let last = 0;
   let i = 1;
-  let arc = getSunLongitude(
-    getNewMoonDay(k + i, timeZone),
-    timeZone,
-  );
+  let arc = getSunLongitude(getNewMoonDay(k + i, timeZone), timeZone);
 
   do {
     last = arc;
     i += 1;
-    arc = getSunLongitude(
-      getNewMoonDay(k + i, timeZone),
-      timeZone,
-    );
+    arc = getSunLongitude(getNewMoonDay(k + i, timeZone), timeZone);
   } while (arc !== last && i < 14);
 
   return i - 1;
@@ -333,9 +282,7 @@ function getVietnameseLunarDay(date = new Date()) {
   const yy = date.getFullYear();
 
   const dayNumber = jdFromDate(dd, mm, yy);
-  const k = Math.floor(
-    (dayNumber - 2415021.076998695) / 29.530588853,
-  );
+  const k = Math.floor((dayNumber - 2415021.076998695) / 29.530588853);
 
   let monthStart = getNewMoonDay(k + 1, timeZone);
 
@@ -345,13 +292,13 @@ function getVietnameseLunarDay(date = new Date()) {
 
   let a11 = getLunarMonth11(yy, timeZone);
   let b11 = a11;
-  let lunarYear: number;
+  //let lunarYear: number;
 
   if (a11 >= monthStart) {
-    lunarYear = yy;
+    // lunarYear = yy;
     a11 = getLunarMonth11(yy - 1, timeZone);
   } else {
-    lunarYear = yy + 1;
+    //lunarYear = yy + 1;
     b11 = getLunarMonth11(yy + 1, timeZone);
   }
 
@@ -372,7 +319,7 @@ function getVietnameseLunarDay(date = new Date()) {
   }
 
   if (lunarMonth >= 11 && diff < 4) {
-    lunarYear -= 1;
+    //lunarYear -= 1;
   }
 
   return lunarDay;
@@ -382,10 +329,7 @@ function isSpecialLunarNight() {
   const lunarDay = getVietnameseLunarDay();
 
   return (
-    lunarDay === 1 ||
-    lunarDay === 14 ||
-    lunarDay === 15 ||
-    lunarDay === 30
+    lunarDay === 1 || lunarDay === 14 || lunarDay === 15 || lunarDay === 30
   );
 }
 
@@ -456,7 +400,7 @@ function MovingWater() {
           {
             top: '18%',
             opacity: 0.13,
-            transform: [{translateX: moveA}],
+            transform: [{ translateX: moveA }],
           },
         ]}
       />
@@ -467,7 +411,7 @@ function MovingWater() {
           {
             top: '39%',
             opacity: 0.1,
-            transform: [{translateX: moveB}],
+            transform: [{ translateX: moveB }],
           },
         ]}
       />
@@ -478,7 +422,7 @@ function MovingWater() {
           {
             top: '60%',
             opacity: 0.12,
-            transform: [{translateX: moveC}],
+            transform: [{ translateX: moveC }],
           },
         ]}
       />
@@ -489,7 +433,7 @@ function MovingWater() {
           {
             top: '78%',
             opacity: 0.08,
-            transform: [{translateX: moveA}],
+            transform: [{ translateX: moveA }],
           },
         ]}
       />
@@ -497,11 +441,7 @@ function MovingWater() {
   );
 }
 
-function SpecialNightEffects({
-  enabled,
-}: {
-  enabled: boolean;
-}) {
+function SpecialNightEffects({ enabled }: { enabled: boolean }) {
   const float = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -543,36 +483,34 @@ function SpecialNightEffects({
     <View pointerEvents="none" style={styles.specialLayer}>
       <View style={styles.brightMoonGlow} />
 
-      {[0.18, 0.33, 0.48, 0.62, 0.76, 0.88].map(
-        (leftRatio, index) => (
-          <Animated.Text
-            key={leftRatio}
-            style={[
-              styles.skyLantern,
-              {
-                left: SCREEN_WIDTH * leftRatio,
-                top: 118 + index * 32,
-                opacity,
-                transform: [
-                  {
-                    translateY,
-                  },
-                  {
-                    translateX:
-                      index % 2 === 0 ? -10 : 10,
-                  },
-                ],
-              },
-            ]}>
-            🏮
-          </Animated.Text>
-        ),
-      )}
+      {[0.18, 0.33, 0.48, 0.62, 0.76, 0.88].map((leftRatio, index) => (
+        <Animated.Text
+          key={leftRatio}
+          style={[
+            styles.skyLantern,
+            {
+              left: SCREEN_WIDTH * leftRatio,
+              top: 118 + index * 32,
+              opacity,
+              transform: [
+                {
+                  translateY,
+                },
+                {
+                  translateX: index % 2 === 0 ? -10 : 10,
+                },
+              ],
+            },
+          ]}
+        >
+          🏮
+        </Animated.Text>
+      ))}
     </View>
   );
 }
 
-function LanternSprite({item}: {item: LanternItem}) {
+function LanternSprite({ item }: { item: LanternItem }) {
   const translateX = item.progress.interpolate({
     inputRange: [0, 0.18, 0.36, 0.55, 0.75, 1],
     outputRange: [
@@ -624,9 +562,10 @@ function LanternSprite({item}: {item: LanternItem}) {
           left: item.startX,
           top: item.startY,
           opacity,
-          transform: [{translateX}, {translateY}, {scale}, {rotate}],
+          transform: [{ translateX }, { translateY }, { scale }, { rotate }],
         },
-      ]}>
+      ]}
+    >
       <Text style={styles.lanternLabel} numberOfLines={2}>
         {item.label}
       </Text>
@@ -644,7 +583,7 @@ function LanternSprite({item}: {item: LanternItem}) {
           styles.reflection,
           {
             opacity: reflectionOpacity,
-            transform: [{scaleX: reflectionScale}],
+            transform: [{ scaleX: reflectionScale }],
           },
         ]}
       />
@@ -653,24 +592,20 @@ function LanternSprite({item}: {item: LanternItem}) {
 }
 
 export default function LanternReleaseScreen() {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const idRef = useRef(1);
 
-  const [stats, setStats] =
-    useState<LanternStats>(createDefaultStats());
+  const [stats, setStats] = useState<LanternStats>(createDefaultStats());
 
-  const [lanterns, setLanterns] =
-    useState<LanternItem[]>([]);
+  const [lanterns, setLanterns] = useState<LanternItem[]>([]);
 
-  const [modalVisible, setModalVisible] =
-    useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
-  const [prayerText, setPrayerText] =
-    useState('');
+  const [prayerText, setPrayerText] = useState('');
 
-  const [selectedLantern, setSelectedLantern] =
-    useState<LanternKind>('pink');
+  const [selectedLantern, setSelectedLantern] = useState<LanternKind>('pink');
+  const [soundEnabled, setSoundEnabled] = useState(getLanternSoundEnabled());
 
   const specialNight = useMemo(() => {
     return isSpecialLunarNight();
@@ -680,6 +615,27 @@ export default function LanternReleaseScreen() {
     let mounted = true;
 
     preloadLanternSounds();
+
+    AsyncStorage.getItem(SOUND_STORAGE_KEY).then(value => {
+      if (!mounted || value === null) {
+        return;
+      }
+
+      const enabled = value === 'true';
+      setSoundEnabled(enabled);
+      setLanternSoundEnabled(enabled);
+    });
+
+    scheduleLanternReleaseReminders({
+      channelName: t('lanternRelease.reminderChannelName'),
+      channelDescription: t('lanternRelease.reminderChannelDescription'),
+      firstDayTitle: t('lanternRelease.firstDayReminderTitle'),
+      firstDayBody: t('lanternRelease.firstDayReminderBody'),
+      fullMoonTitle: t('lanternRelease.fullMoonReminderTitle'),
+      fullMoonBody: t('lanternRelease.fullMoonReminderBody'),
+    }).catch(error => {
+      console.log('Schedule lantern reminders error:', error);
+    });
 
     loadStats().then(value => {
       if (mounted) {
@@ -691,7 +647,7 @@ export default function LanternReleaseScreen() {
       mounted = false;
       releaseLanternSounds();
     };
-  }, []);
+  }, [t]);
 
   const prayerPresets = useMemo(() => {
     const value = t('lanternRelease.prayerPresets', {
@@ -711,9 +667,8 @@ export default function LanternReleaseScreen() {
 
   const selectedLanternType = useMemo(() => {
     return (
-      LANTERN_TYPES.find(
-        item => item.key === selectedLantern,
-      ) || LANTERN_TYPES[0]
+      LANTERN_TYPES.find(item => item.key === selectedLantern) ||
+      LANTERN_TYPES[0]
     );
   }, [selectedLantern]);
 
@@ -723,19 +678,31 @@ export default function LanternReleaseScreen() {
     setStats(prev => {
       const next: LanternStats = {
         total: prev.total + 1,
-        today:
-          prev.lastDate === today
-            ? prev.today + 1
-            : 1,
+        today: prev.lastDate === today ? prev.today + 1 : 1,
         lastDate: today,
       };
 
-      void saveStats(next);
+      saveStats(next).catch(error => {
+        console.log('Save lantern stats error:', error);
+      });
 
       return next;
     });
   };
+  const toggleSound = () => {
+    setSoundEnabled(prev => {
+      const next = !prev;
 
+      setLanternSoundEnabled(next);
+      AsyncStorage.setItem(SOUND_STORAGE_KEY, next ? 'true' : 'false').catch(
+        error => {
+          console.log('Save lantern sound setting error:', error);
+        },
+      );
+
+      return next;
+    });
+  };
   const openPrayerModal = () => {
     setPrayerText('');
     setModalVisible(true);
@@ -745,11 +712,9 @@ export default function LanternReleaseScreen() {
     const id = idRef.current++;
     const progress = new Animated.Value(0);
 
-    const randomOffsetX =
-      (Math.random() - 0.5) * SCREEN_WIDTH * 0.22;
+    const randomOffsetX = (Math.random() - 0.5) * SCREEN_WIDTH * 0.22;
 
-    const randomDriftX =
-      (Math.random() - 0.5) * SCREEN_WIDTH * 0.5;
+    const randomDriftX = (Math.random() - 0.5) * SCREEN_WIDTH * 0.5;
 
     const cleanedPrayer = customPrayer?.trim();
 
@@ -778,9 +743,7 @@ export default function LanternReleaseScreen() {
       easing: Easing.inOut(Easing.quad),
       useNativeDriver: true,
     }).start(() => {
-      setLanterns(prev =>
-        prev.filter(lantern => lantern.id !== id),
-      );
+      setLanterns(prev => prev.filter(lantern => lantern.id !== id));
     });
   };
 
@@ -795,7 +758,8 @@ export default function LanternReleaseScreen() {
         <ImageBackground
           source={ASSETS.background}
           resizeMode="cover"
-          style={styles.background}>
+          style={styles.background}
+        >
           <SpecialNightEffects enabled={specialNight} />
 
           <View style={styles.topBar}>
@@ -803,25 +767,29 @@ export default function LanternReleaseScreen() {
               <Text style={styles.backText}>‹</Text>
             </Pressable>
 
-            <View style={styles.counterBadge}>
-              <Text style={styles.counterText}>🌸 {countText}</Text>
+            <View style={styles.topRightActions}>
+              <Pressable style={styles.soundButton} onPress={toggleSound}>
+                <Text style={styles.soundButtonText}>
+                  {soundEnabled ? '🔊' : '🔇'}
+                </Text>
+              </Pressable>
+
+              <View style={styles.counterBadge}>
+                <Text style={styles.counterText}>🌸 {countText}</Text>
+              </View>
             </View>
           </View>
 
           <View style={styles.statsPanel}>
             <View style={styles.statItem}>
-              <Text style={styles.statLabel}>
-                {t('lanternRelease.today')}
-              </Text>
+              <Text style={styles.statLabel}>{t('lanternRelease.today')}</Text>
               <Text style={styles.statValue}>{stats.today}</Text>
             </View>
 
             <View style={styles.statDivider} />
 
             <View style={styles.statItem}>
-              <Text style={styles.statLabel}>
-                {t('lanternRelease.total')}
-              </Text>
+              <Text style={styles.statLabel}>{t('lanternRelease.total')}</Text>
               <Text style={styles.statValue}>{stats.total}</Text>
             </View>
           </View>
@@ -844,7 +812,8 @@ export default function LanternReleaseScreen() {
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.typeSelectorContent}>
+              contentContainerStyle={styles.typeSelectorContent}
+            >
               {LANTERN_TYPES.map(item => {
                 const selected = item.key === selectedLantern;
 
@@ -855,15 +824,16 @@ export default function LanternReleaseScreen() {
                       styles.typeChip,
                       selected && styles.typeChipSelected,
                     ]}
-                    onPress={() => setSelectedLantern(item.key)}>
+                    onPress={() => setSelectedLantern(item.key)}
+                  >
                     <Text
                       style={[
                         styles.typeChipText,
                         selected && styles.typeChipTextSelected,
                       ]}
-                      numberOfLines={1}>
-                      {item.emoji}{' '}
-                      {t(item.labelKey)}
+                      numberOfLines={1}
+                    >
+                      {item.emoji} {t(item.labelKey)}
                     </Text>
                   </Pressable>
                 );
@@ -872,27 +842,19 @@ export default function LanternReleaseScreen() {
 
             <View style={styles.actionRow}>
               <Pressable
-                style={[
-                  styles.compactButton,
-                  styles.compactButtonLeft,
-                ]}
-                onPress={() => releaseLantern()}>
-                <Text
-                  style={styles.compactButtonText}
-                  numberOfLines={1}>
+                style={[styles.compactButton, styles.compactButtonLeft]}
+                onPress={() => releaseLantern()}
+              >
+                <Text style={styles.compactButtonText} numberOfLines={1}>
                   🪷 {t('lanternRelease.releaseButton')}
                 </Text>
               </Pressable>
 
               <Pressable
-                style={[
-                  styles.compactButton,
-                  styles.compactButtonPrimary,
-                ]}
-                onPress={openPrayerModal}>
-                <Text
-                  style={styles.compactButtonPrimaryText}
-                  numberOfLines={1}>
+                style={[styles.compactButton, styles.compactButtonPrimary]}
+                onPress={openPrayerModal}
+              >
+                <Text style={styles.compactButtonPrimaryText} numberOfLines={1}>
                   🌸 {t('lanternRelease.releaseWithPrayer')}
                 </Text>
               </Pressable>
@@ -905,7 +867,8 @@ export default function LanternReleaseScreen() {
         visible={modalVisible}
         transparent
         animationType="fade"
-        onRequestClose={() => setModalVisible(false)}>
+        onRequestClose={() => setModalVisible(false)}
+      >
         <View style={styles.modalOverlay}>
           <View style={styles.modalCard}>
             <Text style={styles.modalTitle}>
@@ -927,7 +890,8 @@ export default function LanternReleaseScreen() {
                 <Pressable
                   key={item}
                   style={styles.presetChip}
-                  onPress={() => setPrayerText(item)}>
+                  onPress={() => setPrayerText(item)}
+                >
                   <Text style={styles.presetText}>{item}</Text>
                 </Pressable>
               ))}
@@ -936,15 +900,14 @@ export default function LanternReleaseScreen() {
             <View style={styles.modalActions}>
               <Pressable
                 style={styles.cancelButton}
-                onPress={() => setModalVisible(false)}>
+                onPress={() => setModalVisible(false)}
+              >
                 <Text style={styles.cancelButtonText}>
                   {t('lanternRelease.cancel')}
                 </Text>
               </Pressable>
 
-              <Pressable
-                style={styles.confirmButton}
-                onPress={confirmRelease}>
+              <Pressable style={styles.confirmButton} onPress={confirmRelease}>
                 <Text style={styles.confirmButtonText}>
                   {t('lanternRelease.release')}
                 </Text>
@@ -1369,5 +1332,25 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 15,
     fontWeight: '900',
+  },
+  topRightActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  soundButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    marginRight: 8,
+    backgroundColor: 'rgba(0,0,0,0.42)',
+    borderWidth: 1,
+    borderColor: 'rgba(255,213,145,0.24)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  soundButtonText: {
+    fontSize: 18,
   },
 });

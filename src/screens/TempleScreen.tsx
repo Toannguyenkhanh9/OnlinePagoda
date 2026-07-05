@@ -4,6 +4,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+
 import {
   Alert,
   Animated,
@@ -21,7 +22,7 @@ import {
 } from 'react-native';
 
 import {useFocusEffect} from '@react-navigation/native';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 import SkiaIncenseSmoke from '../components/SkiaIncenseSmoke';
 
@@ -34,26 +35,38 @@ import {
   stopTempleSound,
   type TempleSound,
 } from '../services/audio';
+
 import TempleAmbientSound from '../components/TempleAmbientSound';
 import TempleSceneOverlay from '../components/TempleSceneOverlay';
 
 import {
   incrementChantDraft,
 } from '../services/chantCounter';
+
 import {
   recordPracticeActivity,
 } from '../services/practice';
+
 import {
   DEFAULT_ALTAR_PREFERENCES,
   getAltarPreferences,
   type AltarPreferences,
 } from '../services/altarPreferences';
+
 import {
   getAltarBackgroundSource,
   resolveAltarCultureTheme,
 } from '../utils/altarTheme';
 
-type ActionKind = 'incense' | 'woodenFish' | 'bell';
+const TEMPLE_EFFECT_ASSETS = {
+  incenseStick: require('../assets/images/incense_stick_real.png'),
+  incenseFlame: require('../assets/images/incense_flame_real.png'),
+};
+
+type ActionKind =
+  | 'incense'
+  | 'woodenFish'
+  | 'bell';
 
 type TempleRoundActionProps = {
   kind: ActionKind;
@@ -148,44 +161,49 @@ function TempleRoundAction({
   const rotation = motion.interpolate({
     inputRange: [-1, 0, 1],
     outputRange:
-      kind === 'bell' ? ['-10deg', '0deg', '10deg'] : ['-4deg', '0deg', '4deg'],
+      kind === 'bell'
+        ? ['-10deg', '0deg', '10deg']
+        : ['-4deg', '0deg', '4deg'],
   });
 
   const translateY = motion.interpolate({
     inputRange: [-1, 0, 1],
-    outputRange: kind === 'woodenFish' ? [2, 0, -3] : [0, 0, 0],
+    outputRange:
+      kind === 'woodenFish'
+        ? [2, 0, -3]
+        : [0, 0, 0],
   });
 
   return (
     <View style={styles.actionItem}>
       <Pressable
         accessibilityRole="button"
-        accessibilityState={{ selected: isActive }}
+        accessibilityState={{selected: isActive}}
         delayLongPress={500}
         onPress={handlePress}
         onLongPress={handleLongPress}
-        style={({ pressed }) => [
+        style={({pressed}) => [
           styles.actionPressable,
           pressed && styles.actionPressed,
-        ]}
-      >
+        ]}>
         <Animated.View
           style={[
             styles.actionCircle,
             isActive && styles.actionCircleActive,
             {
-              transform: [{ scale }],
+              transform: [{scale}],
             },
-          ]}
-        >
+          ]}>
           <Animated.View
             style={[
               styles.actionVisual,
               {
-                transform: [{ rotate: rotation }, { translateY }],
+                transform: [
+                  {rotate: rotation},
+                  {translateY},
+                ],
               },
-            ]}
-          >
+            ]}>
             {imageSource ? (
               <Image
                 source={imageSource}
@@ -212,8 +230,7 @@ function TempleRoundAction({
           style={[
             styles.actionSubtitle,
             isActive && styles.actionSubtitleActive,
-          ]}
-        >
+          ]}>
           {subtitle}
         </Text>
       )}
@@ -221,6 +238,238 @@ function TempleRoundAction({
   );
 }
 
+type IncenseLightingEffectProps = {
+  visible: boolean;
+  progress: Animated.Value;
+};
+
+function IncenseLightingEffect({
+  visible,
+  progress,
+}: IncenseLightingEffectProps) {
+  const flamePulse = useRef(new Animated.Value(1)).current;
+  const emberGlow = useRef(new Animated.Value(0.75)).current;
+
+  useEffect(() => {
+    if (!visible) {
+      flamePulse.stopAnimation();
+      emberGlow.stopAnimation();
+      flamePulse.setValue(1);
+      emberGlow.setValue(0.75);
+      return;
+    }
+
+    const flameLoop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(flamePulse, {
+          toValue: 1.1,
+          duration: 260,
+          useNativeDriver: true,
+        }),
+        Animated.timing(flamePulse, {
+          toValue: 0.92,
+          duration: 220,
+          useNativeDriver: true,
+        }),
+        Animated.timing(flamePulse, {
+          toValue: 1.04,
+          duration: 260,
+          useNativeDriver: true,
+        }),
+      ]),
+    );
+
+    const glowLoop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(emberGlow, {
+          toValue: 1,
+          duration: 320,
+          useNativeDriver: true,
+        }),
+        Animated.timing(emberGlow, {
+          toValue: 0.65,
+          duration: 340,
+          useNativeDriver: true,
+        }),
+      ]),
+    );
+
+    flameLoop.start();
+    glowLoop.start();
+
+    return () => {
+      flameLoop.stop();
+      glowLoop.stop();
+      flamePulse.stopAnimation();
+      emberGlow.stopAnimation();
+    };
+  }, [visible, flamePulse, emberGlow]);
+
+  if (!visible) {
+    return null;
+  }
+
+  const groupTranslateY = progress.interpolate({
+    inputRange: [0, 0.28, 0.58, 0.84, 1],
+    outputRange: [150, 22, 0, -4, -20],
+  });
+
+  const groupOpacity = progress.interpolate({
+    inputRange: [0, 0.08, 0.18, 0.88, 1],
+    outputRange: [0, 0.65, 1, 1, 0],
+  });
+
+  const groupScale = progress.interpolate({
+    inputRange: [0, 0.22, 0.58, 1],
+    outputRange: [0.9, 0.97, 1, 0.92],
+  });
+
+  const stickOpacity = progress.interpolate({
+    inputRange: [0, 0.12, 0.88, 1],
+    outputRange: [0, 1, 1, 0],
+  });
+
+  const flameOpacity = progress.interpolate({
+    inputRange: [0, 0.26, 0.36, 0.86, 1],
+    outputRange: [0, 0.25, 1, 0.9, 0],
+  });
+
+  const glowOpacity = progress.interpolate({
+    inputRange: [0, 0.26, 0.42, 0.86, 1],
+    outputRange: [0, 0.45, 0.95, 0.55, 0],
+  });
+
+  const smokeOpacity = progress.interpolate({
+    inputRange: [0, 0.42, 0.68, 0.92, 1],
+    outputRange: [0, 0.04, 0.18, 0.48, 0],
+  });
+
+  const smokeTranslateY = progress.interpolate({
+    inputRange: [0, 1],
+    outputRange: [8, -94],
+  });
+
+  const smokeDriftLeft = progress.interpolate({
+    inputRange: [0, 0.4, 0.72, 1],
+    outputRange: [0, -8, 10, 16],
+  });
+
+  const smokeDriftCenter = progress.interpolate({
+    inputRange: [0, 0.35, 0.7, 1],
+    outputRange: [0, 4, -4, 8],
+  });
+
+  const smokeDriftRight = progress.interpolate({
+    inputRange: [0, 0.45, 0.75, 1],
+    outputRange: [0, 8, -6, -14],
+  });
+
+  const trayOpacity = progress.interpolate({
+    inputRange: [0, 0.18, 0.78, 1],
+    outputRange: [0, 0.88, 0.7, 0],
+  });
+
+  const sticks = [
+    {
+      key: 'left',
+      x: -24,
+      rotate: '-9deg',
+      smokeX: smokeDriftLeft,
+    },
+    {
+      key: 'center',
+      x: 0,
+      rotate: '0deg',
+      smokeX: smokeDriftCenter,
+    },
+    {
+      key: 'right',
+      x: 24,
+      rotate: '9deg',
+      smokeX: smokeDriftRight,
+    },
+  ];
+
+  return (
+    <Animated.View
+      pointerEvents="none"
+      style={[
+        styles.incenseLightingLayer,
+        {
+          opacity: groupOpacity,
+          transform: [
+            {translateY: groupTranslateY},
+            {scale: groupScale},
+          ],
+        },
+      ]}>
+      <Animated.View
+        style={[
+          styles.incenseOfferingTray,
+          {
+            opacity: trayOpacity,
+          },
+        ]}
+      />
+
+      {sticks.map(stick => (
+        <Animated.View
+          key={stick.key}
+          style={[
+            styles.incenseStickWrap,
+            {
+              marginLeft: stick.x,
+              opacity: stickOpacity,
+              transform: [{rotate: stick.rotate}],
+            },
+          ]}>
+          <Animated.View
+            style={[
+              styles.incenseLightingGlow,
+              {
+                opacity: Animated.multiply(
+                  glowOpacity,
+                  emberGlow,
+                ),
+              },
+            ]}
+          />
+
+          <Animated.View
+            style={[
+              styles.incenseLightingSmoke,
+              {
+                opacity: smokeOpacity,
+                transform: [
+                  {translateY: smokeTranslateY},
+                  {translateX: stick.smokeX},
+                ],
+              },
+            ]}
+          />
+
+          <Animated.Image
+            source={TEMPLE_EFFECT_ASSETS.incenseFlame}
+            resizeMode="contain"
+            style={[
+              styles.incenseFlameImage,
+              {
+                opacity: flameOpacity,
+                transform: [{scale: flamePulse}],
+              },
+            ]}
+          />
+
+          <Animated.Image
+            source={TEMPLE_EFFECT_ASSETS.incenseStick}
+            resizeMode="contain"
+            style={styles.incenseStickImage}
+          />
+        </Animated.View>
+      ))}
+    </Animated.View>
+  );
+}
 
 type TempleSmokeLayerProps = {
   visible: boolean;
@@ -285,12 +534,6 @@ function useRandomPulse(
   return value;
 }
 
-/**
- * Ba ảnh PNG trong suốt chỉ chứa vùng sáng mềm.
- * Vì ảnh hiệu ứng có cùng kích thước và cùng resizeMode="cover"
- * với ảnh nền nên đèn và nến luôn nằm đúng vị trí, không tạo
- * vòng tròn mờ trên Android.
- */
 function TempleLightEffects() {
   const leftLight = useRandomPulse(
     0.22,
@@ -300,8 +543,8 @@ function TempleLightEffects() {
   );
 
   const rightLight = useRandomPulse(
-    0.20,
-    0.70,
+    0.2,
+    0.7,
     300,
     960,
   );
@@ -316,8 +559,7 @@ function TempleLightEffects() {
   return (
     <View
       pointerEvents="none"
-      style={styles.fullScreenEffect}
-    >
+      style={styles.fullScreenEffect}>
       <Animated.Image
         source={require('../assets/images/temple_glow_left.png')}
         resizeMode="cover"
@@ -354,11 +596,6 @@ function TempleLightEffects() {
   );
 }
 
-/**
- * Khói vẫn dùng component Skia hiện có, nhưng toàn bộ lớp khói
- * được đẩy trái/phải và thay đổi độ đậm nhẹ để tạo cảm giác
- * có luồng gió rất nhỏ.
- */
 function TempleSmokeLayer({
   visible,
 }: TempleSmokeLayerProps) {
@@ -443,15 +680,12 @@ function TempleSmokeLayer({
             {scaleX},
           ],
         },
-      ]}
-    >
+      ]}>
       <SkiaIncenseSmoke />
     </Animated.View>
   );
 }
 
-// Mỗi nén nhang cháy trong 60 giây.
-// Khi hoàn thiện, có thể đổi thành 5 * 60 * 1000 để cháy trong 5 phút.
 const INCENSE_BURN_DURATION_MS = 60 * 1000;
 
 export default function TempleScreen() {
@@ -460,9 +694,27 @@ export default function TempleScreen() {
   const [incenseExpirations, setIncenseExpirations] =
     useState<number[]>([]);
 
+  const [
+    incenseLightingVisible,
+    setIncenseLightingVisible,
+  ] = useState(false);
+
+  const incenseLightingProgress = useRef(
+    new Animated.Value(0),
+  ).current;
+
+  const incenseLightingTimeoutRef = useRef<
+    ReturnType<typeof setTimeout> | null
+  >(null);
+
   const incenseCount = incenseExpirations.length;
-  const [woodenFishCount, setWoodenFishCount] = useState(0);
-  const [bellCount, setBellCount] = useState(0);
+
+  const [woodenFishCount, setWoodenFishCount] =
+    useState(0);
+
+  const [bellCount, setBellCount] =
+    useState(0);
+
   const [loopingSound, setLoopingSound] =
     useState<TempleSound | null>(null);
 
@@ -514,6 +766,11 @@ export default function TempleScreen() {
     preloadTempleSounds();
 
     return () => {
+      if (incenseLightingTimeoutRef.current) {
+        clearTimeout(incenseLightingTimeoutRef.current);
+        incenseLightingTimeoutRef.current = null;
+      }
+
       stopAllTempleSounds();
       releaseTempleSounds();
     };
@@ -547,32 +804,45 @@ export default function TempleScreen() {
   }, []);
 
   const lightIncense = () => {
-    const expirationTime =
-      Date.now() + INCENSE_BURN_DURATION_MS;
+    if (incenseLightingTimeoutRef.current) {
+      clearTimeout(incenseLightingTimeoutRef.current);
+      incenseLightingTimeoutRef.current = null;
+    }
 
-    setIncenseExpirations(current => [
-      ...current,
-      expirationTime,
-    ]);
+    incenseLightingProgress.stopAnimation();
+    incenseLightingProgress.setValue(0);
+    setIncenseLightingVisible(true);
 
-    recordPracticeActivity('incense').catch(
-      error => {
+    incenseLightingTimeoutRef.current = setTimeout(() => {
+      const expirationTime =
+        Date.now() + INCENSE_BURN_DURATION_MS;
+
+      setIncenseExpirations(current => [
+        ...current,
+        expirationTime,
+        expirationTime,
+        expirationTime,
+      ]);
+
+      recordPracticeActivity('incense').catch(error => {
         console.warn(
           'Unable to record incense practice:',
           error,
         );
-      },
-    );
+      });
+    }, 1600);
+
+    Animated.timing(incenseLightingProgress, {
+      toValue: 1,
+      duration: 3800,
+      easing: Easing.inOut(Easing.quad),
+      useNativeDriver: true,
+    }).start(() => {
+      setIncenseLightingVisible(false);
+      incenseLightingProgress.setValue(0);
+    });
   };
 
-  /**
-   * Cộng một lần gõ mõ vào:
-   * 1. Bộ đếm tạm đang hiển thị trong Chính điện.
-   * 2. Bản đếm đang dở của Bộ đếm tụng niệm.
-   *
-   * Lịch sử theo ngày chỉ được tạo khi người dùng mở màn hình
-   * Bộ đếm tụng niệm và bấm "Hoàn thành và lưu".
-   */
   const recordWoodenFishStrike = async () => {
     setWoodenFishCount(current => current + 1);
 
@@ -622,8 +892,6 @@ export default function TempleScreen() {
     setLoopingSound(type);
 
     if (type === 'woodenFish') {
-      // Khi bắt đầu phát lặp chỉ tính một lần.
-      // Âm thanh lặp không tự động cộng số liên tục.
       await recordWoodenFishStrike();
     } else {
       setBellCount(current => current + 1);
@@ -631,34 +899,38 @@ export default function TempleScreen() {
   };
 
   const resetCounters = () => {
-    Alert.alert(t('temple.resetDialogTitle'), t('temple.resetDialogMessage'), [
-      {
-        text: t('common.cancel'),
-        style: 'cancel',
-      },
-      {
-        text: t('common.reset'),
-        style: 'destructive',
-        onPress: () => {
-          stopAllTempleSounds();
-          setLoopingSound(null);
-          setIncenseExpirations([]);
-          setWoodenFishCount(0);
-          setBellCount(0);
+    Alert.alert(
+      t('temple.resetDialogTitle'),
+      t('temple.resetDialogMessage'),
+      [
+        {
+          text: t('common.cancel'),
+          style: 'cancel',
         },
-      },
-    ]);
+        {
+          text: t('common.reset'),
+          style: 'destructive',
+          onPress: () => {
+            stopAllTempleSounds();
+            setLoopingSound(null);
+            setIncenseExpirations([]);
+            setWoodenFishCount(0);
+            setBellCount(0);
+          },
+        },
+      ],
+    );
   };
 
   return (
     <ImageBackground
       source={altarBackground}
       resizeMode="cover"
-      style={styles.background}
-    >
+      style={styles.background}>
       <TempleSceneOverlay
         preferences={altarPreferences}
       />
+
       <TempleAmbientSound />
 
       <StatusBar
@@ -667,26 +939,31 @@ export default function TempleScreen() {
       />
 
       <View style={styles.overlay}>
-        {effectiveCultureTheme ===
-          'vietnam' && (
+        {effectiveCultureTheme === 'vietnam' && (
           <TempleLightEffects />
         )}
 
         <SafeAreaView style={styles.safeArea}>
           <ScrollView
             contentContainerStyle={styles.content}
-            showsVerticalScrollIndicator={false}
-          >
+            showsVerticalScrollIndicator={false}>
             <View style={styles.header}>
               <View style={styles.headerLeft}>
                 <Text style={styles.lotusIcon}>✺</Text>
-                <Text style={styles.headerTitle}>{t('temple.title')}</Text>
+                <Text style={styles.headerTitle}>
+                  {t('temple.title')}
+                </Text>
               </View>
 
               <Text style={styles.notificationIcon}>♧</Text>
             </View>
 
             <View style={styles.heroSpacer}>
+              <IncenseLightingEffect
+                visible={incenseLightingVisible}
+                progress={incenseLightingProgress}
+              />
+
               <TempleSmokeLayer
                 visible={incenseCount > 0}
               />
@@ -719,8 +996,12 @@ export default function TempleScreen() {
                         })
                   }
                   isActive={loopingSound === 'woodenFish'}
-                  onPress={() => handleSoundPress('woodenFish')}
-                  onLongPress={() => handleSoundLongPress('woodenFish')}
+                  onPress={() =>
+                    handleSoundPress('woodenFish')
+                  }
+                  onLongPress={() =>
+                    handleSoundLongPress('woodenFish')
+                  }
                 />
 
                 <TempleRoundAction
@@ -736,13 +1017,17 @@ export default function TempleScreen() {
                   }
                   isActive={loopingSound === 'bell'}
                   onPress={() => handleSoundPress('bell')}
-                  onLongPress={() => handleSoundLongPress('bell')}
+                  onLongPress={() =>
+                    handleSoundLongPress('bell')
+                  }
                 />
               </View>
 
               <View style={styles.mottoRow}>
                 <Text style={styles.mottoOrnament}>‹</Text>
-                <Text style={styles.motto}>{t('temple.motto')}</Text>
+                <Text style={styles.motto}>
+                  {t('temple.motto')}
+                </Text>
                 <Text style={styles.mottoOrnament}>›</Text>
               </View>
 
@@ -757,21 +1042,31 @@ export default function TempleScreen() {
                       defaultValue: 'Số nén hương',
                     })}
                   </Text>
-                  <Text style={styles.statValue}>{incenseCount}</Text>
+                  <Text style={styles.statValue}>
+                    {incenseCount}
+                  </Text>
                 </View>
 
                 <View style={styles.statDivider} />
 
                 <View style={styles.statItem}>
-                  <Text style={styles.statLabel}>{t('temple.woodenFish')}</Text>
-                  <Text style={styles.statValue}>{woodenFishCount}</Text>
+                  <Text style={styles.statLabel}>
+                    {t('temple.woodenFish')}
+                  </Text>
+                  <Text style={styles.statValue}>
+                    {woodenFishCount}
+                  </Text>
                 </View>
 
                 <View style={styles.statDivider} />
 
                 <View style={styles.statItem}>
-                  <Text style={styles.statLabel}>{t('temple.bell')}</Text>
-                  <Text style={styles.statValue}>{bellCount}</Text>
+                  <Text style={styles.statLabel}>
+                    {t('temple.bell')}
+                  </Text>
+                  <Text style={styles.statValue}>
+                    {bellCount}
+                  </Text>
                 </View>
               </View>
 
@@ -788,12 +1083,11 @@ export default function TempleScreen() {
               )}
 
               <Pressable
-                style={({ pressed }) => [
+                style={({pressed}) => [
                   styles.resetButton,
                   pressed && styles.resetButtonPressed,
                 ]}
-                onPress={resetCounters}
-              >
+                onPress={resetCounters}>
                 <Text style={styles.resetButtonText}>
                   {t('temple.resetCounter')}
                 </Text>
@@ -861,7 +1155,7 @@ const styles = StyleSheet.create({
   notificationIcon: {
     color: GOLD_LIGHT,
     fontSize: 26,
-    transform: [{ rotate: '180deg' }],
+    transform: [{rotate: '180deg'}],
   },
 
   heroSpacer: {
@@ -870,6 +1164,75 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'relative',
     overflow: 'hidden',
+  },
+
+  incenseLightingLayer: {
+    position: 'absolute',
+    bottom: 16,
+    alignSelf: 'center',
+    width: 190,
+    height: 292,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    zIndex: 12,
+  },
+
+  incenseOfferingTray: {
+    position: 'absolute',
+    bottom: 2,
+    width: 132,
+    height: 42,
+    borderRadius: 24,
+    backgroundColor: 'rgba(154, 98, 50, 0.72)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 220, 150, 0.42)',
+    shadowColor: '#000',
+    shadowOpacity: 0.32,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+
+  incenseStickWrap: {
+    position: 'absolute',
+    bottom: 28,
+    width: 46,
+    height: 210,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+
+  incenseStickImage: {
+    width: 36,
+    height: 178,
+  },
+
+  incenseFlameImage: {
+    position: 'absolute',
+    top: 2,
+    width: 24,
+    height: 38,
+  },
+
+  incenseLightingGlow: {
+    position: 'absolute',
+    top: 8,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: 'rgba(255, 188, 88, 0.22)',
+    shadowColor: '#FFB74D',
+    shadowOpacity: 1,
+    shadowRadius: 16,
+    elevation: 10,
+  },
+
+  incenseLightingSmoke: {
+    position: 'absolute',
+    top: 12,
+    width: 18,
+    height: 82,
+    borderRadius: 12,
+    backgroundColor: 'rgba(255,255,255,0.18)',
   },
 
   fullScreenEffect: {
@@ -1013,7 +1376,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
     borderBottomLeftRadius: 7,
-    transform: [{ rotate: '8deg' }],
+    transform: [{rotate: '8deg'}],
     marginBottom: -1,
   },
 

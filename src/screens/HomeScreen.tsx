@@ -1,7 +1,4 @@
-import React, {
-  useCallback,
-  useState,
-} from "react";
+import React, { useCallback, useState } from 'react';
 import {
   ImageBackground,
   Pressable,
@@ -11,49 +8,50 @@ import {
   StyleSheet,
   Text,
   View,
-} from "react-native";
+} from 'react-native';
 
-import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import { useFocusEffect } from "@react-navigation/native";
-import { useTranslation } from "react-i18next";
+import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { useFocusEffect } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 
-import PracticeStreakCard from "../components/PracticeStreakCard";
-import type { RootTabParamList } from "../navigation/RootNavigator";
+import PracticeStreakCard from '../components/PracticeStreakCard';
+import type { RootTabParamList } from '../navigation/RootNavigator';
 import {
   DEFAULT_ALTAR_PREFERENCES,
   getAltarPreferences,
   type AltarPreferences,
-} from "../services/altarPreferences";
+} from '../services/altarPreferences';
 import {
   getAltarBackgroundSource,
   resolveAltarCultureTheme,
-} from "../utils/altarTheme";
+} from '../utils/altarTheme';
 
-type Props = BottomTabScreenProps<RootTabParamList, "Home">;
+type Props = BottomTabScreenProps<RootTabParamList, 'Home'>;
 
 type MenuRoute =
-  | "Temple"
-  | "Meditation"
-  | "Prayer"
-  | "SpiritualAudio"
-  | "ChantCounter"
-  | "PracticeJourney"
-  | "DailyRitual"
-  | "PeaceJournal"
-  | "AltarCustomization"
-  | "Today"
-  | "LunarCalendar"
-  | "BuddhistCalendar"
-  | "FortuneStick"
-  | "Horoscope"
-  | "BaziChart"
-  | "BaziHistory"
-  | "UserProfiles"
-  | "BaziStage4"
-  | "ZiweiChart"
-  | "Settings"
-  | "ReleaseLife"
-    | "LanternRelease";
+  | 'Temple'
+  | 'Meditation'
+  | 'Prayer'
+  | 'SpiritualAudio'
+  | 'ChantCounter'
+  | 'PracticeJourney'
+  | 'DailyRitual'
+  | 'PeaceJournal'
+  | 'AltarCustomization'
+  | 'Today'
+  | 'LunarCalendar'
+  | 'BuddhistCalendar'
+  | 'FortuneStick'
+  | 'Horoscope'
+  | 'BaziChart'
+  | 'BaziHistory'
+  | 'UserProfiles'
+  | 'BaziStage4'
+  | 'ZiweiChart'
+  | 'Settings'
+  | 'ReleaseLife'
+  | 'LanternRelease'
+  | 'AncestorAltar';
 
 type HomeMenuItem = {
   icon: string;
@@ -155,7 +153,7 @@ function HomeSection({
       </View>
 
       <View style={styles.menuGrid}>
-        {items.map((item) => (
+        {items.map(item => (
           <HomeMenuCard
             key={`${title}-${item.route}-${item.title}`}
             {...item}
@@ -168,12 +166,11 @@ function HomeSection({
 }
 
 export default function HomeScreen({ navigation }: Props) {
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const [altarPreferences, setAltarPreferences] =
-    useState<AltarPreferences>(
-      DEFAULT_ALTAR_PREFERENCES,
-    );
+  const [altarPreferences, setAltarPreferences] = useState<AltarPreferences>(
+    DEFAULT_ALTAR_PREFERENCES,
+  );
 
   useFocusEffect(
     useCallback(() => {
@@ -186,10 +183,7 @@ export default function HomeScreen({ navigation }: Props) {
           }
         })
         .catch(error => {
-          console.warn(
-            "Unable to load altar preferences:",
-            error,
-          );
+          console.warn('Unable to load altar preferences:', error);
         });
 
       return () => {
@@ -198,21 +192,14 @@ export default function HomeScreen({ navigation }: Props) {
     }, []),
   );
 
-  const language =
-    i18n.resolvedLanguage ??
-    i18n.language ??
-    "en";
+  const language = i18n.resolvedLanguage ?? i18n.language ?? 'en';
 
-  const effectiveCultureTheme =
-    resolveAltarCultureTheme(
-      altarPreferences.cultureTheme,
-      language,
-    );
+  const effectiveCultureTheme = resolveAltarCultureTheme(
+    altarPreferences.cultureTheme,
+    language,
+  );
 
-  const heroBackground =
-    getAltarBackgroundSource(
-      effectiveCultureTheme,
-    );
+  const heroBackground = getAltarBackgroundSource(effectiveCultureTheme);
 
   const navigateTo = (route: MenuRoute) => {
     navigation.navigate(route);
@@ -220,244 +207,247 @@ export default function HomeScreen({ navigation }: Props) {
 
   const practiceItems: HomeMenuItem[] = [
     {
-      icon: "🌱",
-      title: t("practiceJourney.homeTitle"),
-      subtitle: t("practiceJourney.homeSubtitle"),
-      route: "PracticeJourney",
-      accent: "#E7E5C9",
+      icon: '🌱',
+      title: t('practiceJourney.homeTitle'),
+      subtitle: t('practiceJourney.homeSubtitle'),
+      route: 'PracticeJourney',
+      accent: '#E7E5C9',
     },
     {
-      icon: "🪔",
-      title: t("home.templeTitle"),
-      subtitle: t("home.templeSubtitle"),
-      route: "Temple",
-      accent: "#F6E1C2",
+      icon: '🪔',
+      title: t('home.templeTitle'),
+      subtitle: t('home.templeSubtitle'),
+      route: 'Temple',
+      accent: '#F6E1C2',
     },
     {
-      icon: "🧘",
-      title: t("home.meditationTitle"),
-      subtitle: t("home.meditationSubtitle"),
-      route: "Meditation",
-      accent: "#E8E5D2",
-    },
-    {
-      icon: "🙏",
-      title: t("home.prayerTitle"),
-      subtitle: t("home.prayerSubtitle"),
-      route: "Prayer",
-      accent: "#F5E6CF",
-    },
-    {
-      icon: "🎧",
-      title: t("home.spiritualAudioTitle"),
-      subtitle: t("home.spiritualAudioSubtitle"),
-      route: "SpiritualAudio",
-      accent: "#E3E8DF",
-    },
-    {
-      icon: "📿",
-      title: t("chantCounter.title"),
-      subtitle: t("chantCounter.homeSubtitle"),
-      route: "ChantCounter",
-      accent: "#EEE0C5",
-    },
-    {
-      icon: "🔥",
-      title: t("practice.title", {
-        defaultValue: "Nghi thức hằng ngày",
+      icon: '🪔',
+      title: t('home.ancestorAltarTitle', {
+        defaultValue: 'Thờ gia tiên',
       }),
-      subtitle: t("practice.subtitle", {
+      subtitle: t('home.ancestorAltarSubtitle', {
+        defaultValue: 'Tưởng nhớ người thân, thắp hương và gửi lời cầu nguyện',
+      }),
+      route: 'AncestorAltar',
+      accent: '#F8DFA5',
+    },
+    {
+      icon: '🧘',
+      title: t('home.meditationTitle'),
+      subtitle: t('home.meditationSubtitle'),
+      route: 'Meditation',
+      accent: '#E8E5D2',
+    },
+    {
+      icon: '🙏',
+      title: t('home.prayerTitle'),
+      subtitle: t('home.prayerSubtitle'),
+      route: 'Prayer',
+      accent: '#F5E6CF',
+    },
+    {
+      icon: '🎧',
+      title: t('home.spiritualAudioTitle'),
+      subtitle: t('home.spiritualAudioSubtitle'),
+      route: 'SpiritualAudio',
+      accent: '#E3E8DF',
+    },
+    {
+      icon: '🕊️',
+      title: t('home.releaseLifeTitle', {
+        defaultValue: 'Phóng sinh',
+      }),
+      subtitle: t('home.releaseLifeSubtitle', {
+        defaultValue: 'Trải nghiệm hành trình buông bỏ và tìm lại sự bình yên',
+      }),
+      route: 'ReleaseLife',
+      accent: '#F7F0DF',
+    },
+    {
+      icon: '🌸',
+      title: t('home.lanternReleaseTitle', {
+        defaultValue: 'Thả hoa đăng',
+      }),
+      subtitle: t('home.lanternReleaseSubtitle', {
+        defaultValue: 'Gửi lời nguyện bình an theo ánh đèn trên mặt nước',
+      }),
+      route: 'LanternRelease',
+      accent: '#DFA436',
+    },
+    {
+      icon: '📿',
+      title: t('chantCounter.title'),
+      subtitle: t('chantCounter.homeSubtitle'),
+      route: 'ChantCounter',
+      accent: '#EEE0C5',
+    },
+    {
+      icon: '🔥',
+      title: t('practice.title', {
+        defaultValue: 'Nghi thức hằng ngày',
+      }),
+      subtitle: t('practice.subtitle', {
         defaultValue:
-          "Thắp hương, nghe kinh, thiền và ghi lại lòng biết ơn mỗi ngày",
+          'Thắp hương, nghe kinh, thiền và ghi lại lòng biết ơn mỗi ngày',
       }),
-      route: "DailyRitual",
-      accent: "#F2E0C4",
+      route: 'DailyRitual',
+      accent: '#F2E0C4',
     },
     {
-      icon: "🪷",
-      title: t("altarCustomization.title", {
-        defaultValue: "Bàn thờ cá nhân hóa",
+      icon: '🪷',
+      title: t('altarCustomization.title', {
+        defaultValue: 'Bàn thờ cá nhân hóa',
       }),
-      subtitle: t("altarCustomization.subtitle", {
+      subtitle: t('altarCustomization.subtitle', {
         defaultValue:
-          "Tùy chỉnh biểu tượng, hoa, đèn, màu ánh sáng và không gian chính điện",
+          'Tùy chỉnh biểu tượng, hoa, đèn, màu ánh sáng và không gian chính điện',
       }),
-      route: "AltarCustomization",
-      accent: "#F0D8BA",
+      route: 'AltarCustomization',
+      accent: '#F0D8BA',
     },
     {
-      icon: "📖",
-      title: t("home.peaceJournalShortTitle", {
-        defaultValue: "Nhật ký",
+      icon: '📖',
+      title: t('home.peaceJournalShortTitle', {
+        defaultValue: 'Nhật ký',
       }),
-      subtitle: t("home.peaceJournalShortSubtitle", {
-        defaultValue: "Ghi lại cảm xúc, lòng biết ơn và điều muốn buông bỏ",
+      subtitle: t('home.peaceJournalShortSubtitle', {
+        defaultValue: 'Ghi lại cảm xúc, lòng biết ơn và điều muốn buông bỏ',
       }),
-      route: "PeaceJournal",
-      accent: "#F1DFC8",
+      route: 'PeaceJournal',
+      accent: '#F1DFC8',
     },
-    {
-      icon: "🕊️",
-      title: t("home.releaseLifeTitle", {
-        defaultValue: "Phóng sinh",
-      }),
-      subtitle: t("home.releaseLifeSubtitle", {
-        defaultValue: "Trải nghiệm hành trình buông bỏ và tìm lại sự bình yên",
-      }),
-      route: "ReleaseLife",
-      accent: "#F7F0DF",
-    },
-{
-  icon: '🌸',
-  title: t('home.lanternReleaseTitle', {
-    defaultValue: 'Thả hoa đăng',
-  }),
-  subtitle: t('home.lanternReleaseSubtitle', {
-    defaultValue: 'Gửi lời nguyện bình an theo ánh đèn trên mặt nước',
-  }),
-  route: 'LanternRelease',
-  accent: '#DFA436',
-}
-
   ];
 
   const calendarItems: HomeMenuItem[] = [
     {
-      icon: "☀️",
-      title: t("today.title", {
-        defaultValue: "Hôm nay",
+      icon: '☀️',
+      title: t('today.title', {
+        defaultValue: 'Hôm nay',
       }),
-      subtitle: t("today.homeSubtitle", {
+      subtitle: t('today.homeSubtitle', {
         defaultValue:
-          "Xem ngày âm, Can Chi, giờ tham khảo và một phút chiêm nghiệm",
+          'Xem ngày âm, Can Chi, giờ tham khảo và một phút chiêm nghiệm',
       }),
-      route: "Today",
-      accent: "#F3E3BE",
+      route: 'Today',
+      accent: '#F3E3BE',
     },
     {
-      icon: "📅",
-      title: t("home.lunarCalendarTitle"),
-      subtitle: t("home.lunarCalendarSubtitle"),
-      route: "LunarCalendar",
-      accent: "#E9DFEF",
+      icon: '📅',
+      title: t('home.lunarCalendarTitle'),
+      subtitle: t('home.lunarCalendarSubtitle'),
+      route: 'LunarCalendar',
+      accent: '#E9DFEF',
     },
     {
-      icon: "🌑",
-      title: t("home.newMoonFullMoonTitle", {
-        defaultValue: "Mùng một – ngày rằm",
+      icon: '🌑',
+      title: t('home.newMoonFullMoonTitle', {
+        defaultValue: 'Mùng một – ngày rằm',
       }),
-      subtitle: t("home.newMoonFullMoonSubtitle", {
-        defaultValue: "Theo dõi ngày sóc, ngày vọng và chuẩn bị nghi lễ",
+      subtitle: t('home.newMoonFullMoonSubtitle', {
+        defaultValue: 'Theo dõi ngày sóc, ngày vọng và chuẩn bị nghi lễ',
       }),
-      route: "BuddhistCalendar",
-      accent: "#E6E0EE",
+      route: 'BuddhistCalendar',
+      accent: '#E6E0EE',
     },
     {
-      icon: "☸",
-      title: t("home.buddhistFestivalTitle", {
-        defaultValue: "Ngày lễ Phật giáo",
+      icon: '☸',
+      title: t('home.buddhistFestivalTitle', {
+        defaultValue: 'Ngày lễ Phật giáo',
       }),
-      subtitle: t("home.buddhistFestivalSubtitle", {
-        defaultValue: "Xem Phật Đản, Vu Lan và các ngày vía phổ biến",
+      subtitle: t('home.buddhistFestivalSubtitle', {
+        defaultValue: 'Xem Phật Đản, Vu Lan và các ngày vía phổ biến',
       }),
-      route: "BuddhistCalendar",
-      accent: "#E8D6B8",
+      route: 'BuddhistCalendar',
+      accent: '#E8D6B8',
     },
     {
-      icon: "🔔",
-      title: t("home.practiceReminderTitle", {
-        defaultValue: "Nhắc thực hành",
+      icon: '🔔',
+      title: t('home.practiceReminderTitle', {
+        defaultValue: 'Nhắc thực hành',
       }),
-      subtitle: t("home.practiceReminderSubtitle", {
-        defaultValue: "Chọn giờ nhắc thiền, tụng kinh và nghi thức hằng ngày",
+      subtitle: t('home.practiceReminderSubtitle', {
+        defaultValue: 'Chọn giờ nhắc thiền, tụng kinh và nghi thức hằng ngày',
       }),
-      route: "Settings",
-      accent: "#E4E6DA",
+      route: 'Settings',
+      accent: '#E4E6DA',
     },
   ];
 
   const reflectionItems: HomeMenuItem[] = [
     {
-      icon: "🧧",
-      title: t("home.fortuneStickTitle"),
-      subtitle: t("home.fortuneStickSubtitle"),
-      route: "FortuneStick",
-      accent: "#F3DFC9",
+      icon: '🧧',
+      title: t('home.fortuneStickTitle'),
+      subtitle: t('home.fortuneStickSubtitle'),
+      route: 'FortuneStick',
+      accent: '#F3DFC9',
     },
     {
-      icon: "🔮",
-      title: t("home.horoscopeTitle", {
-        defaultValue: "Tử vi và ngày tốt",
+      icon: '🔮',
+      title: t('home.horoscopeTitle', {
+        defaultValue: 'Tử vi và ngày tốt',
       }),
-      subtitle: t("home.horoscopeSubtitle", {
+      subtitle: t('home.horoscopeSubtitle', {
         defaultValue:
-          "Nhập ngày sinh để tham khảo tử vi và ngày phù hợp cho các việc quan trọng",
+          'Nhập ngày sinh để tham khảo tử vi và ngày phù hợp cho các việc quan trọng',
       }),
-      route: "Horoscope",
-      accent: "#E9DDEE",
+      route: 'Horoscope',
+      accent: '#E9DDEE',
     },
     {
-      icon: "☯",
-      title: t("home.baziTitle"),
-      subtitle: t("home.baziSubtitle"),
-      route: "BaziChart",
-      accent: "#EFE2D0",
+      icon: '☯',
+      title: t('home.baziTitle'),
+      subtitle: t('home.baziSubtitle'),
+      route: 'BaziChart',
+      accent: '#EFE2D0',
     },
-        {
-      icon: "✋",
-      title: t("palmReading.homeTitle"),
-      subtitle: t("palmReading.homeSubtitle"),
-      route: "PalmReadingIntro",
-      accent: "#EFE2D0",
-    },
-    
+
     {
-      icon: "◎",
-      title: t("userProfiles.title", {
-        defaultValue: "Hồ sơ chiêm nghiệm",
+      icon: '◎',
+      title: t('userProfiles.title', {
+        defaultValue: 'Hồ sơ chiêm nghiệm',
       }),
-      subtitle: t("userProfiles.subtitle", {
+      subtitle: t('userProfiles.subtitle', {
         defaultValue:
-          "Lưu thông tin ngày giờ sinh để dùng chung cho Bát Tự, Tử Vi và ngày tốt",
+          'Lưu thông tin ngày giờ sinh để dùng chung cho Bát Tự, Tử Vi và ngày tốt',
       }),
-      route: "UserProfiles",
-      accent: "#DDE5E9",
+      route: 'UserProfiles',
+      accent: '#DDE5E9',
     },
     {
-      icon: "📚",
-      title: t("home.baziHistoryTitle", {
-        defaultValue: "Lá số đã lưu",
+      icon: '📚',
+      title: t('home.baziHistoryTitle', {
+        defaultValue: 'Lá số đã lưu',
       }),
-      subtitle: t("home.baziHistorySubtitle", {
+      subtitle: t('home.baziHistorySubtitle', {
         defaultValue:
-          "Xem lại, chia sẻ, nhân bản và tính lại các lá số Bát tự đã lưu",
+          'Xem lại, chia sẻ, nhân bản và tính lại các lá số Bát tự đã lưu',
       }),
-      route: "BaziHistory",
-      accent: "#F1E4CF",
+      route: 'BaziHistory',
+      accent: '#F1E4CF',
     },
     {
-      icon: "✦",
-      title: t("home.baziStage4Title", {
-        defaultValue: "Dòng vận và tương hợp",
+      icon: '✦',
+      title: t('home.baziStage4Title', {
+        defaultValue: 'Dòng vận và tương hợp',
       }),
-      subtitle: t("home.baziStage4Subtitle", {
+      subtitle: t('home.baziStage4Subtitle', {
         defaultValue:
-          "Xem lưu niên, lưu nguyệt, so hai lá số và chọn ngày theo Bát tự",
+          'Xem lưu niên, lưu nguyệt, so hai lá số và chọn ngày theo Bát tự',
       }),
-      route: "BaziStage4",
-      accent: "#F0DFC3",
+      route: 'BaziStage4',
+      accent: '#F0DFC3',
     },
     {
-      icon: "紫",
-      title: t("home.ziweiTitle", {
-        defaultValue: "Tử vi Đẩu số",
+      icon: '紫',
+      title: t('home.ziweiTitle', {
+        defaultValue: 'Tử vi Đẩu số',
       }),
-      subtitle: t("home.ziweiSubtitle", {
+      subtitle: t('home.ziweiSubtitle', {
         defaultValue:
-          "An Mệnh, an Thân, 12 cung, sao và các lớp luận giải chuyên sâu",
+          'An Mệnh, an Thân, 12 cung, sao và các lớp luận giải chuyên sâu',
       }),
-      route: "ZiweiChart",
-      accent: "#F0E0CA",
+      route: 'ZiweiChart',
+      accent: '#F0E0CA',
     },
   ];
 
@@ -472,23 +462,23 @@ export default function HomeScreen({ navigation }: Props) {
         <View style={styles.topHeader}>
           <View style={styles.headerTextWrap}>
             <Text style={styles.welcomeText}>
-              {t("home.welcome", {
-                defaultValue: "Bình an mỗi ngày",
+              {t('home.welcome', {
+                defaultValue: 'Bình an mỗi ngày',
               })}
             </Text>
 
-            <Text style={styles.brandText}>{t("home.title")}</Text>
+            <Text style={styles.brandText}>{t('home.title')}</Text>
           </View>
 
           <View style={styles.headerActions}>
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel={t("home.settingsTitle")}
+              accessibilityLabel={t('home.settingsTitle')}
               style={({ pressed }) => [
                 styles.settingsButton,
                 pressed && styles.headerButtonPressed,
               ]}
-              onPress={() => navigation.navigate("Settings")}
+              onPress={() => navigation.navigate('Settings')}
             >
               <Text style={styles.settingsIcon}>⚙️</Text>
             </Pressable>
@@ -510,31 +500,31 @@ export default function HomeScreen({ navigation }: Props) {
               <Text style={styles.heroTopBadgeIcon}>☸</Text>
 
               <Text style={styles.heroTopBadgeText}>
-                {t("home.peacefulSpace", {
-                  defaultValue: "Không gian tĩnh tâm",
+                {t('home.peacefulSpace', {
+                  defaultValue: 'Không gian tĩnh tâm',
                 })}
               </Text>
             </View>
 
             <View style={styles.heroContent}>
               <Text style={styles.heroTitle}>
-                {t("home.heroTitle", {
-                  defaultValue: "Trở về với sự an yên",
+                {t('home.heroTitle', {
+                  defaultValue: 'Trở về với sự an yên',
                 })}
               </Text>
 
-              <Text style={styles.heroSubtitle}>{t("home.subtitle")}</Text>
+              <Text style={styles.heroSubtitle}>{t('home.subtitle')}</Text>
 
               <Pressable
                 style={({ pressed }) => [
                   styles.heroButton,
                   pressed && styles.heroButtonPressed,
                 ]}
-                onPress={() => navigation.navigate("Temple")}
+                onPress={() => navigation.navigate('Temple')}
               >
                 <Text style={styles.heroButtonText}>
-                  {t("home.enterTemple", {
-                    defaultValue: "Vào chính điện",
+                  {t('home.enterTemple', {
+                    defaultValue: 'Vào chính điện',
                   })}
                 </Text>
 
@@ -546,21 +536,21 @@ export default function HomeScreen({ navigation }: Props) {
 
         <View style={styles.practiceCardWrap}>
           <PracticeStreakCard
-            onPress={() => navigation.navigate("DailyRitual")}
+            onPress={() => navigation.navigate('DailyRitual')}
           />
         </View>
 
         <View style={styles.pageSectionHeader}>
           <View>
             <Text style={styles.sectionEyebrow}>
-              {t("home.discover", {
-                defaultValue: "Khám phá",
+              {t('home.discover', {
+                defaultValue: 'Khám phá',
               })}
             </Text>
 
             <Text style={styles.sectionTitle}>
-              {t("home.organizedActivitiesTitle", {
-                defaultValue: "Không gian dành cho bạn",
+              {t('home.organizedActivitiesTitle', {
+                defaultValue: 'Không gian dành cho bạn',
               })}
             </Text>
           </View>
@@ -574,15 +564,15 @@ export default function HomeScreen({ navigation }: Props) {
 
         <HomeSection
           icon="🪷"
-          eyebrow={t("home.practiceSectionEyebrow", {
-            defaultValue: "THỰC HÀNH",
+          eyebrow={t('home.practiceSectionEyebrow', {
+            defaultValue: 'THỰC HÀNH',
           })}
-          title={t("home.practiceSectionTitle", {
-            defaultValue: "Tu tập",
+          title={t('home.practiceSectionTitle', {
+            defaultValue: 'Tu tập',
           })}
-          subtitle={t("home.practiceSectionSubtitle", {
+          subtitle={t('home.practiceSectionSubtitle', {
             defaultValue:
-              "Các hoạt động giúp tâm lắng dịu và duy trì thói quen mỗi ngày",
+              'Các hoạt động giúp tâm lắng dịu và duy trì thói quen mỗi ngày',
           })}
           backgroundColor="#FFF8EC"
           borderColor="#E8D2AD"
@@ -592,15 +582,15 @@ export default function HomeScreen({ navigation }: Props) {
 
         <HomeSection
           icon="📆"
-          eyebrow={t("home.calendarSectionEyebrow", {
-            defaultValue: "THỜI GIAN",
+          eyebrow={t('home.calendarSectionEyebrow', {
+            defaultValue: 'THỜI GIAN',
           })}
-          title={t("home.calendarSectionTitle", {
-            defaultValue: "Lịch và nghi lễ",
+          title={t('home.calendarSectionTitle', {
+            defaultValue: 'Lịch và nghi lễ',
           })}
-          subtitle={t("home.calendarSectionSubtitle", {
+          subtitle={t('home.calendarSectionSubtitle', {
             defaultValue:
-              "Theo dõi ngày âm, ngày lễ và những dịp thực hành quan trọng",
+              'Theo dõi ngày âm, ngày lễ và những dịp thực hành quan trọng',
           })}
           backgroundColor="#F8F5EE"
           borderColor="#DDD5C4"
@@ -610,15 +600,15 @@ export default function HomeScreen({ navigation }: Props) {
 
         <HomeSection
           icon="☯"
-          eyebrow={t("home.reflectionSectionEyebrow", {
-            defaultValue: "CHIÊM NGHIỆM",
+          eyebrow={t('home.reflectionSectionEyebrow', {
+            defaultValue: 'CHIÊM NGHIỆM',
           })}
-          title={t("home.reflectionSectionTitle", {
-            defaultValue: "Chiêm nghiệm",
+          title={t('home.reflectionSectionTitle', {
+            defaultValue: 'Chiêm nghiệm',
           })}
-          subtitle={t("home.reflectionSectionSubtitle", {
+          subtitle={t('home.reflectionSectionSubtitle', {
             defaultValue:
-              "Nội dung truyền thống để tham khảo văn hóa và tự nhìn lại bản thân",
+              'Nội dung truyền thống để tham khảo văn hóa và tự nhìn lại bản thân',
           })}
           backgroundColor="#FBF5F0"
           borderColor="#E6D4C7"
@@ -632,9 +622,9 @@ export default function HomeScreen({ navigation }: Props) {
           </View>
 
           <View style={styles.dailyContent}>
-            <Text style={styles.dailyLabel}>{t("home.dailyTitle")}</Text>
+            <Text style={styles.dailyLabel}>{t('home.dailyTitle')}</Text>
 
-            <Text style={styles.dailyText}>{t("home.dailyText")}</Text>
+            <Text style={styles.dailyText}>{t('home.dailyText')}</Text>
           </View>
         </View>
 
@@ -642,8 +632,8 @@ export default function HomeScreen({ navigation }: Props) {
           <Text style={styles.footerQuoteMark}>“</Text>
 
           <Text style={styles.footerQuoteText}>
-            {t("home.footerQuote", {
-              defaultValue: "Tâm tĩnh thì mọi nơi đều là chốn bình an.",
+            {t('home.footerQuote', {
+              defaultValue: 'Tâm tĩnh thì mọi nơi đều là chốn bình an.',
             })}
           </Text>
 
@@ -654,13 +644,13 @@ export default function HomeScreen({ navigation }: Props) {
   );
 }
 
-const BACKGROUND = "#FFF9F1";
-const SURFACE = "#FFFDF9";
-const BROWN = "#4D2C1D";
-const BROWN_SOFT = "#6D4D39";
-const GOLD = "#C99551";
-const GOLD_LIGHT = "#F5D9A4";
-const BORDER = "#E8D6BF";
+const BACKGROUND = '#FFF9F1';
+const SURFACE = '#FFFDF9';
+const BROWN = '#4D2C1D';
+const BROWN_SOFT = '#6D4D39';
+const GOLD = '#C99551';
+const GOLD_LIGHT = '#F5D9A4';
+const BORDER = '#E8D6BF';
 
 const styles = StyleSheet.create({
   screen: {
@@ -676,9 +666,9 @@ const styles = StyleSheet.create({
 
   topHeader: {
     minHeight: 66,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: 12,
   },
 
@@ -688,33 +678,33 @@ const styles = StyleSheet.create({
   },
 
   headerActions: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 
   welcomeText: {
-    color: "#9A7B62",
+    color: '#9A7B62',
     fontSize: 12,
-    fontWeight: "700",
+    fontWeight: '700',
     letterSpacing: 0.6,
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
   },
 
   brandText: {
     color: BROWN,
     fontSize: 25,
-    fontWeight: "900",
+    fontWeight: '900',
     marginTop: 3,
   },
 
   settingsButton: {
     width: 42,
     height: 42,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#F7EEE3",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F7EEE3',
     borderWidth: 1,
-    borderColor: "#E5D4BF",
+    borderColor: '#E5D4BF',
     borderRadius: 21,
     marginRight: 8,
   },
@@ -731,11 +721,11 @@ const styles = StyleSheet.create({
   lotusBadge: {
     width: 48,
     height: 48,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#F7EBD9",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F7EBD9',
     borderWidth: 1,
-    borderColor: "#E6CCA7",
+    borderColor: '#E6CCA7',
     borderRadius: 24,
   },
 
@@ -744,11 +734,11 @@ const styles = StyleSheet.create({
   },
 
   hero: {
-    width: "100%",
+    width: '100%',
     aspectRatio: 0.96,
-    overflow: "hidden",
+    overflow: 'hidden',
     borderRadius: 28,
-    shadowColor: "#5C351F",
+    shadowColor: '#5C351F',
     shadowOpacity: 0.2,
     shadowRadius: 18,
     shadowOffset: {
@@ -764,18 +754,18 @@ const styles = StyleSheet.create({
 
   heroOverlay: {
     flex: 1,
-    justifyContent: "space-between",
-    backgroundColor: "rgba(31, 14, 6, 0.30)",
+    justifyContent: 'space-between',
+    backgroundColor: 'rgba(31, 14, 6, 0.30)',
     padding: 18,
   },
 
   heroTopBadge: {
-    alignSelf: "flex-start",
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "rgba(255, 248, 234, 0.92)",
+    alignSelf: 'flex-start',
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 248, 234, 0.92)',
     borderWidth: 1,
-    borderColor: "rgba(232, 196, 138, 0.85)",
+    borderColor: 'rgba(232, 196, 138, 0.85)',
     borderRadius: 16,
     paddingHorizontal: 12,
     paddingVertical: 7,
@@ -790,36 +780,36 @@ const styles = StyleSheet.create({
   heroTopBadgeText: {
     color: BROWN,
     fontSize: 12,
-    fontWeight: "800",
+    fontWeight: '800',
   },
 
   heroContent: {
-    backgroundColor: "rgba(32, 15, 7, 0.68)",
+    backgroundColor: 'rgba(32, 15, 7, 0.68)',
     borderWidth: 1,
-    borderColor: "rgba(239, 204, 145, 0.38)",
+    borderColor: 'rgba(239, 204, 145, 0.38)',
     borderRadius: 22,
     padding: 18,
   },
 
   heroTitle: {
-    color: "#FFF4D8",
+    color: '#FFF4D8',
     fontSize: 27,
-    fontWeight: "900",
+    fontWeight: '900',
     lineHeight: 34,
   },
 
   heroSubtitle: {
-    color: "#F4DFC3",
+    color: '#F4DFC3',
     fontSize: 14,
     lineHeight: 21,
     marginTop: 8,
   },
 
   heroButton: {
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
     minHeight: 44,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: GOLD,
     borderRadius: 14,
     paddingHorizontal: 16,
@@ -832,13 +822,13 @@ const styles = StyleSheet.create({
   },
 
   heroButtonText: {
-    color: "#3D2316",
+    color: '#3D2316',
     fontSize: 14,
-    fontWeight: "900",
+    fontWeight: '900',
   },
 
   heroButtonArrow: {
-    color: "#3D2316",
+    color: '#3D2316',
     fontSize: 23,
     lineHeight: 24,
     marginLeft: 8,
@@ -849,9 +839,9 @@ const styles = StyleSheet.create({
   },
 
   pageSectionHeader: {
-    flexDirection: "row",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
     marginTop: 28,
     marginBottom: 14,
   },
@@ -859,28 +849,28 @@ const styles = StyleSheet.create({
   sectionEyebrow: {
     color: GOLD,
     fontSize: 11,
-    fontWeight: "900",
+    fontWeight: '900',
     letterSpacing: 1.2,
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
   },
 
   sectionTitle: {
     color: BROWN,
     fontSize: 24,
-    fontWeight: "900",
+    fontWeight: '900',
     marginTop: 3,
   },
 
   sectionOrnament: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 5,
   },
 
   sectionLine: {
     width: 20,
     height: 1,
-    backgroundColor: "#D8B981",
+    backgroundColor: '#D8B981',
   },
 
   sectionLotus: {
@@ -897,8 +887,8 @@ const styles = StyleSheet.create({
   },
 
   categoryHeader: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 3,
     paddingVertical: 5,
     marginBottom: 12,
@@ -907,11 +897,11 @@ const styles = StyleSheet.create({
   categoryIconWrap: {
     width: 52,
     height: 52,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgba(255,255,255,0.72)",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.72)',
     borderWidth: 1,
-    borderColor: "rgba(201,149,81,0.28)",
+    borderColor: 'rgba(201,149,81,0.28)',
     borderRadius: 18,
     marginRight: 12,
   },
@@ -927,32 +917,32 @@ const styles = StyleSheet.create({
   categoryEyebrow: {
     color: GOLD,
     fontSize: 9,
-    fontWeight: "900",
+    fontWeight: '900',
     letterSpacing: 1.1,
   },
 
   categoryTitle: {
     color: BROWN,
     fontSize: 21,
-    fontWeight: "900",
+    fontWeight: '900',
     marginTop: 2,
   },
 
   categorySubtitle: {
-    color: "#806B5A",
+    color: '#806B5A',
     fontSize: 11,
     lineHeight: 16,
     marginTop: 3,
   },
 
   menuGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
 
   menuCard: {
-    width: "48.5%",
+    width: '48.5%',
     minHeight: 172,
     backgroundColor: SURFACE,
     borderWidth: 1,
@@ -960,7 +950,7 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     padding: 14,
     marginBottom: 12,
-    shadowColor: "#6A4027",
+    shadowColor: '#6A4027',
     shadowOpacity: 0.07,
     shadowRadius: 9,
     shadowOffset: {
@@ -978,8 +968,8 @@ const styles = StyleSheet.create({
   menuIconWrap: {
     width: 54,
     height: 54,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 18,
   },
 
@@ -995,26 +985,26 @@ const styles = StyleSheet.create({
   menuTitle: {
     color: BROWN,
     fontSize: 17,
-    fontWeight: "900",
+    fontWeight: '900',
     lineHeight: 21,
   },
 
   menuSubtitle: {
-    color: "#7D6858",
+    color: '#7D6858',
     fontSize: 12,
     lineHeight: 18,
     marginTop: 5,
   },
 
   menuArrowWrap: {
-    position: "absolute",
+    position: 'absolute',
     right: 12,
     top: 15,
     width: 26,
     height: 26,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#F7EEE3",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F7EEE3',
     borderRadius: 13,
   },
 
@@ -1025,11 +1015,11 @@ const styles = StyleSheet.create({
   },
 
   dailyCard: {
-    flexDirection: "row",
-    alignItems: "flex-start",
+    flexDirection: 'row',
+    alignItems: 'flex-start',
     backgroundColor: BROWN,
     borderWidth: 1,
-    borderColor: "#8B634A",
+    borderColor: '#8B634A',
     borderRadius: 24,
     padding: 18,
     marginTop: 2,
@@ -1038,9 +1028,9 @@ const styles = StyleSheet.create({
   dailyIconWrap: {
     width: 48,
     height: 48,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#F2D39B",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F2D39B',
     borderRadius: 24,
     marginRight: 13,
   },
@@ -1057,21 +1047,21 @@ const styles = StyleSheet.create({
   dailyLabel: {
     color: GOLD_LIGHT,
     fontSize: 16,
-    fontWeight: "900",
+    fontWeight: '900',
   },
 
   dailyText: {
-    color: "#F4E7D4",
+    color: '#F4E7D4',
     fontSize: 13,
     lineHeight: 20,
     marginTop: 6,
   },
 
   footerQuote: {
-    alignItems: "center",
-    backgroundColor: "#F8EAD7",
+    alignItems: 'center',
+    backgroundColor: '#F8EAD7',
     borderWidth: 1,
-    borderColor: "#E6CBA4",
+    borderColor: '#E6CBA4',
     borderRadius: 20,
     paddingHorizontal: 22,
     paddingVertical: 18,
@@ -1079,7 +1069,7 @@ const styles = StyleSheet.create({
   },
 
   footerQuoteMark: {
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
     color: GOLD,
     fontSize: 30,
     lineHeight: 25,
@@ -1089,50 +1079,50 @@ const styles = StyleSheet.create({
     color: BROWN_SOFT,
     fontSize: 14,
     lineHeight: 21,
-    fontStyle: "italic",
-    textAlign: "center",
+    fontStyle: 'italic',
+    textAlign: 'center',
   },
 
   footerQuoteMarkEnd: {
-    alignSelf: "flex-end",
+    alignSelf: 'flex-end',
     color: GOLD,
     fontSize: 30,
     lineHeight: 25,
   },
   releaseLifeButton: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  backgroundColor: '#F7F0DF',
-  borderRadius: 18,
-  padding: 14,
-  marginHorizontal: 16,
-  marginTop: 12,
-  borderWidth: 1,
-  borderColor: '#E3D4B7',
-},
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F7F0DF',
+    borderRadius: 18,
+    padding: 14,
+    marginHorizontal: 16,
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: '#E3D4B7',
+  },
 
-releaseLifeIcon: {
-  fontSize: 30,
-  marginRight: 12,
-},
+  releaseLifeIcon: {
+    fontSize: 30,
+    marginRight: 12,
+  },
 
-releaseLifeTitle: {
-  color: '#3F3324',
-  fontSize: 16,
-  fontWeight: '900',
-},
+  releaseLifeTitle: {
+    color: '#3F3324',
+    fontSize: 16,
+    fontWeight: '900',
+  },
 
-releaseLifeSubtitle: {
-  color: '#7A6B56',
-  fontSize: 12,
-  lineHeight: 17,
-  marginTop: 3,
-  fontWeight: '600',
-},
+  releaseLifeSubtitle: {
+    color: '#7A6B56',
+    fontSize: 12,
+    lineHeight: 17,
+    marginTop: 3,
+    fontWeight: '600',
+  },
 
-releaseLifeArrow: {
-  color: '#8A6A34',
-  fontSize: 28,
-  fontWeight: '600',
-},
+  releaseLifeArrow: {
+    color: '#8A6A34',
+    fontSize: 28,
+    fontWeight: '600',
+  },
 });

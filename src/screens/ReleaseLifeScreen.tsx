@@ -110,30 +110,43 @@ async function saveStats(stats: ReleaseStats) {
   await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(stats));
 }
 
-function FishSprite({ item }: { item: FishItem }) {
+function FishSprite({item}: {item: FishItem}) {
   const translateX = item.progress.interpolate({
-    inputRange: [0, 0.3, 0.7, 1],
-    outputRange: [0, 42, 105, 170],
+    inputRange: [0, 0.16, 0.32, 0.5, 0.66, 0.82, 1],
+    outputRange: [0, 40, 92, 132, 95, 150, 190],
   });
 
   const translateY = item.progress.interpolate({
-    inputRange: [0, 0.45, 0.75, 1],
-    outputRange: [0, -68, -22, 12],
+    inputRange: [0, 0.22, 0.42, 0.58, 0.75, 1],
+    outputRange: [0, -70, -18, 10, 22, 48],
   });
 
   const rotate = item.progress.interpolate({
-    inputRange: [0, 0.5, 1],
-    outputRange: ['-14deg', '10deg', '0deg'],
+    inputRange: [0, 0.16, 0.32, 0.5, 0.66, 0.82, 1],
+    outputRange: [
+      '-18deg',
+      '16deg',
+      '-12deg',
+      '18deg',
+      '-16deg',
+      '10deg',
+      '0deg',
+    ],
   });
 
   const scale = item.progress.interpolate({
-    inputRange: [0, 0.5, 1],
-    outputRange: [1, 1.2, 0.88],
+    inputRange: [0, 0.25, 0.5, 0.75, 1],
+    outputRange: [1, 1.18, 1.02, 0.72, 0.35],
+  });
+
+  const scaleX = item.progress.interpolate({
+    inputRange: [0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84, 1],
+    outputRange: [1, 0.72, 1.18, 0.78, 1.14, 0.82, 1.1, 0.9, 0.7],
   });
 
   const opacity = item.progress.interpolate({
-    inputRange: [0, 0.9, 1],
-    outputRange: [1, 1, 0],
+    inputRange: [0, 0.72, 0.9, 1],
+    outputRange: [1, 1, 0.55, 0],
   });
 
   return (
@@ -146,7 +159,13 @@ function FishSprite({ item }: { item: FishItem }) {
           left: item.x,
           top: item.y,
           opacity,
-          transform: [{ translateX }, { translateY }, { rotate }, { scale }],
+          transform: [
+            {translateX},
+            {translateY},
+            {rotate},
+            {scale},
+            {scaleX},
+          ],
         },
       ]}
     />
@@ -156,49 +175,63 @@ function FishSprite({ item }: { item: FishItem }) {
 function BirdSprite({item}: {item: BirdItem}) {
   const translateX = item.progress.interpolate({
     inputRange: [0, 0.12, 0.25, 0.38, 0.52, 0.68, 0.84, 1],
-    outputRange: [
-      0,
-      -85,
-      -25,
-      70,
-      15,
-      -95,
-      45,
-      130,
-    ],
+    outputRange: [0, -90, 70, -120, 95, -55, 135, 210],
   });
 
   const translateY = item.progress.interpolate({
-    inputRange: [0, 0.12, 0.25, 0.38, 0.52, 0.68, 0.84, 1],
-    outputRange: [
-      0,
-      -45,
-      -105,
-      -150,
-      -210,
-      -255,
-      -315,
-      -390,
-    ],
+    inputRange: [0, 0.15, 0.32, 0.5, 0.68, 0.84, 1],
+    outputRange: [0, -65, -145, -210, -285, -360, -430],
   });
 
   const rotate = item.progress.interpolate({
-    inputRange: [0, 0.12, 0.25, 0.38, 0.52, 0.68, 0.84, 1],
+    inputRange: [0, 0.15, 0.32, 0.5, 0.68, 0.84, 1],
     outputRange: [
       '0deg',
       '-22deg',
-      '14deg',
       '18deg',
-      '-12deg',
-      '-24deg',
+      '-18deg',
       '16deg',
+      '-8deg',
       '6deg',
     ],
   });
 
   const scale = item.progress.interpolate({
     inputRange: [0, 0.25, 0.5, 0.75, 1],
-    outputRange: [1, 1.14, 1.04, 0.9, 0.72],
+    outputRange: [1, 1.12, 1.02, 0.9, 0.72],
+  });
+
+  const scaleY = item.progress.interpolate({
+    inputRange: [
+      0,
+      0.08,
+      0.16,
+      0.24,
+      0.32,
+      0.4,
+      0.48,
+      0.56,
+      0.64,
+      0.72,
+      0.8,
+      0.88,
+      1,
+    ],
+    outputRange: [
+      1,
+      0.72,
+      1.18,
+      0.76,
+      1.16,
+      0.78,
+      1.12,
+      0.82,
+      1.08,
+      0.86,
+      1.04,
+      0.9,
+      0.78,
+    ],
   });
 
   const opacity = item.progress.interpolate({
@@ -216,7 +249,13 @@ function BirdSprite({item}: {item: BirdItem}) {
           left: item.x,
           top: item.y,
           opacity,
-          transform: [{translateX}, {translateY}, {rotate}, {scale}],
+          transform: [
+            {translateX},
+            {translateY},
+            {rotate},
+            {scale},
+            {scaleY},
+          ],
         },
       ]}
     />
@@ -312,12 +351,12 @@ export default function ReleaseLifeScreen() {
     const id = idRef.current++;
     const progress = new Animated.Value(0);
 
-    const item: FishItem = {
-      id,
-      x: SCREEN_WIDTH * 0.21,
-      y: SCREEN_HEIGHT * 0.52,
-      progress,
-    };
+const item: FishItem = {
+  id,
+  x: SCREEN_WIDTH * 0.21,
+  y: SCREEN_HEIGHT * 0.52,
+  progress,
+};
 
     setFishItems(prev => [...prev, item]);
     setFishCount(prev => Math.max(0, prev - 1));
@@ -326,12 +365,12 @@ export default function ReleaseLifeScreen() {
 
     setTimeout(() => {
       playFishReleaseSound();
-    }, 850);
+    }, 700);
 
 Animated.timing(progress, {
   toValue: 1,
-  duration: 1350,
-  easing: Easing.out(Easing.quad),
+  duration: 2600,
+  easing: Easing.inOut(Easing.quad),
   useNativeDriver: true,
 }).start(() => {
       setFishItems(prev => prev.filter(fish => fish.id !== id));
@@ -347,16 +386,11 @@ Animated.timing(progress, {
     const id = idRef.current++;
     const progress = new Animated.Value(0);
 
-const startX =
-  SCREEN_WIDTH * (0.18 + Math.random() * 0.6);
-
-const startY =
-  SCREEN_HEIGHT * (0.54 + Math.random() * 0.12);
 
 const item: BirdItem = {
   id,
-  x: startX,
-  y: startY,
+  x: SCREEN_WIDTH * (0.48 + Math.random() * 0.28),
+  y: SCREEN_HEIGHT * (0.48 + Math.random() * 0.08),
   progress,
 };
 
@@ -860,18 +894,17 @@ const styles = StyleSheet.create({
     fontSize: isSmallScreen ? 11.5 : 13,
     fontWeight: '900',
   },
-
-  fishReleased: {
-    position: 'absolute',
-    width: 46,
-    height: 38,
-    zIndex: 50,
-  },
+fishReleased: {
+  position: 'absolute',
+  width: 52,
+  height: 42,
+  zIndex: 50,
+},
 
 birdReleased: {
   position: 'absolute',
-  width: 54,
-  height: 48,
+  width: 58,
+  height: 52,
   zIndex: 50,
 },
 });

@@ -1,9 +1,6 @@
 import bazi from './bazi.ja';
 import ziwei from './ziwei.ja';
-import practice, {
-  practiceAudio,
-  practiceMeditation,
-} from './practice.ja';
+import practice, { practiceAudio, practiceMeditation } from './practice.ja';
 import {
   peaceJournal,
   buddhistCalendar,
@@ -15,18 +12,12 @@ import {
   premiumContent,
   smartFeatures,
 } from './spiritualFeatures10_13.ja';
-import chantCounter
-  from './chantCounter.ja';
-  import practiceJourney
-  from './practiceJourney.ja';
-  import userProfiles
-  from './userProfiles.ja';
-  import today
-  from './today.ja';
-    import palmReading
-  from './palmReading.ja';
-  import palmReadingV2Lite
-  from './palmReadingV2Lite.ja';
+import chantCounter from './chantCounter.ja';
+import practiceJourney from './practiceJourney.ja';
+import userProfiles from './userProfiles.ja';
+import today from './today.ja';
+import palmReading from './palmReading.ja';
+import palmReadingV2Lite from './palmReadingV2Lite.ja';
 const ja = {
   common: {
     cancel: 'キャンセル',
@@ -72,8 +63,7 @@ const ja = {
     lunarCalendarSubtitle: '旧暦1日と15日を確認',
     spiritualAudioTitle: 'お経と瞑想',
 
-    spiritualAudioSubtitle:
-      'お経、瞑想音楽、自然音を聴く',
+    spiritualAudioSubtitle: 'お経、瞑想音楽、自然音を聴く',
     welcome: '毎日に安らぎを',
 
     peacefulSpace: '安らぎの空間',
@@ -91,55 +81,42 @@ const ja = {
     horoscopeTitle: '運勢と吉日',
 
     horoscopeSubtitle: '旧暦の誕生日、干支、おすすめの日を確認',
-     baziTitle: '四柱推命',
+    baziTitle: '四柱推命',
 
-  baziSubtitle:
-    '四柱、五行、大運、解釈',
-    baziHistoryTitle:
-  '保存済みの四柱推命',
+    baziSubtitle: '四柱、五行、大運、解釈',
+    baziHistoryTitle: '保存済みの四柱推命',
 
-baziHistorySubtitle:
-  '保存した四柱推命を確認・管理',
-  baziStage4Title:
-  '運勢推移と相性',
+    baziHistorySubtitle: '保存した四柱推命を確認・管理',
+    baziStage4Title: '運勢推移と相性',
 
-baziStage4Subtitle:
-  '流年・流月、命式比較、日取り選択',
-  organizedActivitiesTitle: 'あなたのための修習空間',
-practiceSectionEyebrow: '修習',
-practiceSectionTitle: '修習',
-practiceSectionSubtitle:
-  '心を落ち着け、毎日の習慣を続けるための活動',
-calendarSectionEyebrow: '時間と儀式',
-calendarSectionTitle: '暦と儀式',
-calendarSectionSubtitle:
-  '旧暦の日付、仏教行事、重要な修習日を確認します',
-reflectionSectionEyebrow: '省察',
-reflectionSectionTitle: '省察',
-reflectionSectionSubtitle:
-  '文化的な参考と自己省察のための伝統コンテンツ',
-peaceJournalShortTitle: '日記',
-peaceJournalShortSubtitle:
-  '感情、感謝、手放したいことを記録します',
-newMoonFullMoonTitle: '朔日と満月日',
-newMoonFullMoonSubtitle:
-  '旧暦の節目を確認し、儀式の準備をします',
-buddhistFestivalTitle: '仏教行事',
-buddhistFestivalSubtitle:
-  'ウェーサーカ祭、盂蘭盆会などの行事を確認します',
-practiceReminderTitle: '修習リマインダー',
-practiceReminderSubtitle:
-  '瞑想、読経、毎日の儀式の通知時間を選びます',
-chooseDateTitle: '日取りを見る',
-chooseDateSubtitle:
-  '結婚、開店、重要な予定に適した日を参考にします',
-        ziweiTitle: '紫微斗数',
-  ziweiSubtitle: '生年月日、出生時刻、出生地を入力して、十二宮、十四主星、21の補助星、四化、旬空・截空、十二運を配置します。',
-  lanternReleaseTitle: '灯籠流し',
-lanternReleaseSubtitle:
-  '水面に浮かぶ灯りに平安の祈りを込める',
-  releaseLifeTitle: '生命を解放',
-  releaseLifeSubtitle: '手放すと感じる旅と平和を見つける体験',
+    baziStage4Subtitle: '流年・流月、命式比較、日取り選択',
+    organizedActivitiesTitle: 'あなたのための修習空間',
+    practiceSectionEyebrow: '修習',
+    practiceSectionTitle: '修習',
+    practiceSectionSubtitle: '心を落ち着け、毎日の習慣を続けるための活動',
+    calendarSectionEyebrow: '時間と儀式',
+    calendarSectionTitle: '暦と儀式',
+    calendarSectionSubtitle: '旧暦の日付、仏教行事、重要な修習日を確認します',
+    reflectionSectionEyebrow: '省察',
+    reflectionSectionTitle: '省察',
+    reflectionSectionSubtitle: '文化的な参考と自己省察のための伝統コンテンツ',
+    peaceJournalShortTitle: '日記',
+    peaceJournalShortSubtitle: '感情、感謝、手放したいことを記録します',
+    newMoonFullMoonTitle: '朔日と満月日',
+    newMoonFullMoonSubtitle: '旧暦の節目を確認し、儀式の準備をします',
+    buddhistFestivalTitle: '仏教行事',
+    buddhistFestivalSubtitle: 'ウェーサーカ祭、盂蘭盆会などの行事を確認します',
+    practiceReminderTitle: '修習リマインダー',
+    practiceReminderSubtitle: '瞑想、読経、毎日の儀式の通知時間を選びます',
+    chooseDateTitle: '日取りを見る',
+    chooseDateSubtitle: '結婚、開店、重要な予定に適した日を参考にします',
+    ziweiTitle: '紫微斗数',
+    ziweiSubtitle:
+      '生年月日、出生時刻、出生地を入力して、十二宮、十四主星、21の補助星、四化、旬空・截空、十二運を配置します。',
+    lanternReleaseTitle: '灯籠流し',
+    lanternReleaseSubtitle: '水面に浮かぶ灯りに平安の祈りを込める',
+    releaseLifeTitle: '生命を解放',
+    releaseLifeSubtitle: '手放すと感じる旅と平和を見つける体験',
   },
 
   temple: {
@@ -182,50 +159,48 @@ lanternReleaseSubtitle:
     incenseStatsTitle: 'お香の本数',
   },
 
-meditation: {
-  title: '瞑想',
-  screenTitle: '瞑想',
+  meditation: {
+    title: '瞑想',
+    screenTitle: '瞑想',
 
-  subtitle:
-    '楽な姿勢で座り、肩の力を抜いて、一呼吸ずつ静かに意識を向けましょう。',
+    subtitle:
+      '楽な姿勢で座り、肩の力を抜いて、一呼吸ずつ静かに意識を向けましょう。',
 
-  breathingTitle: '呼吸瞑想',
+    breathingTitle: '呼吸瞑想',
 
-  chooseDuration: '時間を選択',
+    chooseDuration: '時間を選択',
 
-  minutes: '{{count}}分',
-  minuteUnit: '分',
-  heroMinutes: '{{count}}分',
+    minutes: '{{count}}分',
+    minuteUnit: '分',
+    heroMinutes: '{{count}}分',
 
-  start: '瞑想を始める',
-  pause: '瞑想を一時停止',
-  restart: 'もう一度瞑想する',
+    start: '瞑想を始める',
+    pause: '瞑想を一時停止',
+    restart: 'もう一度瞑想する',
 
-  ready: '準備完了',
-  paused: '一時停止中',
-  running: '瞑想中',
+    ready: '準備完了',
+    paused: '一時停止中',
+    running: '瞑想中',
 
-  resetTime: '時間をリセット',
+    resetTime: '時間をリセット',
 
-  completedTitle: '瞑想が完了しました',
+    completedTitle: '瞑想が完了しました',
 
-  completedMessage:
-    'ゆっくり呼吸し、今の心と体の状態を感じてみましょう。',
+    completedMessage: 'ゆっくり呼吸し、今の心と体の状態を感じてみましょう。',
 
-  breathTitle: '呼吸ガイド',
+    breathTitle: '呼吸ガイド',
 
-  inhale: '4秒かけてゆっくり吸う',
+    inhale: '4秒かけてゆっくり吸う',
 
-  hold: '2秒間息を止める',
+    hold: '2秒間息を止める',
 
-  exhale: '6秒かけてゆっくり吐く',
-},
+    exhale: '6秒かけてゆっくり吐く',
+  },
 
   prayer: {
     title: '祈りの日記',
 
-    subtitle:
-      '入力内容はこの端末に保存され、自動的にアップロードされません。',
+    subtitle: '入力内容はこの端末に保存され、自動的にアップロードされません。',
 
     placeholder: '祈っていることや感謝していることを書いてください...',
 
@@ -298,8 +273,7 @@ meditation: {
 
     privacy: 'プライバシー',
 
-    privacyDescription:
-      '祈りの日記は現在この端末にのみ保存されています。',
+    privacyDescription: '祈りの日記は現在この端末にのみ保存されています。',
 
     information: '情報',
 
@@ -338,13 +312,11 @@ meditation: {
 
     settingTitle: '旧暦1日・15日のリマインダー',
 
-    settingDescription:
-      '旧暦1日と15日に通知を受け取ります。',
+    settingDescription: '旧暦1日と15日に通知を受け取ります。',
 
     reminderTime: '通知時刻',
 
-    settingNote:
-      'アプリは今後12か月分の通知を設定し、起動時に更新します。',
+    settingNote: 'アプリは今後12か月分の通知を設定し、起動時に更新します。',
 
     firstDayTitle: '今日は旧暦1日です',
 
@@ -364,8 +336,7 @@ meditation: {
 
     errorTitle: 'リマインダーを設定できません',
 
-    errorMessage:
-      '旧暦リマインダーの設定中にエラーが発生しました。',
+    errorMessage: '旧暦リマインダーの設定中にエラーが発生しました。',
   },
   spiritualAudio: {
     title: 'お経と瞑想',
@@ -472,13 +443,11 @@ meditation: {
 
     sutraTitle: '読経またはお経を聴く時間です',
 
-    sutraBody:
-      '数分間静かに唱えたり聴いたりして、心を落ち着けましょう。',
+    sutraBody: '数分間静かに唱えたり聴いたりして、心を落ち着けましょう。',
 
     bothTitle: '毎日の修行の時間です',
 
-    bothBody:
-      '短い瞑想をするか、お経を聴いて穏やかな時間を過ごしましょう。',
+    bothBody: '短い瞑想をするか、お経を聴いて穏やかな時間を過ごしましょう。',
 
     permissionTitle: '通知が無効です',
 
@@ -504,7 +473,8 @@ meditation: {
 
     drawing: 'おみくじを引いています...',
 
-    drawHint: 'ゆっくり呼吸し、心を落ち着けて、下のボタンをタップしてください。',
+    drawHint:
+      'ゆっくり呼吸し、心を落ち着けて、下のボタンをタップしてください。',
 
     drawingButton: '抽選中',
 
@@ -551,485 +521,494 @@ meditation: {
     },
   },
   horoscope: {
-  title: '運勢と吉日',
+    title: '運勢と吉日',
 
-  subtitle:
-    '西暦の生年月日を入力し、旧暦の日付、干支、重要な行事の候補日を確認します。',
+    subtitle:
+      '西暦の生年月日を入力し、旧暦の日付、干支、重要な行事の候補日を確認します。',
 
-  subtitleExtended:
-    '西暦の生年月日と出生時刻、性別、解釈方式を入力し、旧暦プロフィール、内省的な解釈、候補日を確認します。',
+    subtitleExtended:
+      '西暦の生年月日と出生時刻、性別、解釈方式を入力し、旧暦プロフィール、内省的な解釈、候補日を確認します。',
 
-  birthDateTitle: '西暦の生年月日',
+    birthDateTitle: '西暦の生年月日',
 
-  day: '日',
+    day: '日',
 
-  month: '月',
+    month: '月',
 
-  year: '年',
+    year: '年',
 
-  birthTimeTitle: '出生時刻',
+    birthTimeTitle: '出生時刻',
 
-  hour: '時',
+    hour: '時',
 
-  minute: '分',
+    minute: '分',
 
-  birthTimeHint: '出生地の現地時刻',
+    birthTimeHint: '出生地の現地時刻',
 
-  genderTitle: '性別',
+    genderTitle: '性別',
 
-  schoolTitle: '解釈方式',
+    schoolTitle: '解釈方式',
 
-  selectedMethod: '現在の方式',
+    selectedMethod: '現在の方式',
 
-  activityTitle: '目的',
+    activityTitle: '目的',
 
-  searchPeriod: '検索期間',
+    searchPeriod: '検索期間',
 
-  monthCount: '{{count}}か月',
+    monthCount: '{{count}}か月',
 
-  calculate: '変換して候補日を探す',
+    calculate: '変換して候補日を探す',
 
-  calculateExtended: 'プロフィールを作成して候補日を探す',
+    calculateExtended: 'プロフィールを作成して候補日を探す',
 
-  calculating: '計算中...',
+    calculating: '計算中...',
 
-  invalidDateTitle: '生年月日が無効です',
+    invalidDateTitle: '生年月日が無効です',
 
-  invalidInputTitle: '情報が無効です',
+    invalidInputTitle: '情報が無効です',
 
-  invalidDateMessage:
-    '有効な西暦の生年月日を入力してください。',
+    invalidDateMessage: '有効な西暦の生年月日を入力してください。',
 
-  invalidTimeMessage:
-    '出生時刻は00:00から23:59の範囲で入力してください。',
+    invalidTimeMessage: '出生時刻は00:00から23:59の範囲で入力してください。',
 
-  profileTitle: '出生情報',
+    profileTitle: '出生情報',
 
-  lunarBirthDate: '旧暦の生年月日',
+    lunarBirthDate: '旧暦の生年月日',
 
-  birthHourBranch: '出生時の地支',
+    birthHourBranch: '出生時の地支',
 
-  zodiac: '干支',
+    zodiac: '干支',
 
-  canChiYear: '干支年',
+    canChiYear: '干支年',
 
-  profileGender: '性別',
+    profileGender: '性別',
 
-  profileSchool: '解釈方式',
+    profileSchool: '解釈方式',
 
-  yearPolarity: '出生年の陰陽',
+    yearPolarity: '出生年の陰陽',
 
-  cycleDirection: '参考運行方向',
+    cycleDirection: '参考運行方向',
 
-  leapMonth: '閏月',
+    leapMonth: '閏月',
 
-  resultsTitle: '候補日',
+    resultsTitle: '候補日',
 
-  resultsSubtitle:
-    '日付は文化的な参考スコアによって順位付けされます。',
+    resultsSubtitle: '日付は文化的な参考スコアによって順位付けされます。',
 
-  resultsSubtitleExtended:
-    '選択した方式、出生年の干支、出生時の地支に基づいて日付を順位付けします。',
+    resultsSubtitleExtended:
+      '選択した方式、出生年の干支、出生時の地支に基づいて日付を順位付けします。',
 
-  lunarDateLine: '旧暦 {{year}}年{{month}}月{{day}}日',
+    lunarDateLine: '旧暦 {{year}}年{{month}}月{{day}}日',
 
-  suitableReasons: '良い要素',
+    suitableReasons: '良い要素',
 
-  cautionReasons: '考慮すべき点',
+    cautionReasons: '考慮すべき点',
 
-  lifeOverviewTitle: '恋愛と仕事',
+    lifeOverviewTitle: '恋愛と仕事',
 
-  lifeOverviewSubtitle:
-    '入力した生年月日、出生時刻、選択した解釈方式に基づく内省的な読み解きです。',
+    lifeOverviewSubtitle:
+      '入力した生年月日、出生時刻、選択した解釈方式に基づく内省的な読み解きです。',
 
-  lifeStrengths: '長所',
+    lifeStrengths: '長所',
 
-  lifeCautions: '整えるべき点',
+    lifeCautions: '整えるべき点',
 
-  lifeAdvice: '成長の提案',
+    lifeAdvice: '成長の提案',
 
-  disclaimer:
-    '結果は文化的な参考と自己内省のためのものです。結婚、建築、投資、その他の重要な決定の唯一の根拠にはしないでください。',
+    disclaimer:
+      '結果は文化的な参考と自己内省のためのものです。結婚、建築、投資、その他の重要な決定の唯一の根拠にはしないでください。',
 
-  disclaimerExtended:
-    'これは旧暦、出生年の干支、出生時刻、選択した方式の重み付けに基づく簡易的な内省モデルです。完全な紫微斗数や八字の命式ではなく、重要な決定の唯一の根拠にはしないでください。',
+    disclaimerExtended:
+      'これは旧暦、出生年の干支、出生時刻、選択した方式の重み付けに基づく簡易的な内省モデルです。完全な紫微斗数や八字の命式ではなく、重要な決定の唯一の根拠にはしないでください。',
 
-  activities: {
-    wedding: '結婚',
-    construction: '建築',
-    opening: '開業',
-    moving: '引っ越し',
-    travel: '旅行',
-  },
-
-  genders: {
-    male: '男性',
-    female: '女性',
-    unspecified: '未指定',
-  },
-
-  schools: {
-    folkTitle: '民間総合法',
-    folkDescription:
-      '伝統的な吉日規則、干支の関係、出生時刻、一般的な文化習慣をバランスよく考慮します。',
-
-    baziTitle: '八字参考',
-    baziDescription:
-      '出生年の干支、出生時の地支、合と冲の関係をより重視します。',
-
-    ziweiTitle: '紫微斗数参考',
-    ziweiDescription:
-      '紫微斗数の時運思想に着想を得た内省的な重み付けと、出生情報と候補日の関係を用います。',
-
-    almanacTitle: '伝統暦',
-    almanacDescription:
-      '暦の宜忌、吉日、伝統的な旧暦上の注意日を優先します。',
-  },
-
-  polarity: {
-    yang: '陽',
-    yin: '陰',
-  },
-
-  directions: {
-    forward: '順行',
-    backward: '逆行',
-    neutral: '未確定',
-  },
-
-  schoolNotes: {
-    folk:
-      '民間習慣、暦の要素、干支の関係、出生時刻の参考をバランスよく組み合わせています。',
-
-    bazi:
-      '簡易的な八字参考として、干支と出生時刻の合・冲関係により大きな重みを置きます。',
-
-    ziwei:
-      '文化的な内省のため、紫微斗数の時運概念に着想を得た簡易的な重み付けを使用します。',
-
-    almanac:
-      '伝統暦の宜忌と旧暦上の日付規則を最も重視します。',
-  },
-
-  ratings: {
-    excellent: '非常に良い',
-    good: '良い',
-    fair: 'まずまず',
-    caution: '要検討',
-  },
-
-  lifeRatings: {
-    veryStrong: '非常に強い',
-    favorable: '良好',
-    balanced: '均衡',
-    developing: '発展中',
-  },
-
-  love: {
-    title: '恋愛',
-
-    styles: {
-      warm: '温かく表現豊か',
-      steady: '安定し誠実',
-      independent: '自立的で率直',
-      sensitive: '繊細で直感的',
+    activities: {
+      wedding: '結婚',
+      construction: '建築',
+      opening: '開業',
+      moving: '引っ越し',
+      travel: '旅行',
     },
 
-    summaries: {
-      warm:
-        '愛情を率直に表し、心の温かさ、親密さ、誠実な感謝を大切にする傾向があります。',
-
-      steady:
-        '少しずつ築く信頼、安定した約束、継続的な気遣いによって育つ関係を好む傾向があります。',
-
-      independent:
-        '誠実さ、個人の空間、双方が自分らしさを保てる関係を大切にする傾向があります。',
-
-      sensitive:
-        '感情の細かな変化に気づきやすく、共感、安心感、相互理解のある関係を求める傾向があります。',
-    },
-  },
-
-  career: {
-    title: '仕事',
-
-    styles: {
-      leadership: 'リーダーシップ志向',
-      creative: '創造的で表現豊か',
-      analytical: '分析的で体系的',
-      supportive: '支援・奉仕志向',
-      entrepreneurial: '起業家的で適応力が高い',
+    genders: {
+      male: '男性',
+      female: '女性',
+      unspecified: '未指定',
     },
 
-    summaries: {
-      leadership:
-        '責任を担い、人を調整し、方向性を明確な行動へ変える場面で力を発揮しやすいでしょう。',
+    schools: {
+      folkTitle: '民間総合法',
+      folkDescription:
+        '伝統的な吉日規則、干支の関係、出生時刻、一般的な文化習慣をバランスよく考慮します。',
 
-      creative:
-        '想像力、コミュニケーション、デザイン、物語表現、独創的な問題解決を重視する仕事で力を発揮しやすいでしょう。',
+      baziTitle: '八字参考',
+      baziDescription:
+        '出生年の干支、出生時の地支、合と冲の関係をより重視します。',
 
-      analytical:
-        '計画、調査、システム思考、正確さ、慎重な判断が必要な仕事で最も実力を発揮しやすいでしょう。',
+      ziweiTitle: '紫微斗数参考',
+      ziweiDescription:
+        '紫微斗数の時運思想に着想を得た内省的な重み付けと、出生情報と候補日の関係を用います。',
 
-      supportive:
-        '協働、助言、教育、ケア、サービス中心の役割で大きく貢献しやすいでしょう。',
+      almanacTitle: '伝統暦',
+      almanacDescription:
+        '暦の宜忌、吉日、伝統的な旧暦上の注意日を優先します。',
+    },
 
-      entrepreneurial:
-        '主体性、試行、独立したプロジェクト、適応力が評価される機会に惹かれやすいでしょう。',
+    polarity: {
+      yang: '陽',
+      yin: '陰',
+    },
+
+    directions: {
+      forward: '順行',
+      backward: '逆行',
+      neutral: '未確定',
+    },
+
+    schoolNotes: {
+      folk: '民間習慣、暦の要素、干支の関係、出生時刻の参考をバランスよく組み合わせています。',
+
+      bazi: '簡易的な八字参考として、干支と出生時刻の合・冲関係により大きな重みを置きます。',
+
+      ziwei:
+        '文化的な内省のため、紫微斗数の時運概念に着想を得た簡易的な重み付けを使用します。',
+
+      almanac: '伝統暦の宜忌と旧暦上の日付規則を最も重視します。',
+    },
+
+    ratings: {
+      excellent: '非常に良い',
+      good: '良い',
+      fair: 'まずまず',
+      caution: '要検討',
+    },
+
+    lifeRatings: {
+      veryStrong: '非常に強い',
+      favorable: '良好',
+      balanced: '均衡',
+      developing: '発展中',
+    },
+
+    love: {
+      title: '恋愛',
+
+      styles: {
+        warm: '温かく表現豊か',
+        steady: '安定し誠実',
+        independent: '自立的で率直',
+        sensitive: '繊細で直感的',
+      },
+
+      summaries: {
+        warm: '愛情を率直に表し、心の温かさ、親密さ、誠実な感謝を大切にする傾向があります。',
+
+        steady:
+          '少しずつ築く信頼、安定した約束、継続的な気遣いによって育つ関係を好む傾向があります。',
+
+        independent:
+          '誠実さ、個人の空間、双方が自分らしさを保てる関係を大切にする傾向があります。',
+
+        sensitive:
+          '感情の細かな変化に気づきやすく、共感、安心感、相互理解のある関係を求める傾向があります。',
+      },
+    },
+
+    career: {
+      title: '仕事',
+
+      styles: {
+        leadership: 'リーダーシップ志向',
+        creative: '創造的で表現豊か',
+        analytical: '分析的で体系的',
+        supportive: '支援・奉仕志向',
+        entrepreneurial: '起業家的で適応力が高い',
+      },
+
+      summaries: {
+        leadership:
+          '責任を担い、人を調整し、方向性を明確な行動へ変える場面で力を発揮しやすいでしょう。',
+
+        creative:
+          '想像力、コミュニケーション、デザイン、物語表現、独創的な問題解決を重視する仕事で力を発揮しやすいでしょう。',
+
+        analytical:
+          '計画、調査、システム思考、正確さ、慎重な判断が必要な仕事で最も実力を発揮しやすいでしょう。',
+
+        supportive:
+          '協働、助言、教育、ケア、サービス中心の役割で大きく貢献しやすいでしょう。',
+
+        entrepreneurial:
+          '主体性、試行、独立したプロジェクト、適応力が評価される機会に惹かれやすいでしょう。',
+      },
+    },
+
+    reasons: {
+      hoangDao: '暦上の吉日',
+
+      hacDao: '暦上の凶日',
+
+      traditionalSuitable: '伝統的にこの目的に適している',
+
+      traditionalAvoid: '伝統的にこの目的を避けるよう勧められる',
+
+      zodiacClash: '日の地支が出生年の干支と冲になる',
+
+      sixHarmony: '六合の関係',
+
+      threeHarmony: '三合の関係',
+
+      nguyetKy: '伝統的な月忌日',
+
+      tamNuong: '伝統的な三娘日',
+
+      preferredLunarDay: '参考規則で優先される旧暦日',
+
+      weekendConvenient: '週末で都合がよい',
+
+      birthHourClash: '日の地支が出生時の地支と冲になる',
+
+      birthHourHarmony: '日の地支が出生時と六合を形成する',
+
+      birthHourThreeHarmony: '日の地支が出生時と三合を形成する',
+
+      birthLunarDayResonance: '旧暦の日が旧暦の出生日と対応する',
+
+      school_folk: '民間総合法で評価',
+
+      school_bazi: '八字参考プリセットで評価',
+
+      school_ziwei: '紫微斗数参考プリセットで評価',
+
+      school_almanac: '伝統暦プリセットで評価',
+    },
+
+    insights: {
+      loveHarmony: '出生年の干支と出生時の地支が六合の関係を形成します。',
+
+      loveThreeHarmony:
+        '出生年の干支と出生時の地支が同じ三合グループに属します。',
+
+      loveInnerConflict:
+        '出生年の干支と出生時の地支が冲となり、親密さと個人的な必要の間の内的な緊張を表す場合があります。',
+
+      loveSelfAwareness:
+        '旧暦の出生日は、内省と感情への自己認識の傾向を示します。',
+
+      loveWarmHeart:
+        '愛情を豊かに表し、温かい感情の雰囲気を作りやすいでしょう。',
+
+      loveExpressive:
+        '言葉、行動、明確な気遣いを通して思いやりを示す力があるでしょう。',
+
+      loveOvergiving:
+        '自分の必要が満たされているか確認する前に、与えすぎることがあります。',
+
+      loveSetBoundaries:
+        '思いやりが偏らないよう、明確で優しい境界線を持ちましょう。',
+
+      loveReceiveCare:
+        'いつも与える側になるのではなく、他者からの支えも受け取りましょう。',
+
+      loveLoyal: '誠実さ、信頼性、長期的な約束を重視する傾向があります。',
+
+      lovePatient: '関係が育つまで時間をかけることができるでしょう。',
+
+      loveReserved: '感情を内側にため、説明が難しくなることがあります。',
+
+      loveSpeakClearly:
+        '相手に察してもらうのを待たず、必要を早めに明確に伝えましょう。',
+
+      loveCreateRituals: '信頼とつながりを強める小さな共通習慣を作りましょう。',
+
+      loveRespectsSpace:
+        '個性を尊重し、個人の空間が必要であることを理解しやすいでしょう。',
+
+      loveHonest:
+        '関係では率直で誠実なコミュニケーションを好む傾向があります。',
+
+      loveNeedsFreedom:
+        '制限が多すぎると、引きこもったり感情的に距離を置いたりする場合があります。',
+
+      loveBalanceFreedom:
+        '自立と継続的な心のつながりのバランスを取りましょう。',
+
+      loveSharePlans:
+        '自由が距離感に見えないよう、計画と期待を共有しましょう。',
+
+      loveEmpathetic:
+        '微妙な感情の変化を理解し、共感をもって応じやすいでしょう。',
+
+      loveIntuitive: '関係を理解するとき、直感に強く頼る傾向があります。',
+
+      loveOverthinking:
+        'コミュニケーションが不明確なとき、繊細さが考えすぎにつながる場合があります。',
+
+      loveTrustSlowly:
+        '推測ではなく、繰り返される行動によって信頼を育てましょう。',
+
+      loveAskDirectly: '不確かなときは沈黙を解釈せず、直接たずねましょう。',
+
+      careerPersistent:
+        '粘り強さと前進し続ける意志によって成長しやすいでしょう。',
+
+      careerReflective: '振り返り、内省、方法の調整を通して学ぶ力があります。',
+
+      careerActionOriented:
+        '陽の傾向は、主体性、目に見える行動、決断力のある推進を支える場合があります。',
+
+      careerObservant:
+        '陰の傾向は、観察、忍耐、タイミング、丁寧な準備を支える場合があります。',
+
+      careerLeadership:
+        '人を導き、明確な方向性を示すことに抵抗が少ないでしょう。',
+
+      careerResponsibility:
+        '結果に責任を持ち、約束を最後まで果たす傾向があります。',
+
+      careerOvercontrol:
+        '支配しすぎると協力が制限され、不要な圧力を生む場合があります。',
+
+      careerDelegate:
+        '明確に委任し、他者が自分の方法で貢献する余地を与えましょう。',
+
+      careerListenBeforeDeciding:
+        '重要な決定の前に、さまざまな意見を集めましょう。',
+
+      careerCreative:
+        '独創的なアイデアを生み、他者が見落とす可能性に気づきやすいでしょう。',
+
+      careerExpression:
+        'コミュニケーション、デザイン、物語表現、プレゼンテーションが自然な強みになるでしょう。',
+
+      careerScattered:
+        '同時に多くのアイデアを持つと、最も重要な仕事を終えにくくなる場合があります。',
+
+      careerBuildPortfolio:
+        '完成した仕事を見える形で積み上げ、創造性を機会につなげましょう。',
+
+      careerFinishOneThing:
+        '次のアイデアへ広げる前に、一つの優先事項を終えましょう。',
+
+      careerAnalytical: '細部、パターン、因果関係を分析する力があるでしょう。',
+
+      careerPlanning:
+        '体系的な準備はリスクを減らし、安定性を高める助けになります。',
+
+      careerPerfectionism:
+        '完璧な情報を待つと、有益な行動が遅れる場合があります。',
+
+      careerSetMilestones:
+        '大きな目標を測定可能な段階と明確な期限に分けましょう。',
+
+      careerDecideWithEnoughData:
+        '情報が完全でなくても十分にそろった段階で行動しましょう。',
+
+      careerTeamwork:
+        '協力、信頼性、感情への気づきによってチームを強くできるでしょう。',
+
+      careerService:
+        '助ける、教える、支える、他者の生活を改善する仕事に意味を感じやすいでしょう。',
+
+      careerPeoplePleasing:
+        '全員を満足させようとすると、エネルギーが減り優先事項が曖昧になる場合があります。',
+
+      careerProtectEnergy:
+        '貢献を持続可能にするため、時間と感情労働の境界を設けましょう。',
+
+      careerShowYourContribution:
+        '他者が気づくと決めつけず、成果を明確に伝えましょう。',
+
+      careerInitiative:
+        '条件が完全に確定していなくても、始める意欲があるでしょう。',
+
+      careerAdaptability:
+        '状況、市場、計画が変化したとき、素早く適応できるでしょう。',
+
+      careerRiskTaking:
+        '機会への熱意から、十分な備えなしにリスクを取る場合があります。',
+
+      careerValidateRisk:
+        '大きな約束をする前に、小さな実験で仮説を確認しましょう。',
+
+      careerKeepCashReserve:
+        '独立した機会や不確実な挑戦を追うときは、資金の予備を保ちましょう。',
     },
   },
-
-  reasons: {
-    hoangDao: '暦上の吉日',
-
-    hacDao: '暦上の凶日',
-
-    traditionalSuitable:
-      '伝統的にこの目的に適している',
-
-    traditionalAvoid:
-      '伝統的にこの目的を避けるよう勧められる',
-
-    zodiacClash:
-      '日の地支が出生年の干支と冲になる',
-
-    sixHarmony: '六合の関係',
-
-    threeHarmony: '三合の関係',
-
-    nguyetKy: '伝統的な月忌日',
-
-    tamNuong: '伝統的な三娘日',
-
-    preferredLunarDay:
-      '参考規則で優先される旧暦日',
-
-    weekendConvenient: '週末で都合がよい',
-
-    birthHourClash:
-      '日の地支が出生時の地支と冲になる',
-
-    birthHourHarmony:
-      '日の地支が出生時と六合を形成する',
-
-    birthHourThreeHarmony:
-      '日の地支が出生時と三合を形成する',
-
-    birthLunarDayResonance:
-      '旧暦の日が旧暦の出生日と対応する',
-
-    school_folk:
-      '民間総合法で評価',
-
-    school_bazi:
-      '八字参考プリセットで評価',
-
-    school_ziwei:
-      '紫微斗数参考プリセットで評価',
-
-    school_almanac:
-      '伝統暦プリセットで評価',
+  lanternRelease: {
+    released: '灯しました',
+    releaseButton: '灯籠を流す',
+    releaseWithPrayer: '祈りを込めて流す',
+    modalTitle: '祈りを書く',
+    modalPlaceholder: '例：家族の平安を祈ります',
+    cancel: 'キャンセル',
+    release: '流す',
+    today: '今日',
+    total: '合計',
+    defaultPrayer: '平安',
+    specialNightMessage: '今日は平安を祈って灯籠を流す吉日です。',
+    types: {
+      pink: '桃色の蓮',
+      gold: '金色の蓮',
+      paper: '紙灯籠',
+      moon: '月の灯籠',
+      peace: '平安の灯籠',
+    },
+    prayerPresets: ['平安', '願い', '祈り', '慈悲', '良縁', '安らぎ'],
+    reminderChannelName: '灯籠流しのリマインダー',
+    reminderChannelDescription:
+      '旧暦の一日と十五日に灯籠流しをお知らせします。',
+    firstDayReminderTitle: '今日は旧暦の一日です',
+    firstDayReminderBody:
+      '静かなひとときを過ごし、灯籠に平安の祈りを込めましょう。',
+    fullMoonReminderTitle: '今日は満月の日です',
+    fullMoonReminderBody:
+      '満月の日は、平安を祈って灯籠を流すのに美しい日です。',
   },
+  ancestorAltar: {
+  title: '先祖供養',
+  subtitle: '感謝の心で大切な人を偲ぶ',
 
-  insights: {
-    loveHarmony:
-      '出生年の干支と出生時の地支が六合の関係を形成します。',
+  addPhoto: '写真を追加',
+  photoHint: '額縁をタップして家族やご先祖様の写真を選択',
+  noName: '亡き大切な人',
 
-    loveThreeHarmony:
-      '出生年の干支と出生時の地支が同じ三合グループに属します。',
+  incenseCount: '焚いているお香',
+  prayerCount: '祈り',
 
-    loveInnerConflict:
-      '出生年の干支と出生時の地支が冲となり、親密さと個人的な必要の間の内的な緊張を表す場合があります。',
+  lightIncense: 'お香を供える',
+  lightWithPrayer: '祈りを込めてお香を供える',
 
-    loveSelfAwareness:
-      '旧暦の出生日は、内省と感情への自己認識の傾向を示します。',
+  profileTitle: '故人の情報',
+  choosePhoto: '写真を選択',
+  namePlaceholder: '故人のお名前',
+  birthPlaceholder: '生年月日',
+  deathPlaceholder: '命日',
 
-    loveWarmHeart:
-      '愛情を豊かに表し、温かい感情の雰囲気を作りやすいでしょう。',
+  prayerTitle: '祈りの言葉',
+  prayerPlaceholder:
+    '例：ご先祖様、家族が平安でありますようお守りください...',
+  prayerPresetPeace:
+    '家族が平安で、物事が順調に進みますように。',
+  prayerPresetGratitude:
+    'ご先祖様のご恩に感謝し、心より偲びます。',
+  prayerPresetProtection:
+    'ご先祖様が子孫を見守ってくださいますように。',
 
-    loveExpressive:
-      '言葉、行動、明確な気遣いを通して思いやりを示す力があるでしょう。',
+  emptyPrayerTitle: '祈りが入力されていません',
+  emptyPrayerMessage: '先に祈りの言葉を入力してください。',
 
-    loveOvergiving:
-      '自分の必要が満たされているか確認する前に、与えすぎることがあります。',
-
-    loveSetBoundaries:
-      '思いやりが偏らないよう、明確で優しい境界線を持ちましょう。',
-
-    loveReceiveCare:
-      'いつも与える側になるのではなく、他者からの支えも受け取りましょう。',
-
-    loveLoyal:
-      '誠実さ、信頼性、長期的な約束を重視する傾向があります。',
-
-    lovePatient:
-      '関係が育つまで時間をかけることができるでしょう。',
-
-    loveReserved:
-      '感情を内側にため、説明が難しくなることがあります。',
-
-    loveSpeakClearly:
-      '相手に察してもらうのを待たず、必要を早めに明確に伝えましょう。',
-
-    loveCreateRituals:
-      '信頼とつながりを強める小さな共通習慣を作りましょう。',
-
-    loveRespectsSpace:
-      '個性を尊重し、個人の空間が必要であることを理解しやすいでしょう。',
-
-    loveHonest:
-      '関係では率直で誠実なコミュニケーションを好む傾向があります。',
-
-    loveNeedsFreedom:
-      '制限が多すぎると、引きこもったり感情的に距離を置いたりする場合があります。',
-
-    loveBalanceFreedom:
-      '自立と継続的な心のつながりのバランスを取りましょう。',
-
-    loveSharePlans:
-      '自由が距離感に見えないよう、計画と期待を共有しましょう。',
-
-    loveEmpathetic:
-      '微妙な感情の変化を理解し、共感をもって応じやすいでしょう。',
-
-    loveIntuitive:
-      '関係を理解するとき、直感に強く頼る傾向があります。',
-
-    loveOverthinking:
-      'コミュニケーションが不明確なとき、繊細さが考えすぎにつながる場合があります。',
-
-    loveTrustSlowly:
-      '推測ではなく、繰り返される行動によって信頼を育てましょう。',
-
-    loveAskDirectly:
-      '不確かなときは沈黙を解釈せず、直接たずねましょう。',
-
-    careerPersistent:
-      '粘り強さと前進し続ける意志によって成長しやすいでしょう。',
-
-    careerReflective:
-      '振り返り、内省、方法の調整を通して学ぶ力があります。',
-
-    careerActionOriented:
-      '陽の傾向は、主体性、目に見える行動、決断力のある推進を支える場合があります。',
-
-    careerObservant:
-      '陰の傾向は、観察、忍耐、タイミング、丁寧な準備を支える場合があります。',
-
-    careerLeadership:
-      '人を導き、明確な方向性を示すことに抵抗が少ないでしょう。',
-
-    careerResponsibility:
-      '結果に責任を持ち、約束を最後まで果たす傾向があります。',
-
-    careerOvercontrol:
-      '支配しすぎると協力が制限され、不要な圧力を生む場合があります。',
-
-    careerDelegate:
-      '明確に委任し、他者が自分の方法で貢献する余地を与えましょう。',
-
-    careerListenBeforeDeciding:
-      '重要な決定の前に、さまざまな意見を集めましょう。',
-
-    careerCreative:
-      '独創的なアイデアを生み、他者が見落とす可能性に気づきやすいでしょう。',
-
-    careerExpression:
-      'コミュニケーション、デザイン、物語表現、プレゼンテーションが自然な強みになるでしょう。',
-
-    careerScattered:
-      '同時に多くのアイデアを持つと、最も重要な仕事を終えにくくなる場合があります。',
-
-    careerBuildPortfolio:
-      '完成した仕事を見える形で積み上げ、創造性を機会につなげましょう。',
-
-    careerFinishOneThing:
-      '次のアイデアへ広げる前に、一つの優先事項を終えましょう。',
-
-    careerAnalytical:
-      '細部、パターン、因果関係を分析する力があるでしょう。',
-
-    careerPlanning:
-      '体系的な準備はリスクを減らし、安定性を高める助けになります。',
-
-    careerPerfectionism:
-      '完璧な情報を待つと、有益な行動が遅れる場合があります。',
-
-    careerSetMilestones:
-      '大きな目標を測定可能な段階と明確な期限に分けましょう。',
-
-    careerDecideWithEnoughData:
-      '情報が完全でなくても十分にそろった段階で行動しましょう。',
-
-    careerTeamwork:
-      '協力、信頼性、感情への気づきによってチームを強くできるでしょう。',
-
-    careerService:
-      '助ける、教える、支える、他者の生活を改善する仕事に意味を感じやすいでしょう。',
-
-    careerPeoplePleasing:
-      '全員を満足させようとすると、エネルギーが減り優先事項が曖昧になる場合があります。',
-
-    careerProtectEnergy:
-      '貢献を持続可能にするため、時間と感情労働の境界を設けましょう。',
-
-    careerShowYourContribution:
-      '他者が気づくと決めつけず、成果を明確に伝えましょう。',
-
-    careerInitiative:
-      '条件が完全に確定していなくても、始める意欲があるでしょう。',
-
-    careerAdaptability:
-      '状況、市場、計画が変化したとき、素早く適応できるでしょう。',
-
-    careerRiskTaking:
-      '機会への熱意から、十分な備えなしにリスクを取る場合があります。',
-
-    careerValidateRisk:
-      '大きな約束をする前に、小さな実験で仮説を確認しましょう。',
-
-    careerKeepCashReserve:
-      '独立した機会や不確実な挑戦を追うときは、資金の予備を保ちましょう。',
-  },
-},
-lanternRelease: {
-  released: '灯しました',
-  releaseButton: '灯籠を流す',
-  releaseWithPrayer: '祈りを込めて流す',
-  modalTitle: '祈りを書く',
-  modalPlaceholder: '例：家族の平安を祈ります',
-  cancel: 'キャンセル',
-  release: '流す',
-  today: '今日',
-  total: '合計',
-  defaultPrayer: '平安',
-  specialNightMessage:
-    '今日は平安を祈って灯籠を流す吉日です。',
-  types: {
-    pink: '桃色の蓮',
-    gold: '金色の蓮',
-    paper: '紙灯籠',
-    moon: '月の灯籠',
-    peace: '平安の灯籠',
-  },
-  prayerPresets: [
-    '平安',
-    '願い',
-    '祈り',
-    '慈悲',
-    '良縁',
-    '安らぎ',
-  ],
+  historyTitle: '祈りの履歴',
+  emptyHistory: '保存された祈りはまだありません。',
 },
   bazi,
   ziwei,
-    practice,
+  practice,
   practiceAudio,
   practiceMeditation,
-    peaceJournal,
+  peaceJournal,
   buddhistCalendar,
   altarCustomization,
-    dataSync,
+  dataSync,
   pdfExport,
   premiumContent,
   smartFeatures,
@@ -1037,8 +1016,8 @@ lanternRelease: {
   practiceJourney,
   userProfiles,
   today,
-                          ...palmReading,
-                          ...palmReadingV2Lite,
+  ...palmReading,
+  ...palmReadingV2Lite,
 } as const;
 
 export default ja;

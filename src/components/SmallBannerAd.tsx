@@ -21,7 +21,7 @@ type Props = {
  * Android và iOS phải dùng hai quảng cáo riêng.
  */
 const androidBannerUnitId =
-  'ca-app-pub-XXXXXXXXXXXXXXXX/ANDROID_BANNER_ID';
+  'ca-app-pub-6025850831913874/4102336037';
 
 const iosBannerUnitId =
   'ca-app-pub-XXXXXXXXXXXXXXXX/IOS_BANNER_ID';

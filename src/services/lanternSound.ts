@@ -4,6 +4,7 @@ Sound.setCategory('Playback');
 
 let lanternWaterSound: Sound | null = null;
 let isPreloaded = false;
+let soundEnabled = true;
 
 function loadSound(
   filename: string,
@@ -40,8 +41,20 @@ export function releaseLanternSounds() {
   isPreloaded = false;
 }
 
+export function setLanternSoundEnabled(enabled: boolean) {
+  soundEnabled = enabled;
+
+  if (!enabled) {
+    lanternWaterSound?.stop();
+  }
+}
+
+export function getLanternSoundEnabled() {
+  return soundEnabled;
+}
+
 export function playLanternWaterSound() {
-  if (!lanternWaterSound) {
+  if (!soundEnabled || !lanternWaterSound) {
     return;
   }
 

@@ -116,6 +116,8 @@ const zh = {
     lanternReleaseSubtitle: '让心愿随着水面上的灯光缓缓流去',
     releaseLifeTitle: '放生',
     releaseLifeSubtitle: '体验放下与找回平静的旅程',
+    ancestorAltarTitle: '祖先牌位',
+    ancestorAltarSubtitle: '创建纪念和祭祀祖先的空间',
   },
 
   temple: {

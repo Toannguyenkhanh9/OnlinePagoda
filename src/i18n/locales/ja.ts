@@ -117,6 +117,8 @@ const ja = {
     lanternReleaseSubtitle: '水面に浮かぶ灯りに平安の祈りを込める',
     releaseLifeTitle: '生命を解放',
     releaseLifeSubtitle: '手放すと感じる旅と平和を見つける体験',
+    ancestorAltarTitle: '祖先牌位',
+    ancestorAltarSubtitle: '祖先を記念し、祭祀する空間を作ります',
   },
 
   temple: {

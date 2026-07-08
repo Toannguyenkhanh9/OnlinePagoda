@@ -128,6 +128,8 @@ const en = {
     releaseLifeTitle: 'Release Life',
     releaseLifeSubtitle:
       'Experience the journey of letting go and finding peace',
+    ancestorAltarTitle: 'Ancestor Altar',
+    ancestorAltarSubtitle: 'Create a space to remember and honor your ancestors',
   },
 
   temple: {

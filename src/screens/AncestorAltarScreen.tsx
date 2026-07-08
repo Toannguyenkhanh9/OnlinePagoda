@@ -726,47 +726,49 @@ export default function AncestorAltarScreen() {
             >
               <View style={styles.altarDarkOverlay} />
 
-              <View style={styles.ancestorFrameArea}>
-                <Pressable style={styles.photoFrame} onPress={openProfileModal}>
-                  {profile.photoUri ? (
-                    <Image
-                      source={{ uri: profile.photoUri }}
-                      resizeMode="cover"
-                      style={styles.ancestorPhoto}
-                    />
-                  ) : (
-                    <View style={styles.photoPlaceholder}>
-                      <Text style={styles.photoPlaceholderText}>
-                        {t('ancestorAltar.addPhoto', {
-                          defaultValue: 'Thêm ảnh',
-                        })}
-                      </Text>
-                    </View>
-                  )}
-                </Pressable>
+<View style={styles.ancestorFrameArea}>
+  <Pressable style={styles.photoFrame} onPress={openProfileModal}>
+    {profile.photoUri?.trim() ? (
+      <Image
+        source={{uri: profile.photoUri}}
+        resizeMode="cover"
+        style={styles.ancestorPhoto}
+      />
+    ) : (
+      <View style={styles.photoPlaceholder}>
+        <Text style={styles.photoPlaceholderText}>
+          {t('ancestorAltar.addPhoto', {
+            defaultValue: 'Thêm ảnh',
+          })}
+        </Text>
+      </View>
+    )}
+  </Pressable>
 
-                <Text style={styles.photoHintText} numberOfLines={2}>
-                  {t('ancestorAltar.photoHint', {
-                    defaultValue:
-                      'Nhấn vào khung hình để chọn ảnh người thân/tổ tiên',
-                  })}
-                </Text>
+  {!profile.photoUri?.trim() ? (
+    <Text style={styles.photoHintText} numberOfLines={2}>
+      {t('ancestorAltar.photoHint', {
+        defaultValue:
+          'Nhấn vào khung hình để chọn ảnh người thân/tổ tiên',
+      })}
+    </Text>
+  ) : null}
 
-                <View style={styles.namePlaque}>
-                  <Text style={styles.ancestorName} numberOfLines={1}>
-                    {profile.name ||
-                      t('ancestorAltar.noName', {
-                        defaultValue: 'Người thân đã khuất',
-                      })}
-                  </Text>
+  <View style={styles.namePlaque}>
+    <Text style={styles.ancestorName} numberOfLines={1}>
+      {profile.name ||
+        t('ancestorAltar.noName', {
+          defaultValue: 'Người thân đã khuất',
+        })}
+    </Text>
 
-                  <Text style={styles.ancestorDates} numberOfLines={1}>
-                    {profile.birthDate || '—'}
-                    {'  ·  '}
-                    {profile.deathDate || '—'}
-                  </Text>
-                </View>
-              </View>
+    <Text style={styles.ancestorDates} numberOfLines={1}>
+      {profile.birthDate || '—'}
+      {'  ·  '}
+      {profile.deathDate || '—'}
+    </Text>
+  </View>
+</View>
 
               <View style={styles.incenseBowlArea}>
                 {floatingPrayer ? (
@@ -1737,18 +1739,18 @@ const styles = StyleSheet.create({
     zIndex: 18,
   },
   photoHintText: {
-  maxWidth: 230,
-  marginTop: 7,
-  paddingHorizontal: 12,
-  paddingVertical: 6,
-  borderRadius: 999,
-  backgroundColor: 'rgba(0,0,0,0.38)',
-  borderWidth: 1,
-  borderColor: 'rgba(255,221,145,0.24)',
-  color: '#FFE4A0',
-  fontSize: 10,
-  lineHeight: 14,
-  fontWeight: '800',
-  textAlign: 'center',
-},
+    maxWidth: 230,
+    marginTop: 7,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 999,
+    backgroundColor: 'rgba(0,0,0,0.38)',
+    borderWidth: 1,
+    borderColor: 'rgba(255,221,145,0.24)',
+    color: '#FFE4A0',
+    fontSize: 10,
+    lineHeight: 14,
+    fontWeight: '800',
+    textAlign: 'center',
+  },
 });

@@ -125,6 +125,8 @@ const vi = {
     releaseLifeTitle: 'Phóng sinh',
     releaseLifeSubtitle:
       'Trải nghiệm hành trình buông bỏ và tìm lại sự bình yên',
+      ancestorAltarTitle :  'Bàn thờ gia tiên',
+      ancestorAltarSubtitle :  'Tạo không gian tưởng nhớ và thờ cúng gia tiên',
   },
 
   temple: {

@@ -120,6 +120,8 @@ const ko = {
     releaseLifeTitle: '생명 방생',
     releaseLifeSubtitle:
       '버리고 싶은 것을 내려놓고 평온함을 찾는 경험을 하세요',
+    ancestorAltarTitle: '조상 제단',
+    ancestorAltarSubtitle: '조상을 기리고 제사를 지낼 공간을 만드세요',
   },
 
   temple: {

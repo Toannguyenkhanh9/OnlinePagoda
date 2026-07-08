@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 
 import {
   Alert,
@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useTranslation} from 'react-i18next';
 
 import {
   getReleaseLifeSoundEnabled,
@@ -25,7 +26,7 @@ import {
   setReleaseLifeSoundEnabled,
 } from '../services/releaseLifeSound';
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 
 const STORAGE_KEY = 'IPAGODA_RELEASE_LIFE_STATS';
 
@@ -42,6 +43,141 @@ const isSmallScreen = SCREEN_HEIGHT < 760;
 const objectSize = Math.min(SCREEN_WIDTH * 0.38, isSmallScreen ? 132 : 162);
 
 const previewIconSize = isSmallScreen ? 21 : 24;
+
+type SupportedLanguage = 'en' | 'zh' | 'vi' | 'ja' | 'ko';
+
+type ReleaseLifeText = {
+  title: string;
+  subtitle: string;
+  today: string;
+  totalRelease: string;
+  prayerTitle: string;
+  prayerText: string;
+  remainingPrefix: string;
+  soundOn: string;
+  soundOff: string;
+  resetToday: string;
+  noFishTitle: string;
+  noFishMessage: string;
+  noBirdTitle: string;
+  noBirdMessage: string;
+  resetTitle: string;
+  resetMessage: string;
+  cancel: string;
+  reset: string;
+};
+
+const RELEASE_LIFE_TEXT: Record<SupportedLanguage, ReleaseLifeText> = {
+  en: {
+    title: 'Release Life',
+    subtitle: 'Nurture compassion for all living beings',
+    today: 'Today',
+    totalRelease: 'Total Released',
+    prayerTitle: 'Prayer',
+    prayerText:
+      'May all living beings be safe, free from suffering, meet good conditions, and live in peace.',
+    remainingPrefix: 'Left:',
+    soundOn: 'Sound: On',
+    soundOff: 'Sound: Off',
+    resetToday: 'Reset Today',
+    noFishTitle: 'No fish left',
+    noFishMessage: 'Tap Reset Today to continue releasing life.',
+    noBirdTitle: 'No birds left',
+    noBirdMessage: 'Tap Reset Today to continue releasing life.',
+    resetTitle: 'Reset Today',
+    resetMessage: 'Add fish and birds again to continue releasing life?',
+    cancel: 'Cancel',
+    reset: 'Reset',
+  },
+
+  zh: {
+    title: '放生',
+    subtitle: '以慈悲心善待一切生命',
+    today: '今日',
+    totalRelease: '累计放生',
+    prayerTitle: '祈愿',
+    prayerText:
+      '愿一切众生平安，远离苦难，得遇善缘，安住自在。',
+    remainingPrefix: '剩余：',
+    soundOn: '声音：开',
+    soundOff: '声音：关',
+    resetToday: '重置今日',
+    noFishTitle: '鱼儿已放完',
+    noFishMessage: '点击“重置今日”即可继续放生。',
+    noBirdTitle: '鸟儿已放完',
+    noBirdMessage: '点击“重置今日”即可继续放生。',
+    resetTitle: '重置今日',
+    resetMessage: '是否重新加入鱼和鸟，继续放生？',
+    cancel: '取消',
+    reset: '重置',
+  },
+
+  vi: {
+    title: 'Phóng sinh',
+    subtitle: 'Nuôi dưỡng tâm từ bi với muôn loài',
+    today: 'Hôm nay',
+    totalRelease: 'Tổng phóng sinh',
+    prayerTitle: 'Lời nguyện',
+    prayerText:
+      'Nguyện cho muôn loài được an lành, xa lìa khổ nạn, gặp duyên lành và sống trong bình an.',
+    remainingPrefix: 'Còn lại:',
+    soundOn: 'Âm thanh: Bật',
+    soundOff: 'Âm thanh: Tắt',
+    resetToday: 'Đặt lại hôm nay',
+    noFishTitle: 'Đã hết cá',
+    noFishMessage: 'Bạn có thể bấm Đặt lại hôm nay để tiếp tục.',
+    noBirdTitle: 'Đã hết chim',
+    noBirdMessage: 'Bạn có thể bấm Đặt lại hôm nay để tiếp tục.',
+    resetTitle: 'Đặt lại hôm nay',
+    resetMessage: 'Bạn muốn thêm lại cá và chim để tiếp tục phóng sinh?',
+    cancel: 'Hủy',
+    reset: 'Đặt lại',
+  },
+
+  ja: {
+    title: '放生',
+    subtitle: 'すべての命に慈悲の心を育みます',
+    today: '今日',
+    totalRelease: '累計放生',
+    prayerTitle: '祈り',
+    prayerText:
+      'すべての命が安らかで、苦しみから離れ、善き縁に恵まれ、平穏に生きられますように。',
+    remainingPrefix: '残り：',
+    soundOn: '音：オン',
+    soundOff: '音：オフ',
+    resetToday: '今日をリセット',
+    noFishTitle: '魚がなくなりました',
+    noFishMessage: '「今日をリセット」を押すと続けられます。',
+    noBirdTitle: '鳥がなくなりました',
+    noBirdMessage: '「今日をリセット」を押すと続けられます。',
+    resetTitle: '今日をリセット',
+    resetMessage: '魚と鳥をもう一度追加して放生を続けますか？',
+    cancel: 'キャンセル',
+    reset: 'リセット',
+  },
+
+  ko: {
+    title: '방생',
+    subtitle: '모든 생명을 향한 자비의 마음을 키워요',
+    today: '오늘',
+    totalRelease: '총 방생',
+    prayerTitle: '발원',
+    prayerText:
+      '모든 생명이 평안하고 고통에서 벗어나 좋은 인연을 만나 평화롭게 살아가기를 바랍니다.',
+    remainingPrefix: '남음:',
+    soundOn: '소리: 켜짐',
+    soundOff: '소리: 꺼짐',
+    resetToday: '오늘 초기화',
+    noFishTitle: '물고기가 없습니다',
+    noFishMessage: '오늘 초기화를 누르면 계속 방생할 수 있습니다.',
+    noBirdTitle: '새가 없습니다',
+    noBirdMessage: '오늘 초기화를 누르면 계속 방생할 수 있습니다.',
+    resetTitle: '오늘 초기화',
+    resetMessage: '물고기와 새를 다시 추가하여 방생을 계속할까요?',
+    cancel: '취소',
+    reset: '초기화',
+  },
+};
 
 type ReleaseStats = {
   totalFish: number;
@@ -64,6 +200,43 @@ type BirdItem = {
   y: number;
   progress: Animated.Value;
 };
+
+function normalizeLanguage(language?: string): SupportedLanguage {
+  const normalized = (language || 'en').toLowerCase();
+
+  if (normalized.startsWith('zh') || normalized.startsWith('cn')) {
+    return 'zh';
+  }
+
+  if (normalized.startsWith('vi')) {
+    return 'vi';
+  }
+
+  if (normalized.startsWith('ja') || normalized.startsWith('jp')) {
+    return 'ja';
+  }
+
+  if (normalized.startsWith('ko') || normalized.startsWith('kr')) {
+    return 'ko';
+  }
+
+  return 'en';
+}
+
+function getNumberLocale(language: SupportedLanguage) {
+  switch (language) {
+    case 'zh':
+      return 'zh-CN';
+    case 'vi':
+      return 'vi-VN';
+    case 'ja':
+      return 'ja-JP';
+    case 'ko':
+      return 'ko-KR';
+    default:
+      return 'en-US';
+  }
+}
 
 function getTodayKey() {
   return new Date().toISOString().slice(0, 10);
@@ -261,6 +434,7 @@ function BirdSprite({item}: {item: BirdItem}) {
     />
   );
 }
+
 function StatBox({
   title,
   children,
@@ -277,6 +451,17 @@ function StatBox({
 }
 
 export default function ReleaseLifeScreen() {
+  const {i18n} = useTranslation();
+
+  const language = useMemo(
+    () => normalizeLanguage(i18n.language),
+    [i18n.language],
+  );
+
+  const text = RELEASE_LIFE_TEXT[language];
+
+  const numberLocale = useMemo(() => getNumberLocale(language), [language]);
+
   const idRef = useRef(1);
 
   const [fishCount, setFishCount] = useState(12);
@@ -296,11 +481,15 @@ export default function ReleaseLifeScreen() {
 
     preloadReleaseLifeSounds();
 
-    loadStats().then(value => {
-      if (mounted) {
-        setStats(value);
-      }
-    });
+    loadStats()
+      .then(value => {
+        if (mounted) {
+          setStats(value);
+        }
+      })
+      .catch(error => {
+        console.log('Load release life stats error:', error);
+      });
 
     return () => {
       mounted = false;
@@ -309,12 +498,12 @@ export default function ReleaseLifeScreen() {
   }, []);
 
   const fishPreview = useMemo(
-    () => Array.from({ length: Math.min(fishCount, 8) }),
+    () => Array.from({length: Math.min(fishCount, 8)}),
     [fishCount],
   );
 
   const birdPreview = useMemo(
-    () => Array.from({ length: Math.min(birdCount, 8) }),
+    () => Array.from({length: Math.min(birdCount, 8)}),
     [birdCount],
   );
 
@@ -344,92 +533,92 @@ export default function ReleaseLifeScreen() {
 
   const releaseFish = () => {
     if (fishCount <= 0) {
-      Alert.alert('Đã hết cá', 'Bạn có thể bấm Đặt lại hôm nay để tiếp tục.');
+      Alert.alert(text.noFishTitle, text.noFishMessage);
       return;
     }
 
     const id = idRef.current++;
     const progress = new Animated.Value(0);
 
-const item: FishItem = {
-  id,
-  x: SCREEN_WIDTH * 0.21,
-  y: SCREEN_HEIGHT * 0.52,
-  progress,
-};
+    const item: FishItem = {
+      id,
+      x: SCREEN_WIDTH * 0.21,
+      y: SCREEN_HEIGHT * 0.52,
+      progress,
+    };
 
     setFishItems(prev => [...prev, item]);
     setFishCount(prev => Math.max(0, prev - 1));
 
-    void updateStats('fish');
+    updateStats('fish').catch(error => {
+      console.log('Update release fish stats error:', error);
+    });
 
     setTimeout(() => {
       playFishReleaseSound();
     }, 700);
 
-Animated.timing(progress, {
-  toValue: 1,
-  duration: 2600,
-  easing: Easing.inOut(Easing.quad),
-  useNativeDriver: true,
-}).start(() => {
+    Animated.timing(progress, {
+      toValue: 1,
+      duration: 2600,
+      easing: Easing.inOut(Easing.quad),
+      useNativeDriver: true,
+    }).start(() => {
       setFishItems(prev => prev.filter(fish => fish.id !== id));
     });
   };
 
   const releaseBird = () => {
     if (birdCount <= 0) {
-      Alert.alert('Đã hết chim', 'Bạn có thể bấm Đặt lại hôm nay để tiếp tục.');
+      Alert.alert(text.noBirdTitle, text.noBirdMessage);
       return;
     }
 
     const id = idRef.current++;
     const progress = new Animated.Value(0);
 
-
-const item: BirdItem = {
-  id,
-  x: SCREEN_WIDTH * (0.48 + Math.random() * 0.28),
-  y: SCREEN_HEIGHT * (0.48 + Math.random() * 0.08),
-  progress,
-};
+    const item: BirdItem = {
+      id,
+      x: SCREEN_WIDTH * (0.48 + Math.random() * 0.28),
+      y: SCREEN_HEIGHT * (0.48 + Math.random() * 0.08),
+      progress,
+    };
 
     setBirdItems(prev => [...prev, item]);
     setBirdCount(prev => Math.max(0, prev - 1));
 
-    void updateStats('bird');
+    updateStats('bird').catch(error => {
+      console.log('Update release bird stats error:', error);
+    });
+
     playBirdReleaseSound();
 
-Animated.timing(progress, {
-  toValue: 1,
-  duration: 5200,
-  easing: Easing.inOut(Easing.sin),
-  useNativeDriver: true,
-}).start(() => {
+    Animated.timing(progress, {
+      toValue: 1,
+      duration: 5200,
+      easing: Easing.inOut(Easing.sin),
+      useNativeDriver: true,
+    }).start(() => {
       setBirdItems(prev => prev.filter(bird => bird.id !== id));
     });
   };
 
   const resetToday = () => {
-    Alert.alert(
-      'Đặt lại hôm nay',
-      'Bạn muốn thêm lại cá và chim để tiếp tục phóng sinh?',
-      [
-        {
-          text: 'Hủy',
-          style: 'cancel',
+    Alert.alert(text.resetTitle, text.resetMessage, [
+      {
+        text: text.cancel,
+        style: 'cancel',
+      },
+      {
+        text: text.reset,
+        onPress: () => {
+          setFishCount(12);
+          setBirdCount(8);
+          setFishItems([]);
+          setBirdItems([]);
         },
-        {
-          text: 'Đặt lại',
-          onPress: () => {
-            setFishCount(12);
-            setBirdCount(8);
-            setFishItems([]);
-            setBirdItems([]);
-          },
-        },
-      ],
-    );
+      },
+    ]);
   };
 
   return (
@@ -438,22 +627,19 @@ Animated.timing(progress, {
         source={RELEASE_ASSETS.sceneBg}
         resizeMode="cover"
         style={styles.background}
-        imageStyle={styles.backgroundImage}
-      >
+        imageStyle={styles.backgroundImage}>
         <View style={styles.overlay}>
           <View style={styles.header}>
             <Text style={styles.title}>
-              Phóng sinh
+              {text.title}
               <Text style={styles.leafText}> ❧</Text>
             </Text>
 
-            <Text style={styles.subtitle}>
-              Nuôi dưỡng tâm từ bi với muôn loài
-            </Text>
+            <Text style={styles.subtitle}>{text.subtitle}</Text>
           </View>
 
           <View style={styles.statsRow}>
-            <StatBox title="Hôm nay">
+            <StatBox title={text.today}>
               <View style={styles.todayRow}>
                 <Image
                   source={RELEASE_ASSETS.fish}
@@ -473,11 +659,11 @@ Animated.timing(progress, {
               </View>
             </StatBox>
 
-            <StatBox title="Tổng phóng sinh">
+            <StatBox title={text.totalRelease}>
               <View style={styles.totalRow}>
                 <Text style={styles.totalLotus}>🪷</Text>
                 <Text style={styles.totalText}>
-                  {totalReleased.toLocaleString('vi-VN')}
+                  {totalReleased.toLocaleString(numberLocale)}
                 </Text>
               </View>
             </StatBox>
@@ -489,11 +675,8 @@ Animated.timing(progress, {
             </View>
 
             <View style={styles.prayerContent}>
-              <Text style={styles.prayerTitle}>Lời nguyện</Text>
-              <Text style={styles.prayerText}>
-                Nguyện cho muôn loài được an lành, xa lìa khổ nạn, gặp duyên
-                lành và sống trong bình an.
-              </Text>
+              <Text style={styles.prayerTitle}>{text.prayerTitle}</Text>
+              <Text style={styles.prayerText}>{text.prayerText}</Text>
             </View>
           </View>
 
@@ -501,11 +684,10 @@ Animated.timing(progress, {
             <View style={styles.itemColumn}>
               <Pressable
                 onPress={releaseFish}
-                style={({ pressed }) => [
+                style={({pressed}) => [
                   styles.touchArea,
                   pressed && styles.objectPressed,
-                ]}
-              >
+                ]}>
                 <Image
                   source={RELEASE_ASSETS.fishBowl}
                   resizeMode="contain"
@@ -525,18 +707,19 @@ Animated.timing(progress, {
               </View>
 
               <View style={styles.remainingBadge}>
-                <Text style={styles.remainingText}>Còn lại: {fishCount}</Text>
+                <Text style={styles.remainingText}>
+                  {text.remainingPrefix} {fishCount}
+                </Text>
               </View>
             </View>
 
             <View style={styles.itemColumn}>
               <Pressable
                 onPress={releaseBird}
-                style={({ pressed }) => [
+                style={({pressed}) => [
                   styles.touchArea,
                   pressed && styles.objectPressed,
-                ]}
-              >
+                ]}>
                 <Image
                   source={RELEASE_ASSETS.birdCage}
                   resizeMode="contain"
@@ -556,7 +739,9 @@ Animated.timing(progress, {
               </View>
 
               <View style={styles.remainingBadge}>
-                <Text style={styles.remainingText}>Còn lại: {birdCount}</Text>
+                <Text style={styles.remainingText}>
+                  {text.remainingPrefix} {birdCount}
+                </Text>
               </View>
             </View>
           </View>
@@ -567,17 +752,16 @@ Animated.timing(progress, {
                 styles.soundButton,
                 !soundEnabled && styles.soundButtonOff,
               ]}
-              onPress={toggleSound}
-            >
+              onPress={toggleSound}>
               <Text style={styles.bottomButtonIcon}>🔊</Text>
               <Text style={styles.bottomButtonText}>
-                {soundEnabled ? 'Âm thanh: Bật' : 'Âm thanh: Tắt'}
+                {soundEnabled ? text.soundOn : text.soundOff}
               </Text>
             </Pressable>
 
             <Pressable style={styles.resetButton} onPress={resetToday}>
               <Text style={styles.bottomButtonIcon}>↻</Text>
-              <Text style={styles.bottomButtonText}>Đặt lại hôm nay</Text>
+              <Text style={styles.bottomButtonText}>{text.resetToday}</Text>
             </Pressable>
           </View>
 
@@ -627,7 +811,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     color: '#0D6B49',
     textShadowColor: 'rgba(255,255,255,0.98)',
-    textShadowOffset: { width: 0, height: 2 },
+    textShadowOffset: {width: 0, height: 2},
     textShadowRadius: 10,
   },
 
@@ -643,7 +827,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     marginTop: 0,
     textShadowColor: 'rgba(255,255,255,0.9)',
-    textShadowOffset: { width: 0, height: 1 },
+    textShadowOffset: {width: 0, height: 1},
     textShadowRadius: 4,
   },
 
@@ -797,7 +981,7 @@ const styles = StyleSheet.create({
   },
 
   objectPressed: {
-    transform: [{ scale: 0.97 }],
+    transform: [{scale: 0.97}],
     opacity: 0.9,
   },
 
@@ -894,17 +1078,18 @@ const styles = StyleSheet.create({
     fontSize: isSmallScreen ? 11.5 : 13,
     fontWeight: '900',
   },
-fishReleased: {
-  position: 'absolute',
-  width: 52,
-  height: 42,
-  zIndex: 50,
-},
 
-birdReleased: {
-  position: 'absolute',
-  width: 58,
-  height: 52,
-  zIndex: 50,
-},
+  fishReleased: {
+    position: 'absolute',
+    width: 52,
+    height: 42,
+    zIndex: 50,
+  },
+
+  birdReleased: {
+    position: 'absolute',
+    width: 58,
+    height: 52,
+    zIndex: 50,
+  },
 });

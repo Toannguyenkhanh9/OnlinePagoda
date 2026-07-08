@@ -82,3 +82,8 @@ echo android/app/release/ >> .gitignore
 echo *.apk >> .gitignore
 echo *.aab >> .gitignore
 echo *.zip >> .gitignore
+# Android build outputs
+android/app/release/
+*.apk
+*.aab
+*.zip

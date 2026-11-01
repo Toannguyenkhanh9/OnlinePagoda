@@ -38,6 +38,7 @@ import {
 
 import TempleAmbientSound from '../components/TempleAmbientSound';
 import TempleSceneOverlay from '../components/TempleSceneOverlay';
+import Temple3DScene, {type Temple3DAction} from '../components/Temple3DScene';
 
 import {
   incrementChantDraft,
@@ -690,6 +691,9 @@ const INCENSE_BURN_DURATION_MS = 60 * 1000;
 
 export default function TempleScreen() {
   const {t, i18n} = useTranslation();
+  const [show3D, setShow3D] = useState(false);
+  const [chanting3D, setChanting3D] = useState(false);
+  const [meditating3D, setMeditating3D] = useState(false);
 
   const [incenseExpirations, setIncenseExpirations] =
     useState<number[]>([]);
@@ -898,6 +902,48 @@ export default function TempleScreen() {
     }
   };
 
+  const handle3DAction = useCallback((action: Temple3DAction, active?: boolean) => {
+    if (action === 'incense') {
+      lightIncense();
+    } else if (action === 'fish') {
+      void handleSoundPress('woodenFish');
+    } else if (action === 'bell') {
+      void handleSoundPress('bell');
+    } else if (action === 'chant') {
+      setChanting3D(Boolean(active));
+      setMeditating3D(false);
+    } else if (action === 'meditate') {
+      setMeditating3D(Boolean(active));
+      setChanting3D(false);
+    } else if (action === 'bow') {
+      // Visual-only in this prototype; no invented practice counter.
+    }
+  }, [lightIncense, handleSoundPress]);
+
+  if (show3D) {
+    return (
+      <View style={{flex: 1, backgroundColor: '#140b08'}}>
+        <StatusBar barStyle="light-content" backgroundColor="#140b08" />
+        <SafeAreaView style={{flex: 1}}>
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingVertical: 9}}>
+            <Pressable onPress={() => {
+              stopAllTempleSounds();
+              setLoopingSound(null);
+              setChanting3D(false);
+              setMeditating3D(false);
+              setShow3D(false);
+            }} style={{paddingVertical: 6, paddingHorizontal: 12, borderWidth: 1, borderColor: '#D6AC64', borderRadius: 12}}>
+              <Text style={{color: '#F8DEAA'}}>‹ Chính điện cũ</Text>
+            </Pressable>
+            <Text style={{color: '#F8DEAA', fontWeight: 'bold'}}>Chính điện 3D</Text>
+            <Text style={{color: '#C7A97A', fontSize: 11}}>{chanting3D ? 'Tụng kinh' : meditating3D ? 'Thiền' : 'Khám phá'}</Text>
+          </View>
+          <Temple3DScene onAction={handle3DAction} />
+        </SafeAreaView>
+      </View>
+    );
+  }
+
   const resetCounters = () => {
     Alert.alert(
       t('temple.resetDialogTitle'),
@@ -955,7 +1001,9 @@ export default function TempleScreen() {
                 </Text>
               </View>
 
-              <Text style={styles.notificationIcon}>♧</Text>
+              <Pressable onPress={() => setShow3D(true)} style={{borderWidth: 1, borderColor: '#E8B84F', borderRadius: 16, paddingHorizontal: 12, paddingVertical: 7, backgroundColor: '#27150B'}} accessibilityRole="button" accessibilityLabel="Mở chính điện 3D">
+                <Text style={{color: '#FFE4A0', fontWeight: '700'}}>✦ Chế độ 3D</Text>
+              </Pressable>
             </View>
 
             <View style={styles.heroSpacer}>
